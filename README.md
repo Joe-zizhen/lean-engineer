@@ -4,7 +4,7 @@
 
 为 AI 编码建立可执行的工程纪律。Lean Engineer 把能力复用、最小实现、风险分档、机器质量门、独立审查和交付证据组织成一套完整工作流，适用于功能开发、代码修复、重构、技术选型、Review 与验收。
 
-版本 **1.1.2** · [MIT License](LICENSE) · [主技能](skills/lean-engineer/SKILL.md) · [验证记录](VALIDATION.md)
+版本 **1.1.3** · [MIT License](LICENSE) · [主技能](skills/lean-engineer/SKILL.md) · [验证记录](VALIDATION.md)
 
 ## 为什么使用 Lean Engineer
 

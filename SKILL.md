@@ -3,7 +3,7 @@ name: lean-engineer
 description: "写、改、重构、选型或验收代码时使用。先复用项目能力，再按风险执行最小实现、真实验证和独立审查。内置 Web 前后端、移动端、嵌入式和数据工程检查。纯需求、纯问答和仅定位根因时不主导；性能或容量的测量型诊断除外。"
 license: MIT
 metadata:
-  version: "1.1.2"
+  version: "1.1.3"
 ---
 
 # lean-engineer 兼容入口

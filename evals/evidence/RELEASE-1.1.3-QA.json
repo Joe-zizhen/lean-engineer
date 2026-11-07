@@ -1,0 +1,771 @@
+{
+  "version": "1.1.3",
+  "date": "2026-11-07",
+  "baseline_commit": "ec80ae19143a783339f6fea10f962815c3351f1a",
+  "scope": "Tool version pinning and bounded supplemental verification; no production-code changes.",
+  "source_checks": {
+    "passed": true,
+    "checks": [
+      {
+        "name": "package",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "scripts/validate_package.py",
+          "."
+        ],
+        "exit_code": 0,
+        "expected": 0,
+        "seconds": 0.163,
+        "stdout": "{\r\n  \"ok\": true,\r\n  \"errors\": [],\r\n  \"warnings\": [],\r\n  \"summary\": {\r\n    \"required_files\": 46,\r\n    \"markdown_files\": 32,\r\n    \"local_links_checked\": 110,\r\n    \"evaluation_definitions\": 69,\r\n    \"model_runs\": 15\r\n  }\r\n}\r\n",
+        "stderr": "",
+        "passed": true
+      },
+      {
+        "name": "tests",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-v"
+        ],
+        "exit_code": 0,
+        "expected": 0,
+        "seconds": 14.701,
+        "stdout": "",
+        "stderr": "test_eval_evidence_rejects_internal_directory_link (test_adversarial.AuditClosureTests) ... ok\r\ntest_eval_evidence_rejects_internal_file_symlink (test_adversarial.AuditClosureTests) ... ok\r\ntest_eval_reference_matrix_covers_all_cases (test_adversarial.AuditClosureTests) ... ok\r\ntest_eval_run_count_and_evidence_reject_invalid_records (test_adversarial.AuditClosureTests) ... ok\r\ntest_eval_status_text_supports_future_nonzero_runs (test_adversarial.AuditClosureTests) ... ok\r\ntest_performance_measurement_diagnosis_route_is_explicit (test_adversarial.AuditClosureTests) ... ok\r\ntest_readonly_formal_verification_uses_delegated_output (test_adversarial.AuditClosureTests) ... ok\r\ntest_readonly_history_routing_does_not_require_implementation (test_adversarial.AuditClosureTests) ... ok\r\ntest_rereview_history_and_missing_branch (test_adversarial.AuditClosureTests) ... ok\r\ntest_synthetic_eval_evidence_survives_packaging (test_adversarial.AuditClosureTests) ... ok\r\ntest_synthetic_eval_run_with_valid_evidence_is_accepted (test_adversarial.AuditClosureTests) ... ok\r\ntest_parameterized_reviewer_tools_are_rejected (test_adversarial.FinalAuditTests) ... ok\r\ntest_manifest_root_arrays_return_errors (test_adversarial.MalformedStructureTests) ... ok\r\ntest_null_and_object_identifiers_return_errors (test_adversarial.MalformedStructureTests) ... ok\r\ntest_null_eval_lists_return_errors (test_adversarial.MalformedStructureTests) ... ok\r\ntest_archive_creation_error_is_not_masked_by_cleanup (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_archive_rejects_unsafe_names_and_corrupt_content (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_backend_protocol_includes_not_checked (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_cli_preserves_plugin_default_and_selects_skill_format (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_cli_relative_output_and_failed_inputs (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_coding_route_declares_the_combined_baseline (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_conditional_capability_route_keeps_separate_authority (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_disable_model_invocation_uses_yaml_boolean (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_domain_references_are_required (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_empty_license_is_rejected (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_eval_schema_is_strict (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_existing_temporary_archive_is_not_overwritten (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_external_unknown_cannot_be_controlled_change (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_frontend_topics_require_evidence_and_sources (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_implementation_discipline_is_routed_and_complete (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_json_input_has_a_size_limit (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_kimi_manifest_rejects_files_for_directories (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_kimi_manifest_rejects_parent_escape (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_output_cannot_be_inside_package_root (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_output_cannot_overwrite_input (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_package_excludes_backup_cache_and_orig (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_package_rejects_outside_link (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_plugin_archive_default_and_file_permissions (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_quality_gate_preflight_and_ci_handoff (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_repository_location_is_not_a_risk_gate_by_itself (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_reviewer_policy_cannot_be_overridden_in_body (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_reviewer_tools_are_host_neutral (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_risk_and_delivery_status_cover_all_branches (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_runtime_files_do_not_reference_removed_external_skills (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_self_review_cases_require_independent_reviewer (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_skill_archive_is_self_contained (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_skill_archive_rejects_each_missing_license_file (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_skill_archive_rejects_missing_entrypoint (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_standalone_license_and_validator_command (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_thick_change_requires_gates_and_independent_expectations (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_thick_eval_cases_have_complete_routing (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_validation_record_is_current (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_verification_does_not_unconditionally_build_ci (test_adversarial.PackageAdversarialTests) ... ok\r\ntest_authorized_no_object_exemption_is_allowed (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_coverage_rejects_invalid_references_evidence_and_questions (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_coverage_requires_valid_checks_and_schema (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_design_model_evidence_is_allowed (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_evidence_requires_baseline_reference (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_full_requires_all_topics (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_invalid_observed_at_fails (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_malformed_fields_return_errors_instead_of_raising (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_malformed_required_topics_return_errors (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_missing_capability_cannot_use_evidence_or_decision (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_missing_capability_contradicts_no_check_object (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_model_only_code_finding_is_rejected (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_model_replay_must_link_to_finding (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_model_resolution_requires_code_replay (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_non_behavior_exemption_allows_current_specification (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_non_behavior_exemption_requires_structured_basis (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_normal_risk_does_not_remove_behavior_requirement (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_orphan_finding_is_rejected (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_placeholder_baseline_cannot_be_ready (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_placeholder_decisions_are_rejected (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_ready_requires_authority (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_release_evidence_baseline_must_match (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_release_evidence_must_link_a_passed_check (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_resolution_evidence_must_link_to_finding (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_resolved_evidence_must_match_current_baseline (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_surface_location_is_required (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_unhashable_evidence_ids_return_errors (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_valid_failed_check_can_complete_coverage (test_adversarial.ReleaseGateAdversarialTests) ... ok\r\ntest_candidate_triage_and_agent_inheritance (test_adversarial.ReviewWorkflowContractTests) ... ok\r\ntest_evaluation_protocol_and_routing_cases (test_adversarial.ReviewWorkflowContractTests) ... ok\r\ntest_rereview_convergence_contract (test_adversarial.ReviewWorkflowContractTests) ... ok\r\ntest_rule_feedback_contract (test_adversarial.ReviewWorkflowContractTests) ... ok\r\ntest_any_error_forces_release_ready_false (test_adversarial.SecondRoundAuditTests) ... ok\r\ntest_behavior_exemption_requires_structured_basis (test_adversarial.SecondRoundAuditTests) ... ok\r\ntest_mixed_baseline_supporting_evidence_is_rejected (test_adversarial.SecondRoundAuditTests) ... ok\r\ntest_reviewer_has_no_shell_or_skill_tools (test_adversarial.SecondRoundAuditTests) ... ok\r\ntest_reviewer_inline_tools_are_rejected (test_adversarial.SecondRoundAuditTests) ... ok\r\ntest_reviewer_task_is_rejected (test_adversarial.SecondRoundAuditTests) ... ok\r\ntest_invalid_project_returns_errors (test_validators.MalformedInputTests) ... ok\r\ntest_invalid_reference_type_returns_errors (test_validators.MalformedInputTests) ... ok\r\ntest_non_string_eval_id_returns_errors (test_validators.MalformedInputTests) ... ok\r\ntest_claude_manifest_checks_agent_path (test_validators.PackageValidatorTests) ... ok\r\ntest_current_package_is_valid (test_validators.PackageValidatorTests) ... ok\r\ntest_eval_ids_must_be_unique (test_validators.PackageValidatorTests) ... ok\r\ntest_eval_input_boundaries (test_validators.PackageValidatorTests) ... ok\r\ntest_evaluation_activation_warning (test_validators.PackageValidatorTests) ... ok\r\ntest_frontmatter_reads_metadata_version (test_validators.PackageValidatorTests) ... ok\r\ntest_license_content_and_distribution_copies (test_validators.PackageValidatorTests) ... ok\r\ntest_manifest_consistency_in_both_directions (test_validators.PackageValidatorTests) ... ok\r\ntest_manifest_rejects_session_start (test_validators.PackageValidatorTests) ... ok\r\ntest_markdown_link_must_exist (test_validators.PackageValidatorTests) ... ok\r\ntest_missing_capability_reference_is_rejected (test_validators.PackageValidatorTests) ... ok\r\ntest_package_missing_root_and_optional_checks_do_not_raise (test_validators.PackageValidatorTests) ... ok\r\ntest_portable_manifest_rejects_unknown_top_level_field (test_validators.PackageValidatorTests) ... ok\r\ntest_portable_manifest_requires_canonical_schema (test_validators.PackageValidatorTests) ... ok\r\ntest_security_reference_is_required_without_inbound_links (test_validators.PackageValidatorTests) ... ok\r\ntest_skill_license_is_required (test_validators.PackageValidatorTests) ... ok\r\ntest_skill_name_must_match_directory (test_validators.PackageValidatorTests) ... ok\r\ntest_accepted_risk_requires_human_decision (test_validators.ReviewValidatorTests) ... ok\r\ntest_behavior_rejects_source_only_evidence (test_validators.ReviewValidatorTests) ... ok\r\ntest_failed_check_requires_finding (test_validators.ReviewValidatorTests) ... ok\r\ntest_finding_text_cannot_be_empty (test_validators.ReviewValidatorTests) ... ok\r\ntest_full_requires_all_declared_topics (test_validators.ReviewValidatorTests) ... ok\r\ntest_high_risk_surface_requires_behavior_evidence (test_validators.ReviewValidatorTests) ... ok\r\ntest_not_assessed_does_not_pass_require_ready (test_validators.ReviewValidatorTests) ... ok\r\ntest_pass_requires_evidence (test_validators.ReviewValidatorTests) ... ok\r\ntest_ready_rejects_blocked_check (test_validators.ReviewValidatorTests) ... ok\r\ntest_resolved_finding_requires_resolution_evidence (test_validators.ReviewValidatorTests) ... ok\r\ntest_specification_cannot_confirm_or_resolve (test_validators.ReviewValidatorTests) ... ok\r\ntest_template_is_valid_but_not_ready (test_validators.ReviewValidatorTests) ... ok\r\ntest_unknown_evidence_reference_fails (test_validators.ReviewValidatorTests) ... ok\r\ntest_valid_ready_review (test_validators.ReviewValidatorTests) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 125 tests in 14.457s\r\n\r\nOK\r\n",
+        "passed": true
+      },
+      {
+        "name": "skill-root",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "<host-skill-creator>/scripts/quick_validate.py",
+          "."
+        ],
+        "exit_code": 0,
+        "expected": 0,
+        "seconds": 0.098,
+        "stdout": "Skill is valid!\r\n",
+        "stderr": "",
+        "passed": true
+      },
+      {
+        "name": "skill-main",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "<host-skill-creator>/scripts/quick_validate.py",
+          "skills/lean-engineer"
+        ],
+        "exit_code": 0,
+        "expected": 0,
+        "seconds": 0.076,
+        "stdout": "Skill is valid!\r\n",
+        "stderr": "",
+        "passed": true
+      },
+      {
+        "name": "ledger",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "skills/lean-engineer/scripts/validate_review.py",
+          "skills/lean-engineer/assets/backend-review-template.json"
+        ],
+        "exit_code": 0,
+        "expected": 0,
+        "seconds": 0.068,
+        "stdout": "{\r\n  \"ok\": true,\r\n  \"errors\": [],\r\n  \"warnings\": [\r\n    \"No surfaces registered. This is a template or an incomplete review.\"\r\n  ],\r\n  \"summary\": {\r\n    \"surfaces\": 0,\r\n    \"checks\": 0,\r\n    \"findings\": 0,\r\n    \"review_coverage_complete\": false,\r\n    \"release_ready\": false\r\n  }\r\n}\r\n",
+        "stderr": "",
+        "passed": true
+      },
+      {
+        "name": "ledger-reject-incomplete",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "skills/lean-engineer/scripts/validate_review.py",
+          "skills/lean-engineer/assets/backend-review-template.json",
+          "--require-ready"
+        ],
+        "exit_code": 2,
+        "expected": 2,
+        "seconds": 0.072,
+        "stdout": "{\r\n  \"ok\": true,\r\n  \"errors\": [],\r\n  \"warnings\": [\r\n    \"No surfaces registered. This is a template or an incomplete review.\"\r\n  ],\r\n  \"summary\": {\r\n    \"surfaces\": 0,\r\n    \"checks\": 0,\r\n    \"findings\": 0,\r\n    \"review_coverage_complete\": false,\r\n    \"release_ready\": false\r\n  }\r\n}\r\n",
+        "stderr": "",
+        "passed": true
+      }
+    ]
+  },
+  "state_boundary_checks": {
+    "scope": "Synthetic inputs for the existing backend ledger validator; not a model-behavior test or a general quality-gate runner.",
+    "validator_sha256": "8962fe870fe62dcca3fa430039269dabc278560d17b4b7835942cd33c5156fa9",
+    "cases": [
+      {
+        "id": "supplement-does-not-clear-blocked",
+        "input": {
+          "schema_version": "1.3",
+          "project": {
+            "name": "fixture",
+            "mode": "quick",
+            "baseline": "commit-fixture",
+            "scope": "one endpoint",
+            "access": "source_runtime",
+            "required_topics": [
+              "api_contracts",
+              "identity_access"
+            ]
+          },
+          "surfaces": [
+            {
+              "id": "API-001",
+              "kind": "api",
+              "name": "orders",
+              "location": "orders.py:10",
+              "risk": "high"
+            }
+          ],
+          "evidence": [
+            {
+              "id": "EV-S",
+              "kind": "source",
+              "locator": "orders.py:12",
+              "observed_at": "2026-10-26T00:00:00Z",
+              "summary": "source checked",
+              "baseline_ref": "commit-fixture"
+            },
+            {
+              "id": "EV-T",
+              "kind": "test",
+              "locator": "pytest orders",
+              "observed_at": "2026-10-26T00:01:00Z",
+              "summary": "passed",
+              "baseline_ref": "commit-fixture"
+            },
+            {
+              "id": "EV-R",
+              "kind": "runtime",
+              "locator": "POST /test/orders",
+              "observed_at": "2026-10-26T00:02:00Z",
+              "summary": "observed",
+              "baseline_ref": "commit-fixture"
+            }
+          ],
+          "checks": [
+            {
+              "id": "CHK-001",
+              "surface_id": "API-001",
+              "topic": "api_contracts",
+              "kind": "static",
+              "question": "Is the contract explicit?",
+              "status": "passed",
+              "evidence_ids": [
+                "EV-S"
+              ],
+              "finding_ids": [],
+              "reason": ""
+            },
+            {
+              "id": "CHK-002",
+              "surface_id": "API-001",
+              "topic": "identity_access",
+              "kind": "behavior",
+              "question": "Is cross-tenant access denied?",
+              "status": "passed",
+              "evidence_ids": [
+                "EV-T",
+                "EV-R"
+              ],
+              "finding_ids": [
+                "FND-001"
+              ],
+              "reason": ""
+            },
+            {
+              "id": "CHK-SUPPLEMENT",
+              "surface_id": "API-001",
+              "topic": "identity_access",
+              "kind": "behavior",
+              "question": "Did the existing supplemental behavior test pass?",
+              "status": "passed",
+              "evidence_ids": [
+                "EV-T",
+                "EV-R"
+              ],
+              "finding_ids": [],
+              "reason": ""
+            },
+            {
+              "id": "CHK-TOOL",
+              "surface_id": "API-001",
+              "topic": "api_contracts",
+              "kind": "static",
+              "question": "Did the required tool check run?",
+              "status": "blocked",
+              "evidence_ids": [],
+              "finding_ids": [],
+              "reason": "Required tool unavailable"
+            }
+          ],
+          "findings": [
+            {
+              "id": "FND-001",
+              "title": "fixed contract issue",
+              "severity": "P1",
+              "confidence": "confirmed",
+              "status": "resolved",
+              "subject": "code",
+              "actual": "old behavior",
+              "expected": "required behavior",
+              "impact": "contract failure",
+              "evidence_ids": [
+                "EV-S"
+              ],
+              "reproduction": "request fixture",
+              "remediation": "use the contract",
+              "retest": "pytest orders",
+              "owner": "backend",
+              "root_cause": "missing check",
+              "root_cause_confidence": "confirmed",
+              "surface_ids": [
+                "API-001"
+              ],
+              "resolution_evidence_ids": [
+                "EV-T"
+              ]
+            }
+          ],
+          "release": {
+            "status": "ready",
+            "reason": "fixture passes",
+            "evidence_ids": [
+              "EV-R"
+            ],
+            "decision": {
+              "authority": "release owner",
+              "reason": "verified fixture"
+            }
+          }
+        },
+        "result": {
+          "ok": false,
+          "errors": [
+            "$.release.status: ready does not satisfy the release requirements"
+          ],
+          "warnings": [],
+          "summary": {
+            "surfaces": 1,
+            "checks": 4,
+            "findings": 1,
+            "review_coverage_complete": false,
+            "release_ready": false
+          }
+        },
+        "expected_ready": false,
+        "passed": true
+      },
+      {
+        "id": "supplement-does-not-clear-not_run",
+        "input": {
+          "schema_version": "1.3",
+          "project": {
+            "name": "fixture",
+            "mode": "quick",
+            "baseline": "commit-fixture",
+            "scope": "one endpoint",
+            "access": "source_runtime",
+            "required_topics": [
+              "api_contracts",
+              "identity_access"
+            ]
+          },
+          "surfaces": [
+            {
+              "id": "API-001",
+              "kind": "api",
+              "name": "orders",
+              "location": "orders.py:10",
+              "risk": "high"
+            }
+          ],
+          "evidence": [
+            {
+              "id": "EV-S",
+              "kind": "source",
+              "locator": "orders.py:12",
+              "observed_at": "2026-10-26T00:00:00Z",
+              "summary": "source checked",
+              "baseline_ref": "commit-fixture"
+            },
+            {
+              "id": "EV-T",
+              "kind": "test",
+              "locator": "pytest orders",
+              "observed_at": "2026-10-26T00:01:00Z",
+              "summary": "passed",
+              "baseline_ref": "commit-fixture"
+            },
+            {
+              "id": "EV-R",
+              "kind": "runtime",
+              "locator": "POST /test/orders",
+              "observed_at": "2026-10-26T00:02:00Z",
+              "summary": "observed",
+              "baseline_ref": "commit-fixture"
+            }
+          ],
+          "checks": [
+            {
+              "id": "CHK-001",
+              "surface_id": "API-001",
+              "topic": "api_contracts",
+              "kind": "static",
+              "question": "Is the contract explicit?",
+              "status": "passed",
+              "evidence_ids": [
+                "EV-S"
+              ],
+              "finding_ids": [],
+              "reason": ""
+            },
+            {
+              "id": "CHK-002",
+              "surface_id": "API-001",
+              "topic": "identity_access",
+              "kind": "behavior",
+              "question": "Is cross-tenant access denied?",
+              "status": "passed",
+              "evidence_ids": [
+                "EV-T",
+                "EV-R"
+              ],
+              "finding_ids": [
+                "FND-001"
+              ],
+              "reason": ""
+            },
+            {
+              "id": "CHK-SUPPLEMENT",
+              "surface_id": "API-001",
+              "topic": "identity_access",
+              "kind": "behavior",
+              "question": "Did the existing supplemental behavior test pass?",
+              "status": "passed",
+              "evidence_ids": [
+                "EV-T",
+                "EV-R"
+              ],
+              "finding_ids": [],
+              "reason": ""
+            },
+            {
+              "id": "CHK-TOOL",
+              "surface_id": "API-001",
+              "topic": "api_contracts",
+              "kind": "static",
+              "question": "Did the required tool check run?",
+              "status": "not_run",
+              "evidence_ids": [],
+              "finding_ids": [],
+              "reason": "Required tool not executed"
+            }
+          ],
+          "findings": [
+            {
+              "id": "FND-001",
+              "title": "fixed contract issue",
+              "severity": "P1",
+              "confidence": "confirmed",
+              "status": "resolved",
+              "subject": "code",
+              "actual": "old behavior",
+              "expected": "required behavior",
+              "impact": "contract failure",
+              "evidence_ids": [
+                "EV-S"
+              ],
+              "reproduction": "request fixture",
+              "remediation": "use the contract",
+              "retest": "pytest orders",
+              "owner": "backend",
+              "root_cause": "missing check",
+              "root_cause_confidence": "confirmed",
+              "surface_ids": [
+                "API-001"
+              ],
+              "resolution_evidence_ids": [
+                "EV-T"
+              ]
+            }
+          ],
+          "release": {
+            "status": "ready",
+            "reason": "fixture passes",
+            "evidence_ids": [
+              "EV-R"
+            ],
+            "decision": {
+              "authority": "release owner",
+              "reason": "verified fixture"
+            }
+          }
+        },
+        "result": {
+          "ok": false,
+          "errors": [
+            "$.release.status: ready does not satisfy the release requirements"
+          ],
+          "warnings": [],
+          "summary": {
+            "surfaces": 1,
+            "checks": 4,
+            "findings": 1,
+            "review_coverage_complete": false,
+            "release_ready": false
+          }
+        },
+        "expected_ready": false,
+        "passed": true
+      },
+      {
+        "id": "original-behavior-failure-is-not-ready",
+        "input": {
+          "schema_version": "1.3",
+          "project": {
+            "name": "fixture",
+            "mode": "quick",
+            "baseline": "commit-fixture",
+            "scope": "one endpoint",
+            "access": "source_runtime",
+            "required_topics": [
+              "api_contracts",
+              "identity_access"
+            ]
+          },
+          "surfaces": [
+            {
+              "id": "API-001",
+              "kind": "api",
+              "name": "orders",
+              "location": "orders.py:10",
+              "risk": "high"
+            }
+          ],
+          "evidence": [
+            {
+              "id": "EV-S",
+              "kind": "source",
+              "locator": "orders.py:12",
+              "observed_at": "2026-10-26T00:00:00Z",
+              "summary": "source checked",
+              "baseline_ref": "commit-fixture"
+            },
+            {
+              "id": "EV-T",
+              "kind": "test",
+              "locator": "pytest orders",
+              "observed_at": "2026-10-26T00:01:00Z",
+              "summary": "Original behavior assertion failed in this synthetic fixture",
+              "baseline_ref": "commit-fixture"
+            },
+            {
+              "id": "EV-R",
+              "kind": "runtime",
+              "locator": "POST /test/orders",
+              "observed_at": "2026-10-26T00:02:00Z",
+              "summary": "observed",
+              "baseline_ref": "commit-fixture"
+            }
+          ],
+          "checks": [
+            {
+              "id": "CHK-001",
+              "surface_id": "API-001",
+              "topic": "api_contracts",
+              "kind": "static",
+              "question": "Is the contract explicit?",
+              "status": "passed",
+              "evidence_ids": [
+                "EV-S"
+              ],
+              "finding_ids": [],
+              "reason": ""
+            },
+            {
+              "id": "CHK-002",
+              "surface_id": "API-001",
+              "topic": "identity_access",
+              "kind": "behavior",
+              "question": "Is cross-tenant access denied?",
+              "status": "failed",
+              "evidence_ids": [
+                "EV-T",
+                "EV-R"
+              ],
+              "finding_ids": [
+                "FND-001"
+              ],
+              "reason": ""
+            },
+            {
+              "id": "CHK-SUPPLEMENT",
+              "surface_id": "API-001",
+              "topic": "identity_access",
+              "kind": "behavior",
+              "question": "Did the existing supplemental behavior test pass?",
+              "status": "passed",
+              "evidence_ids": [
+                "EV-T",
+                "EV-R"
+              ],
+              "finding_ids": [],
+              "reason": ""
+            }
+          ],
+          "findings": [
+            {
+              "id": "FND-001",
+              "title": "fixed contract issue",
+              "severity": "P1",
+              "confidence": "confirmed",
+              "status": "open",
+              "subject": "code",
+              "actual": "old behavior",
+              "expected": "required behavior",
+              "impact": "contract failure",
+              "evidence_ids": [
+                "EV-S"
+              ],
+              "reproduction": "request fixture",
+              "remediation": "use the contract",
+              "retest": "pytest orders",
+              "owner": "backend",
+              "root_cause": "missing check",
+              "root_cause_confidence": "confirmed",
+              "surface_ids": [
+                "API-001"
+              ],
+              "resolution_evidence_ids": []
+            }
+          ],
+          "release": {
+            "status": "ready",
+            "reason": "fixture passes",
+            "evidence_ids": [
+              "EV-R"
+            ],
+            "decision": {
+              "authority": "release owner",
+              "reason": "verified fixture"
+            }
+          }
+        },
+        "result": {
+          "ok": false,
+          "errors": [
+            "$.release.status: ready does not satisfy the release requirements"
+          ],
+          "warnings": [],
+          "summary": {
+            "surfaces": 1,
+            "checks": 3,
+            "findings": 1,
+            "review_coverage_complete": true,
+            "release_ready": false
+          }
+        },
+        "expected_ready": false,
+        "passed": true
+      },
+      {
+        "id": "all-required-checks-pass-remains-ready",
+        "input": {
+          "schema_version": "1.3",
+          "project": {
+            "name": "fixture",
+            "mode": "quick",
+            "baseline": "commit-fixture",
+            "scope": "one endpoint",
+            "access": "source_runtime",
+            "required_topics": [
+              "api_contracts",
+              "identity_access"
+            ]
+          },
+          "surfaces": [
+            {
+              "id": "API-001",
+              "kind": "api",
+              "name": "orders",
+              "location": "orders.py:10",
+              "risk": "high"
+            }
+          ],
+          "evidence": [
+            {
+              "id": "EV-S",
+              "kind": "source",
+              "locator": "orders.py:12",
+              "observed_at": "2026-10-26T00:00:00Z",
+              "summary": "source checked",
+              "baseline_ref": "commit-fixture"
+            },
+            {
+              "id": "EV-T",
+              "kind": "test",
+              "locator": "pytest orders",
+              "observed_at": "2026-10-26T00:01:00Z",
+              "summary": "passed",
+              "baseline_ref": "commit-fixture"
+            },
+            {
+              "id": "EV-R",
+              "kind": "runtime",
+              "locator": "POST /test/orders",
+              "observed_at": "2026-10-26T00:02:00Z",
+              "summary": "observed",
+              "baseline_ref": "commit-fixture"
+            }
+          ],
+          "checks": [
+            {
+              "id": "CHK-001",
+              "surface_id": "API-001",
+              "topic": "api_contracts",
+              "kind": "static",
+              "question": "Is the contract explicit?",
+              "status": "passed",
+              "evidence_ids": [
+                "EV-S"
+              ],
+              "finding_ids": [],
+              "reason": ""
+            },
+            {
+              "id": "CHK-002",
+              "surface_id": "API-001",
+              "topic": "identity_access",
+              "kind": "behavior",
+              "question": "Is cross-tenant access denied?",
+              "status": "passed",
+              "evidence_ids": [
+                "EV-T",
+                "EV-R"
+              ],
+              "finding_ids": [
+                "FND-001"
+              ],
+              "reason": ""
+            },
+            {
+              "id": "CHK-SUPPLEMENT",
+              "surface_id": "API-001",
+              "topic": "identity_access",
+              "kind": "behavior",
+              "question": "Did the existing supplemental behavior test pass?",
+              "status": "passed",
+              "evidence_ids": [
+                "EV-T",
+                "EV-R"
+              ],
+              "finding_ids": [],
+              "reason": ""
+            }
+          ],
+          "findings": [
+            {
+              "id": "FND-001",
+              "title": "fixed contract issue",
+              "severity": "P1",
+              "confidence": "confirmed",
+              "status": "resolved",
+              "subject": "code",
+              "actual": "old behavior",
+              "expected": "required behavior",
+              "impact": "contract failure",
+              "evidence_ids": [
+                "EV-S"
+              ],
+              "reproduction": "request fixture",
+              "remediation": "use the contract",
+              "retest": "pytest orders",
+              "owner": "backend",
+              "root_cause": "missing check",
+              "root_cause_confidence": "confirmed",
+              "surface_ids": [
+                "API-001"
+              ],
+              "resolution_evidence_ids": [
+                "EV-T"
+              ]
+            }
+          ],
+          "release": {
+            "status": "ready",
+            "reason": "fixture passes",
+            "evidence_ids": [
+              "EV-R"
+            ],
+            "decision": {
+              "authority": "release owner",
+              "reason": "verified fixture"
+            }
+          }
+        },
+        "result": {
+          "ok": true,
+          "errors": [],
+          "warnings": [],
+          "summary": {
+            "surfaces": 1,
+            "checks": 3,
+            "findings": 1,
+            "review_coverage_complete": true,
+            "release_ready": true
+          }
+        },
+        "expected_ready": true,
+        "passed": true
+      }
+    ],
+    "passed": true
+  },
+  "independent_review": {
+    "report": "[经验门禁] 无命中。 确认发现：0 条。 本轮未确认由 1.1.3 新改动引入的规则冲突、误判通过路径、越权或范围扩张，因此没有缺陷 ID、修复建议或待复验的修复项。本结论是只读规则审计结果，不代表整版发布验证通过。 已核对 HEAD 为指定基线 ec80ae19143a783339f6fea10f962815c3351f1a，审查了完整差异及唯一新增 QA 文件，共 9 个修改文件、1 个新增文件。生产脚本、依赖、风险分档和审查协议均未改变；版本元数据与 README 已同步为 1.1.3。 主要审查位置： implementation.md 第 73 行：新增工具的版本固定要求。 verification.md 第 72 行：补充验证的触发、授权、隔离和反验步骤。 verification.md 第 74 行：补证与机器质量门、失败状态的关系。 独立提出并核对了以下边界案例。预期来自本轮授权目标及既有权限、状态规则；这些是规则核对，没有冒充实际模型试用或项目运行结果。 边界案例 核对结论 已有锁文件，工具声明仍采用版本范围 要求固定解析版本，没有强制重写所有依赖声明 无锁机制，只记录本次版本，下次仍运行浮动命令 被“版本记录不代替版本锁定”及明确入口版本要求排除 复用旧工具，顺手治理历史依赖或新建第二套版本管理 “本次新增”和禁止回溯、禁止第二套管理限制了范围 只读审查发现缺工具，或项目禁止安装 版本固定及补证条款均不产生安装、修改权限 必需机器门受阻，手工反验绿→红→绿 机器门仍为受阻；不能因此取得 verified 已有反验覆盖，或缺少测试、授权、隔离条件 复用证据或说明条件不足，没有新增强制补证项 定向破坏仅造成语法、依赖或环境错误 明确不算检测到目标行为缺陷 原实现的必需行为已失败，同时工具也受阻 必须记录行为检查为 failed ，不能只报告受阻 版本固定条款另经独立子代理交叉审查，未产生确认发现。工具候选文件已有回指实现纪律的规则，其示例命令没有形成绕过版本固定要求的例外。 实际只读检查结果： git diff --check 通过。 10 个变更文件均可严格按 UTF-8 解码，无 BOM、使用 LF。 前后两次清单的 SHA-256 全部一致，审计期间变更集未漂移。 本轮 QA 文件 仍如实标记 in_progress，没有伪称检查完成。 剩余条件是：尚未核对最终测试、打包及模型执行证据；跨生态工具不能使用现有锁机制的实际接入行为也未验证。这些属于未验证范围，目前没有足够证据将其认定为缺陷。发布前仍需由执行方归档真实检查结果，本报告不替代这些检查。 本次按 1.1.3 新增范围首轮审查记录：round=1、round_cap=3、history_consistency=not_applicable，不对旧版审计历史重新宣称收敛。全程未修改文件、安装工具、提交或推送，也未主动联系其他聊天。",
+    "confirmed_findings": 0,
+    "round": 1,
+    "round_cap": 3,
+    "history_consistency": "not_applicable",
+    "scope": "Independent read-only review of the pre-publication candidate; final evidence archival, artifact checks and installation remained closing conditions."
+  },
+  "reviewed_rule_sha256": {
+    "skills/lean-engineer/references/implementation.md": "24ba1813341890c4d6afe72a5a9491030543838a3e335b84703a9adb1a49dfd1",
+    "skills/lean-engineer/references/verification.md": "560285887caffcf7f486db3cd19006b5845fd430f3850c00daa549d14fca1c06"
+  },
+  "unchanged_authorities": [
+    "agents/lean-reviewer.md",
+    "agents/openai.yaml",
+    "scripts/distribution_rules.py",
+    "scripts/package.py",
+    "scripts/validate_package.py",
+    "skills/lean-engineer/assets/backend-review-template.json",
+    "skills/lean-engineer/references/reusable-capabilities.md",
+    "skills/lean-engineer/references/review-protocol.md",
+    "skills/lean-engineer/references/risk-gates.md",
+    "skills/lean-engineer/references/tooling.md",
+    "skills/lean-engineer/scripts/validate_review.py",
+    "tests/test_adversarial.py",
+    "tests/test_validators.py"
+  ],
+  "limitations": [
+    "Synthetic ledger checks do not prove natural-language execution behavior.",
+    "Independent review is a source-rule audit, not a real-project or cross-ecosystem installation trial.",
+    "Artifact and installed-copy verification are separate closing checks."
+  ]
+}

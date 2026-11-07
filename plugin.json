@@ -1,0 +1,21 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "lean-engineer",
+  "version": "1.1.2",
+  "description": "Reusable project capabilities, lean implementation, risk-based verification, and independent cross-domain code review",
+  "author": {
+    "name": "lean-engineer contributors"
+  },
+  "license": "MIT",
+  "keywords": [
+    "coding",
+    "code-review",
+    "backend",
+    "frontend",
+    "mobile",
+    "embedded",
+    "data-engineering",
+    "verification",
+    "quality-gates"
+  ]
+}

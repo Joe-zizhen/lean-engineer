@@ -1,0 +1,265 @@
+{
+  "schema_version": 1,
+  "release": "1.0.0",
+  "round": 2,
+  "round_cap": 3,
+  "history_consistency": "passed",
+  "experience_gate": "无命中",
+  "history_basis": "承接同一独立审查者第1轮完整报告：0项已确认缺陷，无发现ID；未重置历史，未重新发布既有beta已关闭发现。",
+  "independence": "未参与实现、测试编写或变异分类编写。只读核对资料；唯一写入为本报告。未运行安装、测试、构建、打包或变异框架。",
+  "finding_count": 0,
+  "findings": [],
+  "previous_finding_id_mapping": [],
+  "unresolved_findings": [],
+  "independent_review": "completed",
+  "scope": {
+    "baseline": "baseline",
+    "candidate": "candidate",
+    "baseline_files": 55,
+    "candidate_files": 58,
+    "changed_count": 24,
+    "changed_files": [
+      ".claude-plugin/plugin.json",
+      "README.md",
+      "SKILL.md",
+      "VALIDATION.md",
+      "agents/lean-reviewer.md",
+      "agents/openai.yaml",
+      "evals/evidence/RELEASE-1.0.0-QA.json",
+      "evals/evidence/RUN-20261104-PENDING-REVIEW.json",
+      "evals/evidence/RUN-20261104-RELEASE-ROUTING.json",
+      "evals/runs.json",
+      "evals/tasks.json",
+      "kimi.plugin.json",
+      "plugin.json",
+      "scripts/package.py",
+      "scripts/validate_package.py",
+      "skills/lean-engineer/SKILL.md",
+      "skills/lean-engineer/agents/openai.yaml",
+      "skills/lean-engineer/references/implementation.md",
+      "skills/lean-engineer/references/review-protocol.md",
+      "skills/lean-engineer/references/risk-gates.md",
+      "skills/lean-engineer/references/tooling.md",
+      "skills/lean-engineer/references/verification.md",
+      "tests/test_adversarial.py",
+      "tests/test_validators.py"
+    ],
+    "baseline_manifest_sha256": "39e84e3d0115127e4c71c1e55817ead11366c8cb117c9b7e7655c3baca0cb551",
+    "candidate_manifest_sha256": "c0390db00ec5c8f9d2b8090c43fed5796b8f0e565711877b7ab45cff74be833b",
+    "manifest_algorithm": "按路径排序，路径+NUL+小写文件SHA256+LF，以UTF-8编码求SHA256",
+    "candidate_file_sha256": {
+      "kimi.plugin.json": "1826f743a14638a9824b5cc9fc16352b719ca83091e6164384e1fc23009b6db1",
+      "LICENSE": "cfe26ca8616c7aaacd65df6bc713a54fa4f78b40e01e9e36c7122d69e9400296",
+      "NOTICE": "9b0c3961fc23b0e80d6880ee0f7ae277d1e8bb4b899e225bf28c4013709765c8",
+      "plugin.json": "69273c4ad63a8d220a7a4ff49cabd77df949431af6487936de794ca9d65688b1",
+      "README.md": "45b5e61ee07d16fa09023c9f19ebd59b19a99e6eb847ff129cff9af160cea2da",
+      "SKILL.md": "3e93324c8c03da104746badb1ecf402c6af15632a18b86997feca51bd81d7e6e",
+      "VALIDATION.md": "d7da85be4aa1aa6bb31d5373eb12507f8546eb39e881edb5ab7e26e2dd1c8382",
+      ".claude-plugin/plugin.json": "3e95e95f0b61b56dc12011f0dabea1e0c70271fcd1a1effacc6188aa4d32d579",
+      "agents/lean-reviewer.md": "c9817fc46a03a3d1d9ab77c8fd2e8df5632c2b6c0817bac6fb461c95b52ddff9",
+      "agents/openai.yaml": "d284c062b0f2bb6df0105c2364cd2509efca7054b9a85fbfe559eee7966e7504",
+      "evals/README.md": "b07e12898fdbdcd75c2a43ce6e1b6fb02a8e4dfb3783f88813c3262c5097201a",
+      "evals/runs.json": "29f5abec7bb31801f2dbc0c96b554d32354548960a358c526445ad9f0b39c7e4",
+      "evals/tasks.json": "b2a4d00e8a8fd05982b1fa75f53cb1e36f86fd5b28f6c3b32d803463e508e279",
+      "evals/evidence/RELEASE-1.0.0-QA.json": "9652edf91091867a22eb9d8c030a0cd101a15cab6e20dcdcf508d87719934453",
+      "evals/evidence/RUN-20261029-CAPABILITY-FIRST.json": "9f5b96d9e1feb33ca705604f67f06d543486be35c74cc66e875235d19a539453",
+      "evals/evidence/RUN-20261029-CAPABILITY-REUSE.json": "8fc834e43d9bd740bc51ca430547a380ef9f81cfee1aa743070d9c514eb876f2",
+      "evals/evidence/RUN-20261029-EXISTING-CONVENTIONS.json": "bee6edaba3d8c8e330d45b16f6a10d7bfc7cf3179a047533d32b430e488e26fe",
+      "evals/evidence/RUN-20261029-POLICY-BASELINE.json": "7151e111a713f3294969f7255dfb633fd33a873b9eb653906a2f0ec051eac5f4",
+      "evals/evidence/RUN-20261029-POLICY-CANDIDATE.json": "5847465789645065870f7efb62c134b9977b16dadcee48549eef74adf651e3a3",
+      "evals/evidence/RUN-20261029-READONLY-INDEX.json": "0b8faac5d9cd4f1371a3b800122e00a25808e7ad8cfe944914b5b577978bcfb4",
+      "evals/evidence/RUN-20261104-PENDING-REVIEW.json": "52dc43d5f1709ec5deb1f4bb0914e6fddb771fd7db193b69e7efb05b33a2b704",
+      "evals/evidence/RUN-20261104-RELEASE-ROUTING.json": "68d01cc956431ca9b371231a308bf9e30241ddae0dfcefdad82279bab4862c1c",
+      "scripts/distribution_rules.py": "cd565f6ace5fc7d7544d5d349d275524d51b55be43dbc190dcbc16be9f2208c9",
+      "scripts/package.py": "c14452a3cffbcb538f08107ae2b4cc45bb563320d666e428c4d4e0cfa5c84b93",
+      "scripts/validate_package.py": "109cd33d3a2ca885a4850d08b70da4bebf6eded5d3c3b1be6488e0a995f6b10a",
+      "skills/lean-engineer/LICENSE": "cfe26ca8616c7aaacd65df6bc713a54fa4f78b40e01e9e36c7122d69e9400296",
+      "skills/lean-engineer/NOTICE": "9b0c3961fc23b0e80d6880ee0f7ae277d1e8bb4b899e225bf28c4013709765c8",
+      "skills/lean-engineer/SKILL.md": "50bd2c00fb18cb26cb86cbd498d1a7b4b37c3f7c02b182c4389c26d20b18d68d",
+      "skills/lean-engineer/agents/openai.yaml": "eb31ff5f9c2bded829f1639b895a32ad0f2add60ed6cf3ba2b792023b452c412",
+      "skills/lean-engineer/assets/backend-review-template.json": "5f2289dcec40a75f03f9d528011b4d15dc23f60f371051d530316a71f1c20476",
+      "skills/lean-engineer/references/backend-review.md": "7de7d0ab859dd442b1fdd5b9b560bd339bac1161f674026ad2da61f77a032ea0",
+      "skills/lean-engineer/references/formal-verification.md": "cd09492617109f93472492f3dc56637c5f9f07bc29aa40307d08b3a587378057",
+      "skills/lean-engineer/references/frontend-review.md": "8d061667e99034410fb9a3c826555e6a9082f388c70010ae75dd666866a85848",
+      "skills/lean-engineer/references/implementation.md": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4",
+      "skills/lean-engineer/references/reusable-capabilities.md": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+      "skills/lean-engineer/references/review-protocol.md": "c8b7969d9e2a95a7275216937d990c694aa98097abc5a4cc2db6b5be55354c99",
+      "skills/lean-engineer/references/risk-gates.md": "1156aa3397872cc727b19b77ceb79d9741d3f88f649a7e792ccf3530bf302fd4",
+      "skills/lean-engineer/references/tooling.md": "9ba9fa972c863cecf54fb3b65ab014b4dbed99792fb880eeef6094aad106c702",
+      "skills/lean-engineer/references/verification.md": "6e830bdb906fd7eab42a9db8f699e74632d985eff13f14afc9ab4e9161a28ee2",
+      "skills/lean-engineer/references/backend/api-contracts.md": "9456aeef7af936233fdfc862091aab1e53e60f009473bc39435eb1b02f2da8f1",
+      "skills/lean-engineer/references/backend/concurrency-messaging.md": "6297682ea74cf79aed71b1530dd23e139791f6805a07d9fb265bf7e403a319f6",
+      "skills/lean-engineer/references/backend/data-consistency.md": "38c874cfe12aa8cf20ad97a9a3c2d3976f0cd91e8c5ea57040b8b1021811bfd1",
+      "skills/lean-engineer/references/backend/delivery-operations.md": "6f8af2296d1b5dd77944cd91d972d4a3230202ef0e978434b3d2d22cfa762a67",
+      "skills/lean-engineer/references/backend/identity-access.md": "bb2b90997117cb0df0a4da06a93c9311baf55645e641e2b941db72dbbfdb8170",
+      "skills/lean-engineer/references/backend/ledger-contract.md": "43a86d10fdea76a2fd3a732e059c497f63cd370c4bf3cfca1e72b48928517d1a",
+      "skills/lean-engineer/references/backend/security-runtime.md": "3cd156c40aedde83a37e90aa5b702e3866376e5cee7b1a6f1075f612931c30f7",
+      "skills/lean-engineer/references/domains/data-engineering.md": "691d2aa4f28716704646272024534d0e20300da18ef90d32788d6125821b69d6",
+      "skills/lean-engineer/references/domains/embedded.md": "7dadbb0ba1eecaf503273f3e715d2eeccb8a2bc593208c83088d6af1b162403c",
+      "skills/lean-engineer/references/domains/mobile.md": "6289cb5bbad029a38de95e2cd9f36fe58143ffe68d42e20a4f205ec52fb6cc30",
+      "skills/lean-engineer/references/frontend/accessibility-layout.md": "69e0259b5b92332d85aaf52b3e7e7e4472b54db0e702cc7b7b6598055f5b92f2",
+      "skills/lean-engineer/references/frontend/delivery-evidence.md": "1326d4f4bb796f04033739acd5f3e6ac0acde55af0158b7b0f40911430c78eed",
+      "skills/lean-engineer/references/frontend/performance-lifecycle.md": "b64a630ddcd87d617c45925581d3af3c2325637ef0ed50147e12891288f82347",
+      "skills/lean-engineer/references/frontend/routes-components.md": "1b54c10f589b7758ab058c6e77de655fd434203f3b5327116c362c036cdec75b",
+      "skills/lean-engineer/references/frontend/security-privacy.md": "23e455cf4042cbf4923b4d895ffb7d6516418d29797f0b72529d31d245d2129e",
+      "skills/lean-engineer/references/frontend/state-data.md": "93d39b538b28296d6065a57048d64e82f383e41a682f8e7dc38af7edd1b40724",
+      "skills/lean-engineer/scripts/validate_review.py": "8962fe870fe62dcca3fa430039269dabc278560d17b4b7835942cd33c5156fa9",
+      "tests/test_adversarial.py": "70c7eb35892cd35a2423baa19c7a3c04e9d0f06d8a328a786e8e73cd52739018",
+      "tests/test_validators.py": "6c2802c30d41dd542739c437af1244e61b4761ec8cf84a8df969357d227d9af6"
+    },
+    "git_evidence": "非Git目录，使用清单、哈希、逐文件文本及AST差异核对。"
+  },
+  "source_review": [
+    "覆盖全部24项变更、58文件清单及相关打包/校验调用链；拆分保持既有判断、调用顺序和诊断。write_zip新增可选参数默认False，原调用方式及CLI默认插件行为保持兼容。",
+    "风险规则自第1轮未变化。所有权允许明确转交并保留失败清理；兼容例外仍仅限证据闭合的可选展示字段，独立审查和原验证门槛保留。",
+    "当前生产源码和测试哈希均匹配包内QA。两份评估JSON由CRLF恢复LF后，对象语义与预检归档一致。全部候选文本严格UTF-8解码、无BOM和替换字符。",
+    "审查期间主agent通知两个JSON行尾恢复及host_session_load证据加入，旧final-file-manifest的三项哈希需最终刷新。本报告记录实际候选快照。"
+  ],
+  "reviewed_evidence": [
+    "source-checks.json",
+    "artifact-checks.json",
+    "complexity.json",
+    "architecture.json",
+    "mutation-results.json",
+    "mutation-rerun-results.json",
+    "mutation-final-results.json",
+    "mutation-summary.json",
+    "host-load.json",
+    "run_mutations.py",
+    "check_release.py",
+    "final-file-manifest.json",
+    "final-changes.diff",
+    "candidate/evals/evidence/RELEASE-1.0.0-QA.json",
+    "candidate/evals/evidence/RUN-20261104-RELEASE-ROUTING.json",
+    "candidate/evals/evidence/RUN-20261104-PENDING-REVIEW.json"
+  ],
+  "verification": {
+    "tests": "源检查119项全部通过，无跳过；最终候选生产源码与测试哈希匹配QA。",
+    "format": "两个技能入口quick_validate通过；Claude strict清单校验通过。host-load.json会话加载exit0，lean-engineer@inline、Version 1.0.0、Status loaded；包内副本一致。",
+    "ledger": "源目录、完整插件解包目录及单技能目录，普通空台账exit0，require-ready exit2。",
+    "complexity": "独立AST比较确认14个新增/修改生产函数，与Lizard报告集合一致；最高9，阈值10。",
+    "architecture": "既有必需文件、清单、引用、排除和链接规则有实际校验输出；生产导入边与基线一致，无新增生产依赖。",
+    "model_trials": "两次新增独立合成试用共8场景，读取与证据哈希匹配；历史6次执行仍分开标识。补充not_run和blocked场景均为受控大改+partial，未免独审、未自动强制三门。",
+    "preflight": "完整插件57文件、单技能31文件，两次打包字节一致，源字节比较和解包复检通过。只读打开预检归档确认与当前源差异来自后加QA、最终验证文案及通知的JSON行尾；单技能全部对应源字节一致。最终归档仍待重打包。"
+  },
+  "mutation_review": {
+    "status": "passed_with_documented_equivalents",
+    "initial": {
+      "total": 294,
+      "killed": 212,
+      "survived": 82
+    },
+    "rerun": {
+      "total": 82,
+      "killed": 67,
+      "survived": 15
+    },
+    "final_known_breaks": {
+      "total": 3,
+      "each_exit_codes": [
+        0,
+        1,
+        0
+      ]
+    },
+    "summary": {
+      "total": 294,
+      "killed": 282,
+      "equivalent": 12,
+      "unresolved_survivors": 0,
+      "timeout": 0
+    },
+    "reconciliation": "原始与汇总变异多重集一致；补跑正好覆盖初次82存活项，3组绿红绿关闭剩余非等价项。100个不同起始位置标识另含3个不同结束坐标的嵌套AST目标，因此103个目标与294试验不冲突；重复坐标试验保留，均初次杀死。",
+    "equivalents": [
+      {
+        "ids": [
+          "M007"
+        ],
+        "basis": "False默认值变None，仅用于skill_only真假判断，省略参数仍选插件。等价不包含反射签名字面值。"
+      },
+      {
+        "ids": [
+          "M012",
+          "M085",
+          "M159",
+          "M231"
+        ],
+        "basis": "copyfileobj缓冲变为0、1、2048，对普通二进制输入文件保持内容；0采用默认缓冲。等价限于文件内容与CLI功能，不声称耗时、吞吐或调用次数相同。"
+      },
+      {
+        "ids": [
+          "M020"
+        ],
+        "basis": "绝对Path与cwd相接仍为该绝对路径，后续validate_output依旧resolve；相对路径原本进入分支。"
+      },
+      {
+        "ids": [
+          "M022",
+          "M163"
+        ],
+        "basis": "argparse仅允许plugin和skill，两值上的>= skill与== skill真假表相同。"
+      },
+      {
+        "ids": [
+          "M024",
+          "M087",
+          "M098",
+          "M161"
+        ],
+        "basis": "ensure_ascii None与False同为假，True仅改变Unicode JSON表示；解析后对象和值相同，不声称stdout原始字节相同。"
+      }
+    ],
+    "limits": "Mutatest支持操作符的全部本次目标试验，不等于任意程序变更穷尽。审查者核对授权执行者提供的真实输出，没有自行运行变异框架。"
+  },
+  "independent_expectations": [
+    {
+      "scenario": "其余兼容证据完整，独审not_run或blocked",
+      "expected": "受控大改+partial，独审仍必需，不自动强制三门",
+      "observed": "两个独立试用均符合"
+    },
+    {
+      "scenario": "未知旧消费者或缺兼容证据",
+      "expected": "不适用兼容例外，厚审并保留缺口",
+      "observed": "规则试用符合"
+    },
+    {
+      "scenario": "工厂失败清理，成功转交接收方关闭",
+      "expected": "允许转交，仍需核对异常、取消、关闭次数和共享借用边界",
+      "observed": "规则试用符合"
+    },
+    {
+      "scenario": "双打包形态，缺许可证/入口，坏归档，暂存文件已存在",
+      "expected": "成功形态完整；失败明确且不覆盖已存在暂存，不留下新归档",
+      "observed": "新增测试和实际运行输出符合"
+    },
+    {
+      "scenario": "清单不一致、非法评估字段、领域文件缺失",
+      "expected": "校验拒绝并保留对应诊断",
+      "observed": "边界测试、原始变异失败、最终回归输出符合"
+    }
+  ],
+  "coverage_axes": {
+    "requirements": "覆盖五项发行维护目标，最终归档为后置条件。",
+    "norms": "核对风险、实现、独立审查、验证与元数据，未观察到门槛降低。",
+    "security": "覆盖分发路径、链接、输出覆盖和只读边界，不替代全面安全审计。",
+    "evidence": "核对原始输出、哈希、变异合并、试用范围和预检/最终归档区别。"
+  },
+  "delivery_conditions": [
+    {
+      "id": "FINAL-ARTIFACTS",
+      "status": "not_run",
+      "owner": "主agent",
+      "required": "加入本报告并更新VALIDATION后刷新完整源清单；重打包两种发行物，重复打包字节比对、ZIP/源逐文件核对、解包复检；更新旁路sha256与files.json。不得把预检哈希当最终交付哈希。"
+    }
+  ],
+  "uninspected": [
+    "Kimi/Codex/ChatGPT完整交互安装及真实任务端到端验证",
+    "真实移动设备、硬件台架、生产数据管道、浏览器合规、TLC、真实事故效果评估",
+    "本报告加入之后尚未生成的最终归档"
+  ],
+  "conclusion": "第2轮独立源码及证据复核完成：0确认缺陷，0未决缺陷，history_consistency=passed。现有证据支持限定范围内的源码质量门。完成FINAL-ARTIFACTS前不将整个发行标为verified；独立审查不替代授权发布决定。",
+  "distribution_redaction": {
+    "original_report_sha256": "6888a15c464faf4adff36f90c4914c07856e598628653e560eed77a21bd2a724",
+    "scope": "Local workspace path substituted only; conclusions, findings and hashes unchanged."
+  }
+}

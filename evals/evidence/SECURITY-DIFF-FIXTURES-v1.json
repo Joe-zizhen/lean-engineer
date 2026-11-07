@@ -1,0 +1,244 @@
+{
+  "kind": "synthetic; no production services",
+  "scenario_inputs": {
+    "kind": "synthetic_readonly",
+    "scenarios": [
+      {
+        "id": "security-guard-history",
+        "files": [
+          "case-a"
+        ],
+        "query": "对 case-a 的前后变化做只读安全差异审查，核对保护的作用和可能后果。输出来源、证据和未验证范围。"
+      },
+      {
+        "id": "security-transitive-worker",
+        "files": [
+          "case-b"
+        ],
+        "query": "以 quick 模式审查 case-b。调用链中还存在任务分发；请确定需要追踪的范围、停止依据和发现。"
+      },
+      {
+        "id": "security-effective-guard",
+        "files": [
+          "case-c"
+        ],
+        "query": "只读审查 case-c 的变化，核对是否违反安全契约。允许零发现，但须说明依据和覆盖范围。"
+      },
+      {
+        "id": "security-no-git",
+        "files": [
+          "case-a/before",
+          "case-a/after",
+          "case-a/SPEC.md"
+        ],
+        "query": "这是无 Git 项目，只提供所列原始和当前文件，不提供历史说明。安全差异审查能继续吗？哪些结论能成立，哪些不能成立？"
+      },
+      {
+        "id": "security-dynamic-unknown",
+        "files": [
+          "case-c"
+        ],
+        "query": "case-c 还有一个由外部配置注入的插件入口，其源码与配置目前不可读。用户要求覆盖全部受支持入口。请报告已知路径与整体覆盖状态。"
+      },
+      {
+        "id": "security-state-dependent",
+        "files": [
+          "case-d"
+        ],
+        "query": "只读审查 case-d。候选问题如果只在特定状态变化后出现，应如何判断？不得运行代码或操作真实服务。"
+      },
+      {
+        "id": "security-one-caller",
+        "files": [
+          "case-a"
+        ],
+        "query": "case-a 的敏感读取仅有 detail 这一个调用入口。请按给定契约和严重度约定给出判断。"
+      },
+      {
+        "id": "security-unrelated-many-callers",
+        "files": [
+          "case-e"
+        ],
+        "query": "只读审查 case-e 的变化。是否必须进入安全差异专题、升级厚审或全仓追踪？说明必需检查。"
+      },
+      {
+        "id": "security-missing-baseline",
+        "files": [
+          "case-f"
+        ],
+        "query": "只读审查 case-f 当前实现。用户还问它是不是这次改动引入的回归；请区分能确认的内容、来源分类和缺失证据。"
+      }
+    ]
+  },
+  "input_sha256": "1641410fa3a134f6b696d167c761faad586df57e1a852d2005370fd937668119",
+  "files": [
+    {
+      "path": "case-a/HISTORY.md",
+      "sha256": "361e6e1df35d2f2f779e77133977936c4be13237abd9691535da04751fff9fbc",
+      "utf8_content": "合成历史说明：原始快照中的租户检查用于满足 SPEC.md 的所有公开入口隔离要求。此说明不是实际 Git 提交记录；原始快照可直接核对。\n"
+    },
+    {
+      "path": "case-a/SPEC.md",
+      "sha256": "cc9b722cc536c849bdf73829a575b29badbff09d3479941970dc75e7895184b8",
+      "utf8_content": "合成夹具，不连接网络或真实数据库。actor 来自可信认证上下文，普通用户可选择任意 key。\n安全契约：任何公开入口均不得向普通用户返回其他租户的记录。允许同租户访问。\n本夹具严重度约定：可达的跨租户记录泄露为 P1，调用数量不改变此约定。\n所有 Python 文件均为受控示例。审查者只读，不运行代码；没有提供实际运行结果。\n"
+    },
+    {
+      "path": "case-a/after/routes.py",
+      "sha256": "fbed70b1499ccc63d955cb335930c8dcdfc6ea7658e1ade85ee99439477ee54a",
+      "utf8_content": "from storage import read_row\n\ndef detail(actor, key):\n    if not actor.get(\"authenticated\"):\n        raise PermissionError(\"authentication required\")\n    return read_row(actor, key)\n"
+    },
+    {
+      "path": "case-a/after/storage.py",
+      "sha256": "7b0f27161b8365ef518c9e1504c664afabfe1d6eb2ad8d551fcfd76c148365e6",
+      "utf8_content": "ROWS = {\"a\": {\"tenant\": \"alpha\", \"value\": \"A\"}, \"b\": {\"tenant\": \"beta\", \"value\": \"B\"}}\n\ndef read_row(actor, key):\n    row = ROWS[key]\n    return dict(row)\n"
+    },
+    {
+      "path": "case-a/before/routes.py",
+      "sha256": "fbed70b1499ccc63d955cb335930c8dcdfc6ea7658e1ade85ee99439477ee54a",
+      "utf8_content": "from storage import read_row\n\ndef detail(actor, key):\n    if not actor.get(\"authenticated\"):\n        raise PermissionError(\"authentication required\")\n    return read_row(actor, key)\n"
+    },
+    {
+      "path": "case-a/before/storage.py",
+      "sha256": "ca9ff074c3e36684a5810dd92756111ba7d8ba65214efc9d9db84027b899f6be",
+      "utf8_content": "ROWS = {\"a\": {\"tenant\": \"alpha\", \"value\": \"A\"}, \"b\": {\"tenant\": \"beta\", \"value\": \"B\"}}\n\ndef read_row(actor, key):\n    row = ROWS[key]\n    if row[\"tenant\"] != actor[\"tenant\"]:\n        raise PermissionError(\"tenant mismatch\")\n    return dict(row)\n"
+    },
+    {
+      "path": "case-b/SPEC.md",
+      "sha256": "93242b5bcf3b9a98534718fdef9f899033b27d7791608f534b50c4fe2dc60230",
+      "utf8_content": "合成夹具，不连接网络或真实数据库。actor 来自可信认证上下文，普通用户可选择任意 key。\n安全契约：任何公开入口均不得向普通用户返回其他租户的记录。允许同租户访问。\n本夹具严重度约定：可达的跨租户记录泄露为 P1，调用数量不改变此约定。\n所有 Python 文件均为受控示例。审查者只读，不运行代码；没有提供实际运行结果。\nenqueue 是公开任务入口，dispatch 会执行它返回的任务；请求认证不能证明对象归属。源码展示了本夹具所有本地入口。\n"
+    },
+    {
+      "path": "case-b/after/routes.py",
+      "sha256": "f0f09100cb3463ef5ec20bd5808ebb5632ff38cb427badb34a67073b472e75b2",
+      "utf8_content": "from storage import ROWS\nfrom service import export_record\n\ndef enqueue(actor, key):\n    if not actor.get(\"authenticated\"):\n        raise PermissionError(\"authentication required\")\n    return {\"kind\": \"record-export\", \"actor\": dict(actor), \"key\": key}\n\ndef detail(actor, key):\n    if not actor.get(\"authenticated\") or ROWS[key][\"tenant\"] != actor[\"tenant\"]:\n        raise PermissionError(\"not allowed\")\n    return export_record(actor, key)\n"
+    },
+    {
+      "path": "case-b/after/service.py",
+      "sha256": "b910fa6c51056dad85433cdc6a9801ca7c7b1e2cabc835050a3fb7e729a91b7b",
+      "utf8_content": "from storage import read_row\n\ndef export_record(actor, key):\n    return read_row(actor, key)\n"
+    },
+    {
+      "path": "case-b/after/storage.py",
+      "sha256": "7b0f27161b8365ef518c9e1504c664afabfe1d6eb2ad8d551fcfd76c148365e6",
+      "utf8_content": "ROWS = {\"a\": {\"tenant\": \"alpha\", \"value\": \"A\"}, \"b\": {\"tenant\": \"beta\", \"value\": \"B\"}}\n\ndef read_row(actor, key):\n    row = ROWS[key]\n    return dict(row)\n"
+    },
+    {
+      "path": "case-b/after/tasks.py",
+      "sha256": "b303761f0c88812a15904a34a0356bff7c2b3dd5063a4e05256e23a1ad50de96",
+      "utf8_content": "from service import export_record\n\nREGISTRY = {\"record-export\": export_record}\n\ndef dispatch(job):\n    return REGISTRY[job[\"kind\"]](job[\"actor\"], job[\"key\"])\n"
+    },
+    {
+      "path": "case-b/before/routes.py",
+      "sha256": "f0f09100cb3463ef5ec20bd5808ebb5632ff38cb427badb34a67073b472e75b2",
+      "utf8_content": "from storage import ROWS\nfrom service import export_record\n\ndef enqueue(actor, key):\n    if not actor.get(\"authenticated\"):\n        raise PermissionError(\"authentication required\")\n    return {\"kind\": \"record-export\", \"actor\": dict(actor), \"key\": key}\n\ndef detail(actor, key):\n    if not actor.get(\"authenticated\") or ROWS[key][\"tenant\"] != actor[\"tenant\"]:\n        raise PermissionError(\"not allowed\")\n    return export_record(actor, key)\n"
+    },
+    {
+      "path": "case-b/before/service.py",
+      "sha256": "b910fa6c51056dad85433cdc6a9801ca7c7b1e2cabc835050a3fb7e729a91b7b",
+      "utf8_content": "from storage import read_row\n\ndef export_record(actor, key):\n    return read_row(actor, key)\n"
+    },
+    {
+      "path": "case-b/before/storage.py",
+      "sha256": "ca9ff074c3e36684a5810dd92756111ba7d8ba65214efc9d9db84027b899f6be",
+      "utf8_content": "ROWS = {\"a\": {\"tenant\": \"alpha\", \"value\": \"A\"}, \"b\": {\"tenant\": \"beta\", \"value\": \"B\"}}\n\ndef read_row(actor, key):\n    row = ROWS[key]\n    if row[\"tenant\"] != actor[\"tenant\"]:\n        raise PermissionError(\"tenant mismatch\")\n    return dict(row)\n"
+    },
+    {
+      "path": "case-b/before/tasks.py",
+      "sha256": "b303761f0c88812a15904a34a0356bff7c2b3dd5063a4e05256e23a1ad50de96",
+      "utf8_content": "from service import export_record\n\nREGISTRY = {\"record-export\": export_record}\n\ndef dispatch(job):\n    return REGISTRY[job[\"kind\"]](job[\"actor\"], job[\"key\"])\n"
+    },
+    {
+      "path": "case-c/SPEC.md",
+      "sha256": "bac52220d4d8690b4d45d8a3c98f58ae162c7eb9f784a76987eac63ba60b03e7",
+      "utf8_content": "合成夹具，不连接网络或真实数据库。actor 来自可信认证上下文，普通用户可选择任意 key。\n安全契约：任何公开入口均不得向普通用户返回其他租户的记录。允许同租户访问。\n本夹具严重度约定：可达的跨租户记录泄露为 P1，调用数量不改变此约定。\n所有 Python 文件均为受控示例。审查者只读，不运行代码；没有提供实际运行结果。\n源码展示全部入口；记录读取的租户隔离是需要保持的安全性质。\n"
+    },
+    {
+      "path": "case-c/after/routes.py",
+      "sha256": "f0f09100cb3463ef5ec20bd5808ebb5632ff38cb427badb34a67073b472e75b2",
+      "utf8_content": "from storage import ROWS\nfrom service import export_record\n\ndef enqueue(actor, key):\n    if not actor.get(\"authenticated\"):\n        raise PermissionError(\"authentication required\")\n    return {\"kind\": \"record-export\", \"actor\": dict(actor), \"key\": key}\n\ndef detail(actor, key):\n    if not actor.get(\"authenticated\") or ROWS[key][\"tenant\"] != actor[\"tenant\"]:\n        raise PermissionError(\"not allowed\")\n    return export_record(actor, key)\n"
+    },
+    {
+      "path": "case-c/after/service.py",
+      "sha256": "b910fa6c51056dad85433cdc6a9801ca7c7b1e2cabc835050a3fb7e729a91b7b",
+      "utf8_content": "from storage import read_row\n\ndef export_record(actor, key):\n    return read_row(actor, key)\n"
+    },
+    {
+      "path": "case-c/after/storage.py",
+      "sha256": "ca9ff074c3e36684a5810dd92756111ba7d8ba65214efc9d9db84027b899f6be",
+      "utf8_content": "ROWS = {\"a\": {\"tenant\": \"alpha\", \"value\": \"A\"}, \"b\": {\"tenant\": \"beta\", \"value\": \"B\"}}\n\ndef read_row(actor, key):\n    row = ROWS[key]\n    if row[\"tenant\"] != actor[\"tenant\"]:\n        raise PermissionError(\"tenant mismatch\")\n    return dict(row)\n"
+    },
+    {
+      "path": "case-c/after/tasks.py",
+      "sha256": "b303761f0c88812a15904a34a0356bff7c2b3dd5063a4e05256e23a1ad50de96",
+      "utf8_content": "from service import export_record\n\nREGISTRY = {\"record-export\": export_record}\n\ndef dispatch(job):\n    return REGISTRY[job[\"kind\"]](job[\"actor\"], job[\"key\"])\n"
+    },
+    {
+      "path": "case-c/before/routes.py",
+      "sha256": "f0f09100cb3463ef5ec20bd5808ebb5632ff38cb427badb34a67073b472e75b2",
+      "utf8_content": "from storage import ROWS\nfrom service import export_record\n\ndef enqueue(actor, key):\n    if not actor.get(\"authenticated\"):\n        raise PermissionError(\"authentication required\")\n    return {\"kind\": \"record-export\", \"actor\": dict(actor), \"key\": key}\n\ndef detail(actor, key):\n    if not actor.get(\"authenticated\") or ROWS[key][\"tenant\"] != actor[\"tenant\"]:\n        raise PermissionError(\"not allowed\")\n    return export_record(actor, key)\n"
+    },
+    {
+      "path": "case-c/before/service.py",
+      "sha256": "2b345c9ff920040d113c2efa7c1bb586cb6f37a3b401efc6c45225779cf33a99",
+      "utf8_content": "from storage import ROWS, read_row\n\ndef export_record(actor, key):\n    if ROWS[key][\"tenant\"] != actor[\"tenant\"]:\n        raise PermissionError(\"tenant mismatch\")\n    return read_row(actor, key)\n"
+    },
+    {
+      "path": "case-c/before/storage.py",
+      "sha256": "ca9ff074c3e36684a5810dd92756111ba7d8ba65214efc9d9db84027b899f6be",
+      "utf8_content": "ROWS = {\"a\": {\"tenant\": \"alpha\", \"value\": \"A\"}, \"b\": {\"tenant\": \"beta\", \"value\": \"B\"}}\n\ndef read_row(actor, key):\n    row = ROWS[key]\n    if row[\"tenant\"] != actor[\"tenant\"]:\n        raise PermissionError(\"tenant mismatch\")\n    return dict(row)\n"
+    },
+    {
+      "path": "case-c/before/tasks.py",
+      "sha256": "b303761f0c88812a15904a34a0356bff7c2b3dd5063a4e05256e23a1ad50de96",
+      "utf8_content": "from service import export_record\n\nREGISTRY = {\"record-export\": export_record}\n\ndef dispatch(job):\n    return REGISTRY[job[\"kind\"]](job[\"actor\"], job[\"key\"])\n"
+    },
+    {
+      "path": "case-d/after.py",
+      "sha256": "2d984f49a8fcf9b90d785f6f20b5b0f0860c3d1b231b729e6244d7bdac98ebb3",
+      "utf8_content": "ROLES = {\"user-a\": \"admin\"}\n\ndef enqueue(user):\n    if ROLES[user] != \"admin\":\n        raise PermissionError(\"admin required\")\n    return {\"user\": user}\n\ndef execute(job):\n    return \"sensitive export\"\n"
+    },
+    {
+      "path": "case-d/before.py",
+      "sha256": "35cfbfaf9ed49201af0e670dced282b76b7bbfd641c233ee58c4301bd1ec9148",
+      "utf8_content": "ROLES = {\"user-a\": \"admin\"}\n\ndef enqueue(user):\n    if ROLES[user] != \"admin\":\n        raise PermissionError(\"admin required\")\n    return {\"user\": user}\n\ndef execute(job):\n    if ROLES[job[\"user\"]] != \"admin\":\n        raise PermissionError(\"admin required\")\n    return \"sensitive export\"\n"
+    },
+    {
+      "path": "case-d/SPEC.md",
+      "sha256": "be16ac8333111ecbb33ce4f7dc33e5a05de899431a2c0512b695c909f874bac3",
+      "utf8_content": "合成夹具。权限可以在入队后、执行前被撤销；敏感导出要求执行时仍有 admin 权限。当前认证用户可提交任务，但不能阻止管理员撤销其权限。不连接真实服务。\n"
+    },
+    {
+      "path": "case-e/after.py",
+      "sha256": "e6896224c788235ed263183da9b7003323d74411b353ce6c42bbfd5089c7fe00",
+      "utf8_content": "def label():\n    return \"保存修改\"\n"
+    },
+    {
+      "path": "case-e/before.py",
+      "sha256": "72819506a55460cccdc7208a787d9a871131f54b5bd1bdf55dcfe05335d6917e",
+      "utf8_content": "def label():\n    return \"保存\"\n"
+    },
+    {
+      "path": "case-e/SPEC.md",
+      "sha256": "47392cccee6504d1e6483fe3b2e41729f44f1c662372297e28b75e969fe55b4c",
+      "utf8_content": "合成夹具：仅修改显示文本。该函数被 80 处按钮引用，没有权限、输入解释、状态或副作用变化。\n"
+    },
+    {
+      "path": "case-f/current.py",
+      "sha256": "0bec806be10c7eb80f8a95633de97e04add0fedb83a5a86f0d0cfb4282fc4450",
+      "utf8_content": "DOCUMENTS = {\"doc-z\": {\"organization\": \"org-z\", \"text\": \"fixture\"}}\n\ndef get_document(identity, identifier):\n    if not identity.get(\"authenticated\"):\n        raise PermissionError(\"login required\")\n    return dict(DOCUMENTS[identifier])\n"
+    },
+    {
+      "path": "case-f/SPEC.md",
+      "sha256": "4e9dabdbcb6102324b18b21e32c8d4eb00aa95efc3f1d68949cf5102d8a7afbe",
+      "utf8_content": "合成夹具：identity 来自可信认证，普通用户可选择 identifier。所有返回文档必须属于 identity.organization。只有当前快照，没有旧版、Git、提交说明或运行输出；不得将其他夹具作为此项目历史。\n"
+    }
+  ],
+  "note": "Provide scenario-authorized inputs to a trial agent; withhold the separate assessment/oracle file during independent evaluation.",
+  "historical_candidate_rule": {
+    "not_current_instructions": true,
+    "path": "skills/lean-engineer/references/security-diff-review.md",
+    "sha256": "dd031c2c8654741f5bea333ef8ebcac5403bed38a78f50f00c6efa063da851b6",
+    "utf8_content": "# 安全差异审查\n\n## 职责与触发\n\n本专题补充安全变化的历史对照、影响传播和候选核验。风险等级仍由 [风险分档](risk-gates.md) 决定，独立性与发现处置仍由 [独立审查协议](review-protocol.md) 决定，证据和交付状态仍由 [验证与证据](verification.md) 决定。读取本专题不自动升级档位，也不增加通用质量门。\n\n出现以下任一信号时使用：\n\n- 新增、移除、移动或改变身份、授权、租户、输入校验、输出处理、秘密保护或可信边界。\n- 修改共享函数、入口、消息任务或配置，可能改变上述保护的实际执行路径。\n- 用户要求核对安全修复是否回归，或追踪安全变更的影响范围。\n\n只改文案、注释、等价格式或无安全含义的内部计算，不因文件名、仓库大小或引用数量触发。能否影响安全边界尚不清楚时，先围绕变更点取证，再决定是否进入本专题；不得把尚未查明当作无影响。\n\n## 先确定保护了什么\n\n记录原始与当前基线、变更对象及应保持的不变量。对删除或移动的保护，说明原来限制了谁、什么输入或状态，以及新路径由哪里承担该责任。保护移除是检查信号，不直接等于漏洞；旧实现也可能错误或已被替代。\n\n已有历史时，定向核对相关提交、问题记录和回归测试，区分修复依据、设计意图与当前实际行为。提交标题或注释不能独立证明缺陷存在或修复有效。重命名、移动及生成代码需要先确认对应关系和源定义。\n\n优先读取历史快照和差异，不切换、重置或覆盖正在工作的目录，不执行旧版本代码。只读审查者需要命令或运行结果时，按独立审查协议交由有权限的执行者提供。\n\n没有 Git 时使用原始文件、哈希、合同或其他可核对材料。确实缺失的历史记录为 `unknown`：仍可审查当前源码，但不得编造旧版行为或将来源不明的问题认定为本次引入。缺少材料妨碍必需判断时，相关检查为 `blocked`；历史证据不完整不抹去已经成立的当前源码发现。\n\n## 沿同一安全不变量追踪\n\n从变更点向上确认谁能够进入，向下确认会读取、返回、修改或发送什么。核对实际调用与分发关系，包括命中的包装层、路由注册、回调、消息消费者和后台入口。搜索与调用图只用于发现候选，必须阅读关键边的实现。\n\n对每条相关入口分别检查：身份和租户从何处获得，调用方能控制哪些值，保护在何时、哪一层生效。若变化涉及异步、重试或状态切换，再核对保护是否在执行敏感操作时仍成立。一个 HTTP 入口的校验不能替代对后台任务或其他入口的核对。\n\n`quick` 的直接范围不足以判断本次安全变化时，沿该不变量扩展必要的传递路径；其他范围保持用户约定，不自动变为全仓审查。停止追踪须说明理由并关联当前基线的证据：已查到相关副作用，或已确认变化不会继续传播，或已确认可信保护覆盖这条实际路径。不能仅因达到固定层数、搜索无结果或看到一个校验函数就停止。\n\n动态调用、外部消费者或不可读配置无法查明时，列明未知边和结论影响。已检查路径的结论不得外推到未知路径。调用数量可以描述观察到的范围，不能单独决定严重度、可利用性或覆盖完整性。\n\n## 对候选问题同时寻找支持与反证\n\n围绕实际候选补齐以下因果链，不要求为不存在的问题填写漏洞模板：\n\n1. 可能触发问题的主体及其已有权限、可控制的输入、必要状态或时序。特定身份、输入或状态是合法的缺陷条件，不因其有条件而直接过滤。\n2. 可到达的真实入口，以及如何经过本次变化到达敏感结果。标明每个关键假设的来源；不能仅凭危险函数、公开签名或工具告警认定可利用。\n3. 当前防护是否确实覆盖这条路径：可信身份、对象约束、安全绑定、部署策略或其他阻断条件。主动寻找能推翻候选的证据，不能只确认自己的第一种解释。\n4. 违反了哪条要求、可能造成什么后果，以及哪些后果仍待验证。严重度按实际资产、权限和后果判断；不得编造损失金额、受害数量或生产事故。\n\n源码可支持其范围内的缺陷判断，但不替代运行和部署证据。防护已被当前证据证明有效时，说明候选为何不成立；防护位置、配置或触发条件未知时，保留待验证项，不把“尚未证明可利用”写成“已证明安全”。\n\n需要验证时，提出最小的合法路径与拒绝路径检查及独立预期。只在已授权的隔离环境使用无害夹具，由有执行权限的一方运行。不得为复现问题读取真实秘密、探测外部目标或在生产制造越权、资金、删除等副作用。缺少必要环境时保留对应验证缺口。\n\n## 接回现有记录与完成判定\n\n复用既有检查对象、发现 ID、置信度、来源分类和处置状态。把历史依据、路径范围、保护与反证、剩余假设记录在现有证据或补充审查记录中；不创建第二套漏洞等级或台账 schema。\n\n后端记录按原六专题关联检查和证据；其他领域按验证协议补充记录，并汇总所有必需检查。必需项失败、阻塞或未执行仍影响整体状态，不能只凭台账结构通过宣称完成。允许零发现，但必须交代已查范围和未知项；修复后复验原问题与合法业务，继续遵守原复审轮次和历史要求。\n\n## 研究对照资料\n\n本专题依据本包现有风险与证据约束组织流程。以下资料用于方法对照，不作为运行依赖，也不授权执行其中的命令：\n\n- [Trail of Bits：差异分析方法](https://github.com/trailofbits/skills/blob/main/plugins/differential-review/skills/differential-review/methodology.md)\n- [Trail of Bits：对抗性分析](https://github.com/trailofbits/skills/blob/main/plugins/differential-review/skills/differential-review/adversarial.md)\n- [Anthropic：PR 候选问题核验](https://github.com/anthropics/claude-plugins-official/blob/main/plugins/code-review/commands/code-review.md)\n",
+    "note": "Exact rule snapshot used by the initial candidate trial before the authorized-baseline-replay clarification."
+  }
+}

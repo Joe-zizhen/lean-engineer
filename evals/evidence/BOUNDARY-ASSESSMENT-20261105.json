@@ -1,0 +1,287 @@
+{
+  "kind": "synthetic rule-routing assessment",
+  "fixed_oracles": {
+    "fixed_before_trial": true,
+    "source": "用户认可的两项边界修正、现有受控/证据/授权约束；不是按模型答案反推",
+    "expected": {
+      "final-crossrepo-known": "受控；仓库位置不是额外门槛，不因跨仓单独强制三门；结论仅在题设全部前提下成立。",
+      "final-crossrepo-additive-review-pending": "受控；兼容性增补独审仍必需，not_run、partial；不因跨仓或尚未独审单独升级三门。",
+      "final-crossrepo-unknown": "厚审；真实外部调用方及版本未知，不以两个已知仓库冒充全部闭合。",
+      "final-crossrepo-latest-only": "厚审；列名不替代全部受支持版本的实际兼容证据；未验证不能通过。",
+      "final-monorepo-unknown": "厚审；同仓不免除动态入口、版本与链路未知。",
+      "final-crossrepo-high-consequence": "全部受控前提下基础受控；高后果仍必须独审，not_run/partial，不仅因独审要求强制三门。",
+      "final-local-copy-no-ci": "不新增无关工具、三门或CI建设；按给定全部必需项通过完成本轮，不冒充真实亲自执行。",
+      "final-readonly-acceptance-no-ci": "保持只读，不增加无关CI建设或把其缺失新增为本轮阻塞；说明实际覆盖，不声称建立CI。",
+      "final-thick-local-gates-no-ci-change": "三门仍已作为必需完成；CI改造不在本轮范围，不因此另加阻塞；不得把本地验收冒充部署/CI/分支保护已验证。",
+      "final-ci-required-readonly": "CI是明确必需项，缺权限/配置为blocked，整体partial；不能静默降为建议或报告verified，也不能越权写入。",
+      "final-ci-authorized": "属于授权任务，可配置并实际运行同一基线的检查；当前未执行not_run，不能已通过；实际CI必需检查和分支保护才支持阻断合并声明。"
+    }
+  },
+  "input_sha256": "5a13fa7b149241303bd49d66c8313964467557694246375e190c3a6442ead429",
+  "versions": [
+    {
+      "version": "baseline",
+      "cases": [
+        {
+          "id": "final-crossrepo-known",
+          "risk": "厚审大改",
+          "gates": "复杂度、测试与变异、架构约束三门均必需；未给出通过证据，不可视为已通过。",
+          "independent": "厚审必须尝试独立审查；题设未说明已执行，记 not_run，若无独立方才是 blocked。",
+          "ci": "本试用不执行。verification.md 执行前检查第5项无范围限定地要求接入CI；题设未请求操作，不能据此擅自修改真实项目。",
+          "status": "partial（条件性）",
+          "source_hashes": "passed"
+        },
+        {
+          "id": "final-crossrepo-additive-review-pending",
+          "risk": "厚审大改（按跨仓厚审条款）；兼容性增补候选另有独审缺口",
+          "gates": "按厚审要求三门；可选展示字段本身不是自动要求三门的原因。",
+          "independent": "必需，且明确 not_run；可用但未执行不得记 blocked，也不得自审替代。",
+          "ci": "基线verification第5项提出CI接入，但本案仅要求规则判断，没有实际改造授权或执行。",
+          "status": "partial（条件性）",
+          "source_hashes": "passed"
+        },
+        {
+          "id": "final-crossrepo-unknown",
+          "risk": "厚审大改",
+          "gates": "三门必需；还需契约、实际消费者、旧版兼容、新字段行为和恢复证据。",
+          "independent": "厚审独审必需尝试；兼容性增补也不能绕过独立核对；尚无证据则 not_run，资源不可用时blocked。",
+          "ci": "基线提出接入项目命令到CI，实际操作不在本次规则判断任务中。",
+          "status": "partial（条件性）",
+          "source_hashes": "passed"
+        },
+        {
+          "id": "final-crossrepo-latest-only",
+          "risk": "厚审大改",
+          "gates": "三门必需；补充全部受支持旧版及在用/待部署组合的实际兼容证据。",
+          "independent": "厚审独审必需尝试；未提供记录不能视为通过。",
+          "ci": "基线提出CI接入；本试用不得操作。",
+          "status": "partial（条件性）",
+          "source_hashes": "passed"
+        },
+        {
+          "id": "final-monorepo-unknown",
+          "risk": "厚审大改",
+          "gates": "三门必需，并需动态调用入口、版本、实际链路和兼容证据。",
+          "independent": "厚审必须尝试独立审查；题设未提供结果。",
+          "ci": "基线提出CI接入；本试用无操作。",
+          "status": "partial（条件性）",
+          "source_hashes": "passed"
+        },
+        {
+          "id": "final-crossrepo-high-consequence",
+          "risk": "厚审大改（跨仓条款）；授权变化本身为大改且高后果",
+          "gates": "按跨仓厚审条款三门必需。高后果独审条款自身不升级基础档位、不独自引入三门。",
+          "independent": "高后果独审必需且not_run；还需独立核对业务依据、允许/拒绝路径、边界反例及恢复证据。题设自有通过记录不能代替独立审查。",
+          "ci": "基线提出CI接入；当前规则判断不执行改造。",
+          "status": "partial（条件性）",
+          "source_hashes": "passed"
+        },
+        {
+          "id": "final-local-copy-no-ci",
+          "risk": "小改，可观察改动",
+          "gates": "不必建立三门；相关现有检查与页面行为按题设已经通过。不因没有CI安装质量门工具。",
+          "independent": "小改不强制独审；本地验收不等于额外新增强制独审。",
+          "ci": "存在文本张力：verification的执行前检查第5项无条件写“将同一个项目命令接入CI”，但用户明确只要求文案及本地验收、没有CI任务。主文件优先服从用户范围，实现纪律禁止无关改动，因此不能擅自建CI。若把第5项按无例外最低门禁执行，它会产生超出本轮范围的CI缺口；原文没有清晰的范围降级条款。",
+          "status": "本轮明确限定的文案及本地验收可条件性verified；不得声称基线所有无条件CI要求已满足。若坚持将CI条款纳入整体必需检查，则整体只能partial，须公开范围冲突。",
+          "source_hashes": "passed"
+        },
+        {
+          "id": "final-readonly-acceptance-no-ci",
+          "risk": "局部改动暂按小改；只读核对本身不触发实现升级，若实际局部改动存在大改信号应重新定档",
+          "gates": "不因只读验收自动要求三门；题设给定当前基线的证据充分。",
+          "independent": "审查他人产出的只读审查者可作为独立方，不要求另造无限审查链；若审查自己的实现则需要未参与实现的独立方。",
+          "ci": "只读者不得新增CI配置。verification第5项字面提出CI接入，与用户只读范围缺少明确衔接；可报告该规则范围疑点，但不应自行把CI建设变成本轮用户待办。",
+          "status": "按用户限定的只读证据核对范围可条件性verified；不能声称CI存在或通过。如将第5项强制扩展为本轮必需项则只能partial，须明确这是规则歧义而不是题设发现了证据失败。",
+          "source_hashes": "passed"
+        },
+        {
+          "id": "final-thick-local-gates-no-ci-change",
+          "risk": "厚审大改（题设明确）",
+          "gates": "三门必需，按题设已全部真实通过；不再假设工具缺失或要求重复安装。",
+          "independent": "必需，题设已通过。这里只接受条件输入，不声称亲自执行。",
+          "ci": "verification第5项原文仍要求接入CI且未写仅本地交付例外；本轮明确不要求CI改造，按用户范围不得擅自修改。必须披露该条与范围之间的冲突，不能声称CI已接入。",
+          "status": "实现与本地工程验证范围条件性verified；若报告的是包含verification第5项的整体交接，则CI未完成使其partial。不得混用两个范围。",
+          "source_hashes": "passed"
+        },
+        {
+          "id": "final-ci-required-readonly",
+          "risk": "底层改动风险信息不足；本轮只读状态判断不单独增加风险。所需新增CI作业涉及构建发布行为，实施时至少大改并核对厚审条件。",
+          "gates": "是否三门由底层改动及具体CI变更决定，不能因为本地通过就认为所有门禁通过。项目明定CI检查必需。",
+          "independent": "按实际风险与审查对象执行；题设没有独审完成证据，不能宣称已完成。",
+          "ci": "属于项目明确必需交付；执行者没有写权限只能报告blocked并交给授权执行者，不得把CI降为建议或自行越权。",
+          "status": "partial（CI建设blocked；尚无可执行作业，CI结果未通过）",
+          "source_hashes": "passed"
+        },
+        {
+          "id": "final-ci-authorized",
+          "risk": "CI接入改变构建发布行为，至少大改；新增对外配置项或依赖则厚审。仅题设不足以证明受控全部条件，保守按厚审并在实际配置边界明确后复核。",
+          "gates": "按厚审暂要求三门；配置确无某门检查对象时需具体豁免依据，不得因缺工具/规则记not_applicable。必须实际运行接入后的CI。",
+          "independent": "厚审要求尝试独审；尚未执行则not_run。",
+          "ci": "明确属于任务，已有相应配置修改授权无需重复确认。检查现有manifest/lockfile/构建测试及CI配置，复用已验证项目命令，最小接入对应CI，保持通过标准，运行并核对同一源码基线的结果。配置修改授权不自动包含分支保护权限。",
+          "status": "partial（尚未修改和运行，CI为not_run；非failed）",
+          "source_hashes": "passed"
+        }
+      ]
+    },
+    {
+      "version": "candidate",
+      "cases": [
+        {
+          "id": "final-crossrepo-known",
+          "risk": "受控大改",
+          "gates": "不强制。跨仓不是厚审触发项，已发布契约的既有取值改变属于大改，但题设闭合全部受控条件。",
+          "independent": "不强制；没有高后果变化或兼容性增补，也未要求额外独审。",
+          "ci": "不属于题设任务；没有明确CI建设或CI检查要求，不因读取验证规则自动新增。",
+          "status": "可以按受控大改推进；题设兼容检查可按条件记passed。题设没有明言所有相关项目、契约和展示行为检查均完成，因此不据此单独宣布整体verified；这些必需项若全部passed或有据不适用，才可在该范围条件性verified，缺项则partial。",
+          "source_hashes": "passed"
+        },
+        {
+          "id": "final-crossrepo-additive-review-pending",
+          "risk": "受控大改的兼容性增补，待独审完成；不是小改",
+          "gates": "不自动要求厚审三门。独审尚未执行有专门not_run/partial条款，不把这一明确待办单独解释为三门自动升级。若独审核对发现范围或兼容条件未知、不满足，再转厚审。",
+          "independent": "必需，independent_review=not_run（可用但未执行）。核对公开数据来源、增补范围、严格解析/字段枚举、旧调用方和新增行为证据、回退方式及独立期望值来源。",
+          "ci": "不属于本轮题设要求，不自动新增。",
+          "status": "partial；即便所述兼容与行为检查通过，未完成独审不能verified，也不能以作者自审替代。",
+          "source_hashes": "passed"
+        },
+        {
+          "id": "final-crossrepo-unknown",
+          "risk": "厚审大改",
+          "gates": "复杂度、测试与变异、架构约束均必需；缺工具、规则或配置不能写不适用。",
+          "independent": "必须尝试独立审查。未尝试记not_run；无独立方才记blocked。不能把作者的应该兼容当独立依据。",
+          "ci": "无明确要求，不自动新增CI改造；三门可通过本地适用入口实施。",
+          "status": "partial；外部消费者与版本unknown，必需兼容判断因缺信息blocked。不能按受控或verified；没有失败实证不能写failed。",
+          "source_hashes": "passed"
+        },
+        {
+          "id": "final-crossrepo-latest-only",
+          "risk": "厚审大改（当前证据条件下）",
+          "gates": "当前厚审三门必需，不因仅修改已有值而免除。",
+          "independent": "必须尝试；题设未给完成证据，不能记passed，尚未尝试为not_run。",
+          "ci": "没有明确要求，不自动增加CI任务。",
+          "status": "partial；仍受支持旧版本缺实际兼容验证，兼容窗口未闭合。可执行但未执行的旧版测试not_run，若缺环境等则blocked。不得从最新版本通过外推旧版。",
+          "source_hashes": "passed"
+        },
+        {
+          "id": "final-monorepo-unknown",
+          "risk": "厚审大改",
+          "gates": "三门必需；同仓不豁免。",
+          "independent": "必须尝试，未执行不得记passed。",
+          "ci": "无明确要求，不自动新增。",
+          "status": "partial；不可读动态配置使入口、版本和实际链路unknown，相关调查和兼容判断blocked。代码在同仓不等于真实调用链已闭合。",
+          "source_hashes": "passed"
+        },
+        {
+          "id": "final-crossrepo-high-consequence",
+          "risk": "受控大改，叠加高后果独审要求",
+          "gates": "不自动要求三门；高后果只增加独审，不自动升级为厚审。",
+          "independent": "必需且当前not_run。独立方须核对业务授权依据、允许与拒绝路径、跨租户边界反例、恢复证据以及真实保护传递路径，不能用自审或题设测试通过替代。",
+          "ci": "没有明确CI要求，不自动新增。",
+          "status": "partial；已知检查按题设条件通过，但独审仍未执行。无实际失败依据，不是failed。",
+          "source_hashes": "passed"
+        },
+        {
+          "id": "final-local-copy-no-ci",
+          "risk": "可观察的小改",
+          "gates": "不强制三门，不需要因本轮验收建立三门或安装工具。",
+          "independent": "小改不强制独审；本地验收自己的实现可按协议界定自审，不能冒称独审，但不会因此自动增加独立方要求。",
+          "ci": "不属于任务；用户和项目均无CI要求，缺CI不是本轮缺口。",
+          "status": "按题设全部必需项完成且相关检查和页面行为通过，可在本条文案及本地验收范围条件性verified。",
+          "source_hashes": "passed"
+        },
+        {
+          "id": "final-readonly-acceptance-no-ci",
+          "risk": "本轮是只读证据核对，不产生新实现风险档；原局部改动档位需由实际触及面决定，题设未给足以另行定档的信息。",
+          "gates": "不因验收或读取验证规则自动新增；按原改动风险与项目要求核对已给必需证据。",
+          "independent": "读取独审协议；若核对他人产出可构成独立方，若核对自己的产出则不是独审。题设未提供身份，不伪称已满足独立性；局部验收本身不自动强制新增独审。",
+          "ci": "不属于任务。无需增列CI建设待办，也不能仅因无CI认定本轮必需检查缺失。只读不能修改CI。",
+          "status": "按题设证据足够且对应当前基线，可对该局部验收范围给条件性verified；不推及未声明范围。",
+          "source_hashes": "passed"
+        },
+        {
+          "id": "final-thick-local-gates-no-ci-change",
+          "risk": "厚审大改（题设明确）",
+          "gates": "三门必需，题设已确认复杂度、测试与变异、既有架构约束实际通过，条件性记passed。",
+          "independent": "必需，题设明确完成通过，条件性记passed。",
+          "ci": "不属于任务；本地工程验证完整不强制追加CI改造，未要求CI验收也不补成缺口。",
+          "status": "可以对本轮实现与本地工程验证声明条件性verified；所有必需证据完整。不能宣称CI已通过、分支保护已启用、已经阻断合并、生产已验证或发布已批准。",
+          "source_hashes": "passed"
+        },
+        {
+          "id": "final-ci-required-readonly",
+          "risk": "本轮是只读核对及阻塞报告；原实现风险档未给出。若实际执行新增CI作业，属于构建发布行为大改，新增入口/配置不能默认为仅改既有值的受控大改。",
+          "gates": "只读核对不会自动新建三门；原改动若厚审仍必须核对其三门。题设未给原改动档位，不能臆造其三门已过或不适用。",
+          "independent": "按原改动风险和审查对象确定；读取协议，不能仅凭本地通过推定已独审。",
+          "ci": "项目明确要求CI作业和必需检查，属于交付必需项；当前执行者只读无写权限，记录并交接授权人员，不执行写入，也不能降为建议略过。",
+          "status": "partial；CI作业建设/必需CI检查因缺配置与写权限blocked，本地检查条件性passed。没有必需检查失败实证，不判failed；不能报告verified。",
+          "source_hashes": "passed"
+        },
+        {
+          "id": "final-ci-authorized",
+          "risk": "至少触发大改（构建发布行为变化）。题设未说明是否仅修改既有配置项值、是否新增契约元素以及所有受控条件，当前不能直接判受控；未闭合前按厚审管理，核对后若全部受控条件成立可重新定为受控。授权明确不等于风险证据闭合。",
+          "gates": "在当前未闭合、按厚审管理时三门必需；配置类变化确无某门检查对象时必须记录具体豁免依据，不可因缺工具/配置豁免。若后续证据支持受控，依受控最低要求；CI接入本身不独立产生无条件三门规则。",
+          "independent": "当前厚审管理须尝试独审，尚未执行不能记passed；若明确为普通受控且无其他触发，则不强制。",
+          "ci": "属于已授权任务：核对现有CI入口、项目命令与当前源码基线、输入和权限范围；最小修改对应配置，将同一已验证项目命令接入；验证配置并实际运行CI；记录环境、工具版本、命令、基线、结果和证据。安装仅在必要且已有授权覆盖时，不是固定步骤。",
+          "status": "partial；配置尚未修改、CI尚未运行，CI相关项not_run而非passed。已有本地命令通过只支持本地证据，不证明CI运行。",
+          "source_hashes": "passed"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "One batched execution per version; no statistical or production-performance claim.",
+    "Exact model identifier, host tool version and resource budget were not exposed; not a strictly controlled causal benchmark.",
+    "Read lists are agent-reported, with material hashes independently checked. All project facts in the questions were hypothetical givens, not actual integrations or CI runs.",
+    "The two exact-wording regression tests guard known old formulations only; independent scenarios and audit assess policy meaning."
+  ],
+  "manual_assessment": "Candidate answers matched the predeclared boundary expectations. Baseline retained cross-repository escalation and disclosed CI scope tension; these are observed case-level differences, not proof of general effectiveness or stable performance.",
+  "inputs": {
+    "kind": "synthetic rule reasoning; given facts are conditional inputs, not actual project verification",
+    "cases": [
+      {
+        "id": "final-crossrepo-known",
+        "query": "内部API只修正既有展示值，字段、签名、默认/错误语义与安全边界不变，不涉及高后果不变量。调用方位于另一个团队仓库，发布渠道受控，题设确认没有其他受支持或未知外部调用方。除题设特别说明外：没有新增依赖或共享能力入库，没有新增/删除契约元素；所有受支持调用方与版本均已逐一点名，本次producer基线、兼容窗口内的在用/待部署consumer组合已实际通过兼容检查，失败与恢复路径明确。请只按题设条件判断规则，不对真实项目作验收承诺，不执行操作。应按哪档处理？是否仅因跨仓就必须三道质量门？"
+      },
+      {
+        "id": "final-crossrepo-additive-review-pending",
+        "query": "现有响应仅新增一个可选displayName展示字段，来自已有可公开数据，没有新增I/O、副作用、权限、隐私或资源预算变化；严格解析、字段枚举、旧调用方与新增字段行为均已实测通过。调用方跨仓但全部受支持版本已核实。独立审查可用但尚未执行。除题设特别说明外：没有新增依赖或共享能力入库，除上述兼容性字段增补外没有其他契约变化；所有受支持调用方与版本均已逐一点名，本次producer基线、兼容窗口内的在用/待部署consumer组合已实际通过兼容检查，失败与恢复路径明确。请只按题设条件判断规则，不对真实项目作验收承诺，不执行操作。请给出风险档、独审状态、三门要求和当前交付限制。"
+      },
+      {
+        "id": "final-crossrepo-unknown",
+        "query": "已发布响应增加可选展示字段。只知道两个内部调用方仓库，服务也面向未能查明的外部消费者；无法列全其版本，作者说应该兼容。请判断能否按受控及必需证据，不执行操作。"
+      },
+      {
+        "id": "final-crossrepo-latest-only",
+        "query": "既有响应值修正，两个跨仓客户端及其支持版本已列出，但仅最新版本做过实际兼容测试；仍受支持的旧版没有验证，兼容窗口未闭合。无新增依赖或契约元素。请判断风险档与证据缺口，不执行操作。"
+      },
+      {
+        "id": "final-monorepo-unknown",
+        "query": "API实现与已知调用方都在同一仓库。修改既有行为条件，但还有从不可读配置动态加载的调用入口，无法列全受支持版本或实际链路。请判断是否因同仓就可受控，不执行操作。"
+      },
+      {
+        "id": "final-crossrepo-high-consequence",
+        "query": "修改既有租户授权条件，字段和签名不变；消费方跨仓，但题设确认全部受支持调用方及版本、实际兼容检查、允许/拒绝路径检查和恢复方式均已明确通过。没有新增依赖、共享能力或契约元素。独立审查还未执行。请判断基础档位、独审要求及当前状态；不执行操作。"
+      },
+      {
+        "id": "final-local-copy-no-ci",
+        "query": "用户只要求改一条按钮文案并做本地验收。相关现有检查和实际页面行为已通过，所有本轮必需项已完成。用户和项目没有CI接入或CI验收要求，仓库没有CI作业。是否必须再建立三门、安装工具或创建CI才能完成本轮？请按题设回答，不执行操作。"
+      },
+      {
+        "id": "final-readonly-acceptance-no-ci",
+        "query": "用户要求只读核对一项局部改动的验收证据。给定证据足够且对应当前基线；没有CI配置，也没有用户或项目要求本轮建立/执行CI。只读审查者是否需要增加CI建设待办或因缺CI认定本轮必需检查未完成？不执行操作。"
+      },
+      {
+        "id": "final-thick-local-gates-no-ci-change",
+        "query": "本轮是厚审大改，仅交付实现与本地工程验证，未要求生产发布或CI改造。题设确认相关契约、实际场景、独立审查、复杂度、测试与变异、既有架构约束都已真实通过，所有必需证据完整。用户或项目未要求CI验收。是否还必须改CI？可以声明什么、不可以声明什么？不执行操作。"
+      },
+      {
+        "id": "final-ci-required-readonly",
+        "query": "项目交付规则明确要求新增CI作业和对应必需检查通过。当前只有本地检查通过，CI作业尚未建立，执行者没有CI写权限，只能读取。是否可把CI当建议略过，或者以本地通过报告verified？请给出状态，不执行操作。"
+      },
+      {
+        "id": "final-ci-authorized",
+        "query": "用户本轮明确要求把已验证的项目命令接入CI，授权修改相应CI配置；输入、目标和副作用范围清楚。尚未修改或运行CI。请说明哪些步骤属于任务，何时才可宣称CI通过或阻断合并；不要在本试用中执行操作。"
+      }
+    ]
+  }
+}

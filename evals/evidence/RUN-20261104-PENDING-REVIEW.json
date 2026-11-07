@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "raw_input": "请作为独立模型试用者，只读候选 skill 完成两个合成场景。用中文回复。只读 <release-workspace>/candidate/skills/lean-engineer/SKILL.md 及它按任务路由的引用。不得读 baseline、evals、VALIDATION、tests、diff 或其他代理结论。文件读取显式 UTF-8 严格解码。场景A：现有响应增加可选 displayName 展示字段，直接使用已有可公开值，无新增 I/O 或副作用；既有字段、默认行为、错误语义、权限、隐私、数据含义和资源预算均不变。全部受支持调用方及版本都在当前仓库并已逐一点名；严格解析、字段枚举已核对，旧调用方兼容及新增字段行为检查已实际通过，回退明确。独立审查者可用，但尚未审查。给出风险档位、剩余必需步骤、当前交付状态与是否必需三道质量门。场景B：其他事实与A相同，但当前宿主不支持独立代理，也没有其他独立方。回答同样问题。不要编造测试、源码或项目行为已实际执行。不得执行实际生产动作或修改源文件。请把原始输入、逐案实际读取相对文件清单及SHA256、结论和边界保存为 UTF-8 无BOM JSON：<release-workspace>/independent-pending-review-scenarios.json。这一个证据文件获授权可写。最终报告路径和摘要。不要再委派。",
+  "candidate_root": "skills/lean-engineer",
+  "task_type": "合成场景只读规则试用",
+  "actual_actions": [
+    "严格 UTF-8 读取候选技能和路由引用",
+    "计算文件 SHA256",
+    "写入并回读本证据 JSON"
+  ],
+  "not_performed": [
+    "源码审查",
+    "测试执行",
+    "生产操作",
+    "修改源文件",
+    "读取 baseline/evals/VALIDATION/tests/diff",
+    "委派"
+  ],
+  "scenarios": [
+    {
+      "id": "A",
+      "input": "现有响应增加可选 displayName 展示字段，直接使用已有可公开值，无新增 I/O 或副作用；既有字段、默认行为、错误语义、权限、隐私、数据含义和资源预算均不变。全部受支持调用方及版本都在当前仓库并已逐一点名；严格解析、字段枚举已核对，旧调用方兼容及新增字段行为检查已实际通过，回退明确。独立审查者可用，但尚未审查。",
+      "actual_reads": [
+        {
+          "path": "SKILL.md",
+          "sha256": "50bd2c00fb18cb26cb86cbd498d1a7b4b37c3f7c02b182c4389c26d20b18d68d",
+          "encoding": "UTF-8 strict",
+          "read_scope": "full"
+        },
+        {
+          "path": "references/risk-gates.md",
+          "sha256": "1156aa3397872cc727b19b77ceb79d9741d3f88f649a7e792ccf3530bf302fd4",
+          "encoding": "UTF-8 strict",
+          "read_scope": "full"
+        },
+        {
+          "path": "references/verification.md",
+          "sha256": "6e830bdb906fd7eab42a9db8f699e74632d985eff13f14afc9ab4e9161a28ee2",
+          "encoding": "UTF-8 strict",
+          "read_scope": "full"
+        },
+        {
+          "path": "references/review-protocol.md",
+          "sha256": "c8b7969d9e2a95a7275216937d990c694aa98097abc5a4cc2db6b5be55354c99",
+          "encoding": "UTF-8 strict",
+          "read_scope": "full"
+        },
+        {
+          "path": "references/backend/api-contracts.md",
+          "sha256": "9456aeef7af936233fdfc862091aab1e53e60f009473bc39435eb1b02f2da8f1",
+          "encoding": "UTF-8 strict",
+          "read_scope": "full"
+        },
+        {
+          "path": "references/backend-review.md",
+          "sha256": "7de7d0ab859dd442b1fdd5b9b560bd339bac1161f674026ad2da61f77a032ea0",
+          "encoding": "UTF-8 strict",
+          "read_scope": "full"
+        }
+      ],
+      "risk_tier": "受控大改（兼容性增补）",
+      "independent_review": "not_run",
+      "delivery_status": "partial",
+      "three_quality_gates_required": false,
+      "remaining_required_steps": [
+        "执行尚未进行的独立审查，不可用自审替代。",
+        "补齐或核对 producer、consumer、增补变化、失败路径、回退及同一源码基线的证据记录；场景已给定的运行结果仅作为合成前提，不声称本试用者实际执行。",
+        "独立方须核对增补范围、兼容依据、测试期望值来源、需求、反例和验证充分性；依据协议核对完整变更集与真实输出。",
+        "若独立审查产生问题，处置后由独立方复验；全部必需检查通过或有依据不适用后才可为 verified。",
+        "如果实际新增或修改关键契约测试，仍需已知破坏的绿、红、绿真实记录；输入未说明是否已具备，故不得假定该条件性要求已通过。"
+      ],
+      "reason": "risk-gates 明确为兼容性增补保留独立审查；尚未执行记 not_run，交付只能 partial。属于受控大改而非小改，也不因审查尚未执行自动升级厚审。"
+    },
+    {
+      "id": "B",
+      "input": "其他事实与场景A相同，但当前宿主不支持独立代理，也没有其他独立方。",
+      "actual_reads": [
+        {
+          "path": "SKILL.md",
+          "sha256": "50bd2c00fb18cb26cb86cbd498d1a7b4b37c3f7c02b182c4389c26d20b18d68d",
+          "encoding": "UTF-8 strict",
+          "read_scope": "full"
+        },
+        {
+          "path": "references/risk-gates.md",
+          "sha256": "1156aa3397872cc727b19b77ceb79d9741d3f88f649a7e792ccf3530bf302fd4",
+          "encoding": "UTF-8 strict",
+          "read_scope": "full"
+        },
+        {
+          "path": "references/verification.md",
+          "sha256": "6e830bdb906fd7eab42a9db8f699e74632d985eff13f14afc9ab4e9161a28ee2",
+          "encoding": "UTF-8 strict",
+          "read_scope": "full"
+        },
+        {
+          "path": "references/review-protocol.md",
+          "sha256": "c8b7969d9e2a95a7275216937d990c694aa98097abc5a4cc2db6b5be55354c99",
+          "encoding": "UTF-8 strict",
+          "read_scope": "full"
+        },
+        {
+          "path": "references/backend/api-contracts.md",
+          "sha256": "9456aeef7af936233fdfc862091aab1e53e60f009473bc39435eb1b02f2da8f1",
+          "encoding": "UTF-8 strict",
+          "read_scope": "full"
+        },
+        {
+          "path": "references/backend-review.md",
+          "sha256": "7de7d0ab859dd442b1fdd5b9b560bd339bac1161f674026ad2da61f77a032ea0",
+          "encoding": "UTF-8 strict",
+          "read_scope": "full"
+        }
+      ],
+      "risk_tier": "受控大改（兼容性增补）",
+      "independent_review": "blocked",
+      "delivery_status": "partial",
+      "three_quality_gates_required": false,
+      "remaining_required_steps": [
+        "明确记录没有独立方的阻塞；需未来可用的未参与实现的人或独立 agent 完成审查，才可解除阻塞。用户验收仅在实际作为独立审查且保留事实记录时有效，不能预先假定存在。",
+        "补齐或核对 producer、consumer、增补变化、失败路径、回退及同一源码基线的证据记录；场景已给定的运行结果仅作为合成前提，不声称本试用者实际执行。",
+        "独立方须核对增补范围、兼容依据、测试期望值来源、需求、反例和验证充分性；依据协议核对完整变更集与真实输出。",
+        "若独立审查产生问题，处置后由独立方复验；全部必需检查通过或有依据不适用后才可为 verified。",
+        "如果实际新增或修改关键契约测试，仍需已知破坏的绿、红、绿真实记录；输入未说明是否已具备，故不得假定该条件性要求已通过。"
+      ],
+      "reason": "risk-gates 和 review-protocol 明确规定无独立方时 blocked、交付 partial。此具体状态规定优先解释待完成审查，不把它作为自动升级厚审的理由。"
+    }
+  ],
+  "boundaries": [
+    "结论以题设完整描述此次兼容性增补为前提；不推断真实项目中任何源码、测试或运行已通过。",
+    "没有给定新增依赖或新增共享能力入库；本结论以不存在题设外改动为边界。若有此类改动，须重新定档。",
+    "只有审查状态 pending/blocked 不改变此处受控大改基础档位；若字段、安全、调用方、兼容等实质条件未知或不满足，应按厚审重新评估。",
+    "三道质量门指复杂度、测试与变异、架构约束；当前基础档位不强制，但项目或用户另有更严格要求时仍需执行。",
+    "未检查真实仓库、基线、运行证据和项目额外门禁，因此不能将本规则判定当作实际验收或发布批准。",
+    "此处为规则试用，不是真实实现的独立审查；本试用者的回答不能抵消 A 的 not_run 或 B 的 blocked。"
+  ],
+  "routing_note": "为风险、验收结论、独立审查及响应/调用方契约读取六个文件；无实现、能力抽取、状态机、其他领域或 full 审查行为，未加载其余引用。",
+  "redactions": {
+    "scope": "Only absolute local workspace paths were replaced; scenario inputs, answers and source hashes are unchanged.",
+    "original_output_sha256": "4cbc49e82d683d4290f02564d34ef3c115ed054bf3613dab2d044a69c0df8ad0",
+    "executed_at_source": "Completion artifact filesystem timestamp, recorded in UTC."
+  }
+}

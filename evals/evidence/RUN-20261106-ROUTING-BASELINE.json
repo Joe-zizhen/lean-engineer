@@ -1,0 +1,620 @@
+{
+  "kind": "baseline independent read-only routing trial",
+  "input_raw": "{\n  \"kind\": \"synthetic route reasoning; no project execution\",\n  \"cases\": [\n    {\n      \"id\": \"routing-verb-aliases\",\n      \"query\": \"同一事实：已定位的普通内部函数错误，本轮要实际改两行代码；没有契约、安全、依赖或能力目录变化，现有实现与调用链已查明。用户分别说‘请编码修正它’、‘请实现这个修正’、‘请修改这段逻辑’、‘请修复这个错误’。逐一说明首次动手前的必读文件是否相同，是否可能只读风险分档。不要执行。\"\n    },\n    {\n      \"id\": \"routing-fix-with-reuse\",\n      \"query\": \"用户授权修复标题空白处理。项目已有已登记、适用且实际可调用的清洗能力，当前调用方复制了一份有缺陷的处理。本轮准备改调用方接入已有能力。说明要读哪些规则、查什么、哪些行为需要验证；不要执行。\"\n    },\n    {\n      \"id\": \"routing-local-refactor\",\n      \"query\": \"本轮获授权对内部函数做局部重构，未改变公开契约、权限或持久化；不抽模块，不触及已收录能力。应如何选择必读规则？是否一律要读能力库全文并创建库？不要执行。\"\n    },\n    {\n      \"id\": \"routing-code-delete\",\n      \"query\": \"用户已确认删除一个冗余内部函数，相关引用与影响已查明，不属于已收录能力。本轮只有删除，没有添加代码。动手前是否仍需实现纪律？是否自动触发能力收录？不要执行。\"\n    },\n    {\n      \"id\": \"routing-dependency-integration\",\n      \"query\": \"用户授权把项目已安装的库接入一个真实调用位置，不新增包或版本，也没有授权全局安装。说明基础读取、复用判断与实际调用验证的要求；是否仅因为叫‘依赖接入’就不用编码纪律，或必须另造包装库？不要执行。\"\n    },\n    {\n      \"id\": \"routing-source-copy\",\n      \"query\": \"用户要把Web组件源码里的按钮文字由‘保存’改为‘保存修改’，只改这一处显示文字。说明必读文件、适用检查和是否需要建立能力库；不要执行。\"\n    },\n    {\n      \"id\": \"routing-doc-only\",\n      \"query\": \"用户只改普通README介绍中的错别字，不涉及契约、运行配置、代码或产品行为。是否仅因叫‘修改’就属于代码实施并必须加载实现纪律、能力收录流程？请说明适用边界，不执行。\"\n    },\n    {\n      \"id\": \"routing-readonly-review\",\n      \"query\": \"用户只读评审一个普通内部函数的既有diff，不允许修复、安装或修改项目，也没有要求完整验收。当前阶段应读什么？是否必须按代码实施加载实现纪律并执行？不执行任何项目操作。\"\n    },\n    {\n      \"id\": \"routing-readonly-index\",\n      \"query\": \"用户只读核对项目能力索引与源码，发现索引路径可能过期，明确先不要修改。需要读能力库吗？读到补登记/索引维护规则后，可以直接修索引或创建目录吗？是否默认加载实现纪律？不要执行。\"\n    },\n    {\n      \"id\": \"routing-readonly-acceptance\",\n      \"query\": \"只读验收他人已经完成的局部修改，给定证据对应当前基线；本轮不允许改代码或CI。说明风险、验证、审查和实现纪律的读取边界，不把题设证据说成自己执行，不执行操作。\"\n    },\n    {\n      \"id\": \"routing-authorized-transition\",\n      \"query\": \"第一阶段用户只要求审查，未加载实现纪律。第二阶段用户明确授权修复已经定位的已收录能力调用错误。分别说明两个阶段的读取与权限；第二阶段第一次修改前需补什么？如果没有第二次授权又如何？不要实际修改。\"\n    },\n    {\n      \"id\": \"routing-thick-implementation\",\n      \"query\": \"本轮实际代码修复已经正确判为厚审大改。Agent计划只按照风险表中的编码前、验证与审查清单做完就开始写代码。请判断读取是否足够，并列基础与追加要求；没有新收录对象的事实，不要强制造库。不要执行。\"\n    },\n    {\n      \"id\": \"routing-first-capability\",\n      \"query\": \"用户真实要求新增一个功能。现有索引和源码已检查，没有适用实现；其中确有输入、输出、依赖和副作用边界明确的可复用能力，只有一个真实调用方，项目已有能力模块位置。应该读取哪些规则，何时收录，是否要等第二个调用方？不要执行。\"\n    },\n    {\n      \"id\": \"routing-private-orchestration\",\n      \"query\": \"用户要求实现页面私有编排，已查现有能力和源码。本次没有能独立封装的可复用对象，沿用页面内部编排即可。实现功能会触发读能力库规则吗？是否因此必须创建目录、抽模块、补一份空索引？不要执行。\"\n    }\n  ]\n}\n",
+  "input_sha256": "a57354cb2c844d1b5c915742faaf70244673f38370d953f9fb97fbea285ca9b5",
+  "completed_at": "2026-11-06T08:49:58.4356680+08:00",
+  "limitations": [
+    "仅根据指定baseline技能版本及已实际读取引用；未读取candidate、plan、oracle、evals、tests、旧报告或其他代理输出。",
+    "14案均为条件推演，不是真实项目；没有运行项目命令、测试、安装、网络调用，也未修改输入。",
+    "actual_read_files列出本批已实际读取且用于本案判断的文件，允许跨案复用，并不表示每案重新读取；用于解释不触发或不适用的文件也会列出。",
+    "required_readings是场景真正执行时的要求；条件资料未实际打开时不列入actual_read_files。题设给定证据未冒称本人实测。",
+    "先前多文件读取输出截断涉及能力库和验证文件，已单独完整重读；独立审查协议另行完整重读。",
+    "额外合理阅读不自动算错误；纯只读Review不加载实现纪律是该版本的明确范围规定，能力索引发现、规则阅读与真实收录分别判定。"
+  ],
+  "cases": [
+    {
+      "id": "routing-verb-aliases",
+      "answer": "四种表述均表示实际修改代码，事实相同，首次修改前的基础必读相同：风险分档与实现纪律。‘修复’也是实现修复，不能因通用路由只写‘实现’而降为只读风险分档。先记录对象、调用方、契约影响，确认根因与复现，然后按方案阶梯作局部修复。题设已查明调用链可作为条件，不必假称重新调查。普通内部修复可按小改处理；相关检查、原始复现和可稳定自动化时的回归测试仍需要。先查已有能力与源码不等于强制收录；题设没有实现新功能、查找复用、抽模块或修改已收录能力的明确事实，不强制能力库全文或建库。若实施中开始查找复用则追加该规则。修复后复审是独立审查协议触发点，但小改不因此一律必须找独立方。",
+      "required_readings": [
+        "SKILL.md",
+        "references/risk-gates.md：首次修改前",
+        "references/implementation.md：四种说法均首次修改前必读"
+      ],
+      "conditional_readings": [
+        "references/reusable-capabilities.md：查找或接入复用、实现功能、修改已收录能力时",
+        "references/review-protocol.md：执行修复后复审时",
+        "references/verification.md：形成验收结论等命中时；领域专题按实际触及面"
+      ],
+      "prohibited_actions": [
+        "仅因动词不同而遗漏实现纪律",
+        "以两行改动免除相关验证",
+        "无可收录对象强制造库",
+        "把题设条件写成本次实际执行证据"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a"
+        },
+        {
+          "relative_to_skill": "references/implementation.md",
+          "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4"
+        },
+        {
+          "relative_to_skill": "references/reusable-capabilities.md",
+          "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084"
+        },
+        {
+          "relative_to_skill": "references/review-protocol.md",
+          "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598"
+        }
+      ]
+    },
+    {
+      "id": "routing-fix-with-reuse",
+      "answer": "这是获授权的修复兼复用接入。基础读取风险分档、实现纪律，并因查找复用读取能力库。先查项目真实能力索引，再读已登记能力源码，核对入口、依赖、平台、失败行为及标题空白需求；题设给定适用且可调用，按方案阶梯应直接接入，不复制或无用途包装。根因在调用方则只改调用方，保留其他调用行为。验证实际调用方导入或构建、空白及正常标题行为、原始复现，适合自动化的缺陷补或复用回归测试。已登记能力未变路径、接口、使用条件时，不为活动痕迹强改索引；若这些条件改变，同步索引并验证受影响调用方。查索引、规则读取、收录三者不同；此案没有新收录对象。",
+      "required_readings": [
+        "SKILL.md",
+        "references/risk-gates.md",
+        "references/implementation.md",
+        "references/reusable-capabilities.md",
+        "项目现有能力索引与候选源码、调用方（仅条件要求，本试用未读取项目）"
+      ],
+      "conditional_readings": [
+        "references/review-protocol.md：修复后复审",
+        "references/verification.md：验收结论或大改等触发",
+        "领域专题按标题处理所在环境；不是凭‘标题’断言Web"
+      ],
+      "prohibited_actions": [
+        "复制已有能力",
+        "仅凭索引记录宣称本次验证通过",
+        "创建平行库或无用途包装",
+        "超出调用方问题改坏共享正常实现"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a"
+        },
+        {
+          "relative_to_skill": "references/implementation.md",
+          "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4"
+        },
+        {
+          "relative_to_skill": "references/reusable-capabilities.md",
+          "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084"
+        },
+        {
+          "relative_to_skill": "references/review-protocol.md",
+          "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598"
+        }
+      ]
+    },
+    {
+      "id": "routing-local-refactor",
+      "answer": "局部重构仍是实际代码改动，首次修改前读风险分档和实现纪律，不因未加功能免除。按给定边界记录对象与调用方后可按小改推进；先理解调用链和既有能力，保留行为，最小改动并运行相关检查。查能力索引是选择方案的发现步骤，不等于每次重构必须加载能力库全文；本题无查找复用、抽取模块或已收录能力变化的触发，不一律要求能力库全文。若过程中实际转为查复用，追加读取；没有可收录对象不创建目录或空索引。",
+      "required_readings": [
+        "SKILL.md",
+        "references/risk-gates.md",
+        "references/implementation.md"
+      ],
+      "conditional_readings": [
+        "references/reusable-capabilities.md：转为查找复用、抽模块或修改已收录能力时",
+        "references/review-protocol.md：开展代码Review或验收自己的实现时",
+        "references/verification.md：形成验收结论等触发",
+        "领域专题按实际环境"
+      ],
+      "prohibited_actions": [
+        "重构时顺手加功能或清理无关代码",
+        "强制创建空能力库",
+        "未经证据宣称行为保持不变"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a"
+        },
+        {
+          "relative_to_skill": "references/implementation.md",
+          "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4"
+        },
+        {
+          "relative_to_skill": "references/reusable-capabilities.md",
+          "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084"
+        }
+      ]
+    },
+    {
+      "id": "routing-code-delete",
+      "answer": "实现纪律明确把代码删除纳入必读。只有删除也要和风险分档一起在动手前读取。题设已授权、引用与影响已查明且为冗余内部函数，可按相应小改范围核对删除影响，保留其他工作并运行相关检查。删除不是自动收录信号；本案不属已收录能力，无需凭删除创建库或索引。若发现对外导出、动态引用未闭合或契约变化，应重新定档，不能沿用原小改条件。",
+      "required_readings": [
+        "SKILL.md",
+        "references/risk-gates.md",
+        "references/implementation.md"
+      ],
+      "conditional_readings": [
+        "references/reusable-capabilities.md：实际删除已收录能力或维护索引时；题设排除",
+        "references/review-protocol.md：开展代码审查时",
+        "references/verification.md：验收或风险升级时"
+      ],
+      "prohibited_actions": [
+        "把无新增代码当作无需实现纪律",
+        "自动触发能力收录",
+        "借冗余删除授权清理无关函数",
+        "把搜索未命中当成外部或动态调用绝对不存在"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a"
+        },
+        {
+          "relative_to_skill": "references/implementation.md",
+          "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4"
+        },
+        {
+          "relative_to_skill": "references/reusable-capabilities.md",
+          "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084"
+        }
+      ]
+    },
+    {
+      "id": "routing-dependency-integration",
+      "answer": "依赖接入被实现纪律明确覆盖，风险分档也必须读。先理解真实调用链和需求，按已有项目能力、标准库、原生平台、已安装依赖的顺序选择；查能力索引并核对源码，查找复用时读取能力库规则。核对manifest、lockfile与仓库真实用法；若本仓库从未实际使用该API，必须核对所用版本官方资料并真实调用验证，导入或依赖声明不够。题设未新增依赖，不能仅因接入已安装库而自动认定新增依赖厚审；仍按实际后果定档。无需另造包装或收录第三方库镜像。必要项目级验证工具仍受项目与本轮授权限制，全局安装没有授权。此处仅描述流程，不联网或调用库。",
+      "required_readings": [
+        "SKILL.md",
+        "references/risk-gates.md",
+        "references/implementation.md",
+        "项目manifest、lockfile、真实使用点与调用方（本试用未读取）"
+      ],
+      "conditional_readings": [
+        "references/reusable-capabilities.md：执行项目能力查找或复用接入时；查索引不是创建库",
+        "实际版本官方资料：仓库未使用过的API必须核对",
+        "references/review-protocol.md：代码Review、验收自己的实现等触发",
+        "references/verification.md及领域专题按实际范围"
+      ],
+      "prohibited_actions": [
+        "因任务名为依赖接入跳过编码纪律",
+        "未经授权全局安装或改宿主配置",
+        "只凭文档存在API宣称真实调用成功",
+        "强制造包装库或重复能力"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a"
+        },
+        {
+          "relative_to_skill": "references/implementation.md",
+          "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4"
+        },
+        {
+          "relative_to_skill": "references/reusable-capabilities.md",
+          "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084"
+        }
+      ]
+    },
+    {
+      "id": "routing-source-copy",
+      "answer": "源码中的按钮文字修改属于Web前端实际改动，不能与README错字混为一谈。基础读风险分档与实现纪律，并读前端Review协议；组件命中路由与组件，按钮名称和变长文案命中可访问性与布局。按implementation_support、局部quick范围处理，记录具体组件和受影响实例。属于可观察小改：需要页面或对应测试验证‘保存修改’实际出现、可访问名称一致与窄屏/缩放下相关布局没有遮挡；按实际影响选择组合，不自动变成全站完整审核。若保留旧aria-label等导致名称不一致则核对，但不能假称已发现。没有功能新增或可复用对象，不要求能力收录或空库。",
+      "required_readings": [
+        "SKILL.md",
+        "references/risk-gates.md",
+        "references/implementation.md",
+        "references/frontend-review.md",
+        "references/frontend/routes-components.md",
+        "references/frontend/accessibility-layout.md"
+      ],
+      "conditional_readings": [
+        "references/review-protocol.md：另行代码审查或验收自己的实现时",
+        "references/verification.md：给出验收结论时",
+        "其他前端专题仅实际命中才追加；不因一处按钮文案加载整套"
+      ],
+      "prohibited_actions": [
+        "将文案改动称为不可观察",
+        "只看源码就称实际页面交互已验证",
+        "强制造能力库",
+        "擅改其他按钮、布局或功能"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a"
+        },
+        {
+          "relative_to_skill": "references/implementation.md",
+          "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4"
+        },
+        {
+          "relative_to_skill": "references/frontend-review.md",
+          "sha256": "b192273a234b340987b1e31ca0802701081926d9497bb37b12b0507f9ee6dbbe"
+        },
+        {
+          "relative_to_skill": "references/frontend/routes-components.md",
+          "sha256": "1b54c10f589b7758ab058c6e77de655fd434203f3b5327116c362c036cdec75b"
+        },
+        {
+          "relative_to_skill": "references/frontend/accessibility-layout.md",
+          "sha256": "69e0259b5b92332d85aaf52b3e7e7e4472b54db0e702cc7b7b6598055f5b92f2"
+        },
+        {
+          "relative_to_skill": "references/reusable-capabilities.md",
+          "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084"
+        }
+      ]
+    },
+    {
+      "id": "routing-doc-only",
+      "answer": "普通README介绍错字不触及代码、契约、运行配置或产品行为，按职责边界不属于本技能主导的代码实施，不能机械拿‘任何改动’或动词‘修改’扩大到所有文字编辑。主文件足以判断这一边界，不强制实现纪律、能力库流程、三道代码质量门。遵循实际文档编辑授权和项目文本规范，检查仅错字被修正即可；若事实转为契约文档或配置变更则重新路由。此题未实际编辑。",
+      "required_readings": [
+        "SKILL.md：适用边界判断"
+      ],
+      "conditional_readings": [
+        "references/risk-gates.md：发现涉及契约、文档化配置等风险信号时",
+        "references/implementation.md：转为实际代码实现时",
+        "references/reusable-capabilities.md：转为真实能力相关任务时"
+      ],
+      "prohibited_actions": [
+        "仅因‘修改’一词强制代码实施全流程",
+        "虚构能力收录对象或创建空库",
+        "将README排版校验当作产品行为验证"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a"
+        },
+        {
+          "relative_to_skill": "references/implementation.md",
+          "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4"
+        },
+        {
+          "relative_to_skill": "references/reusable-capabilities.md",
+          "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084"
+        }
+      ]
+    },
+    {
+      "id": "routing-readonly-review",
+      "answer": "普通内部函数既有diff的纯只读Review，必读独立审查协议；按协议核对完整变更集、基线、需求、相关上下文与证据，提出反例并主动找反证。实现纪律明文规定纯只读Review不加载，因此不能把评审转为代码实施。没有完整验收请求，验证与证据并非仅因这次Review就强制全套加载；风险分档可用于评估所审变化后果，但本案当前阶段不编码或验收，不将其误称首次实施门禁。审查者可构成对他人产出的独立方；只读交付意见、测试场景和期望，不运行本题禁止的操作。零发现有效，未验证保持缺口。",
+      "required_readings": [
+        "SKILL.md",
+        "references/review-protocol.md",
+        "既有diff、基线、必要代码上下文、规范与需求、已有真实输出（本试用未读取项目）"
+      ],
+      "conditional_readings": [
+        "references/risk-gates.md：核对风险分类或转入验收时",
+        "references/verification.md：验收结论、大改、质量门等触发",
+        "实际领域或安全专题按diff触及面"
+      ],
+      "prohibited_actions": [
+        "修复、安装、写项目或CI",
+        "默认加载并执行实现纪律",
+        "自我修改后宣称原修改通过独立审查",
+        "编造问题、运行证据或完整覆盖"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d"
+        },
+        {
+          "relative_to_skill": "references/review-protocol.md",
+          "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598"
+        },
+        {
+          "relative_to_skill": "references/implementation.md",
+          "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a"
+        },
+        {
+          "relative_to_skill": "references/verification.md",
+          "sha256": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4"
+        }
+      ]
+    },
+    {
+      "id": "routing-readonly-index",
+      "answer": "为核对项目能力索引与源码，需要读能力库规则，才能判断路径、入口、最小调用和使用条件是否匹配；查索引后核对真实源码与契约，过期目前只是候选，不先下已确认结论。若包含代码Review，则读独立审查协议。能力库明确只读审查只报告候选、重复实现或索引失配；补登记条款限于授权实现任务，索引维护也在授权范围内。用户明确不修改，因此不能修索引、建目录或搬代码，读取规则不是写入授权。默认不加载实现纪律；进入实际修改阶段才补齐。",
+      "required_readings": [
+        "SKILL.md",
+        "references/reusable-capabilities.md",
+        "项目索引和对应源码、契约（本试用未读取）"
+      ],
+      "conditional_readings": [
+        "references/review-protocol.md：核对包含代码Review时",
+        "references/risk-gates.md与references/implementation.md：随后获得授权进行实际修改时",
+        "references/verification.md：形成实现验收结论时"
+      ],
+      "prohibited_actions": [
+        "直接修正索引",
+        "创建目录、空索引或迁移实现",
+        "把‘可能过期’写为已证实",
+        "把规则中的补登记要求当成覆盖只读限制的授权"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d"
+        },
+        {
+          "relative_to_skill": "references/reusable-capabilities.md",
+          "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084"
+        },
+        {
+          "relative_to_skill": "references/implementation.md",
+          "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4"
+        },
+        {
+          "relative_to_skill": "references/review-protocol.md",
+          "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598"
+        }
+      ]
+    },
+    {
+      "id": "routing-readonly-acceptance",
+      "answer": "只读验收不是代码实施：风险分档、验证与证据为必读；验收他人成果中的代码审查读取独立审查协议，验收者未参与实现可构成独立方。实现纪律不默认加载，更不能因验证文件提及工具安装而安装或改CI。先依真实后果定档，确定本次必需检查，再逐项核对给定输出的基线、预期来源、环境、时间、结果与覆盖。证据对应当前基线是题设，不等于证据必然覆盖全部要求，更不等于本人执行。局部小改不自动要求三门建设；若确有必需项失败为failed，缺失或未运行则partial，只有全部passed或有依据not_applicable才verified。此模拟不对实际项目作验收结论。",
+      "required_readings": [
+        "SKILL.md",
+        "references/risk-gates.md",
+        "references/verification.md",
+        "references/review-protocol.md",
+        "对应基线的diff、需求与实际证据（本试用未获取）"
+      ],
+      "conditional_readings": [
+        "领域专题、契约、安全等按实际触及面",
+        "references/implementation.md：后续明确授权修改或工具接入时才进入相应流程"
+      ],
+      "prohibited_actions": [
+        "改代码、CI、安装或运行本题禁止的操作",
+        "将别人已有输出称为自己执行",
+        "把当前基线匹配等同所有验收通过",
+        "因读取verification强制三门建设"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a"
+        },
+        {
+          "relative_to_skill": "references/verification.md",
+          "sha256": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4"
+        },
+        {
+          "relative_to_skill": "references/review-protocol.md",
+          "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598"
+        },
+        {
+          "relative_to_skill": "references/implementation.md",
+          "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4"
+        }
+      ]
+    },
+    {
+      "id": "routing-authorized-transition",
+      "answer": "第一阶段是只读代码审查：主文件和独立审查协议，已收录能力调用问题需能力库规则与索引、源码用于核对；不加载或执行实现纪律，不修索引或实现。第二阶段明确授权实际修复后，第一次修改之前必须补读风险分档、实现纪律；已收录能力或其复用调用命中能力库，若第一阶段已完整读且适用可沿用，不冒称每案重新读。重新按当前diff确认对象、调用方、根因、失败路径与影响，优先改有错的调用方并真实验证导入、调用行为、原始复现。若改变已登记接口、路径或条件则同步索引，否则不强改。修复后按协议复审，参与修复者不再是该修复的独立审查者。没有第二次授权，维持只读，仅报告建议和缺口。",
+      "required_readings": [
+        "第一阶段：SKILL.md、references/review-protocol.md、references/reusable-capabilities.md及所核对索引源码",
+        "第二阶段首次修改前：references/risk-gates.md、references/implementation.md；继续遵循能力库规则与复审协议"
+      ],
+      "conditional_readings": [
+        "references/verification.md：验收结论或大改触发",
+        "领域与安全专题随实际问题范围追加",
+        "独立方要求依风险，不因普通小修改自动升级为厚审"
+      ],
+      "prohibited_actions": [
+        "在只有第一阶段授权时直接修复",
+        "第二阶段沿用只读读取集合直接开改",
+        "参与修复后把自审称为独立审查",
+        "未改能力条件仍强制编造索引变化"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a"
+        },
+        {
+          "relative_to_skill": "references/implementation.md",
+          "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4"
+        },
+        {
+          "relative_to_skill": "references/reusable-capabilities.md",
+          "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084"
+        },
+        {
+          "relative_to_skill": "references/review-protocol.md",
+          "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598"
+        },
+        {
+          "relative_to_skill": "references/verification.md",
+          "sha256": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4"
+        }
+      ]
+    },
+    {
+      "id": "routing-thick-implementation",
+      "answer": "仅照风险表清单不足。风险表决定验证深度，不替代通用路由；实际修复动手前必须另读实现纪律，遵循根因、调用链、方案阶梯、最小修改与不变量。厚审还必读验证与证据、独立审查协议及全部实际命中领域专题。列契约、信任边界、调用方、兼容、失败与恢复；运行相关项目检查、风险专项及真实场景，复杂度、测试与变异、架构约束三门均为必需。默认复杂度上限10（项目阈值优先）；非等价变异全杀死，架构无提供规则则blocked，不能自造规则过门。必须尝试独立审查，缺独立方为blocked，未执行为not_run，不能自审替代。质量门缺工具、规则或配置不准写不适用；有失败failed，阻塞/未跑partial。无新增收录对象不造库，查能力与收录分别判断。",
+      "required_readings": [
+        "SKILL.md",
+        "references/risk-gates.md",
+        "references/implementation.md",
+        "references/verification.md",
+        "references/review-protocol.md"
+      ],
+      "conditional_readings": [
+        "references/reusable-capabilities.md：查找复用、实现功能、修改已收录能力等命中时，不因厚审自动收录",
+        "安全差异、形式化与各领域专题按实际风险命中追加",
+        "references/tooling.md：实际选择复杂度、变异或架构工具时"
+      ],
+      "prohibited_actions": [
+        "把风险表当作全部实施规则",
+        "缺工具就把必需门标not_applicable",
+        "强制新建空能力库",
+        "未经授权全局安装或改CI",
+        "把自审代替必需独立审查"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a"
+        },
+        {
+          "relative_to_skill": "references/implementation.md",
+          "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4"
+        },
+        {
+          "relative_to_skill": "references/verification.md",
+          "sha256": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4"
+        },
+        {
+          "relative_to_skill": "references/review-protocol.md",
+          "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598"
+        },
+        {
+          "relative_to_skill": "references/reusable-capabilities.md",
+          "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084"
+        }
+      ]
+    },
+    {
+      "id": "routing-first-capability",
+      "answer": "真实新增功能触发风险分档、实现纪律和能力库规则。题设已查索引与源码无适用实现，可以沿用该条件，仍依方案阶梯检查标准库、原生平台、已安装依赖，不能为了收录忽视更早成立方案。需要新实现且独立边界明确的可复用部分，在首次真实实现时收录到项目既有能力模块；一个真实调用方已经足够，不等待第二个。模块实现、调用方接入、对应验证与索引更新属于同一次改动，不能只放文件或只登记。记录公开入口、依赖、平台、失败行为、副作用、释放责任与可重跑验证依据；业务编排留在调用方。新功能不因‘新’自动厚审，但新增共享能力使已触发大改无法满足受控条件，需要按风险事实判断。",
+      "required_readings": [
+        "SKILL.md",
+        "references/risk-gates.md",
+        "references/implementation.md",
+        "references/reusable-capabilities.md",
+        "项目已有能力位置规则、索引、候选源码与真实调用方（题设条件，本试用未读）"
+      ],
+      "conditional_readings": [
+        "references/verification.md：大改、质量门或验收结论",
+        "references/review-protocol.md：代码审查、验收自己的实现或高风险触发",
+        "领域专题与实际涉及的安全、状态等规则"
+      ],
+      "prohibited_actions": [
+        "等第二个调用方才收录",
+        "另造平行目录或索引",
+        "仅未来设想就增加接口、插件或配置层",
+        "反向依赖页面私有状态",
+        "没有运行证据就登记为可直接使用"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a"
+        },
+        {
+          "relative_to_skill": "references/implementation.md",
+          "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4"
+        },
+        {
+          "relative_to_skill": "references/reusable-capabilities.md",
+          "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084"
+        },
+        {
+          "relative_to_skill": "references/verification.md",
+          "sha256": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4"
+        },
+        {
+          "relative_to_skill": "references/review-protocol.md",
+          "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598"
+        }
+      ]
+    },
+    {
+      "id": "routing-private-orchestration",
+      "answer": "实现功能确实触发读取能力库规则，还要读风险分档和实现纪律；已经查过现有能力与源码是题设条件，可据此进入剩余方案判断。阅读能力库规则并不保证存在收录对象：该规则明确业务编排留在调用方，没有可收录对象不建空库。因此沿用页面内部编排，不强抽模块、不建目录或补空索引。若页面明确为Web，读前端Review与路由组件，并依据编排实际涉及的状态、异步、语义等追加专题；题设单说页面，不擅自假定所有Web专题均命中。验证限定真实功能、调用链与相应可观察行为，缺口明确记录，未运行不宣称完成验收。",
+      "required_readings": [
+        "SKILL.md",
+        "references/risk-gates.md",
+        "references/implementation.md",
+        "references/reusable-capabilities.md"
+      ],
+      "conditional_readings": [
+        "若为Web页面：references/frontend-review.md与references/frontend/routes-components.md",
+        "状态、异步、可访问性等专题仅实际编排命中时读取；原生页面走移动端专题",
+        "references/review-protocol.md：代码审查或验收自己的实现",
+        "references/verification.md：验收结论、大改或质量门"
+      ],
+      "prohibited_actions": [
+        "因为读了能力库就必须建库",
+        "把页面私有编排抽成反向依赖页面的伪复用模块",
+        "补空索引以满足形式要求",
+        "把未知平台或运行结果写成已核实事实"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a"
+        },
+        {
+          "relative_to_skill": "references/implementation.md",
+          "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4"
+        },
+        {
+          "relative_to_skill": "references/reusable-capabilities.md",
+          "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084"
+        },
+        {
+          "relative_to_skill": "references/frontend-review.md",
+          "sha256": "b192273a234b340987b1e31ca0802701081926d9497bb37b12b0507f9ee6dbbe"
+        },
+        {
+          "relative_to_skill": "references/frontend/routes-components.md",
+          "sha256": "1b54c10f589b7758ab058c6e77de655fd434203f3b5327116c362c036cdec75b"
+        }
+      ]
+    }
+  ]
+}

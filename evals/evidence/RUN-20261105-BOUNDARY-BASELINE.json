@@ -1,0 +1,482 @@
+{
+  "kind": "independent baseline rule trial",
+  "language": "zh-CN",
+  "skill_root": "<evaluation-workspace>\\baseline\\skills\\lean-engineer",
+  "original_input_raw_utf8": "{\n  \"kind\": \"synthetic rule reasoning; given facts are conditional inputs, not actual project verification\",\n  \"cases\": [\n    {\n      \"id\": \"final-crossrepo-known\",\n      \"query\": \"内部API只修正既有展示值，字段、签名、默认/错误语义与安全边界不变，不涉及高后果不变量。调用方位于另一个团队仓库，发布渠道受控，题设确认没有其他受支持或未知外部调用方。除题设特别说明外：没有新增依赖或共享能力入库，没有新增/删除契约元素；所有受支持调用方与版本均已逐一点名，本次producer基线、兼容窗口内的在用/待部署consumer组合已实际通过兼容检查，失败与恢复路径明确。请只按题设条件判断规则，不对真实项目作验收承诺，不执行操作。应按哪档处理？是否仅因跨仓就必须三道质量门？\"\n    },\n    {\n      \"id\": \"final-crossrepo-additive-review-pending\",\n      \"query\": \"现有响应仅新增一个可选displayName展示字段，来自已有可公开数据，没有新增I/O、副作用、权限、隐私或资源预算变化；严格解析、字段枚举、旧调用方与新增字段行为均已实测通过。调用方跨仓但全部受支持版本已核实。独立审查可用但尚未执行。除题设特别说明外：没有新增依赖或共享能力入库，除上述兼容性字段增补外没有其他契约变化；所有受支持调用方与版本均已逐一点名，本次producer基线、兼容窗口内的在用/待部署consumer组合已实际通过兼容检查，失败与恢复路径明确。请只按题设条件判断规则，不对真实项目作验收承诺，不执行操作。请给出风险档、独审状态、三门要求和当前交付限制。\"\n    },\n    {\n      \"id\": \"final-crossrepo-unknown\",\n      \"query\": \"已发布响应增加可选展示字段。只知道两个内部调用方仓库，服务也面向未能查明的外部消费者；无法列全其版本，作者说应该兼容。请判断能否按受控及必需证据，不执行操作。\"\n    },\n    {\n      \"id\": \"final-crossrepo-latest-only\",\n      \"query\": \"既有响应值修正，两个跨仓客户端及其支持版本已列出，但仅最新版本做过实际兼容测试；仍受支持的旧版没有验证，兼容窗口未闭合。无新增依赖或契约元素。请判断风险档与证据缺口，不执行操作。\"\n    },\n    {\n      \"id\": \"final-monorepo-unknown\",\n      \"query\": \"API实现与已知调用方都在同一仓库。修改既有行为条件，但还有从不可读配置动态加载的调用入口，无法列全受支持版本或实际链路。请判断是否因同仓就可受控，不执行操作。\"\n    },\n    {\n      \"id\": \"final-crossrepo-high-consequence\",\n      \"query\": \"修改既有租户授权条件，字段和签名不变；消费方跨仓，但题设确认全部受支持调用方及版本、实际兼容检查、允许/拒绝路径检查和恢复方式均已明确通过。没有新增依赖、共享能力或契约元素。独立审查还未执行。请判断基础档位、独审要求及当前状态；不执行操作。\"\n    },\n    {\n      \"id\": \"final-local-copy-no-ci\",\n      \"query\": \"用户只要求改一条按钮文案并做本地验收。相关现有检查和实际页面行为已通过，所有本轮必需项已完成。用户和项目没有CI接入或CI验收要求，仓库没有CI作业。是否必须再建立三门、安装工具或创建CI才能完成本轮？请按题设回答，不执行操作。\"\n    },\n    {\n      \"id\": \"final-readonly-acceptance-no-ci\",\n      \"query\": \"用户要求只读核对一项局部改动的验收证据。给定证据足够且对应当前基线；没有CI配置，也没有用户或项目要求本轮建立/执行CI。只读审查者是否需要增加CI建设待办或因缺CI认定本轮必需检查未完成？不执行操作。\"\n    },\n    {\n      \"id\": \"final-thick-local-gates-no-ci-change\",\n      \"query\": \"本轮是厚审大改，仅交付实现与本地工程验证，未要求生产发布或CI改造。题设确认相关契约、实际场景、独立审查、复杂度、测试与变异、既有架构约束都已真实通过，所有必需证据完整。用户或项目未要求CI验收。是否还必须改CI？可以声明什么、不可以声明什么？不执行操作。\"\n    },\n    {\n      \"id\": \"final-ci-required-readonly\",\n      \"query\": \"项目交付规则明确要求新增CI作业和对应必需检查通过。当前只有本地检查通过，CI作业尚未建立，执行者没有CI写权限，只能读取。是否可把CI当建议略过，或者以本地通过报告verified？请给出状态，不执行操作。\"\n    },\n    {\n      \"id\": \"final-ci-authorized\",\n      \"query\": \"用户本轮明确要求把已验证的项目命令接入CI，授权修改相应CI配置；输入、目标和副作用范围清楚。尚未修改或运行CI。请说明哪些步骤属于任务，何时才可宣称CI通过或阻断合并；不要在本试用中执行操作。\"\n    }\n  ]\n}\n",
+  "original_input_sha256": "5A13FA7B149241303BD49D66C8313964467557694246375E190C3A6442EAD429",
+  "original_input": {
+    "kind": "synthetic rule reasoning; given facts are conditional inputs, not actual project verification",
+    "cases": [
+      {
+        "id": "final-crossrepo-known",
+        "query": "内部API只修正既有展示值，字段、签名、默认/错误语义与安全边界不变，不涉及高后果不变量。调用方位于另一个团队仓库，发布渠道受控，题设确认没有其他受支持或未知外部调用方。除题设特别说明外：没有新增依赖或共享能力入库，没有新增/删除契约元素；所有受支持调用方与版本均已逐一点名，本次producer基线、兼容窗口内的在用/待部署consumer组合已实际通过兼容检查，失败与恢复路径明确。请只按题设条件判断规则，不对真实项目作验收承诺，不执行操作。应按哪档处理？是否仅因跨仓就必须三道质量门？"
+      },
+      {
+        "id": "final-crossrepo-additive-review-pending",
+        "query": "现有响应仅新增一个可选displayName展示字段，来自已有可公开数据，没有新增I/O、副作用、权限、隐私或资源预算变化；严格解析、字段枚举、旧调用方与新增字段行为均已实测通过。调用方跨仓但全部受支持版本已核实。独立审查可用但尚未执行。除题设特别说明外：没有新增依赖或共享能力入库，除上述兼容性字段增补外没有其他契约变化；所有受支持调用方与版本均已逐一点名，本次producer基线、兼容窗口内的在用/待部署consumer组合已实际通过兼容检查，失败与恢复路径明确。请只按题设条件判断规则，不对真实项目作验收承诺，不执行操作。请给出风险档、独审状态、三门要求和当前交付限制。"
+      },
+      {
+        "id": "final-crossrepo-unknown",
+        "query": "已发布响应增加可选展示字段。只知道两个内部调用方仓库，服务也面向未能查明的外部消费者；无法列全其版本，作者说应该兼容。请判断能否按受控及必需证据，不执行操作。"
+      },
+      {
+        "id": "final-crossrepo-latest-only",
+        "query": "既有响应值修正，两个跨仓客户端及其支持版本已列出，但仅最新版本做过实际兼容测试；仍受支持的旧版没有验证，兼容窗口未闭合。无新增依赖或契约元素。请判断风险档与证据缺口，不执行操作。"
+      },
+      {
+        "id": "final-monorepo-unknown",
+        "query": "API实现与已知调用方都在同一仓库。修改既有行为条件，但还有从不可读配置动态加载的调用入口，无法列全受支持版本或实际链路。请判断是否因同仓就可受控，不执行操作。"
+      },
+      {
+        "id": "final-crossrepo-high-consequence",
+        "query": "修改既有租户授权条件，字段和签名不变；消费方跨仓，但题设确认全部受支持调用方及版本、实际兼容检查、允许/拒绝路径检查和恢复方式均已明确通过。没有新增依赖、共享能力或契约元素。独立审查还未执行。请判断基础档位、独审要求及当前状态；不执行操作。"
+      },
+      {
+        "id": "final-local-copy-no-ci",
+        "query": "用户只要求改一条按钮文案并做本地验收。相关现有检查和实际页面行为已通过，所有本轮必需项已完成。用户和项目没有CI接入或CI验收要求，仓库没有CI作业。是否必须再建立三门、安装工具或创建CI才能完成本轮？请按题设回答，不执行操作。"
+      },
+      {
+        "id": "final-readonly-acceptance-no-ci",
+        "query": "用户要求只读核对一项局部改动的验收证据。给定证据足够且对应当前基线；没有CI配置，也没有用户或项目要求本轮建立/执行CI。只读审查者是否需要增加CI建设待办或因缺CI认定本轮必需检查未完成？不执行操作。"
+      },
+      {
+        "id": "final-thick-local-gates-no-ci-change",
+        "query": "本轮是厚审大改，仅交付实现与本地工程验证，未要求生产发布或CI改造。题设确认相关契约、实际场景、独立审查、复杂度、测试与变异、既有架构约束都已真实通过，所有必需证据完整。用户或项目未要求CI验收。是否还必须改CI？可以声明什么、不可以声明什么？不执行操作。"
+      },
+      {
+        "id": "final-ci-required-readonly",
+        "query": "项目交付规则明确要求新增CI作业和对应必需检查通过。当前只有本地检查通过，CI作业尚未建立，执行者没有CI写权限，只能读取。是否可把CI当建议略过，或者以本地通过报告verified？请给出状态，不执行操作。"
+      },
+      {
+        "id": "final-ci-authorized",
+        "query": "用户本轮明确要求把已验证的项目命令接入CI，授权修改相应CI配置；输入、目标和副作用范围清楚。尚未修改或运行CI。请说明哪些步骤属于任务，何时才可宣称CI通过或阻断合并；不要在本试用中执行操作。"
+      }
+    ]
+  },
+  "results": [
+    {
+      "id": "final-crossrepo-known",
+      "risk": "厚审大改",
+      "gates": "复杂度、测试与变异、架构约束三门均必需；未给出通过证据，不可视为已通过。",
+      "independent": "厚审必须尝试独立审查；题设未说明已执行，记 not_run，若无独立方才是 blocked。",
+      "ci": "本试用不执行。verification.md 执行前检查第5项无范围限定地要求接入CI；题设未请求操作，不能据此擅自修改真实项目。",
+      "status": "partial（条件性）",
+      "rationale": "risk-gates.md 的厚审清单明确包含“对外服务的调用方不在当前仓库”。虽然全部已知且兼容证据闭合满足受控附加条件，文本未为跨仓条件设置受控例外。按该明确清单保守判厚审，因此在此基线版本中，仅跨仓也会触发三门。这里存在规则张力，不能悄悄把该条改读为仅未知外部调用方。兼容性检查是题设已通过，不是本次实际运行。",
+      "na": "兼容性增补专门独审不适用：没有增补；高后果专门独审不适用：题设排除高后果。厚审独审仍适用。",
+      "reads": [
+        "SKILL.md",
+        "references/risk-gates.md",
+        "references/verification.md",
+        "references/review-protocol.md"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "137F827325192263D3A2AC27AE5145593F6C433DC4CE2FCCDA644F0ED25E615B"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "1156AA3397872CC727B19B77CEB79D9741D3F88F649A7E792CCF3530BF302FD4"
+        },
+        {
+          "relative_to_skill": "references/verification.md",
+          "sha256": "6E830BDB906FD7EAB42A9DB8F699E74632D985EFF13F14AFC9AB4E9161A28EE2"
+        },
+        {
+          "relative_to_skill": "references/review-protocol.md",
+          "sha256": "8FF19966CAE4B81A007364F5C8C73ADDB00C2247989BB28FB9F5D6AD7965F598"
+        }
+      ]
+    },
+    {
+      "id": "final-crossrepo-additive-review-pending",
+      "risk": "厚审大改（按跨仓厚审条款）；兼容性增补候选另有独审缺口",
+      "gates": "按厚审要求三门；可选展示字段本身不是自动要求三门的原因。",
+      "independent": "必需，且明确 not_run；可用但未执行不得记 blocked，也不得自审替代。",
+      "ci": "基线verification第5项提出CI接入，但本案仅要求规则判断，没有实际改造授权或执行。",
+      "status": "partial（条件性）",
+      "rationale": "增补的范围和兼容运行证据符合给定的技术条件；独立核对尚缺，兼容性增补条款明确其状态只能partial。额外存在跨仓厚审条款，故不能只引用末尾“例外不自动三门”就忽略跨仓。即使排除跨仓条款，独审未做也不能verified。",
+      "na": "高后果专门独审不适用：无权限、隐私、预算或其他高后果变化；兼容性增补和厚审独审适用。",
+      "reads": [
+        "SKILL.md",
+        "references/risk-gates.md",
+        "references/verification.md",
+        "references/review-protocol.md"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "137F827325192263D3A2AC27AE5145593F6C433DC4CE2FCCDA644F0ED25E615B"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "1156AA3397872CC727B19B77CEB79D9741D3F88F649A7E792CCF3530BF302FD4"
+        },
+        {
+          "relative_to_skill": "references/verification.md",
+          "sha256": "6E830BDB906FD7EAB42A9DB8F699E74632D985EFF13F14AFC9AB4E9161A28EE2"
+        },
+        {
+          "relative_to_skill": "references/review-protocol.md",
+          "sha256": "8FF19966CAE4B81A007364F5C8C73ADDB00C2247989BB28FB9F5D6AD7965F598"
+        }
+      ]
+    },
+    {
+      "id": "final-crossrepo-unknown",
+      "risk": "厚审大改",
+      "gates": "三门必需；还需契约、实际消费者、旧版兼容、新字段行为和恢复证据。",
+      "independent": "厚审独审必需尝试；兼容性增补也不能绕过独立核对；尚无证据则 not_run，资源不可用时blocked。",
+      "ci": "基线提出接入项目命令到CI，实际操作不在本次规则判断任务中。",
+      "status": "partial（条件性）",
+      "rationale": "存在未知外部消费者，不能逐一点名版本，不能闭合兼容窗口。应记录unknown，不可把作者“应该兼容”当test证据。厚审并不消除兼容缺口；即使三门通过，也不能把未知消费者写成已验证。没有已知检查失败，故不直接failed。",
+      "na": "高后果是否适用未给出，不能宣称已排除；纯可选声明不构成兼容例外证据。",
+      "reads": [
+        "SKILL.md",
+        "references/risk-gates.md",
+        "references/verification.md",
+        "references/review-protocol.md"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "137F827325192263D3A2AC27AE5145593F6C433DC4CE2FCCDA644F0ED25E615B"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "1156AA3397872CC727B19B77CEB79D9741D3F88F649A7E792CCF3530BF302FD4"
+        },
+        {
+          "relative_to_skill": "references/verification.md",
+          "sha256": "6E830BDB906FD7EAB42A9DB8F699E74632D985EFF13F14AFC9AB4E9161A28EE2"
+        },
+        {
+          "relative_to_skill": "references/review-protocol.md",
+          "sha256": "8FF19966CAE4B81A007364F5C8C73ADDB00C2247989BB28FB9F5D6AD7965F598"
+        }
+      ]
+    },
+    {
+      "id": "final-crossrepo-latest-only",
+      "risk": "厚审大改",
+      "gates": "三门必需；补充全部受支持旧版及在用/待部署组合的实际兼容证据。",
+      "independent": "厚审独审必需尝试；未提供记录不能视为通过。",
+      "ci": "基线提出CI接入；本试用不得操作。",
+      "status": "partial（条件性）",
+      "rationale": "除跨仓厚审条款外，兼容窗口未闭合也独立触发厚审。列出版本不等于实际兼容验证；最新版本通过不能外推仍受支持旧版。旧版未验证是not_run或按实际障碍blocked，不能not_applicable。",
+      "na": "兼容性增补专门要求不适用：没有新增契约元素。高后果未给出，不因跨仓本身认定高后果。",
+      "reads": [
+        "SKILL.md",
+        "references/risk-gates.md",
+        "references/verification.md",
+        "references/review-protocol.md"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "137F827325192263D3A2AC27AE5145593F6C433DC4CE2FCCDA644F0ED25E615B"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "1156AA3397872CC727B19B77CEB79D9741D3F88F649A7E792CCF3530BF302FD4"
+        },
+        {
+          "relative_to_skill": "references/verification.md",
+          "sha256": "6E830BDB906FD7EAB42A9DB8F699E74632D985EFF13F14AFC9AB4E9161A28EE2"
+        },
+        {
+          "relative_to_skill": "references/review-protocol.md",
+          "sha256": "8FF19966CAE4B81A007364F5C8C73ADDB00C2247989BB28FB9F5D6AD7965F598"
+        }
+      ]
+    },
+    {
+      "id": "final-monorepo-unknown",
+      "risk": "厚审大改",
+      "gates": "三门必需，并需动态调用入口、版本、实际链路和兼容证据。",
+      "independent": "厚审必须尝试独立审查；题设未提供结果。",
+      "ci": "基线提出CI接入；本试用无操作。",
+      "status": "partial（条件性）",
+      "rationale": "同仓不是受控充分条件。动态引用无法列全和无法判断触发项均是明确厚审条件；不可读配置是取证障碍，相关检查blocked。已知调用方同仓不能替代实际调用链闭合。没有实证失败不记failed。",
+      "na": "兼容性增补例外不适用：修改既有条件；是否高后果未知，不凭接口名称推定。",
+      "reads": [
+        "SKILL.md",
+        "references/risk-gates.md",
+        "references/verification.md",
+        "references/review-protocol.md"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "137F827325192263D3A2AC27AE5145593F6C433DC4CE2FCCDA644F0ED25E615B"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "1156AA3397872CC727B19B77CEB79D9741D3F88F649A7E792CCF3530BF302FD4"
+        },
+        {
+          "relative_to_skill": "references/verification.md",
+          "sha256": "6E830BDB906FD7EAB42A9DB8F699E74632D985EFF13F14AFC9AB4E9161A28EE2"
+        },
+        {
+          "relative_to_skill": "references/review-protocol.md",
+          "sha256": "8FF19966CAE4B81A007364F5C8C73ADDB00C2247989BB28FB9F5D6AD7965F598"
+        }
+      ]
+    },
+    {
+      "id": "final-crossrepo-high-consequence",
+      "risk": "厚审大改（跨仓条款）；授权变化本身为大改且高后果",
+      "gates": "按跨仓厚审条款三门必需。高后果独审条款自身不升级基础档位、不独自引入三门。",
+      "independent": "高后果独审必需且not_run；还需独立核对业务依据、允许/拒绝路径、边界反例及恢复证据。题设自有通过记录不能代替独立审查。",
+      "ci": "基线提出CI接入；当前规则判断不执行改造。",
+      "status": "partial（条件性）",
+      "rationale": "租户授权条件触及租户隔离核心不变量，即使字段和签名不变也必须独审。受控条件所列证据闭合，但此版本的跨仓厚审条件仍适用。若不存在跨仓厚审条款，才能是受控加独审；不能把那种改写后的判断冒充当前基线。",
+      "na": "兼容性增补专门要求不适用；安全差异、身份访问专题属于实际实施/安全复审路由，本次只判风险及门禁，不声称执行这些专题。",
+      "reads": [
+        "SKILL.md",
+        "references/risk-gates.md",
+        "references/verification.md",
+        "references/review-protocol.md"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "137F827325192263D3A2AC27AE5145593F6C433DC4CE2FCCDA644F0ED25E615B"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "1156AA3397872CC727B19B77CEB79D9741D3F88F649A7E792CCF3530BF302FD4"
+        },
+        {
+          "relative_to_skill": "references/verification.md",
+          "sha256": "6E830BDB906FD7EAB42A9DB8F699E74632D985EFF13F14AFC9AB4E9161A28EE2"
+        },
+        {
+          "relative_to_skill": "references/review-protocol.md",
+          "sha256": "8FF19966CAE4B81A007364F5C8C73ADDB00C2247989BB28FB9F5D6AD7965F598"
+        }
+      ]
+    },
+    {
+      "id": "final-local-copy-no-ci",
+      "risk": "小改，可观察改动",
+      "gates": "不必建立三门；相关现有检查与页面行为按题设已经通过。不因没有CI安装质量门工具。",
+      "independent": "小改不强制独审；本地验收不等于额外新增强制独审。",
+      "ci": "存在文本张力：verification的执行前检查第5项无条件写“将同一个项目命令接入CI”，但用户明确只要求文案及本地验收、没有CI任务。主文件优先服从用户范围，实现纪律禁止无关改动，因此不能擅自建CI。若把第5项按无例外最低门禁执行，它会产生超出本轮范围的CI缺口；原文没有清晰的范围降级条款。",
+      "status": "本轮明确限定的文案及本地验收可条件性verified；不得声称基线所有无条件CI要求已满足。若坚持将CI条款纳入整体必需检查，则整体只能partial，须公开范围冲突。",
+      "rationale": "小改表只要求相关检查及可观察行为，题设明确所有本轮必需项完成；没有厚审触发项。不能把工具安装的允许条款解释成必须安装。本地范围的verified依据题设，不是我运行。",
+      "na": "三门、高后果及兼容性独审不适用，原因是仅文案、无契约或高后果变化；CI建设不在用户任务范围，不能伪称CI passed。",
+      "reads": [
+        "SKILL.md",
+        "references/risk-gates.md",
+        "references/verification.md",
+        "references/review-protocol.md",
+        "references/implementation.md"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "137F827325192263D3A2AC27AE5145593F6C433DC4CE2FCCDA644F0ED25E615B"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "1156AA3397872CC727B19B77CEB79D9741D3F88F649A7E792CCF3530BF302FD4"
+        },
+        {
+          "relative_to_skill": "references/verification.md",
+          "sha256": "6E830BDB906FD7EAB42A9DB8F699E74632D985EFF13F14AFC9AB4E9161A28EE2"
+        },
+        {
+          "relative_to_skill": "references/review-protocol.md",
+          "sha256": "8FF19966CAE4B81A007364F5C8C73ADDB00C2247989BB28FB9F5D6AD7965F598"
+        },
+        {
+          "relative_to_skill": "references/implementation.md",
+          "sha256": "DD9C6649022CD2015E1726B30FCB8195101F539BFE2A58AAB6ED3372E76713E4"
+        }
+      ]
+    },
+    {
+      "id": "final-readonly-acceptance-no-ci",
+      "risk": "局部改动暂按小改；只读核对本身不触发实现升级，若实际局部改动存在大改信号应重新定档",
+      "gates": "不因只读验收自动要求三门；题设给定当前基线的证据充分。",
+      "independent": "审查他人产出的只读审查者可作为独立方，不要求另造无限审查链；若审查自己的实现则需要未参与实现的独立方。",
+      "ci": "只读者不得新增CI配置。verification第5项字面提出CI接入，与用户只读范围缺少明确衔接；可报告该规则范围疑点，但不应自行把CI建设变成本轮用户待办。",
+      "status": "按用户限定的只读证据核对范围可条件性verified；不能声称CI存在或通过。如将第5项强制扩展为本轮必需项则只能partial，须明确这是规则歧义而不是题设发现了证据失败。",
+      "rationale": "主文件先确定只读任务，禁止修改实现；证据充分且对应当前基线是题设。验收报告应限定核对对象、覆盖和已给证据，不承诺发布。局部一词不足以绝对证明没有高后果，故风险结论保留此前提。",
+      "na": "实际CI建设不适用本轮只读范围；三门是否适用由被验收改动风险决定，不由无CI推导。",
+      "reads": [
+        "SKILL.md",
+        "references/risk-gates.md",
+        "references/verification.md",
+        "references/review-protocol.md"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "137F827325192263D3A2AC27AE5145593F6C433DC4CE2FCCDA644F0ED25E615B"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "1156AA3397872CC727B19B77CEB79D9741D3F88F649A7E792CCF3530BF302FD4"
+        },
+        {
+          "relative_to_skill": "references/verification.md",
+          "sha256": "6E830BDB906FD7EAB42A9DB8F699E74632D985EFF13F14AFC9AB4E9161A28EE2"
+        },
+        {
+          "relative_to_skill": "references/review-protocol.md",
+          "sha256": "8FF19966CAE4B81A007364F5C8C73ADDB00C2247989BB28FB9F5D6AD7965F598"
+        }
+      ]
+    },
+    {
+      "id": "final-thick-local-gates-no-ci-change",
+      "risk": "厚审大改（题设明确）",
+      "gates": "三门必需，按题设已全部真实通过；不再假设工具缺失或要求重复安装。",
+      "independent": "必需，题设已通过。这里只接受条件输入，不声称亲自执行。",
+      "ci": "verification第5项原文仍要求接入CI且未写仅本地交付例外；本轮明确不要求CI改造，按用户范围不得擅自修改。必须披露该条与范围之间的冲突，不能声称CI已接入。",
+      "status": "实现与本地工程验证范围条件性verified；若报告的是包含verification第5项的整体交接，则CI未完成使其partial。不得混用两个范围。",
+      "rationale": "题设明确所有所需本地证据完整，三门和独审均通过。本地verified只支持指定基线与本地工程目标，不能推导生产发布、CI通过、分支保护或合并阻断已经建立。基线缺少明确的CI适用边界，不能忽略原文，也不能扩权改造。",
+      "na": "安装新工具不适用：题设门禁已通过，没有缺工具事实；生产发布和分支保护不属于本轮范围。",
+      "reads": [
+        "SKILL.md",
+        "references/risk-gates.md",
+        "references/verification.md",
+        "references/review-protocol.md",
+        "references/implementation.md"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "137F827325192263D3A2AC27AE5145593F6C433DC4CE2FCCDA644F0ED25E615B"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "1156AA3397872CC727B19B77CEB79D9741D3F88F649A7E792CCF3530BF302FD4"
+        },
+        {
+          "relative_to_skill": "references/verification.md",
+          "sha256": "6E830BDB906FD7EAB42A9DB8F699E74632D985EFF13F14AFC9AB4E9161A28EE2"
+        },
+        {
+          "relative_to_skill": "references/review-protocol.md",
+          "sha256": "8FF19966CAE4B81A007364F5C8C73ADDB00C2247989BB28FB9F5D6AD7965F598"
+        },
+        {
+          "relative_to_skill": "references/implementation.md",
+          "sha256": "DD9C6649022CD2015E1726B30FCB8195101F539BFE2A58AAB6ED3372E76713E4"
+        }
+      ]
+    },
+    {
+      "id": "final-ci-required-readonly",
+      "risk": "底层改动风险信息不足；本轮只读状态判断不单独增加风险。所需新增CI作业涉及构建发布行为，实施时至少大改并核对厚审条件。",
+      "gates": "是否三门由底层改动及具体CI变更决定，不能因为本地通过就认为所有门禁通过。项目明定CI检查必需。",
+      "independent": "按实际风险与审查对象执行；题设没有独审完成证据，不能宣称已完成。",
+      "ci": "属于项目明确必需交付；执行者没有写权限只能报告blocked并交给授权执行者，不得把CI降为建议或自行越权。",
+      "status": "partial（CI建设blocked；尚无可执行作业，CI结果未通过）",
+      "rationale": "verification规定缺权限为blocked，必需检查存在blocked则partial。主文件允许用户/项目提高验证要求。本地与CI不是同一执行事实，不能以本地通过代替明确要求的CI。",
+      "na": "独立方是否可用未给出，不能凭只读权限认定独审blocked；不适用不能用来掩盖缺CI权限。",
+      "reads": [
+        "SKILL.md",
+        "references/risk-gates.md",
+        "references/verification.md",
+        "references/review-protocol.md"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "137F827325192263D3A2AC27AE5145593F6C433DC4CE2FCCDA644F0ED25E615B"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "1156AA3397872CC727B19B77CEB79D9741D3F88F649A7E792CCF3530BF302FD4"
+        },
+        {
+          "relative_to_skill": "references/verification.md",
+          "sha256": "6E830BDB906FD7EAB42A9DB8F699E74632D985EFF13F14AFC9AB4E9161A28EE2"
+        },
+        {
+          "relative_to_skill": "references/review-protocol.md",
+          "sha256": "8FF19966CAE4B81A007364F5C8C73ADDB00C2247989BB28FB9F5D6AD7965F598"
+        }
+      ]
+    },
+    {
+      "id": "final-ci-authorized",
+      "risk": "CI接入改变构建发布行为，至少大改；新增对外配置项或依赖则厚审。仅题设不足以证明受控全部条件，保守按厚审并在实际配置边界明确后复核。",
+      "gates": "按厚审暂要求三门；配置确无某门检查对象时需具体豁免依据，不得因缺工具/规则记not_applicable。必须实际运行接入后的CI。",
+      "independent": "厚审要求尝试独审；尚未执行则not_run。",
+      "ci": "明确属于任务，已有相应配置修改授权无需重复确认。检查现有manifest/lockfile/构建测试及CI配置，复用已验证项目命令，最小接入对应CI，保持通过标准，运行并核对同一源码基线的结果。配置修改授权不自动包含分支保护权限。",
+      "status": "partial（尚未修改和运行，CI为not_run；非failed）",
+      "rationale": "只在真实CI运行完成且必需检查支持预期后才可宣称该基线CI通过；配置写好了、预检或本地命令通过均不能代替。实际合并阻断须CI必需检查与分支保护建立并有可核对证据，AI报告自身不建立阻断。没有生产发布授权不得推导发布已完成。",
+      "na": "本次试用的实际改造、测试和安装均不执行；不能把任务步骤清单列为已完成证据。",
+      "reads": [
+        "SKILL.md",
+        "references/risk-gates.md",
+        "references/verification.md",
+        "references/review-protocol.md",
+        "references/implementation.md"
+      ],
+      "actual_read_files": [
+        {
+          "relative_to_skill": "SKILL.md",
+          "sha256": "137F827325192263D3A2AC27AE5145593F6C433DC4CE2FCCDA644F0ED25E615B"
+        },
+        {
+          "relative_to_skill": "references/risk-gates.md",
+          "sha256": "1156AA3397872CC727B19B77CEB79D9741D3F88F649A7E792CCF3530BF302FD4"
+        },
+        {
+          "relative_to_skill": "references/verification.md",
+          "sha256": "6E830BDB906FD7EAB42A9DB8F699E74632D985EFF13F14AFC9AB4E9161A28EE2"
+        },
+        {
+          "relative_to_skill": "references/review-protocol.md",
+          "sha256": "8FF19966CAE4B81A007364F5C8C73ADDB00C2247989BB28FB9F5D6AD7965F598"
+        },
+        {
+          "relative_to_skill": "references/implementation.md",
+          "sha256": "DD9C6649022CD2015E1726B30FCB8195101F539BFE2A58AAB6ED3372E76713E4"
+        }
+      ]
+    }
+  ],
+  "actual_reads": [
+    {
+      "relative_to_skill": "references/implementation.md",
+      "sha256": "DD9C6649022CD2015E1726B30FCB8195101F539BFE2A58AAB6ED3372E76713E4"
+    },
+    {
+      "relative_to_skill": "SKILL.md",
+      "sha256": "137F827325192263D3A2AC27AE5145593F6C433DC4CE2FCCDA644F0ED25E615B"
+    },
+    {
+      "relative_to_skill": "references/verification.md",
+      "sha256": "6E830BDB906FD7EAB42A9DB8F699E74632D985EFF13F14AFC9AB4E9161A28EE2"
+    },
+    {
+      "relative_to_skill": "references/review-protocol.md",
+      "sha256": "8FF19966CAE4B81A007364F5C8C73ADDB00C2247989BB28FB9F5D6AD7965F598"
+    },
+    {
+      "relative_to_skill": "references/risk-gates.md",
+      "sha256": "1156AA3397872CC727B19B77CEB79D9741D3F88F649A7E792CCF3530BF302FD4"
+    }
+  ],
+  "completed_at": "2026-11-05T22:30:54.8802908+08:00",
+  "timezone_id": "China Standard Time",
+  "limitations": [
+    "全部项目事实仅为题设条件输入；未执行任何项目命令、测试、安装、网络或CI。",
+    "实际操作仅为UTF-8严格读取指定基线技能及其风险、验证、独审、实现纪律引用和场景输入，写入并回读本结果文件。",
+    "没有读取candidate、oracle、plan、tests、evals、旧报告或其他代理结果；未再委派。",
+    "这是规则适用性试用，不是实际代码Review；未加载领域实现/审查专题，也不声称已执行它们。",
+    "基线跨仓厚审条款与受控附加条件存在张力，按明确厚审清单处理；CI条款缺少明确范围限制，报告其与用户仅本地/只读范围的张力。"
+  ],
+  "distribution_redaction": {
+    "original_sha256": "2df4e052dd7a57f6455b4a38b76c59797558123138310bcd48b64ec3e28d81ad",
+    "scope": "Local workspace path substitution only; answers and source hashes unchanged."
+  }
+}

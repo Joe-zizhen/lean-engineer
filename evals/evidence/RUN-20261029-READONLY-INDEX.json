@@ -1,0 +1,56 @@
+{
+  "agent_output": "发现 **1 项索引失配**，审查状态 `partial`，未修改任何文件。\n\n- **CAP-001｜open｜origin_unknown｜中等｜高置信度**：`docs/capabilities.md:5` 指向不存在的 `src/shared/old_titles.py`，导入示例同样失效。实际实现位于 `src/shared/titles.py:1`。建议后续授权修复时同时更新路径与示例，并验证正常导入。\n- **可复用候选**：`normalize_title(title: str) -> str`，将首尾及连续空白归一化；源码没有外部依赖或副作用。正确导入为 `from shared.titles import normalize_title`，前提是运行入口能够解析项目的 `src/` 源码路径。\n- `src/app.py:1` 仅抛出 `NotImplementedError`，当前没有接入该能力的实际调用方。索引也未记录验证入口或结果，不能宣称已验证可直接使用。\n\n实际读取：\n- 指定技能的 `SKILL.md`、`references/risk-gates.md`、`references/reusable-capabilities.md`、`references/review-protocol.md`。\n- 指定项目的全部四个文件：`AGENTS.md`、`docs/capabilities.md`、`src/shared/titles.py`、`src/app.py`。均显式使用严格 UTF-8；另执行了文件清单与 SHA-256 核查。\n\n未运行：导入检查、行为测试、CLI 执行及构建；没有安装依赖、创建子代理或落盘报告。建议复验空串、纯空白、连续空白和制表符/换行，期望分别返回空串或单空格分隔的文字。\n\n`history_consistency=not_applicable`（首轮）。**准确模型 ID 不可见**，不能用角色名称推断。",
+  "case_type": "synthetic",
+  "task_input": "只读核对项目能力索引与实际源码是否一致，说明可复用能力，不修复、不修改任何项目文件。",
+  "parent_assessment": {
+    "finding": "stale index path and import example identified",
+    "readonly_files_unchanged": true,
+    "import_behavior": "not_run; correctly not claimed as verified"
+  },
+  "evidence_limits": [
+    "Single execution; exact model ID and token usage unavailable.",
+    "Model-reported file reads, not an independently exported complete tool-read trace."
+  ],
+  "hash_verification": {
+    "before": {
+      "AGENTS.md": "d28912840224b3643f4b444f8608e2a286bb1caa688e80a607306691ea8928f4",
+      "docs/capabilities.md": "267a132f1df4559769c8e171948e80a4aafd9e33baf52500146fd12c0f374d1d",
+      "src/app.py": "b8101baff838970f9b8a23a53e7bd12c43d2de7fc1c2efdef2b51b6e5f21558f",
+      "src/shared/titles.py": "583d9300e41c33fdabac3c83402b9fb4da5e0e9582c585146b954fe8bde25da4"
+    },
+    "after": {
+      "AGENTS.md": "d28912840224b3643f4b444f8608e2a286bb1caa688e80a607306691ea8928f4",
+      "docs/capabilities.md": "267a132f1df4559769c8e171948e80a4aafd9e33baf52500146fd12c0f374d1d",
+      "src/app.py": "b8101baff838970f9b8a23a53e7bd12c43d2de7fc1c2efdef2b51b6e5f21558f",
+      "src/shared/titles.py": "583d9300e41c33fdabac3c83402b9fb4da5e0e9582c585146b954fe8bde25da4"
+    },
+    "project_files_unchanged": true
+  },
+  "skill_input_sha256": {
+    "SKILL.md": "dc63b1927369960eab5406f90ac4c65ff73ee10b1ca29343f63cb37667ae69c0",
+    "skills/lean-engineer/SKILL.md": "6c61f60c320c93c974c46907b9e6c7ad9ea59d0f634de9e8616a5c4dcde7b55f",
+    "skills/lean-engineer/references/implementation.md": "576296b25148410cafa181f2a61ad3e3d4d158df630c54d6ca60fcc2f267aa41",
+    "skills/lean-engineer/references/risk-gates.md": "ebe979d48889a73c48fc8b9d1c6d3697fcf75fdb401b4c3f1e086e818114373d",
+    "skills/lean-engineer/references/review-protocol.md": "89acf455f93dcbf4e8773e4d8b61acdf1c9b07e0d036201de20eb12d55608dec",
+    "skills/lean-engineer/references/verification.md": "ee05566290a2c5e3d991b92dced28cbee03705b985e237f8c5c331bbc1a4cad7",
+    "skills/lean-engineer/references/reusable-capabilities.md": "4fffdc49f1331ecb9667b1b644a93be1ae808b62cff362d83398be0bf51662de"
+  },
+  "input_files": {
+    "AGENTS.md": {
+      "content": "本项目共享能力放在 src/shared/，能力索引为 docs/capabilities.md。CLI 源码放在 src/。不新增其他能力库或依赖。所有文本读写显式 UTF-8。\r\n",
+      "sha256": "d28912840224b3643f4b444f8608e2a286bb1caa688e80a607306691ea8928f4"
+    },
+    "src/shared/titles.py": {
+      "content": "def normalize_title(title: str) -> str:\r\n    return \" \".join(title.split())\r\n",
+      "sha256": "583d9300e41c33fdabac3c83402b9fb4da5e0e9582c585146b954fe8bde25da4"
+    },
+    "docs/capabilities.md": {
+      "content": "# 能力索引\r\n\r\n| 能力 | 文件 | 调用 | 条件 |\r\n| --- | --- | --- | --- |\r\n| 标题空白归一化 | `src/shared/old_titles.py` | `from shared.old_titles import normalize_title` | Python 字符串，无副作用 |\r\n",
+      "sha256": "267a132f1df4559769c8e171948e80a4aafd9e33baf52500146fd12c0f374d1d"
+    },
+    "src/app.py": {
+      "content": "raise NotImplementedError(\"CLI not implemented\")\r\n",
+      "sha256": "b8101baff838970f9b8a23a53e7bd12c43d2de7fc1c2efdef2b51b6e5f21558f"
+    }
+  }
+}

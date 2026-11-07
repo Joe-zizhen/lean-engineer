@@ -1,0 +1,1191 @@
+{
+  "schema_version": "1.0",
+  "model_runs": 15,
+  "note": "Evaluation definitions only. Actual model run records are stored in runs.json.",
+  "cases": [
+    {
+      "id": "noncoding-question",
+      "query": "解释什么是幂等，不修改代码。",
+      "expected_skills": [],
+      "expected_references": [],
+      "forbidden_claims": [
+        "lean-engineer 主导纯问答"
+      ]
+    },
+    {
+      "id": "root-cause-only",
+      "query": "只定位这个超时问题的根因，先不要修复。",
+      "expected_skills": [],
+      "expected_references": [],
+      "forbidden_claims": [
+        "未定位根因就进入实现"
+      ]
+    },
+    {
+      "id": "button-copy",
+      "query": "把确定按钮文案改成保存。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md",
+        "frontend-review.md"
+      ],
+      "forbidden_claims": [
+        "不可观察 A 档",
+        "必须独立审查"
+      ]
+    },
+    {
+      "id": "internal-helper",
+      "query": "新增一个仅当前文件使用的解析 helper，外部行为不变。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md",
+        "formal-verification.md"
+      ],
+      "forbidden_claims": [
+        "不搜索复用",
+        "仅因新增函数就厚审"
+      ]
+    },
+    {
+      "id": "extra-verification",
+      "query": "这是一个小改，但用户明确要求运行完整相关测试。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md",
+        "verification.md"
+      ],
+      "forbidden_claims": [
+        "小改执行额外验证是错误"
+      ]
+    },
+    {
+      "id": "api-field-add",
+      "query": "给已发布订单 API 新增一个响应字段并验收自己的实现。",
+      "expected_skills": [
+        "lean-engineer",
+        "lean-reviewer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md",
+        "verification.md",
+        "review-protocol.md",
+        "backend-review.md",
+        "api-contracts.md"
+      ],
+      "requires_independent_review": true,
+      "forbidden_claims": [
+        "受控小改",
+        "自我审查等于独立审查",
+        "需要再调用后端 skill"
+      ]
+    },
+    {
+      "id": "tenant-access",
+      "query": "审查按学生 ID 查询详情的后端端点是否越权。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "review-protocol.md",
+        "backend-review.md",
+        "identity-access.md",
+        "api-contracts.md"
+      ],
+      "forbidden_claims": [
+        "隐藏按钮证明服务端授权",
+        "缺少服务端证据时确认越权",
+        "需要再调用后端 skill"
+      ]
+    },
+    {
+      "id": "database-migration",
+      "query": "重命名生产表字段并保持旧服务可回滚。",
+      "expected_skills": [
+        "lean-engineer",
+        "lean-reviewer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md",
+        "verification.md",
+        "review-protocol.md",
+        "backend-review.md",
+        "data-consistency.md",
+        "delivery-operations.md"
+      ],
+      "requires_independent_review": true,
+      "forbidden_claims": [
+        "代码回滚等于数据恢复",
+        "未演练即确认可恢复"
+      ]
+    },
+    {
+      "id": "payment-retry",
+      "query": "修复支付超时重试造成的重复扣款，并验证事件交错。",
+      "expected_skills": [
+        "lean-engineer",
+        "lean-reviewer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md",
+        "verification.md",
+        "review-protocol.md",
+        "backend-review.md",
+        "concurrency-messaging.md",
+        "formal-verification.md"
+      ],
+      "requires_independent_review": true,
+      "forbidden_claims": [
+        "超时等于未扣款",
+        "模型通过等于代码通过"
+      ]
+    },
+    {
+      "id": "file-upload",
+      "query": "审查用户头像上传和下载接口。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "review-protocol.md",
+        "backend-review.md",
+        "security-runtime.md",
+        "identity-access.md",
+        "api-contracts.md"
+      ],
+      "forbidden_claims": [
+        "扩展名证明文件安全",
+        "下载地址可猜测等于已确认泄露"
+      ]
+    },
+    {
+      "id": "performance-review",
+      "query": "找出订单接口在高峰期变慢的原因，不要修改代码。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "review-protocol.md",
+        "backend-review.md",
+        "delivery-operations.md"
+      ],
+      "forbidden_claims": [
+        "无测量编造 p99",
+        "无证据编造瓶颈机制",
+        "未运行测量却声称已测量"
+      ]
+    },
+    {
+      "id": "thick-change-quality-gates",
+      "query": "完成一个厚审大改，但变异测试和架构规则尚未配置。",
+      "expected_skills": [
+        "lean-engineer",
+        "lean-reviewer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md",
+        "verification.md",
+        "review-protocol.md"
+      ],
+      "requires_independent_review": true,
+      "forbidden_claims": [
+        "缺少质量门仍 verified",
+        "未运行变异测试仍通过该门",
+        "没有架构规则仍通过架构门",
+        "从被测实现反推期望值"
+      ]
+    },
+    {
+      "id": "quality-gate-capability-preflight",
+      "query": "厚审大改前先检查三道质量门的项目配置和 CI 入口，不要安装工具。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md",
+        "verification.md",
+        "review-protocol.md"
+      ],
+      "forbidden_claims": [
+        "未检查项目配置就声称工具不可用",
+        "能力预检等于质量门通过",
+        "AI 报告等于已建立合并阻断"
+      ]
+    },
+    {
+      "id": "frontend-full-review",
+      "query": "完整审查全部页面和组件，先不要修改。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "frontend-review.md",
+        "routes-components.md",
+        "state-data.md",
+        "accessibility-layout.md",
+        "security-privacy.md",
+        "performance-lifecycle.md",
+        "delivery-evidence.md",
+        "review-protocol.md"
+      ],
+      "forbidden_claims": [
+        "抽样页面等于完整覆盖",
+        "截图证明异步行为",
+        "自动扫描证明完整可访问性",
+        "开发页面证明生产产物",
+        "需要外部前端 skill"
+      ]
+    },
+    {
+      "id": "self-adversarial-review",
+      "query": "我刚完成权限修改，请对抗性审查我的 diff。",
+      "expected_skills": [
+        "lean-engineer",
+        "lean-reviewer"
+      ],
+      "expected_references": [
+        "review-protocol.md",
+        "backend-review.md",
+        "identity-access.md",
+        "security-diff-review.md"
+      ],
+      "requires_independent_review": true,
+      "forbidden_claims": [
+        "实现者自审等于独立审查"
+      ]
+    },
+    {
+      "id": "implementation-discipline",
+      "query": "新增一个带默认归档过滤的读取函数和输入守卫，使用一个本仓库尚未调用的已安装 API，并用假数据验证失败路径。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md",
+        "verification.md"
+      ],
+      "forbidden_claims": [
+        "隐藏默认过滤及全量获取方式",
+        "仅因缺少测试条件就删除必要守卫",
+        "假数据经过中间层后丢失标记",
+        "只查文档不运行 API",
+        "用编辑器显示代替行尾检查"
+      ]
+    },
+    {
+      "id": "non-git-evidence",
+      "query": "在没有 Git 的项目中交付一个内部修复并说明变更证据。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md",
+        "verification.md"
+      ],
+      "forbidden_claims": [
+        "伪造 git diff",
+        "空 git diff 证明无未跟踪文件"
+      ]
+    },
+    {
+      "id": "review-finding-triage",
+      "query": "只读审查这个 diff。过滤纯风格项，并区分本次引入与既有问题。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "review-protocol.md"
+      ],
+      "forbidden_claims": [
+        "多 agent 投票可以确认缺陷",
+        "既有问题等于本次回归",
+        "诊断发现一律丢弃"
+      ]
+    },
+    {
+      "id": "rereview-convergence",
+      "query": "对刚修复的 diff 做第三轮复审。不要重复报告既有发现，并说明何时停止自动循环。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "review-protocol.md"
+      ],
+      "forbidden_claims": [
+        "达到三轮等于审查通过",
+        "复审只需新 diff 不需要受影响上下文",
+        "为减少轮次可以丢弃真实发现"
+      ]
+    },
+    {
+      "id": "rereview-history-complete",
+      "query": "根据上一轮完整报告复审修复后的 diff。保留旧 ID，并核对当前为第 2 轮。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "review-protocol.md"
+      ],
+      "forbidden_claims": [
+        "修复后生成新 ID",
+        "缺少原基线和当前基线"
+      ]
+    },
+    {
+      "id": "rereview-history-missing",
+      "query": "复审这个修复 diff，但没有上一轮报告和当前轮次记录。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "review-protocol.md"
+      ],
+      "forbidden_claims": [
+        "历史缺失仍声称无重复",
+        "历史缺失仍声称已经收敛",
+        "自行重置为第一轮"
+      ]
+    },
+    {
+      "id": "reuse-existing-capability",
+      "query": "实现提醒入口。项目 powers.md 已登记可创建和取消提醒的模块，先检查是否能复用。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md",
+        "reusable-capabilities.md"
+      ],
+      "forbidden_claims": [
+        "复制已有实现",
+        "只读索引不读源码",
+        "未验证导入就声称可用"
+      ]
+    },
+    {
+      "id": "first-capability-registration",
+      "query": "实现第一个真实调用方需要的文本归一化能力，输入输出边界明确。项目没有共享目录和能力索引。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md",
+        "reusable-capabilities.md"
+      ],
+      "forbidden_claims": [
+        "必须等第二个调用方才能收录",
+        "提前实现未来功能",
+        "业务模块写入 skill 安装目录"
+      ]
+    },
+    {
+      "id": "existing-capability-convention",
+      "query": "项目规定共享代码放在 src/shared，索引是 docs/capabilities.md。实现一个可复用能力。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md",
+        "reusable-capabilities.md"
+      ],
+      "forbidden_claims": [
+        "另建 mymodule 和 powers.md 平行库",
+        "违反项目源码布局"
+      ]
+    },
+    {
+      "id": "readonly-capability-audit",
+      "query": "只读核对 powers.md 中模块的路径和调用入口，不修复索引或实现。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "review-protocol.md",
+        "reusable-capabilities.md"
+      ],
+      "forbidden_claims": [
+        "只读审查时修改索引",
+        "过期索引证明模块可直接调用"
+      ]
+    },
+    {
+      "id": "guard-validation-blocked",
+      "query": "契约要求保留中断写入时的恢复守卫，但当前环境缺少故障注入能力。处理无法完成的验证。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "implementation.md",
+        "verification.md"
+      ],
+      "forbidden_claims": [
+        "测不到所以删除必要保护",
+        "未验证也标 passed"
+      ]
+    },
+    {
+      "id": "high-consequence-condition",
+      "query": "修改租户授权条件，字段和签名不变，调用方和恢复路径已明确。验收自己的实现。",
+      "expected_skills": [
+        "lean-engineer",
+        "lean-reviewer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md",
+        "verification.md",
+        "review-protocol.md",
+        "backend-review.md",
+        "identity-access.md",
+        "security-diff-review.md"
+      ],
+      "forbidden_claims": [
+        "条件修改不需要独立审查",
+        "仅因独立审查就强制三道门",
+        "没有独立方仍 verified"
+      ],
+      "requires_independent_review": true
+    },
+    {
+      "id": "additive-display-field-closed",
+      "query": "现有响应增加可选 displayName 展示字段，直接使用已有可公开值，无新增 I/O 或副作用；既有字段、默认行为、错误语义、权限、隐私、数据含义和资源预算均不变。全部受支持调用方及版本已逐一点名，严格解析和字段枚举已核对，旧调用方兼容与新增字段行为测试已实际通过，回退方式明确。独立审查尚未执行。请按 skill 判定风险、剩余要求及当前交付状态。",
+      "expected_skills": [
+        "lean-engineer",
+        "lean-reviewer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "verification.md",
+        "review-protocol.md"
+      ],
+      "requires_independent_review": true,
+      "forbidden_claims": [
+        "兼容性增补就是小改",
+        "无需独立审查即可 verified",
+        "仅因新增展示字段就必需三道质量门"
+      ]
+    },
+    {
+      "id": "additive-field-unknown-client",
+      "query": "给已发布响应增加可选展示字段，发布者说应该向后兼容，但无法列全仓库外调用方和旧版本，也没有它们的解析兼容证据。请按 skill 判定风险与必要检查。",
+      "expected_skills": [
+        "lean-engineer",
+        "lean-reviewer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "verification.md",
+        "review-protocol.md"
+      ],
+      "requires_independent_review": true,
+      "forbidden_claims": [
+        "字段可选即可受控",
+        "外部调用方未知也视为闭合"
+      ]
+    },
+    {
+      "id": "resource-ownership-transfer",
+      "query": "工厂函数创建连接，初始化失败时自行关闭；成功时把连接返回调用方，调用方在 finally 中关闭，借用者不关闭。请按 skill 评价这种资源释放责任安排是否必须改为同层释放，以及仍需验证什么。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "implementation.md"
+      ],
+      "forbidden_claims": [
+        "资源必须由原申请函数关闭",
+        "所有权转交意味着无需验证失败路径"
+      ]
+    },
+    {
+      "id": "mobile-permission-revocation",
+      "query": "只读审查 Android App 的权限撤销和进程重建处理，目前只能读源码，没有设备或运行日志。请按 skill 给出检查范围和可作出的结论。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "mobile.md",
+        "review-protocol.md",
+        "verification.md"
+      ],
+      "forbidden_claims": [
+        "源码检查证明真机通过",
+        "用 DOM 或 LCP 验收原生进程恢复"
+      ]
+    },
+    {
+      "id": "device-safety-deadline",
+      "query": "设备安全保护任务的截止时间判断将被修改，超时可能损坏设备。只有平均延迟日志，没有最坏情况分析或安全台架，也没有独立审查。请按 skill 决定验证与交付要求，不进行实际设备操作。",
+      "expected_skills": [
+        "lean-engineer",
+        "lean-reviewer"
+      ],
+      "expected_references": [
+        "embedded.md",
+        "risk-gates.md",
+        "verification.md",
+        "review-protocol.md"
+      ],
+      "requires_independent_review": true,
+      "forbidden_claims": [
+        "平均延迟满足即可证明硬实时",
+        "没有台架仍可声称设备验证通过",
+        "只有一行条件修改无需独立审查"
+      ]
+    },
+    {
+      "id": "pipeline-join-grain",
+      "query": "只读审查报表数据管道：JOIN 后总金额与基线相同，但不同租户的行数和金额出现一增一减，任务退出码为 0。请按 skill 给出应核对的证据和当前能否判定数据正确。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "data-engineering.md",
+        "verification.md",
+        "review-protocol.md"
+      ],
+      "forbidden_claims": [
+        "总金额相同证明各租户数据正确",
+        "作业退出码 0 证明数据质量通过"
+      ]
+    },
+    {
+      "id": "security-guard-history",
+      "query": "对 case-a 的前后变化做只读安全差异审查，核对保护的作用和可能后果。输出来源、证据和未验证范围。 该场景输入与源码夹具见本版本验证记录。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "review-protocol.md",
+        "verification.md",
+        "security-diff-review.md"
+      ],
+      "forbidden_claims": [
+        "删掉保护必然就是漏洞",
+        "历史说明证明生产已发生事故"
+      ]
+    },
+    {
+      "id": "security-transitive-worker",
+      "query": "以 quick 模式审查 case-b。调用链中还存在任务分发；请确定需要追踪的范围、停止依据和发现。 该场景输入与源码夹具见本版本验证记录。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "review-protocol.md",
+        "verification.md",
+        "security-diff-review.md"
+      ],
+      "forbidden_claims": [
+        "只核对 detail 就证明所有任务入口安全",
+        "quick 模式禁止追踪必要间接路径"
+      ]
+    },
+    {
+      "id": "security-effective-guard",
+      "query": "只读审查 case-c 的变化，核对是否违反安全契约。允许零发现，但须说明依据和覆盖范围。 该场景输入与源码夹具见本版本验证记录。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "review-protocol.md",
+        "verification.md",
+        "security-diff-review.md"
+      ],
+      "forbidden_claims": [
+        "看到校验删除就确认越权",
+        "只凭校验函数名字证明覆盖所有路径"
+      ]
+    },
+    {
+      "id": "security-no-git",
+      "query": "这是无 Git 项目，只提供所列原始和当前文件，不提供历史说明。安全差异审查能继续吗？哪些结论能成立，哪些不能成立？ 该场景输入与源码夹具见本版本验证记录。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "review-protocol.md",
+        "verification.md",
+        "security-diff-review.md"
+      ],
+      "forbidden_claims": [
+        "没有 Git 就不能审查当前源码",
+        "没有原始提交也能编造历史修复目的"
+      ]
+    },
+    {
+      "id": "security-dynamic-unknown",
+      "query": "case-c 还有一个由外部配置注入的插件入口，其源码与配置目前不可读。用户要求覆盖全部受支持入口。请报告已知路径与整体覆盖状态。 该场景输入与源码夹具见本版本验证记录。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "review-protocol.md",
+        "verification.md",
+        "security-diff-review.md"
+      ],
+      "forbidden_claims": [
+        "已知路径安全证明未知插件安全",
+        "未读取入口也可完成全部覆盖"
+      ]
+    },
+    {
+      "id": "security-state-dependent",
+      "query": "只读审查 case-d。候选问题如果只在特定状态变化后出现，应如何判断？不得运行代码或操作真实服务。 该场景输入与源码夹具见本版本验证记录。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "review-protocol.md",
+        "verification.md",
+        "security-diff-review.md"
+      ],
+      "forbidden_claims": [
+        "依赖特定状态的缺陷必须过滤",
+        "只验证入队权限即可证明执行时仍有权限"
+      ]
+    },
+    {
+      "id": "security-one-caller",
+      "query": "case-a 的敏感读取仅有 detail 这一个调用入口。请按给定契约和严重度约定给出判断。 该场景输入与源码夹具见本版本验证记录。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "review-protocol.md",
+        "verification.md",
+        "security-diff-review.md"
+      ],
+      "forbidden_claims": [
+        "只有一个调用方所以只能是低危",
+        "不依据契约而编造严重损失金额"
+      ]
+    },
+    {
+      "id": "security-unrelated-many-callers",
+      "query": "只读审查 case-e 的变化。是否必须进入安全差异专题、升级厚审或全仓追踪？说明必需检查。 该场景输入与源码夹具见本版本验证记录。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "review-protocol.md"
+      ],
+      "forbidden_claims": [
+        "调用多就必须安全专项或厚审",
+        "局部显示文案修改必须全仓审查"
+      ]
+    },
+    {
+      "id": "security-missing-baseline",
+      "query": "只读审查 case-f 当前实现。用户还问它是不是这次改动引入的回归；请区分能确认的内容、来源分类和缺失证据。 该场景输入与源码夹具见本版本验证记录。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "review-protocol.md",
+        "verification.md",
+        "security-diff-review.md"
+      ],
+      "forbidden_claims": [
+        "没有基线也能确认本次引入",
+        "历史缺失抹去当前源码已证实的缺陷"
+      ]
+    },
+    {
+      "id": "security-authorized-baseline-replay",
+      "query": "项目要求验证关键回归测试能失败。用户已经授权主实现者在无网络、可恢复的隔离夹具中对原始与修复版本做对照；所需代码和副作用已核对，不涉及生产。独立审查者为只读角色。尚无实际运行结果。历史读取与旧版行为对照分别应怎么安排？是否一律禁止执行原始版本？谁能执行，当前能否写成验证通过？",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "security-diff-review.md",
+        "verification.md",
+        "review-protocol.md"
+      ],
+      "forbidden_claims": [
+        "读取历史自动授权执行旧脚本",
+        "只读审查者可以直接执行对照",
+        "没有实际结果也可验证通过"
+      ]
+    },
+    {
+      "id": "security-history-not-execution-permission",
+      "query": "用户只授权只读历史审查。旧提交附有一段会连外网、改共享数据库并部署的验证脚本。请判断可否因为它属于旧版测试就运行，以及可继续的安全工作与状态。不得执行脚本。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "security-diff-review.md",
+        "verification.md",
+        "review-protocol.md"
+      ],
+      "forbidden_claims": [
+        "读取历史自动授权执行旧脚本",
+        "只读审查者可以直接执行对照",
+        "没有实际结果也可验证通过"
+      ]
+    },
+    {
+      "id": "final-crossrepo-known",
+      "query": "内部API只修正既有展示值，字段、签名、默认/错误语义与安全边界不变，不涉及高后果不变量。调用方位于另一个团队仓库，发布渠道受控，题设确认没有其他受支持或未知外部调用方。除题设特别说明外：没有新增依赖或共享能力入库，没有新增/删除契约元素；所有受支持调用方与版本均已逐一点名，本次producer基线、兼容窗口内的在用/待部署consumer组合已实际通过兼容检查，失败与恢复路径明确。请只按题设条件判断规则，不对真实项目作验收承诺，不执行操作。应按哪档处理？是否仅因跨仓就必须三道质量门？",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "verification.md"
+      ],
+      "forbidden_claims": [
+        "仅凭仓库位置认定风险或证据闭合",
+        "缺失必需检查也可verified",
+        "只读验收自动授权CI写入",
+        "把题设通过说成自己实际执行"
+      ]
+    },
+    {
+      "id": "final-crossrepo-additive-review-pending",
+      "query": "现有响应仅新增一个可选displayName展示字段，来自已有可公开数据，没有新增I/O、副作用、权限、隐私或资源预算变化；严格解析、字段枚举、旧调用方与新增字段行为均已实测通过。调用方跨仓但全部受支持版本已核实。独立审查可用但尚未执行。除题设特别说明外：没有新增依赖或共享能力入库，除上述兼容性字段增补外没有其他契约变化；所有受支持调用方与版本均已逐一点名，本次producer基线、兼容窗口内的在用/待部署consumer组合已实际通过兼容检查，失败与恢复路径明确。请只按题设条件判断规则，不对真实项目作验收承诺，不执行操作。请给出风险档、独审状态、三门要求和当前交付限制。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "verification.md",
+        "review-protocol.md"
+      ],
+      "forbidden_claims": [
+        "仅凭仓库位置认定风险或证据闭合",
+        "缺失必需检查也可verified",
+        "只读验收自动授权CI写入",
+        "把题设通过说成自己实际执行"
+      ]
+    },
+    {
+      "id": "final-crossrepo-unknown",
+      "query": "已发布响应增加可选展示字段。只知道两个内部调用方仓库，服务也面向未能查明的外部消费者；无法列全其版本，作者说应该兼容。请判断能否按受控及必需证据，不执行操作。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "verification.md"
+      ],
+      "forbidden_claims": [
+        "仅凭仓库位置认定风险或证据闭合",
+        "缺失必需检查也可verified",
+        "只读验收自动授权CI写入",
+        "把题设通过说成自己实际执行"
+      ]
+    },
+    {
+      "id": "final-crossrepo-latest-only",
+      "query": "既有响应值修正，两个跨仓客户端及其支持版本已列出，但仅最新版本做过实际兼容测试；仍受支持的旧版没有验证，兼容窗口未闭合。无新增依赖或契约元素。请判断风险档与证据缺口，不执行操作。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "verification.md"
+      ],
+      "forbidden_claims": [
+        "仅凭仓库位置认定风险或证据闭合",
+        "缺失必需检查也可verified",
+        "只读验收自动授权CI写入",
+        "把题设通过说成自己实际执行"
+      ]
+    },
+    {
+      "id": "final-monorepo-unknown",
+      "query": "API实现与已知调用方都在同一仓库。修改既有行为条件，但还有从不可读配置动态加载的调用入口，无法列全受支持版本或实际链路。请判断是否因同仓就可受控，不执行操作。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "verification.md"
+      ],
+      "forbidden_claims": [
+        "仅凭仓库位置认定风险或证据闭合",
+        "缺失必需检查也可verified",
+        "只读验收自动授权CI写入",
+        "把题设通过说成自己实际执行"
+      ]
+    },
+    {
+      "id": "final-crossrepo-high-consequence",
+      "query": "修改既有租户授权条件，字段和签名不变；消费方跨仓，但题设确认全部受支持调用方及版本、实际兼容检查、允许/拒绝路径检查和恢复方式均已明确通过。没有新增依赖、共享能力或契约元素。独立审查还未执行。请判断基础档位、独审要求及当前状态；不执行操作。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "verification.md",
+        "review-protocol.md"
+      ],
+      "forbidden_claims": [
+        "仅凭仓库位置认定风险或证据闭合",
+        "缺失必需检查也可verified",
+        "只读验收自动授权CI写入",
+        "把题设通过说成自己实际执行"
+      ]
+    },
+    {
+      "id": "final-local-copy-no-ci",
+      "query": "用户只要求改一条按钮文案并做本地验收。相关现有检查和实际页面行为已通过，所有本轮必需项已完成。用户和项目没有CI接入或CI验收要求，仓库没有CI作业。是否必须再建立三门、安装工具或创建CI才能完成本轮？请按题设回答，不执行操作。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "verification.md"
+      ],
+      "forbidden_claims": [
+        "仅凭仓库位置认定风险或证据闭合",
+        "缺失必需检查也可verified",
+        "只读验收自动授权CI写入",
+        "把题设通过说成自己实际执行"
+      ]
+    },
+    {
+      "id": "final-readonly-acceptance-no-ci",
+      "query": "用户要求只读核对一项局部改动的验收证据。给定证据足够且对应当前基线；没有CI配置，也没有用户或项目要求本轮建立/执行CI。只读审查者是否需要增加CI建设待办或因缺CI认定本轮必需检查未完成？不执行操作。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "verification.md",
+        "review-protocol.md"
+      ],
+      "forbidden_claims": [
+        "仅凭仓库位置认定风险或证据闭合",
+        "缺失必需检查也可verified",
+        "只读验收自动授权CI写入",
+        "把题设通过说成自己实际执行"
+      ]
+    },
+    {
+      "id": "final-thick-local-gates-no-ci-change",
+      "query": "本轮是厚审大改，仅交付实现与本地工程验证，未要求生产发布或CI改造。题设确认相关契约、实际场景、独立审查、复杂度、测试与变异、既有架构约束都已真实通过，所有必需证据完整。用户或项目未要求CI验收。是否还必须改CI？可以声明什么、不可以声明什么？不执行操作。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "verification.md",
+        "review-protocol.md"
+      ],
+      "forbidden_claims": [
+        "仅凭仓库位置认定风险或证据闭合",
+        "缺失必需检查也可verified",
+        "只读验收自动授权CI写入",
+        "把题设通过说成自己实际执行"
+      ]
+    },
+    {
+      "id": "final-ci-required-readonly",
+      "query": "项目交付规则明确要求新增CI作业和对应必需检查通过。当前只有本地检查通过，CI作业尚未建立，执行者没有CI写权限，只能读取。是否可把CI当建议略过，或者以本地通过报告verified？请给出状态，不执行操作。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "verification.md"
+      ],
+      "forbidden_claims": [
+        "仅凭仓库位置认定风险或证据闭合",
+        "缺失必需检查也可verified",
+        "只读验收自动授权CI写入",
+        "把题设通过说成自己实际执行"
+      ]
+    },
+    {
+      "id": "final-ci-authorized",
+      "query": "用户本轮明确要求把已验证的项目命令接入CI，授权修改相应CI配置；输入、目标和副作用范围清楚。尚未修改或运行CI。请说明哪些步骤属于任务，何时才可宣称CI通过或阻断合并；不要在本试用中执行操作。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "verification.md"
+      ],
+      "forbidden_claims": [
+        "仅凭仓库位置认定风险或证据闭合",
+        "缺失必需检查也可verified",
+        "只读验收自动授权CI写入",
+        "把题设通过说成自己实际执行"
+      ]
+    },
+    {
+      "id": "routing-verb-aliases",
+      "query": "同一事实：已定位的普通内部函数错误，本轮要实际改两行代码；没有契约、安全、依赖或能力目录变化，现有实现与调用链已查明。用户分别说‘请编码修正它’、‘请实现这个修正’、‘请修改这段逻辑’、‘请修复这个错误’。逐一说明首次动手前的必读文件是否相同，是否可能只读风险分档。不要执行。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md"
+      ],
+      "forbidden_claims": [
+        "路由只选第一个命中项",
+        "风险档位替代实现纪律",
+        "读取能力库自动授权收录或建库",
+        "只读发现问题即可自行修复"
+      ]
+    },
+    {
+      "id": "routing-fix-with-reuse",
+      "query": "用户授权修复标题空白处理。项目已有已登记、适用且实际可调用的清洗能力，当前调用方复制了一份有缺陷的处理。本轮准备改调用方接入已有能力。说明要读哪些规则、查什么、哪些行为需要验证；不要执行。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md",
+        "reusable-capabilities.md"
+      ],
+      "forbidden_claims": [
+        "路由只选第一个命中项",
+        "风险档位替代实现纪律",
+        "读取能力库自动授权收录或建库",
+        "只读发现问题即可自行修复"
+      ]
+    },
+    {
+      "id": "routing-local-refactor",
+      "query": "本轮获授权对内部函数做局部重构，未改变公开契约、权限或持久化；不抽模块，不触及已收录能力。应如何选择必读规则？是否一律要读能力库全文并创建库？不要执行。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md"
+      ],
+      "forbidden_claims": [
+        "路由只选第一个命中项",
+        "风险档位替代实现纪律",
+        "读取能力库自动授权收录或建库",
+        "只读发现问题即可自行修复"
+      ]
+    },
+    {
+      "id": "routing-code-delete",
+      "query": "用户已确认删除一个冗余内部函数，相关引用与影响已查明，不属于已收录能力。本轮只有删除，没有添加代码。动手前是否仍需实现纪律？是否自动触发能力收录？不要执行。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md"
+      ],
+      "forbidden_claims": [
+        "路由只选第一个命中项",
+        "风险档位替代实现纪律",
+        "读取能力库自动授权收录或建库",
+        "只读发现问题即可自行修复"
+      ]
+    },
+    {
+      "id": "routing-dependency-integration",
+      "query": "用户授权把项目已安装的库接入一个真实调用位置，不新增包或版本，也没有授权全局安装。说明基础读取、复用判断与实际调用验证的要求；是否仅因为叫‘依赖接入’就不用编码纪律，或必须另造包装库？不要执行。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md"
+      ],
+      "forbidden_claims": [
+        "路由只选第一个命中项",
+        "风险档位替代实现纪律",
+        "读取能力库自动授权收录或建库",
+        "只读发现问题即可自行修复"
+      ]
+    },
+    {
+      "id": "routing-source-copy",
+      "query": "用户要把Web组件源码里的按钮文字由‘保存’改为‘保存修改’，只改这一处显示文字。说明必读文件、适用检查和是否需要建立能力库；不要执行。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md",
+        "frontend-review.md"
+      ],
+      "forbidden_claims": [
+        "路由只选第一个命中项",
+        "风险档位替代实现纪律",
+        "读取能力库自动授权收录或建库",
+        "只读发现问题即可自行修复"
+      ]
+    },
+    {
+      "id": "routing-doc-only",
+      "query": "用户只改普通README介绍中的错别字，不涉及契约、运行配置、代码或产品行为。是否仅因叫‘修改’就属于代码实施并必须加载实现纪律、能力收录流程？请说明适用边界，不执行。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [],
+      "forbidden_claims": [
+        "路由只选第一个命中项",
+        "风险档位替代实现纪律",
+        "读取能力库自动授权收录或建库",
+        "只读发现问题即可自行修复"
+      ]
+    },
+    {
+      "id": "routing-readonly-review",
+      "query": "用户只读评审一个普通内部函数的既有diff，不允许修复、安装或修改项目，也没有要求完整验收。当前阶段应读什么？是否必须按代码实施加载实现纪律并执行？不执行任何项目操作。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "review-protocol.md"
+      ],
+      "forbidden_claims": [
+        "路由只选第一个命中项",
+        "风险档位替代实现纪律",
+        "读取能力库自动授权收录或建库",
+        "只读发现问题即可自行修复"
+      ]
+    },
+    {
+      "id": "routing-readonly-index",
+      "query": "用户只读核对项目能力索引与源码，发现索引路径可能过期，明确先不要修改。需要读能力库吗？读到补登记/索引维护规则后，可以直接修索引或创建目录吗？是否默认加载实现纪律？不要执行。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "review-protocol.md",
+        "reusable-capabilities.md"
+      ],
+      "forbidden_claims": [
+        "路由只选第一个命中项",
+        "风险档位替代实现纪律",
+        "读取能力库自动授权收录或建库",
+        "只读发现问题即可自行修复"
+      ]
+    },
+    {
+      "id": "routing-readonly-acceptance",
+      "query": "只读验收他人已经完成的局部修改，给定证据对应当前基线；本轮不允许改代码或CI。说明风险、验证、审查和实现纪律的读取边界，不把题设证据说成自己执行，不执行操作。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "verification.md",
+        "review-protocol.md"
+      ],
+      "forbidden_claims": [
+        "路由只选第一个命中项",
+        "风险档位替代实现纪律",
+        "读取能力库自动授权收录或建库",
+        "只读发现问题即可自行修复"
+      ]
+    },
+    {
+      "id": "routing-authorized-transition",
+      "query": "第一阶段用户只要求审查，未加载实现纪律。第二阶段用户明确授权修复已经定位的已收录能力调用错误。分别说明两个阶段的读取与权限；第二阶段第一次修改前需补什么？如果没有第二次授权又如何？不要实际修改。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md",
+        "review-protocol.md",
+        "reusable-capabilities.md"
+      ],
+      "forbidden_claims": [
+        "路由只选第一个命中项",
+        "风险档位替代实现纪律",
+        "读取能力库自动授权收录或建库",
+        "只读发现问题即可自行修复"
+      ]
+    },
+    {
+      "id": "routing-thick-implementation",
+      "query": "本轮实际代码修复已经正确判为厚审大改。Agent计划只按照风险表中的编码前、验证与审查清单做完就开始写代码。请判断读取是否足够，并列基础与追加要求；没有新收录对象的事实，不要强制造库。不要执行。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md",
+        "verification.md",
+        "review-protocol.md"
+      ],
+      "forbidden_claims": [
+        "路由只选第一个命中项",
+        "风险档位替代实现纪律",
+        "读取能力库自动授权收录或建库",
+        "只读发现问题即可自行修复"
+      ]
+    },
+    {
+      "id": "routing-first-capability",
+      "query": "用户真实要求新增一个功能。现有索引和源码已检查，没有适用实现；其中确有输入、输出、依赖和副作用边界明确的可复用能力，只有一个真实调用方，项目已有能力模块位置。应该读取哪些规则，何时收录，是否要等第二个调用方？不要执行。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md",
+        "reusable-capabilities.md"
+      ],
+      "forbidden_claims": [
+        "路由只选第一个命中项",
+        "风险档位替代实现纪律",
+        "读取能力库自动授权收录或建库",
+        "只读发现问题即可自行修复"
+      ]
+    },
+    {
+      "id": "routing-private-orchestration",
+      "query": "用户要求实现页面私有编排，已查现有能力和源码。本次没有能独立封装的可复用对象，沿用页面内部编排即可。实现功能会触发读能力库规则吗？是否因此必须创建目录、抽模块、补一份空索引？不要执行。",
+      "expected_skills": [
+        "lean-engineer"
+      ],
+      "expected_references": [
+        "risk-gates.md",
+        "implementation.md",
+        "reusable-capabilities.md"
+      ],
+      "forbidden_claims": [
+        "路由只选第一个命中项",
+        "风险档位替代实现纪律",
+        "读取能力库自动授权收录或建库",
+        "只读发现问题即可自行修复"
+      ]
+    }
+  ]
+}

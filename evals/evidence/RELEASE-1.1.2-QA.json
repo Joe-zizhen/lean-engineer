@@ -1,0 +1,327 @@
+{
+  "release": "1.1.2",
+  "recorded_at": "2026-11-06T01:08:43.340323+00:00",
+  "scope": "累计读取入口澄清；不改生产代码、风险门槛、能力库条件或审查权限。",
+  "rule_sha256": {
+    "skills/lean-engineer/SKILL.md": "673e6cb98b280fe76683b08f35de634cf4c5bece8227b4c6c8675098d175fb4b",
+    "skills/lean-engineer/references/implementation.md": "e739e886a227bde9518fdd9f03ff09819b634f6439106ccb32842de9a9391b2d",
+    "tests/test_adversarial.py": "3ead4cd12fb93bcedc5dce33eca581383ec005cd683f52cb5579547dcfd427e2"
+  },
+  "source_checks": {
+    "started_at": "2026-11-06T01:10:08.212893+00:00",
+    "status": "passed",
+    "checks": [
+      {
+        "name": "candidate-package",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "scripts/validate_package.py",
+          "."
+        ],
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\11\\04\\01a1a55b-f5af-7122-a764-616899aae474\\lean-engineer-routing-review\\candidate",
+        "expected_exit": 0,
+        "exit_code": 0,
+        "duration_seconds": 0.11,
+        "stdout": "{\n  \"ok\": true,\n  \"errors\": [],\n  \"warnings\": [],\n  \"summary\": {\n    \"required_files\": 46,\n    \"markdown_files\": 32,\n    \"local_links_checked\": 100,\n    \"evaluation_definitions\": 69,\n    \"model_runs\": 15\n  }\n}\n",
+        "stderr": ""
+      },
+      {
+        "name": "candidate-tests",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-v"
+        ],
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\11\\04\\01a1a55b-f5af-7122-a764-616899aae474\\lean-engineer-routing-review\\candidate",
+        "expected_exit": 0,
+        "exit_code": 0,
+        "duration_seconds": 8.937,
+        "stdout": "",
+        "stderr": "test_eval_evidence_rejects_internal_directory_link (test_adversarial.AuditClosureTests) ... ok\ntest_eval_evidence_rejects_internal_file_symlink (test_adversarial.AuditClosureTests) ... ok\ntest_eval_reference_matrix_covers_all_cases (test_adversarial.AuditClosureTests) ... ok\ntest_eval_run_count_and_evidence_reject_invalid_records (test_adversarial.AuditClosureTests) ... ok\ntest_eval_status_text_supports_future_nonzero_runs (test_adversarial.AuditClosureTests) ... ok\ntest_performance_measurement_diagnosis_route_is_explicit (test_adversarial.AuditClosureTests) ... ok\ntest_readonly_formal_verification_uses_delegated_output (test_adversarial.AuditClosureTests) ... ok\ntest_readonly_history_routing_does_not_require_implementation (test_adversarial.AuditClosureTests) ... ok\ntest_rereview_history_and_missing_branch (test_adversarial.AuditClosureTests) ... ok\ntest_synthetic_eval_evidence_survives_packaging (test_adversarial.AuditClosureTests) ... ok\ntest_synthetic_eval_run_with_valid_evidence_is_accepted (test_adversarial.AuditClosureTests) ... ok\ntest_parameterized_reviewer_tools_are_rejected (test_adversarial.FinalAuditTests) ... ok\ntest_manifest_root_arrays_return_errors (test_adversarial.MalformedStructureTests) ... ok\ntest_null_and_object_identifiers_return_errors (test_adversarial.MalformedStructureTests) ... ok\ntest_null_eval_lists_return_errors (test_adversarial.MalformedStructureTests) ... ok\ntest_archive_creation_error_is_not_masked_by_cleanup (test_adversarial.PackageAdversarialTests) ... ok\ntest_archive_rejects_unsafe_names_and_corrupt_content (test_adversarial.PackageAdversarialTests) ... ok\ntest_backend_protocol_includes_not_checked (test_adversarial.PackageAdversarialTests) ... ok\ntest_cli_preserves_plugin_default_and_selects_skill_format (test_adversarial.PackageAdversarialTests) ... ok\ntest_cli_relative_output_and_failed_inputs (test_adversarial.PackageAdversarialTests) ... ok\ntest_coding_route_declares_the_combined_baseline (test_adversarial.PackageAdversarialTests) ... ok\ntest_conditional_capability_route_keeps_separate_authority (test_adversarial.PackageAdversarialTests) ... ok\ntest_disable_model_invocation_uses_yaml_boolean (test_adversarial.PackageAdversarialTests) ... ok\ntest_domain_references_are_required (test_adversarial.PackageAdversarialTests) ... ok\ntest_empty_license_is_rejected (test_adversarial.PackageAdversarialTests) ... ok\ntest_eval_schema_is_strict (test_adversarial.PackageAdversarialTests) ... ok\ntest_existing_temporary_archive_is_not_overwritten (test_adversarial.PackageAdversarialTests) ... ok\ntest_external_unknown_cannot_be_controlled_change (test_adversarial.PackageAdversarialTests) ... ok\ntest_frontend_topics_require_evidence_and_sources (test_adversarial.PackageAdversarialTests) ... ok\ntest_implementation_discipline_is_routed_and_complete (test_adversarial.PackageAdversarialTests) ... ok\ntest_json_input_has_a_size_limit (test_adversarial.PackageAdversarialTests) ... ok\ntest_kimi_manifest_rejects_files_for_directories (test_adversarial.PackageAdversarialTests) ... ok\ntest_kimi_manifest_rejects_parent_escape (test_adversarial.PackageAdversarialTests) ... ok\ntest_output_cannot_be_inside_package_root (test_adversarial.PackageAdversarialTests) ... ok\ntest_output_cannot_overwrite_input (test_adversarial.PackageAdversarialTests) ... ok\ntest_package_excludes_backup_cache_and_orig (test_adversarial.PackageAdversarialTests) ... ok\ntest_package_rejects_outside_link (test_adversarial.PackageAdversarialTests) ... ok\ntest_plugin_archive_default_and_file_permissions (test_adversarial.PackageAdversarialTests) ... ok\ntest_quality_gate_preflight_and_ci_handoff (test_adversarial.PackageAdversarialTests) ... ok\ntest_repository_location_is_not_a_risk_gate_by_itself (test_adversarial.PackageAdversarialTests) ... ok\ntest_reviewer_policy_cannot_be_overridden_in_body (test_adversarial.PackageAdversarialTests) ... ok\ntest_reviewer_tools_are_host_neutral (test_adversarial.PackageAdversarialTests) ... ok\ntest_risk_and_delivery_status_cover_all_branches (test_adversarial.PackageAdversarialTests) ... ok\ntest_runtime_files_do_not_reference_removed_external_skills (test_adversarial.PackageAdversarialTests) ... ok\ntest_self_review_cases_require_independent_reviewer (test_adversarial.PackageAdversarialTests) ... ok\ntest_skill_archive_is_self_contained (test_adversarial.PackageAdversarialTests) ... ok\ntest_skill_archive_rejects_each_missing_license_file (test_adversarial.PackageAdversarialTests) ... ok\ntest_skill_archive_rejects_missing_entrypoint (test_adversarial.PackageAdversarialTests) ... ok\ntest_standalone_license_and_validator_command (test_adversarial.PackageAdversarialTests) ... ok\ntest_thick_change_requires_gates_and_independent_expectations (test_adversarial.PackageAdversarialTests) ... ok\ntest_thick_eval_cases_have_complete_routing (test_adversarial.PackageAdversarialTests) ... ok\ntest_validation_record_is_current (test_adversarial.PackageAdversarialTests) ... ok\ntest_verification_does_not_unconditionally_build_ci (test_adversarial.PackageAdversarialTests) ... ok\ntest_authorized_no_object_exemption_is_allowed (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_coverage_rejects_invalid_references_evidence_and_questions (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_coverage_requires_valid_checks_and_schema (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_design_model_evidence_is_allowed (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_evidence_requires_baseline_reference (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_full_requires_all_topics (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_invalid_observed_at_fails (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_malformed_fields_return_errors_instead_of_raising (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_malformed_required_topics_return_errors (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_missing_capability_cannot_use_evidence_or_decision (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_missing_capability_contradicts_no_check_object (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_model_only_code_finding_is_rejected (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_model_replay_must_link_to_finding (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_model_resolution_requires_code_replay (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_non_behavior_exemption_allows_current_specification (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_non_behavior_exemption_requires_structured_basis (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_normal_risk_does_not_remove_behavior_requirement (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_orphan_finding_is_rejected (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_placeholder_baseline_cannot_be_ready (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_placeholder_decisions_are_rejected (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_ready_requires_authority (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_release_evidence_baseline_must_match (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_release_evidence_must_link_a_passed_check (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_resolution_evidence_must_link_to_finding (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_resolved_evidence_must_match_current_baseline (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_surface_location_is_required (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_unhashable_evidence_ids_return_errors (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_valid_failed_check_can_complete_coverage (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_candidate_triage_and_agent_inheritance (test_adversarial.ReviewWorkflowContractTests) ... ok\ntest_evaluation_protocol_and_routing_cases (test_adversarial.ReviewWorkflowContractTests) ... ok\ntest_rereview_convergence_contract (test_adversarial.ReviewWorkflowContractTests) ... ok\ntest_rule_feedback_contract (test_adversarial.ReviewWorkflowContractTests) ... ok\ntest_any_error_forces_release_ready_false (test_adversarial.SecondRoundAuditTests) ... ok\ntest_behavior_exemption_requires_structured_basis (test_adversarial.SecondRoundAuditTests) ... ok\ntest_mixed_baseline_supporting_evidence_is_rejected (test_adversarial.SecondRoundAuditTests) ... ok\ntest_reviewer_has_no_shell_or_skill_tools (test_adversarial.SecondRoundAuditTests) ... ok\ntest_reviewer_inline_tools_are_rejected (test_adversarial.SecondRoundAuditTests) ... ok\ntest_reviewer_task_is_rejected (test_adversarial.SecondRoundAuditTests) ... ok\ntest_invalid_project_returns_errors (test_validators.MalformedInputTests) ... ok\ntest_invalid_reference_type_returns_errors (test_validators.MalformedInputTests) ... ok\ntest_non_string_eval_id_returns_errors (test_validators.MalformedInputTests) ... ok\ntest_claude_manifest_checks_agent_path (test_validators.PackageValidatorTests) ... ok\ntest_current_package_is_valid (test_validators.PackageValidatorTests) ... ok\ntest_eval_ids_must_be_unique (test_validators.PackageValidatorTests) ... ok\ntest_eval_input_boundaries (test_validators.PackageValidatorTests) ... ok\ntest_evaluation_activation_warning (test_validators.PackageValidatorTests) ... ok\ntest_frontmatter_reads_metadata_version (test_validators.PackageValidatorTests) ... ok\ntest_license_content_and_distribution_copies (test_validators.PackageValidatorTests) ... ok\ntest_manifest_consistency_in_both_directions (test_validators.PackageValidatorTests) ... ok\ntest_manifest_rejects_session_start (test_validators.PackageValidatorTests) ... ok\ntest_markdown_link_must_exist (test_validators.PackageValidatorTests) ... ok\ntest_missing_capability_reference_is_rejected (test_validators.PackageValidatorTests) ... ok\ntest_package_missing_root_and_optional_checks_do_not_raise (test_validators.PackageValidatorTests) ... ok\ntest_portable_manifest_rejects_unknown_top_level_field (test_validators.PackageValidatorTests) ... ok\ntest_portable_manifest_requires_canonical_schema (test_validators.PackageValidatorTests) ... ok\ntest_security_reference_is_required_without_inbound_links (test_validators.PackageValidatorTests) ... ok\ntest_skill_license_is_required (test_validators.PackageValidatorTests) ... ok\ntest_skill_name_must_match_directory (test_validators.PackageValidatorTests) ... ok\ntest_accepted_risk_requires_human_decision (test_validators.ReviewValidatorTests) ... ok\ntest_behavior_rejects_source_only_evidence (test_validators.ReviewValidatorTests) ... ok\ntest_failed_check_requires_finding (test_validators.ReviewValidatorTests) ... ok\ntest_finding_text_cannot_be_empty (test_validators.ReviewValidatorTests) ... ok\ntest_full_requires_all_declared_topics (test_validators.ReviewValidatorTests) ... ok\ntest_high_risk_surface_requires_behavior_evidence (test_validators.ReviewValidatorTests) ... ok\ntest_not_assessed_does_not_pass_require_ready (test_validators.ReviewValidatorTests) ... ok\ntest_pass_requires_evidence (test_validators.ReviewValidatorTests) ... ok\ntest_ready_rejects_blocked_check (test_validators.ReviewValidatorTests) ... ok\ntest_resolved_finding_requires_resolution_evidence (test_validators.ReviewValidatorTests) ... ok\ntest_specification_cannot_confirm_or_resolve (test_validators.ReviewValidatorTests) ... ok\ntest_template_is_valid_but_not_ready (test_validators.ReviewValidatorTests) ... ok\ntest_unknown_evidence_reference_fails (test_validators.ReviewValidatorTests) ... ok\ntest_valid_ready_review (test_validators.ReviewValidatorTests) ... ok\n\n----------------------------------------------------------------------\nRan 125 tests in 8.782s\n\nOK\n"
+      },
+      {
+        "name": "candidate-quick-.",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "C:\\Users\\Administrator\\.codex\\skills\\.system\\skill-creator\\scripts\\quick_validate.py",
+          "."
+        ],
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\11\\04\\01a1a55b-f5af-7122-a764-616899aae474\\lean-engineer-routing-review\\candidate",
+        "expected_exit": 0,
+        "exit_code": 0,
+        "duration_seconds": 0.078,
+        "stdout": "Skill is valid!\n",
+        "stderr": ""
+      },
+      {
+        "name": "candidate-quick-skills/lean-engineer",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "C:\\Users\\Administrator\\.codex\\skills\\.system\\skill-creator\\scripts\\quick_validate.py",
+          "skills/lean-engineer"
+        ],
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\11\\04\\01a1a55b-f5af-7122-a764-616899aae474\\lean-engineer-routing-review\\candidate",
+        "expected_exit": 0,
+        "exit_code": 0,
+        "duration_seconds": 0.063,
+        "stdout": "Skill is valid!\n",
+        "stderr": ""
+      },
+      {
+        "name": "candidate-ledger-0",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "skills/lean-engineer/scripts/validate_review.py",
+          "skills/lean-engineer/assets/backend-review-template.json"
+        ],
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\11\\04\\01a1a55b-f5af-7122-a764-616899aae474\\lean-engineer-routing-review\\candidate",
+        "expected_exit": 0,
+        "exit_code": 0,
+        "duration_seconds": 0.062,
+        "stdout": "{\n  \"ok\": true,\n  \"errors\": [],\n  \"warnings\": [\n    \"No surfaces registered. This is a template or an incomplete review.\"\n  ],\n  \"summary\": {\n    \"surfaces\": 0,\n    \"checks\": 0,\n    \"findings\": 0,\n    \"review_coverage_complete\": false,\n    \"release_ready\": false\n  }\n}\n",
+        "stderr": ""
+      },
+      {
+        "name": "candidate-ledger-2",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "skills/lean-engineer/scripts/validate_review.py",
+          "skills/lean-engineer/assets/backend-review-template.json",
+          "--require-ready"
+        ],
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\11\\04\\01a1a55b-f5af-7122-a764-616899aae474\\lean-engineer-routing-review\\candidate",
+        "expected_exit": 2,
+        "exit_code": 2,
+        "duration_seconds": 0.078,
+        "stdout": "{\n  \"ok\": true,\n  \"errors\": [],\n  \"warnings\": [\n    \"No surfaces registered. This is a template or an incomplete review.\"\n  ],\n  \"summary\": {\n    \"surfaces\": 0,\n    \"checks\": 0,\n    \"findings\": 0,\n    \"review_coverage_complete\": false,\n    \"release_ready\": false\n  }\n}\n",
+        "stderr": ""
+      },
+      {
+        "name": "candidate-claude-manifest",
+        "command": [
+          "pwsh",
+          "-NoProfile",
+          "-Command",
+          "claude plugin validate --strict ."
+        ],
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\11\\04\\01a1a55b-f5af-7122-a764-616899aae474\\lean-engineer-routing-review\\candidate",
+        "expected_exit": 0,
+        "exit_code": 0,
+        "duration_seconds": 0.703,
+        "stdout": "Validating plugin manifest: C:\\Users\\Administrator\\.codex\\visualizations\\2026\\11\\04\\01a1a55b-f5af-7122-a764-616899aae474\\lean-engineer-routing-review\\candidate\\.claude-plugin\\plugin.json\n\n√ Validation passed\n",
+        "stderr": ""
+      }
+    ],
+    "completed_at": "2026-11-06T01:10:18.247360+00:00"
+  },
+  "source_checks_scope": "证据归档及运行索引时间规范化后源码复检；嵌入本检查报告后的最终全文件与归档检查见发行旁路材料。",
+  "quality_scope": {
+    "production_code_unchanged": true,
+    "complexity": {
+      "status": "not_applicable",
+      "basis": "no_check_object",
+      "scope": "No production function or code changed."
+    },
+    "production_mutation": {
+      "status": "not_applicable",
+      "basis": "no_check_object",
+      "scope": "Only instruction routing, metadata, evaluation definitions and tests changed; policy assessed by independent scenarios and audit."
+    },
+    "unchanged_authorities": [
+      "scripts/package.py",
+      "scripts/validate_package.py",
+      "scripts/distribution_rules.py",
+      "skills/lean-engineer/scripts/validate_review.py",
+      "skills/lean-engineer/assets/backend-review-template.json",
+      "agents/lean-reviewer.md",
+      "skills/lean-engineer/references/risk-gates.md",
+      "skills/lean-engineer/references/verification.md",
+      "skills/lean-engineer/references/reusable-capabilities.md"
+    ],
+    "validation_methods": [
+      "existing package/link/manifest checks",
+      "old-structure rejection and restoration",
+      "independent conditional-routing scenarios"
+    ]
+  },
+  "structure_regression": [
+    {
+      "file": "skills/lean-engineer/SKILL.md",
+      "scope": "New entry-structure and authority-reference guard; not evidence of actual old-agent omission",
+      "phases": [
+        {
+          "phase": "green_before",
+          "command": [
+            "D:\\Anaconda\\python.exe",
+            "-B",
+            "-m",
+            "unittest",
+            "test_adversarial.PackageAdversarialTests.test_coding_route_declares_the_combined_baseline"
+          ],
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": ".\n----------------------------------------------------------------------\nRan 1 test in 0.004s\n\nOK\n"
+        },
+        {
+          "phase": "red_old_structure",
+          "command": [
+            "D:\\Anaconda\\python.exe",
+            "-B",
+            "-m",
+            "unittest",
+            "test_adversarial.PackageAdversarialTests.test_coding_route_declares_the_combined_baseline"
+          ],
+          "exit_code": 1,
+          "stdout": "",
+          "stderr": "F\n======================================================================\nFAIL: test_coding_route_declares_the_combined_baseline (test_adversarial.PackageAdversarialTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\Administrator\\.codex\\visualizations\\2026\\11\\04\\01a1a55b-f5af-7122-a764-616899aae474\\lean-engineer-routing-review\\structure-regression\\tests\\test_adversarial.py\", line 785, in test_coding_route_declares_the_combined_baseline\n    self.assertIn(\"### 基础读取\", text)\nAssertionError: '### 基础读取' not found in '---\\nname: lean-engineer\\ndescription: \"写、改、重构、选型或验收代码时使用。先复用项目能力，再按风险执行最小实现、真实验证和独立审查。内置 Web 前后端、移动端、嵌入式和数据工程检查。纯需求、纯问答和仅定位根因时不主导；性能或容量的测量型诊断除外。\"\\nlicense: MIT\\nmetadata:\\n  version: \"1.1.1\"\\n---\\n\\n# lean-engineer\\n\\n用满足需求的最小改动交付可验证结果。先查能力索引并理解真实调用链。已有能力直接调用。新实现中边界明确的可复用能力收录到项目能力库，供后续任务调用。\\n\\n## 职责与优先级\\n\\n本文件只拥有任务分流、方案选择顺序、风险流程和交付状态。详细实现纪律、领域 Review、独立审查和专项验证各有唯一权威。\\n\\n系统、宿主、用户和项目指令按既有优先级执行。本 skill 不把安装视为对任意写入的授权。用户本轮明确关闭本 skill 时，本文件不执行。\\n\\n纯产品需求交给需求流程。性能或容量的测量型诊断属于本 skill 的 Review 范围，按命中的领域专题执行。测量型诊断必须包含工作负载和可执行的测量入口。\\n\\n其他根因未定的故障不由本 skill 主导，使用项目或宿主已有的调试流程。没有该流程时，先读取错误、固定复现、在组件边界取证，再以单假设最小验证形成足以选择修复边界的因果说明，然后决定是否进入实现。开放性方案设计使用用户选择的设计流程。项目已有强制编码 skill 时，不重复生成第二套证据。合并相同检查，保留更严格要求。\\n\\n## 工作卡\\n\\n1. 确定用户要的是实现、只读审查、验收还是工具搭建。只读审查不修改实现。\\n2. 编码或验收前读取 [风险分档](references/risk-gates.md)。按实际后果和调用方证据定档。\\n3. 执行下方按需路由。所有命中项都要处理。未读取的文件不得写成已执行。\\n4. 按方案阶梯选择最小实现。实现功能或修改可复用能力时，执行能力库的查找、调用、收录和索引同步。用户明确要求的能力不得静默削减。\\n5. 运行与改动和风险匹配的检查。交付时区分通过、失败、阻塞和未运行。\\n\\n## 按需路由\\n\\nWeb 前后端、原生移动端、嵌入式和数据工程检查都是本 skill 的内置专题。只读取本次任务命中的文件；同一系统跨多个领域时，组合必要检查并合并重复证据。\\n\\n### 通用流程\\n\\n| 任务信号 | 必须动作 |\\n| --- | --- |\\n| 任何编码、改动或验收 | 读取 [风险分档](references/risk-gates.md) |\\n| 任何实现、复用接入、依赖接入或代码删除 | 读取 [实现纪律](references/implementation.md) |\\n| 实现功能、查找复用、抽取模块或修改已收录能力 | 读取 [能力库](references/reusable-capabilities.md) |\\n| 大改、契约测试、质量门、验收结论 | 读取 [验证与证据](references/verification.md) |\\n| 任何代码 Review、修复后复审、高后果变更、兼容性增补、厚审大改或验收自己的实现 | 读取 [独立审查协议](references/review-protocol.md) |\\n| 安全保护或可信路径发生变化、可能受共享改动影响，或要求核对安全修复回归 | 读取 [安全差异审查](references/security-diff-review.md)，按触发条件核对历史、传递路径和实际防护 |\\n| 状态机、竞态、重试、协议、不变量、解析器、内存安全 | 读取 [形式化验证](references/formal-verification.md)，再判断是否需要建立模型 |\\n| 选择复杂度、变异测试或架构检查工具 | 读取 [工具候选](references/tooling.md) |\\n\\n### 领域边界与专项入口\\n\\n通用纪律适用于各领域；专题只提供常见风险的检查路径，不替代项目契约、平台文档或行业认证。风险按实际行为与后果判定，不因“移动端”“嵌入式”或“数据工程”的名称自动升级。\\n\\n| 任务信号 | 必须动作 |\\n| --- | --- |\\n| Android、iOS、原生或跨平台 App 的实现、审查、性能诊断 | 读取 [移动端](references/domains/mobile.md)；混合应用的 WebView 内容同时读取命中的 Web 前端专题 |\\n| 固件、驱动、中断、RTOS、传感器、执行器、设备升级 | 读取 [嵌入式](references/domains/embedded.md) |\\n| ETL、数仓、批流处理、报表统计口径、特征管道、历史重算 | 读取 [数据工程](references/domains/data-engineering.md) |\\n\\n这些领域沿用 [验证与证据](references/verification.md) 的状态与证据规则。原生界面按平台语义检查，不要求具有 DOM；Web 指标不直接用作原生界面或设备实时性的验收指标。\\n\\n### 后端专题\\n\\n| 任务信号 | 必须动作 |\\n| --- | --- |\\n| 任何后端实现或 Review | 读取 [后端 Review 协议](references/backend-review.md) |\\n| 端点、DTO、OpenAPI、错误、分页、版本、调用方 | 读取 [API 与契约](references/backend/api-contracts.md) |\\n| 登录、会话、角色、对象权限、字段权限、租户 | 读取 [身份与访问控制](references/backend/identity-access.md) |\\n| 数据库、事务、锁、迁移、回填、备份、恢复 | 读取 [数据一致性](references/backend/data-consistency.md) |\\n| 共享状态、重试、幂等、消息、队列、后台任务 | 读取 [并发与消息](references/backend/concurrency-messaging.md) |\\n| 不可信输入、秘密、注入、SSRF、文件、配额、下游服务 | 读取 [安全与资源](references/backend/security-runtime.md) |\\n| 配置、日志、指标、追踪、部署、回滚、容量、性能 | 读取 [交付与运行](references/backend/delivery-operations.md) |\\n| full 后端审查或机器校验台账 | 读取 [后端台账协议](references/backend/ledger-contract.md) |\\n\\n### Web 前端专题\\n\\n下表信号限定在 Web 页面与浏览器执行环境；原生界面使用对应平台专题。\\n\\n| 任务信号 | 必须动作 |\\n| --- | --- |\\n| 任何 Web 前端实现或 Review | 读取 [前端 Review 协议](references/frontend-review.md) |\\n| 路由、页面、组件、实例、导航和历史 | 读取 [路由与组件](references/frontend/routes-components.md) |\\n| 表单、缓存、异步、竞态、草稿、流式任务 | 读取 [状态与数据](references/frontend/state-data.md) |\\n| 语义、键盘、焦点、可访问性、响应式和内容压力 | 读取 [可访问性与布局](references/frontend/accessibility-layout.md) |\\n| XSS、凭据、隐私、租户、上传、第三方内容 | 读取 [安全与隐私](references/frontend/security-privacy.md) |\\n| 渲染、网络、资源、订阅、计时器、性能 | 读取 [性能与生命周期](references/frontend/performance-lifecycle.md) |\\n| 生产构建、发布、回滚、监控和证据覆盖 | 读取 [交付与证据](references/frontend/delivery-evidence.md) |\\n\\n不要凭文件名猜内容。多个专题命中时全部读取。没有命中专题时不加载整套参考资料。\\n\\n## 方案阶梯与实现纪律\\n\\n按顺序选择第一个能够满足真实需求的方案：\\n\\n1. 不需要实现时，不写。\\n2. 项目已有能力目录和源码可复用时，复用。索引只用于发现，源码才是事实。\\n3. 标准库或原生平台可以完成时，优先使用。\\n4. 已安装依赖可以完成时，按实际版本和项目用法使用。\\n5. 成熟专项库明显更省时，先评估维护、兼容、许可证、传递依赖和移除成本。新增依赖必须服从项目授权。\\n6. 否则写最小实现。单用途代码不造通用抽象。\\n\\n默认使用项目根目录的 `powers.md` 作为能力索引，使用项目内 `mymodule/` 存放可导入代码。已有等价索引、源码模块或语言布局约定时沿用，并说明实际位置，不另建平行库。具体收录与调用规则见 [能力库](references/reusable-capabilities.md)。\\n\\n详细的方案操作约束、实现纪律和编码不变量见 [实现纪律](references/implementation.md)。任何实现、复用接入、依赖接入或代码删除都必须读取该文件。纯只读 Review 不加载。\\n\\n## 交付约束\\n\\n- 检查必须真实运行。搜索命中只证明搜索范围内的存在或不存在。\\n- 不得用跳过测试、删除有效测试、放宽阈值或 mock 被测对象来制造通过。需求变化导致测试更新时，必须保留新的独立依据。\\n- 用户或项目可以要求超过当前档位的验证。执行额外验证不是错误。\\n- 声称完成前，逐条对照用户要求。每项给出实际证据或明确缺口。\\n- 只有全部必需检查均为 `passed` 或有依据的 `not_applicable` 时才使用 `verified`。存在未运行或阻塞项时使用 `partial`。存在失败项时使用 `failed`。\\n- 质量门通过不等于需求正确。发布、风险接受和业务语义由授权人员决定。\\n'\n\n----------------------------------------------------------------------\nRan 1 test in 0.005s\n\nFAILED (failures=1)\n"
+        },
+        {
+          "phase": "green_after",
+          "command": [
+            "D:\\Anaconda\\python.exe",
+            "-B",
+            "-m",
+            "unittest",
+            "test_adversarial.PackageAdversarialTests.test_coding_route_declares_the_combined_baseline"
+          ],
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": ".\n----------------------------------------------------------------------\nRan 1 test in 0.005s\n\nOK\n"
+        }
+      ]
+    },
+    {
+      "file": "skills/lean-engineer/references/implementation.md",
+      "scope": "New entry-structure and authority-reference guard; not evidence of actual old-agent omission",
+      "phases": [
+        {
+          "phase": "green_before",
+          "command": [
+            "D:\\Anaconda\\python.exe",
+            "-B",
+            "-m",
+            "unittest",
+            "test_adversarial.PackageAdversarialTests.test_conditional_capability_route_keeps_separate_authority"
+          ],
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": ".\n----------------------------------------------------------------------\nRan 1 test in 0.004s\n\nOK\n"
+        },
+        {
+          "phase": "red_old_structure",
+          "command": [
+            "D:\\Anaconda\\python.exe",
+            "-B",
+            "-m",
+            "unittest",
+            "test_adversarial.PackageAdversarialTests.test_conditional_capability_route_keeps_separate_authority"
+          ],
+          "exit_code": 1,
+          "stdout": "",
+          "stderr": "F\n======================================================================\nFAIL: test_conditional_capability_route_keeps_separate_authority (test_adversarial.PackageAdversarialTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\Administrator\\.codex\\visualizations\\2026\\11\\04\\01a1a55b-f5af-7122-a764-616899aae474\\lean-engineer-routing-review\\structure-regression\\tests\\test_adversarial.py\", line 804, in test_conditional_capability_route_keeps_separate_authority\n    self.assertIn(\"../SKILL.md#基础读取\", implementation)\nAssertionError: '../SKILL.md#基础读取' not found in '# 实现纪律\\n\\n## 适用与职责\\n\\n本文件拥有方案阶梯的操作约束、实现纪律和编码不变量。任何实现、复用接入、依赖接入或代码删除都必须读取本文件。纯只读 Review 不加载本文件。\\n\\n系统、宿主、用户和项目指令按既有优先级执行。项目有更严格要求时，合并相同检查并保留更严格要求。\\n\\n方案阶梯改写自 ponytail（MIT），署名见 [NOTICE](../NOTICE)。\\n\\n## 方案阶梯\\n\\n先理解改动触及的代码和真实调用链，再选择方案。按顺序选择第一个能够满足真实需求的方案。两个方案同时成立时，选择靠前的方案。\\n\\n1. **不需要实现时，不写。** 投机性需求不写代码。说明不写的理由，不伪造 diff 或证据。\\n2. **项目已有能力可以复用时，复用。** 按 [能力库](reusable-capabilities.md) 先查索引，再读源码并验证调用。实现功能或修改已收录能力时，执行收录和索引同步规则。\\n3. **标准库可以完成时，使用标准库。** 两个方案成本接近时，选择边界行为正确的方案。\\n4. **原生平台可以完成时，使用原生能力。** 原生输入、CSS 和数据库约束优先于自定义实现。\\n5. **已安装依赖可以完成时，按实际版本使用。** 先检查 manifest、lockfile 和项目用法。是否使用过 API，以本仓库的真实调用为准。依赖声明、导入语句或模型记忆不能代替调用证据。本仓库未使用过的 API 必须核对所用版本的官方资料，并通过真实调用验证。文档中存在 API 不等于调用成功。\\n6. **成熟专项库明显更省时，先评估再引入。** 需要选库时，实际检索包注册表、GitHub 或官方资料，比较候选的维护、兼容、许可证、传递依赖和移除成本。不得仅凭模型记忆断言没有可用方案。检索受限时说明范围，不声称已穷尽候选。首次接入 API 的版本核验与真实调用要求同第 5 项。新增依赖必须服从项目授权。几行代码能够完成时，不为此新增依赖。\\n7. **否则写清楚、易验证的最小实现。** 最小体现在职责、状态、依赖和分支，不以物理行数衡量。不要为压缩行数而使用难懂的缩写或合并不相关的表达式。单用途代码不造通用抽象。\\n\\n用户要求更简方案时，重新检查是否有更早成立的方案。用户已经确认的功能范围应完整实现，不再以极简为由反复建议删减。精简必须保留 [编码不变量](#编码不变量)。已知限制按 [记录与交付边界](#记录与交付边界) 留痕。\\n\\n### 修复入口\\n\\n修复应针对根因，不能只掩盖症状。修复前读取完整错误，固定复现，并检查相关调用链与调用方。搜索只是定位手段，不能保证找全动态调用、反射调用或外部调用；无法确认的范围应明确记录。\\n\\n多个调用方共享同一根因时，在共享处修复，并验证受影响的调用方。根因只在某个调用方时，在该调用方修复，避免改坏其他正常调用方。只修工单点名的症状入口，不能证明其他调用方已经恢复。\\n\\n多组件故障先在组件边界取证，再以单假设最小验证定位失效层。日志消失不等于修复，增加一层 catch 不等于根因已断。修复后重新运行原始复现，并验证受影响的行为。\\n\\n对能够稳定自动化复现的逻辑缺陷，补充或复用回归测试。确认原实现因该缺陷失败，修复后通过。需要核对原实现时，使用隔离副本或测试夹具，不回退覆盖当前工作区。无法自动化时，记录可重跑步骤、验证限制和原因，不编造测试记录。\\n\\n## 实现纪律\\n\\n### 最小改动与方案判断\\n\\n- 修改前确认目标文件已有的变更。不得覆盖、回滚或顺手整理用户或其他执行者的工作。遇到重叠修改时，先读懂并保留已有改动，无法兼容时再澄清。\\n- 一次变更解决一个问题。修复不顺手清理，重构不顺手加功能，新功能不顺手优化旧逻辑。不做无关重构、格式化、清理或死代码删除。\\n- 同样满足需求和兼容要求时，优先移除导致本次问题的冗余或错误逻辑，再考虑叠加新逻辑。不得以此删除必要保护或清理无关代码。\\n- 不造投机抽象。单实现接口、单产品工厂和不变值的配置必须有真实需求依据。未证明共性前，允许少量重复。\\n- 控制新增文件数量，但不得为减少文件而混合职责。\\n- 清理本次改动产生的未使用 import、变量和函数。无关死代码只报告，不删除。\\n- 每行改动必须能追溯到本次要求。改动超出最初判断时，重新评估风险和方案。\\n- 实现前声明影响方案的假设。存在更简单方案时，必须指出。\\n- 需求和验收明确时，可逆的局部实现选择沿用项目惯例直接推进，不反复确认。已有授权不重复索取。\\n- 缺失信息或不同解释会影响功能范围、兼容性、授权或数据安全时，先说明具体疑点并澄清。不得用默认选择代替必要决策。\\n\\n### 失败路径与信任边界\\n\\n- 正常路径与真实失败路径同时处理。不可能场景不写处理。没有新增失败路径时，说明依据。\\n- 每项资源必须有明确的释放责任方。默认由申请方释放；允许通过返回值、上下文管理器或项目既有机制明确转交所有权，并约定由谁、在何时关闭或取消。转交完成前的失败由申请方清理，完成后由接收方负责；借用者不得释放仍由其他调用方持有的共享资源。\\n- 新 API 必须有本次真实调用方。检查旧调用方、旧数据和被省略参数使用的默认值。\\n- 新增校验、过滤、权限或边界守卫时，必须提供能够触发它的反例或测试。只有依据需求、契约和可达路径证明守卫冗余或不适用时，才删除守卫。测试环境、故障注入或构造方法不足时，保留有需求依据的必要守卫，将对应验证记为 `blocked` 或 `not_run`，说明缺口与补证方法。无法构造输入不等于输入不可能出现，不得因此删除安全措施或把未验证写成通过。\\n- 拼接 SQL、HTML、路径或命令前，先标明信任边界。接收用户数据时，先标明数据从不可信变为可信的位置。使用安全绑定或符合输出上下文的处理。\\n\\n### 项目一致性与兼容性\\n\\n- 匹配项目命名、分层、结构、注释密度和既有用法。没有分层时，不发明 `domain`、`infra` 或 `usecase` 分层壳。\\n- 不假设依赖可用。先检查项目依赖和实际版本，再按项目既有方式使用。\\n- 修改接口客户端、编译产物或标记为生成的文件前，先确认生成关系。确认由工具生成时，定位源定义和生成入口，按项目约定修改源头并重新生成，核对产物差异。项目明确维护手工补丁时，沿用该流程。生成工具不可用时记录阻塞，不把只改产物称为持久修复。\\n- 项目编码和行尾约定优先。项目未定义时，默认 UTF-8 无 BOM 和 LF。使用 `git ls-files --eol` 或项目等价方式确认。编辑器显示不能代替检查。\\n- 非平凡改动必须回答适用的问题：选择了什么，拒绝了什么，重复运行会怎样，做到一半会怎样，信任边界是什么，旧数据或旧调用方是否受影响，失败如何被看见，代码放在哪一层。只回答适用项，不制造固定表格。\\n\\n### 记录与交付边界\\n\\n- 实现取舍要留痕。在满足当前已确认的功能、正确性、安全和性能要求的前提下，选择具有已知上限或限制的简单实现时，在关键代码旁或项目约定位置记录限制、升级触发条件和可行的升级方向。未测量的容量上限不得编造。留痕不能代替对需求变更的确认，也不能豁免必要保护。示例：`# lean: 使用全局锁串行处理。若实测锁争用成为瓶颈，评估分段锁，并验证共享状态的一致性。`\\n- 注释可以说明契约、单位、边界、外部约束和取舍。不得写无法证实的保证。过期注释必须修正。\\n- 输出默认简洁。用户要求的报告、审查和证据说明不受固定行数限制。\\n- 同一检查或同一修复连续失败三次时，停止重试并报告阻塞。\\n- 为完成当前任务，允许根据项目技术栈和现有版本，自动安装并配置必要的项目级开发与验证工具。已有工具优先复用，安装后实际运行验证。项目明确限制安装时，遵守该限制。全局安装或修改宿主配置须另有用户授权。不得自行修改本 skill 来扩大授权。\\n\\n## 编码不变量\\n\\n以下要求不得因精简而删除：\\n\\n- 信任边界的输入校验、防数据丢失的错误处理、安全措施、基础无障碍和用户明确要求的能力。\\n- 真实硬件需要的校准参数。时钟、传感器和其他物理输入需要与其实际误差相匹配的处理。\\n- 读取类函数默认隐藏软删除、禁用、归档或时间窗数据时，必须在函数签名或契约旁说明默认隐藏什么，以及如何获取全量。\\n- mock、假数据和降级返回必须从产生到消费保持可检查标记。项目已有标记约定优先。中间层不得丢失标记。\\n- 永久修复必须有足以选择修复边界的因果说明。活跃事故中的可逆、可观测、可快速回滚止血可以先于根因调查，但不得写成根因修复。\\n'\n\n----------------------------------------------------------------------\nRan 1 test in 0.006s\n\nFAILED (failures=1)\n"
+        },
+        {
+          "phase": "green_after",
+          "command": [
+            "D:\\Anaconda\\python.exe",
+            "-B",
+            "-m",
+            "unittest",
+            "test_adversarial.PackageAdversarialTests.test_conditional_capability_route_keeps_separate_authority"
+          ],
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": ".\n----------------------------------------------------------------------\nRan 1 test in 0.005s\n\nOK\n"
+        }
+      ]
+    }
+  ],
+  "old_structure_red": {
+    "scope": "New intended route structure absent in old version; not proof that old agents actually missed instructions",
+    "command": [
+      "D:\\Anaconda\\python.exe",
+      "-B",
+      "-m",
+      "unittest",
+      "test_adversarial.PackageAdversarialTests.test_coding_route_declares_the_combined_baseline",
+      "test_adversarial.PackageAdversarialTests.test_conditional_capability_route_keeps_separate_authority"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "FF\n======================================================================\nFAIL: test_coding_route_declares_the_combined_baseline (test_adversarial.PackageAdversarialTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\Administrator\\.codex\\visualizations\\2026\\11\\04\\01a1a55b-f5af-7122-a764-616899aae474\\lean-engineer-routing-review\\candidate\\tests\\test_adversarial.py\", line 785, in test_coding_route_declares_the_combined_baseline\n    self.assertIn(\"### 基础读取\", text)\nAssertionError: '### 基础读取' not found in '---\\nname: lean-engineer\\ndescription: \"写、改、重构、选型或验收代码时使用。先复用项目能力，再按风险执行最小实现、真实验证和独立审查。内置 Web 前后端、移动端、嵌入式和数据工程检查。纯需求、纯问答和仅定位根因时不主导；性能或容量的测量型诊断除外。\"\\nlicense: MIT\\nmetadata:\\n  version: \"1.1.1\"\\n---\\n\\n# lean-engineer\\n\\n用满足需求的最小改动交付可验证结果。先查能力索引并理解真实调用链。已有能力直接调用。新实现中边界明确的可复用能力收录到项目能力库，供后续任务调用。\\n\\n## 职责与优先级\\n\\n本文件只拥有任务分流、方案选择顺序、风险流程和交付状态。详细实现纪律、领域 Review、独立审查和专项验证各有唯一权威。\\n\\n系统、宿主、用户和项目指令按既有优先级执行。本 skill 不把安装视为对任意写入的授权。用户本轮明确关闭本 skill 时，本文件不执行。\\n\\n纯产品需求交给需求流程。性能或容量的测量型诊断属于本 skill 的 Review 范围，按命中的领域专题执行。测量型诊断必须包含工作负载和可执行的测量入口。\\n\\n其他根因未定的故障不由本 skill 主导，使用项目或宿主已有的调试流程。没有该流程时，先读取错误、固定复现、在组件边界取证，再以单假设最小验证形成足以选择修复边界的因果说明，然后决定是否进入实现。开放性方案设计使用用户选择的设计流程。项目已有强制编码 skill 时，不重复生成第二套证据。合并相同检查，保留更严格要求。\\n\\n## 工作卡\\n\\n1. 确定用户要的是实现、只读审查、验收还是工具搭建。只读审查不修改实现。\\n2. 编码或验收前读取 [风险分档](references/risk-gates.md)。按实际后果和调用方证据定档。\\n3. 执行下方按需路由。所有命中项都要处理。未读取的文件不得写成已执行。\\n4. 按方案阶梯选择最小实现。实现功能或修改可复用能力时，执行能力库的查找、调用、收录和索引同步。用户明确要求的能力不得静默削减。\\n5. 运行与改动和风险匹配的检查。交付时区分通过、失败、阻塞和未运行。\\n\\n## 按需路由\\n\\nWeb 前后端、原生移动端、嵌入式和数据工程检查都是本 skill 的内置专题。只读取本次任务命中的文件；同一系统跨多个领域时，组合必要检查并合并重复证据。\\n\\n### 通用流程\\n\\n| 任务信号 | 必须动作 |\\n| --- | --- |\\n| 任何编码、改动或验收 | 读取 [风险分档](references/risk-gates.md) |\\n| 任何实现、复用接入、依赖接入或代码删除 | 读取 [实现纪律](references/implementation.md) |\\n| 实现功能、查找复用、抽取模块或修改已收录能力 | 读取 [能力库](references/reusable-capabilities.md) |\\n| 大改、契约测试、质量门、验收结论 | 读取 [验证与证据](references/verification.md) |\\n| 任何代码 Review、修复后复审、高后果变更、兼容性增补、厚审大改或验收自己的实现 | 读取 [独立审查协议](references/review-protocol.md) |\\n| 安全保护或可信路径发生变化、可能受共享改动影响，或要求核对安全修复回归 | 读取 [安全差异审查](references/security-diff-review.md)，按触发条件核对历史、传递路径和实际防护 |\\n| 状态机、竞态、重试、协议、不变量、解析器、内存安全 | 读取 [形式化验证](references/formal-verification.md)，再判断是否需要建立模型 |\\n| 选择复杂度、变异测试或架构检查工具 | 读取 [工具候选](references/tooling.md) |\\n\\n### 领域边界与专项入口\\n\\n通用纪律适用于各领域；专题只提供常见风险的检查路径，不替代项目契约、平台文档或行业认证。风险按实际行为与后果判定，不因“移动端”“嵌入式”或“数据工程”的名称自动升级。\\n\\n| 任务信号 | 必须动作 |\\n| --- | --- |\\n| Android、iOS、原生或跨平台 App 的实现、审查、性能诊断 | 读取 [移动端](references/domains/mobile.md)；混合应用的 WebView 内容同时读取命中的 Web 前端专题 |\\n| 固件、驱动、中断、RTOS、传感器、执行器、设备升级 | 读取 [嵌入式](references/domains/embedded.md) |\\n| ETL、数仓、批流处理、报表统计口径、特征管道、历史重算 | 读取 [数据工程](references/domains/data-engineering.md) |\\n\\n这些领域沿用 [验证与证据](references/verification.md) 的状态与证据规则。原生界面按平台语义检查，不要求具有 DOM；Web 指标不直接用作原生界面或设备实时性的验收指标。\\n\\n### 后端专题\\n\\n| 任务信号 | 必须动作 |\\n| --- | --- |\\n| 任何后端实现或 Review | 读取 [后端 Review 协议](references/backend-review.md) |\\n| 端点、DTO、OpenAPI、错误、分页、版本、调用方 | 读取 [API 与契约](references/backend/api-contracts.md) |\\n| 登录、会话、角色、对象权限、字段权限、租户 | 读取 [身份与访问控制](references/backend/identity-access.md) |\\n| 数据库、事务、锁、迁移、回填、备份、恢复 | 读取 [数据一致性](references/backend/data-consistency.md) |\\n| 共享状态、重试、幂等、消息、队列、后台任务 | 读取 [并发与消息](references/backend/concurrency-messaging.md) |\\n| 不可信输入、秘密、注入、SSRF、文件、配额、下游服务 | 读取 [安全与资源](references/backend/security-runtime.md) |\\n| 配置、日志、指标、追踪、部署、回滚、容量、性能 | 读取 [交付与运行](references/backend/delivery-operations.md) |\\n| full 后端审查或机器校验台账 | 读取 [后端台账协议](references/backend/ledger-contract.md) |\\n\\n### Web 前端专题\\n\\n下表信号限定在 Web 页面与浏览器执行环境；原生界面使用对应平台专题。\\n\\n| 任务信号 | 必须动作 |\\n| --- | --- |\\n| 任何 Web 前端实现或 Review | 读取 [前端 Review 协议](references/frontend-review.md) |\\n| 路由、页面、组件、实例、导航和历史 | 读取 [路由与组件](references/frontend/routes-components.md) |\\n| 表单、缓存、异步、竞态、草稿、流式任务 | 读取 [状态与数据](references/frontend/state-data.md) |\\n| 语义、键盘、焦点、可访问性、响应式和内容压力 | 读取 [可访问性与布局](references/frontend/accessibility-layout.md) |\\n| XSS、凭据、隐私、租户、上传、第三方内容 | 读取 [安全与隐私](references/frontend/security-privacy.md) |\\n| 渲染、网络、资源、订阅、计时器、性能 | 读取 [性能与生命周期](references/frontend/performance-lifecycle.md) |\\n| 生产构建、发布、回滚、监控和证据覆盖 | 读取 [交付与证据](references/frontend/delivery-evidence.md) |\\n\\n不要凭文件名猜内容。多个专题命中时全部读取。没有命中专题时不加载整套参考资料。\\n\\n## 方案阶梯与实现纪律\\n\\n按顺序选择第一个能够满足真实需求的方案：\\n\\n1. 不需要实现时，不写。\\n2. 项目已有能力目录和源码可复用时，复用。索引只用于发现，源码才是事实。\\n3. 标准库或原生平台可以完成时，优先使用。\\n4. 已安装依赖可以完成时，按实际版本和项目用法使用。\\n5. 成熟专项库明显更省时，先评估维护、兼容、许可证、传递依赖和移除成本。新增依赖必须服从项目授权。\\n6. 否则写最小实现。单用途代码不造通用抽象。\\n\\n默认使用项目根目录的 `powers.md` 作为能力索引，使用项目内 `mymodule/` 存放可导入代码。已有等价索引、源码模块或语言布局约定时沿用，并说明实际位置，不另建平行库。具体收录与调用规则见 [能力库](references/reusable-capabilities.md)。\\n\\n详细的方案操作约束、实现纪律和编码不变量见 [实现纪律](references/implementation.md)。任何实现、复用接入、依赖接入或代码删除都必须读取该文件。纯只读 Review 不加载。\\n\\n## 交付约束\\n\\n- 检查必须真实运行。搜索命中只证明搜索范围内的存在或不存在。\\n- 不得用跳过测试、删除有效测试、放宽阈值或 mock 被测对象来制造通过。需求变化导致测试更新时，必须保留新的独立依据。\\n- 用户或项目可以要求超过当前档位的验证。执行额外验证不是错误。\\n- 声称完成前，逐条对照用户要求。每项给出实际证据或明确缺口。\\n- 只有全部必需检查均为 `passed` 或有依据的 `not_applicable` 时才使用 `verified`。存在未运行或阻塞项时使用 `partial`。存在失败项时使用 `failed`。\\n- 质量门通过不等于需求正确。发布、风险接受和业务语义由授权人员决定。\\n'\n\n======================================================================\nFAIL: test_conditional_capability_route_keeps_separate_authority (test_adversarial.PackageAdversarialTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\Administrator\\.codex\\visualizations\\2026\\11\\04\\01a1a55b-f5af-7122-a764-616899aae474\\lean-engineer-routing-review\\candidate\\tests\\test_adversarial.py\", line 797, in test_conditional_capability_route_keeps_separate_authority\n    self.assertIn(\"### 条件追加\", text)\nAssertionError: '### 条件追加' not found in '---\\nname: lean-engineer\\ndescription: \"写、改、重构、选型或验收代码时使用。先复用项目能力，再按风险执行最小实现、真实验证和独立审查。内置 Web 前后端、移动端、嵌入式和数据工程检查。纯需求、纯问答和仅定位根因时不主导；性能或容量的测量型诊断除外。\"\\nlicense: MIT\\nmetadata:\\n  version: \"1.1.1\"\\n---\\n\\n# lean-engineer\\n\\n用满足需求的最小改动交付可验证结果。先查能力索引并理解真实调用链。已有能力直接调用。新实现中边界明确的可复用能力收录到项目能力库，供后续任务调用。\\n\\n## 职责与优先级\\n\\n本文件只拥有任务分流、方案选择顺序、风险流程和交付状态。详细实现纪律、领域 Review、独立审查和专项验证各有唯一权威。\\n\\n系统、宿主、用户和项目指令按既有优先级执行。本 skill 不把安装视为对任意写入的授权。用户本轮明确关闭本 skill 时，本文件不执行。\\n\\n纯产品需求交给需求流程。性能或容量的测量型诊断属于本 skill 的 Review 范围，按命中的领域专题执行。测量型诊断必须包含工作负载和可执行的测量入口。\\n\\n其他根因未定的故障不由本 skill 主导，使用项目或宿主已有的调试流程。没有该流程时，先读取错误、固定复现、在组件边界取证，再以单假设最小验证形成足以选择修复边界的因果说明，然后决定是否进入实现。开放性方案设计使用用户选择的设计流程。项目已有强制编码 skill 时，不重复生成第二套证据。合并相同检查，保留更严格要求。\\n\\n## 工作卡\\n\\n1. 确定用户要的是实现、只读审查、验收还是工具搭建。只读审查不修改实现。\\n2. 编码或验收前读取 [风险分档](references/risk-gates.md)。按实际后果和调用方证据定档。\\n3. 执行下方按需路由。所有命中项都要处理。未读取的文件不得写成已执行。\\n4. 按方案阶梯选择最小实现。实现功能或修改可复用能力时，执行能力库的查找、调用、收录和索引同步。用户明确要求的能力不得静默削减。\\n5. 运行与改动和风险匹配的检查。交付时区分通过、失败、阻塞和未运行。\\n\\n## 按需路由\\n\\nWeb 前后端、原生移动端、嵌入式和数据工程检查都是本 skill 的内置专题。只读取本次任务命中的文件；同一系统跨多个领域时，组合必要检查并合并重复证据。\\n\\n### 通用流程\\n\\n| 任务信号 | 必须动作 |\\n| --- | --- |\\n| 任何编码、改动或验收 | 读取 [风险分档](references/risk-gates.md) |\\n| 任何实现、复用接入、依赖接入或代码删除 | 读取 [实现纪律](references/implementation.md) |\\n| 实现功能、查找复用、抽取模块或修改已收录能力 | 读取 [能力库](references/reusable-capabilities.md) |\\n| 大改、契约测试、质量门、验收结论 | 读取 [验证与证据](references/verification.md) |\\n| 任何代码 Review、修复后复审、高后果变更、兼容性增补、厚审大改或验收自己的实现 | 读取 [独立审查协议](references/review-protocol.md) |\\n| 安全保护或可信路径发生变化、可能受共享改动影响，或要求核对安全修复回归 | 读取 [安全差异审查](references/security-diff-review.md)，按触发条件核对历史、传递路径和实际防护 |\\n| 状态机、竞态、重试、协议、不变量、解析器、内存安全 | 读取 [形式化验证](references/formal-verification.md)，再判断是否需要建立模型 |\\n| 选择复杂度、变异测试或架构检查工具 | 读取 [工具候选](references/tooling.md) |\\n\\n### 领域边界与专项入口\\n\\n通用纪律适用于各领域；专题只提供常见风险的检查路径，不替代项目契约、平台文档或行业认证。风险按实际行为与后果判定，不因“移动端”“嵌入式”或“数据工程”的名称自动升级。\\n\\n| 任务信号 | 必须动作 |\\n| --- | --- |\\n| Android、iOS、原生或跨平台 App 的实现、审查、性能诊断 | 读取 [移动端](references/domains/mobile.md)；混合应用的 WebView 内容同时读取命中的 Web 前端专题 |\\n| 固件、驱动、中断、RTOS、传感器、执行器、设备升级 | 读取 [嵌入式](references/domains/embedded.md) |\\n| ETL、数仓、批流处理、报表统计口径、特征管道、历史重算 | 读取 [数据工程](references/domains/data-engineering.md) |\\n\\n这些领域沿用 [验证与证据](references/verification.md) 的状态与证据规则。原生界面按平台语义检查，不要求具有 DOM；Web 指标不直接用作原生界面或设备实时性的验收指标。\\n\\n### 后端专题\\n\\n| 任务信号 | 必须动作 |\\n| --- | --- |\\n| 任何后端实现或 Review | 读取 [后端 Review 协议](references/backend-review.md) |\\n| 端点、DTO、OpenAPI、错误、分页、版本、调用方 | 读取 [API 与契约](references/backend/api-contracts.md) |\\n| 登录、会话、角色、对象权限、字段权限、租户 | 读取 [身份与访问控制](references/backend/identity-access.md) |\\n| 数据库、事务、锁、迁移、回填、备份、恢复 | 读取 [数据一致性](references/backend/data-consistency.md) |\\n| 共享状态、重试、幂等、消息、队列、后台任务 | 读取 [并发与消息](references/backend/concurrency-messaging.md) |\\n| 不可信输入、秘密、注入、SSRF、文件、配额、下游服务 | 读取 [安全与资源](references/backend/security-runtime.md) |\\n| 配置、日志、指标、追踪、部署、回滚、容量、性能 | 读取 [交付与运行](references/backend/delivery-operations.md) |\\n| full 后端审查或机器校验台账 | 读取 [后端台账协议](references/backend/ledger-contract.md) |\\n\\n### Web 前端专题\\n\\n下表信号限定在 Web 页面与浏览器执行环境；原生界面使用对应平台专题。\\n\\n| 任务信号 | 必须动作 |\\n| --- | --- |\\n| 任何 Web 前端实现或 Review | 读取 [前端 Review 协议](references/frontend-review.md) |\\n| 路由、页面、组件、实例、导航和历史 | 读取 [路由与组件](references/frontend/routes-components.md) |\\n| 表单、缓存、异步、竞态、草稿、流式任务 | 读取 [状态与数据](references/frontend/state-data.md) |\\n| 语义、键盘、焦点、可访问性、响应式和内容压力 | 读取 [可访问性与布局](references/frontend/accessibility-layout.md) |\\n| XSS、凭据、隐私、租户、上传、第三方内容 | 读取 [安全与隐私](references/frontend/security-privacy.md) |\\n| 渲染、网络、资源、订阅、计时器、性能 | 读取 [性能与生命周期](references/frontend/performance-lifecycle.md) |\\n| 生产构建、发布、回滚、监控和证据覆盖 | 读取 [交付与证据](references/frontend/delivery-evidence.md) |\\n\\n不要凭文件名猜内容。多个专题命中时全部读取。没有命中专题时不加载整套参考资料。\\n\\n## 方案阶梯与实现纪律\\n\\n按顺序选择第一个能够满足真实需求的方案：\\n\\n1. 不需要实现时，不写。\\n2. 项目已有能力目录和源码可复用时，复用。索引只用于发现，源码才是事实。\\n3. 标准库或原生平台可以完成时，优先使用。\\n4. 已安装依赖可以完成时，按实际版本和项目用法使用。\\n5. 成熟专项库明显更省时，先评估维护、兼容、许可证、传递依赖和移除成本。新增依赖必须服从项目授权。\\n6. 否则写最小实现。单用途代码不造通用抽象。\\n\\n默认使用项目根目录的 `powers.md` 作为能力索引，使用项目内 `mymodule/` 存放可导入代码。已有等价索引、源码模块或语言布局约定时沿用，并说明实际位置，不另建平行库。具体收录与调用规则见 [能力库](references/reusable-capabilities.md)。\\n\\n详细的方案操作约束、实现纪律和编码不变量见 [实现纪律](references/implementation.md)。任何实现、复用接入、依赖接入或代码删除都必须读取该文件。纯只读 Review 不加载。\\n\\n## 交付约束\\n\\n- 检查必须真实运行。搜索命中只证明搜索范围内的存在或不存在。\\n- 不得用跳过测试、删除有效测试、放宽阈值或 mock 被测对象来制造通过。需求变化导致测试更新时，必须保留新的独立依据。\\n- 用户或项目可以要求超过当前档位的验证。执行额外验证不是错误。\\n- 声称完成前，逐条对照用户要求。每项给出实际证据或明确缺口。\\n- 只有全部必需检查均为 `passed` 或有依据的 `not_applicable` 时才使用 `verified`。存在未运行或阻塞项时使用 `partial`。存在失败项时使用 `failed`。\\n- 质量门通过不等于需求正确。发布、风险接受和业务语义由授权人员决定。\\n'\n\n----------------------------------------------------------------------\nRan 2 tests in 0.006s\n\nFAILED (failures=2)\n"
+  },
+  "model_trials": {
+    "runs_added": 2,
+    "total_runs": 15,
+    "case_definitions": 69,
+    "baseline_cases": 14,
+    "candidate_cases": 14,
+    "input_and_reported_read_hashes": "passed",
+    "assessment": "evals/evidence/ROUTING-ASSESSMENT-20261106.json",
+    "conclusion": "两版均符合固定案例判据，不证明漏读率改善。"
+  },
+  "independent_audit": {
+    "status": "passed",
+    "rounds": 1,
+    "confirmed_defects": 0,
+    "unresolved_confirmed_defects": 0,
+    "report": "evals/evidence/RELEASE-1.1.2-AUDIT.json",
+    "report_sha256": "10d1385c211569313b2424c10e334a40d44b1a28ee2324cce600879c63aab325"
+  },
+  "postconditions": "归档后重新运行完整源码检查，双格式各两次构建、ZIP完整性、逐文件源字节比较、解包复检、写前漂移、安装dry-run、安装后哈希/版本/测试与历史包保留检查；结果见dist/lean-engineer-1.1.2.verification.json。",
+  "archive_timestamp_normalization": {
+    "cause": "Python 3.8.8 datetime.fromisoformat 不接受原始7位小数秒。",
+    "scope": "仅转换运行索引时间表示，不改原始试用输出、生产校验器或规则。",
+    "records": [
+      {
+        "run": "RUN-20261106-ROUTING-BASELINE",
+        "original": "2026-11-06T08:49:58.4356680+08:00",
+        "index_value": "2026-11-06T08:49:58.435668+08:00",
+        "original_accepted": false,
+        "index_accepted": true,
+        "precision": "运行索引截至6位微秒；原始试用报告保留7位原文。",
+        "discarded_tenth_microsecond_digit": "0"
+      },
+      {
+        "run": "RUN-20261106-ROUTING-CANDIDATE",
+        "original": "2026-11-06T08:50:19.3357737+08:00",
+        "index_value": "2026-11-06T08:50:19.335773+08:00",
+        "original_accepted": false,
+        "index_accepted": true,
+        "precision": "运行索引截至6位微秒；原始试用报告保留7位原文。",
+        "discarded_tenth_microsecond_digit": "7"
+      }
+    ],
+    "initial_failed_source_check": {
+      "started_at": "2026-11-06T01:09:10.338283+00:00",
+      "checks": [
+        {
+          "name": "candidate-package",
+          "command": [
+            "D:\\Anaconda\\python.exe",
+            "-B",
+            "scripts/validate_package.py",
+            "."
+          ],
+          "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\11\\04\\01a1a55b-f5af-7122-a764-616899aae474\\lean-engineer-routing-review\\candidate",
+          "expected_exit": 0,
+          "exit_code": 1,
+          "duration_seconds": 0.125,
+          "stdout": "{\n  \"ok\": false,\n  \"errors\": [\n    \"evals/runs.json.runs[13].executed_at: expected ISO timestamp with timezone\",\n    \"evals/runs.json.runs[14].executed_at: expected ISO timestamp with timezone\"\n  ],\n  \"warnings\": [],\n  \"summary\": {\n    \"required_files\": 46,\n    \"markdown_files\": 32,\n    \"local_links_checked\": 100,\n    \"evaluation_definitions\": 69,\n    \"model_runs\": 15\n  }\n}\n",
+          "stderr": ""
+        }
+      ],
+      "completed_at": "2026-11-06T01:09:10.457277+00:00"
+    }
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "schema_version": "1.0",
+  "runs": [
+    {
+      "id": "RUN-20261029-POLICY-BASELINE",
+      "kind": "routing",
+      "model": "Codex host-default (exact model ID not exposed)",
+      "prompt_version": "1.0.0-beta.3",
+      "tool_version": "Codex collaboration and exec_command; exact host tool version not exposed",
+      "case_set_version": "local-smoke-v1 synthetic",
+      "executed_at": "2026-10-29T09:20:23.793206+00:00",
+      "output_locator": "evals/evidence/RUN-20261029-POLICY-BASELINE.json",
+      "output_sha256": "7151e111a713f3294969f7255dfb633fd33a873b9eb653906a2f0ec051eac5f4"
+    },
+    {
+      "id": "RUN-20261029-POLICY-CANDIDATE",
+      "kind": "routing",
+      "model": "Codex host-default (exact model ID not exposed)",
+      "prompt_version": "1.0.0-beta.4 candidate; input hashes in evidence",
+      "tool_version": "Codex collaboration and exec_command; exact host tool version not exposed",
+      "case_set_version": "local-smoke-v1 synthetic",
+      "executed_at": "2026-10-29T09:21:13.397286+00:00",
+      "output_locator": "evals/evidence/RUN-20261029-POLICY-CANDIDATE.json",
+      "output_sha256": "5847465789645065870f7efb62c134b9977b16dadcee48549eef74adf651e3a3"
+    },
+    {
+      "id": "RUN-20261029-CAPABILITY-FIRST",
+      "kind": "routing",
+      "model": "Codex host-default (exact model ID not exposed)",
+      "prompt_version": "1.0.0-beta.4 candidate; input hashes in evidence",
+      "tool_version": "Codex collaboration and exec_command; exact host tool version not exposed",
+      "case_set_version": "local-smoke-v1 synthetic",
+      "executed_at": "2026-10-29T09:22:52.899153+00:00",
+      "output_locator": "evals/evidence/RUN-20261029-CAPABILITY-FIRST.json",
+      "output_sha256": "9f5b96d9e1feb33ca705604f67f06d543486be35c74cc66e875235d19a539453"
+    },
+    {
+      "id": "RUN-20261029-READONLY-INDEX",
+      "kind": "routing",
+      "model": "Codex host-default (exact model ID not exposed)",
+      "prompt_version": "1.0.0-beta.4 candidate; input hashes in evidence",
+      "tool_version": "Codex collaboration and exec_command; exact host tool version not exposed",
+      "case_set_version": "local-smoke-v1 synthetic",
+      "executed_at": "2026-10-29T15:34:36.831176+00:00",
+      "output_locator": "evals/evidence/RUN-20261029-READONLY-INDEX.json",
+      "output_sha256": "0b8faac5d9cd4f1371a3b800122e00a25808e7ad8cfe944914b5b577978bcfb4"
+    },
+    {
+      "id": "RUN-20261029-CAPABILITY-REUSE",
+      "kind": "routing",
+      "model": "Codex host-default (exact model ID not exposed)",
+      "prompt_version": "1.0.0-beta.4 candidate; input hashes in evidence",
+      "tool_version": "Codex collaboration and exec_command; exact host tool version not exposed",
+      "case_set_version": "local-smoke-v1 synthetic",
+      "executed_at": "2026-10-29T15:35:18.502976+00:00",
+      "output_locator": "evals/evidence/RUN-20261029-CAPABILITY-REUSE.json",
+      "output_sha256": "8fc834e43d9bd740bc51ca430547a380ef9f81cfee1aa743070d9c514eb876f2"
+    },
+    {
+      "id": "RUN-20261029-EXISTING-CONVENTIONS",
+      "kind": "routing",
+      "model": "Codex host-default (exact model ID not exposed)",
+      "prompt_version": "1.0.0-beta.4 candidate; input hashes in evidence",
+      "tool_version": "Codex collaboration and exec_command; exact host tool version not exposed",
+      "case_set_version": "local-smoke-v1 synthetic",
+      "executed_at": "2026-10-29T15:40:01.897024+00:00",
+      "output_locator": "evals/evidence/RUN-20261029-EXISTING-CONVENTIONS.json",
+      "output_sha256": "bee6edaba3d8c8e330d45b16f6a10d7bfc7cf3179a047533d32b430e488e26fe"
+    },
+    {
+      "id": "RUN-20261104-RELEASE-ROUTING",
+      "kind": "routing",
+      "model": "Codex host-default (exact model ID not exposed)",
+      "prompt_version": "1.0.0 candidate; input hashes in evidence",
+      "tool_version": "Codex collaboration and exec_command; exact host tool version not exposed",
+      "case_set_version": "release-v1 synthetic; six cases with input and output preserved",
+      "executed_at": "2026-11-04T06:57:21.508644+00:00",
+      "output_locator": "evals/evidence/RUN-20261104-RELEASE-ROUTING.json",
+      "output_sha256": "68d01cc956431ca9b371231a308bf9e30241ddae0dfcefdad82279bab4862c1c"
+    },
+    {
+      "id": "RUN-20261104-PENDING-REVIEW",
+      "kind": "routing",
+      "model": "Codex host-default (exact model ID not exposed)",
+      "prompt_version": "1.0.0 candidate; input hashes in evidence",
+      "tool_version": "Codex collaboration and exec_command; exact host tool version not exposed",
+      "case_set_version": "pending-review-v1 synthetic; two cases with input and output preserved",
+      "executed_at": "2026-11-04T07:08:53.374785+00:00",
+      "output_locator": "evals/evidence/RUN-20261104-PENDING-REVIEW.json",
+      "output_sha256": "52dc43d5f1709ec5deb1f4bb0914e6fddb771fd7db193b69e7efb05b33a2b704"
+    },
+    {
+      "id": "RUN-20261104-SECURITY-BASELINE",
+      "kind": "routing",
+      "model": "Codex host-default (exact model ID not exposed)",
+      "prompt_version": "1.0.0; source hashes in evidence",
+      "tool_version": "Codex collaboration and exec_command; exact host tool version not exposed",
+      "case_set_version": "security-diff-synthetic-v1; nine cases; resource budget unknown",
+      "executed_at": "2026-11-04T08:17:26.049932+00:00",
+      "output_locator": "evals/evidence/RUN-20261104-SECURITY-BASELINE.json",
+      "output_sha256": "6fd61b8b8ebcb0c117f13b46aed02946a48f61f25d2d8db0e2fe49c66e0bfa35"
+    },
+    {
+      "id": "RUN-20261104-SECURITY-CANDIDATE",
+      "kind": "routing",
+      "model": "Codex host-default (exact model ID not exposed)",
+      "prompt_version": "1.1.0 initial candidate before history-execution clarification; source hashes in evidence",
+      "tool_version": "Codex collaboration and exec_command; exact host tool version not exposed",
+      "case_set_version": "security-diff-synthetic-v1; nine cases; resource budget unknown",
+      "executed_at": "2026-11-04T16:18:49.493920+08:00",
+      "output_locator": "evals/evidence/RUN-20261104-SECURITY-CANDIDATE.json",
+      "output_sha256": "cf4b2b7ce29f48f76ff8f15ba0977eec60a07361b0ea1f590dd802f4ceade2e8"
+    },
+    {
+      "id": "RUN-20261104-SECURITY-FINAL",
+      "kind": "routing",
+      "model": "Codex host-default (exact model ID not exposed)",
+      "prompt_version": "1.1.0 final rule candidate; source hashes in evidence",
+      "tool_version": "Codex collaboration and exec_command; exact host tool version not exposed",
+      "case_set_version": "security-diff-synthetic-v2; eleven cases; resource budget unknown",
+      "executed_at": "2026-11-04T08:37:56.847023+00:00",
+      "output_locator": "evals/evidence/RUN-20261104-SECURITY-FINAL.json",
+      "output_sha256": "5bfe335fdbd2786e6a6b265feb2539f56a19e0d1cb3adb8643052e00c50b93be"
+    },
+    {
+      "id": "RUN-20261105-BOUNDARY-BASELINE",
+      "kind": "routing",
+      "model": "Codex host-default (exact model ID not exposed)",
+      "prompt_version": "1.1.0; source hashes in evidence",
+      "tool_version": "Codex collaboration and exec_command; exact host tool version not exposed",
+      "case_set_version": "final-boundaries-v1 synthetic; eleven cases; resource budget unknown",
+      "executed_at": "2026-11-05T22:30:54.880290+08:00",
+      "output_locator": "evals/evidence/RUN-20261105-BOUNDARY-BASELINE.json",
+      "output_sha256": "fe76851e7ce15c217e275258843a207c6621db2277b549d8b975e07745fa44fd"
+    },
+    {
+      "id": "RUN-20261105-BOUNDARY-CANDIDATE",
+      "kind": "routing",
+      "model": "Codex host-default (exact model ID not exposed)",
+      "prompt_version": "1.1.1 candidate; source hashes in evidence",
+      "tool_version": "Codex collaboration and exec_command; exact host tool version not exposed",
+      "case_set_version": "final-boundaries-v1 synthetic; eleven cases; resource budget unknown",
+      "executed_at": "2026-11-05T14:31:45.023472+00:00",
+      "output_locator": "evals/evidence/RUN-20261105-BOUNDARY-CANDIDATE.json",
+      "output_sha256": "5bba7073ae3fad6ea554c969d978d06e856e547f8e33e3807f42b8d61ce7ee3e"
+    },
+    {
+      "id": "RUN-20261106-ROUTING-BASELINE",
+      "kind": "routing",
+      "model": "Codex host-default (exact model ID not exposed in inherited trial record)",
+      "prompt_version": "1.1.1; source hashes in evidence",
+      "tool_version": "Codex collaboration and exec_command; exact host tool version not exposed",
+      "case_set_version": "cumulative-routing-v1 synthetic; fourteen cases; resource budget unknown",
+      "executed_at": "2026-11-06T08:49:58.435668+08:00",
+      "output_locator": "evals/evidence/RUN-20261106-ROUTING-BASELINE.json",
+      "output_sha256": "36209a6be3e07bdc174b72ce20c0620b748668a4986026248dbedc7a69d6d905"
+    },
+    {
+      "id": "RUN-20261106-ROUTING-CANDIDATE",
+      "kind": "routing",
+      "model": "Codex host-default (exact model ID not exposed in inherited trial record)",
+      "prompt_version": "1.1.2 candidate; source hashes in evidence",
+      "tool_version": "Codex collaboration and exec_command; exact host tool version not exposed",
+      "case_set_version": "cumulative-routing-v1 synthetic; fourteen cases; resource budget unknown",
+      "executed_at": "2026-11-06T08:50:19.335773+08:00",
+      "output_locator": "evals/evidence/RUN-20261106-ROUTING-CANDIDATE.json",
+      "output_sha256": "b51eb05f96a41ca6d3f165cc20fe5eebab1c41c9d9aab8b48d44079fc76e7130"
+    }
+  ]
+}

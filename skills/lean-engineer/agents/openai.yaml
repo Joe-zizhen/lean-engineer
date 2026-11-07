@@ -1,0 +1,6 @@
+interface:
+  display_name: "Lean Engineer"
+  short_description: "先复用能力再最小实现，按风险验证并执行独立审查与多领域检查"
+  default_prompt: "Use $lean-engineer to complete the requested code change or review, reuse project capabilities, follow applicable risk and domain checks, and report actual verification results."
+policy:
+  allow_implicit_invocation: true

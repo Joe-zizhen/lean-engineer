@@ -1,0 +1,398 @@
+{
+  "release": "1.1.0",
+  "recorded_at": "2026-11-04T08:45:36.958113+00:00",
+  "scope": "Conditional security-difference review rules, reference registration and synthetic validation. No business implementation or production security certification.",
+  "source_sha256": {
+    "scripts/validate_package.py": "35af880c1d3c8e515ceb18d3766bbb3a5f826842328b7035a02df72631f362bf",
+    "tests/test_adversarial.py": "e5254c0812f9c78e97878d13d45a1de9c208db53d6ee1581d0f9c513fba56553",
+    "tests/test_validators.py": "1556c010e361a5be94f5d249b3633fac8e7facf9a68c5cb2ac0b8c7435fdac0e",
+    "skills/lean-engineer/references/security-diff-review.md": "4806fef88be68385dc7a2dbbedf121df2feff63a96d3af22a2d6da2ca77959db"
+  },
+  "source_checks": {
+    "started_at": "2026-11-04T08:43:08.315617+00:00",
+    "status": "passed",
+    "checks": [
+      {
+        "name": "candidate-package",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "scripts/validate_package.py",
+          "."
+        ],
+        "cwd": "<workspace>\\candidate",
+        "expected_exit": 0,
+        "exit_code": 0,
+        "duration_seconds": 0.109,
+        "stdout": "{\n  \"ok\": true,\n  \"errors\": [],\n  \"warnings\": [],\n  \"summary\": {\n    \"required_files\": 46,\n    \"markdown_files\": 32,\n    \"local_links_checked\": 86,\n    \"evaluation_definitions\": 44,\n    \"model_runs\": 11\n  }\n}\n",
+        "stderr": ""
+      },
+      {
+        "name": "candidate-tests",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-v"
+        ],
+        "cwd": "<workspace>\\candidate",
+        "expected_exit": 0,
+        "exit_code": 0,
+        "duration_seconds": 8.594,
+        "stdout": "",
+        "stderr": "test_eval_evidence_rejects_internal_directory_link (test_adversarial.AuditClosureTests) ... ok\ntest_eval_evidence_rejects_internal_file_symlink (test_adversarial.AuditClosureTests) ... ok\ntest_eval_reference_matrix_covers_all_cases (test_adversarial.AuditClosureTests) ... ok\ntest_eval_run_count_and_evidence_reject_invalid_records (test_adversarial.AuditClosureTests) ... ok\ntest_eval_status_text_supports_future_nonzero_runs (test_adversarial.AuditClosureTests) ... ok\ntest_performance_measurement_diagnosis_route_is_explicit (test_adversarial.AuditClosureTests) ... ok\ntest_readonly_formal_verification_uses_delegated_output (test_adversarial.AuditClosureTests) ... ok\ntest_readonly_history_routing_does_not_require_implementation (test_adversarial.AuditClosureTests) ... ok\ntest_rereview_history_and_missing_branch (test_adversarial.AuditClosureTests) ... ok\ntest_synthetic_eval_evidence_survives_packaging (test_adversarial.AuditClosureTests) ... ok\ntest_synthetic_eval_run_with_valid_evidence_is_accepted (test_adversarial.AuditClosureTests) ... ok\ntest_parameterized_reviewer_tools_are_rejected (test_adversarial.FinalAuditTests) ... ok\ntest_manifest_root_arrays_return_errors (test_adversarial.MalformedStructureTests) ... ok\ntest_null_and_object_identifiers_return_errors (test_adversarial.MalformedStructureTests) ... ok\ntest_null_eval_lists_return_errors (test_adversarial.MalformedStructureTests) ... ok\ntest_archive_creation_error_is_not_masked_by_cleanup (test_adversarial.PackageAdversarialTests) ... ok\ntest_archive_rejects_unsafe_names_and_corrupt_content (test_adversarial.PackageAdversarialTests) ... ok\ntest_backend_protocol_includes_not_checked (test_adversarial.PackageAdversarialTests) ... ok\ntest_cli_preserves_plugin_default_and_selects_skill_format (test_adversarial.PackageAdversarialTests) ... ok\ntest_cli_relative_output_and_failed_inputs (test_adversarial.PackageAdversarialTests) ... ok\ntest_disable_model_invocation_uses_yaml_boolean (test_adversarial.PackageAdversarialTests) ... ok\ntest_domain_references_are_required (test_adversarial.PackageAdversarialTests) ... ok\ntest_empty_license_is_rejected (test_adversarial.PackageAdversarialTests) ... ok\ntest_eval_schema_is_strict (test_adversarial.PackageAdversarialTests) ... ok\ntest_existing_temporary_archive_is_not_overwritten (test_adversarial.PackageAdversarialTests) ... ok\ntest_external_unknown_cannot_be_controlled_change (test_adversarial.PackageAdversarialTests) ... ok\ntest_frontend_topics_require_evidence_and_sources (test_adversarial.PackageAdversarialTests) ... ok\ntest_implementation_discipline_is_routed_and_complete (test_adversarial.PackageAdversarialTests) ... ok\ntest_json_input_has_a_size_limit (test_adversarial.PackageAdversarialTests) ... ok\ntest_kimi_manifest_rejects_files_for_directories (test_adversarial.PackageAdversarialTests) ... ok\ntest_kimi_manifest_rejects_parent_escape (test_adversarial.PackageAdversarialTests) ... ok\ntest_output_cannot_be_inside_package_root (test_adversarial.PackageAdversarialTests) ... ok\ntest_output_cannot_overwrite_input (test_adversarial.PackageAdversarialTests) ... ok\ntest_package_excludes_backup_cache_and_orig (test_adversarial.PackageAdversarialTests) ... ok\ntest_package_rejects_outside_link (test_adversarial.PackageAdversarialTests) ... ok\ntest_plugin_archive_default_and_file_permissions (test_adversarial.PackageAdversarialTests) ... ok\ntest_quality_gate_preflight_and_ci_handoff (test_adversarial.PackageAdversarialTests) ... ok\ntest_reviewer_policy_cannot_be_overridden_in_body (test_adversarial.PackageAdversarialTests) ... ok\ntest_reviewer_tools_are_host_neutral (test_adversarial.PackageAdversarialTests) ... ok\ntest_risk_and_delivery_status_cover_all_branches (test_adversarial.PackageAdversarialTests) ... ok\ntest_runtime_files_do_not_reference_removed_external_skills (test_adversarial.PackageAdversarialTests) ... ok\ntest_self_review_cases_require_independent_reviewer (test_adversarial.PackageAdversarialTests) ... ok\ntest_skill_archive_is_self_contained (test_adversarial.PackageAdversarialTests) ... ok\ntest_skill_archive_rejects_each_missing_license_file (test_adversarial.PackageAdversarialTests) ... ok\ntest_skill_archive_rejects_missing_entrypoint (test_adversarial.PackageAdversarialTests) ... ok\ntest_standalone_license_and_validator_command (test_adversarial.PackageAdversarialTests) ... ok\ntest_thick_change_requires_gates_and_independent_expectations (test_adversarial.PackageAdversarialTests) ... ok\ntest_thick_eval_cases_have_complete_routing (test_adversarial.PackageAdversarialTests) ... ok\ntest_validation_record_is_current (test_adversarial.PackageAdversarialTests) ... ok\ntest_authorized_no_object_exemption_is_allowed (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_coverage_rejects_invalid_references_evidence_and_questions (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_coverage_requires_valid_checks_and_schema (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_design_model_evidence_is_allowed (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_evidence_requires_baseline_reference (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_full_requires_all_topics (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_invalid_observed_at_fails (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_malformed_fields_return_errors_instead_of_raising (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_malformed_required_topics_return_errors (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_missing_capability_cannot_use_evidence_or_decision (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_missing_capability_contradicts_no_check_object (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_model_only_code_finding_is_rejected (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_model_replay_must_link_to_finding (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_model_resolution_requires_code_replay (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_non_behavior_exemption_allows_current_specification (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_non_behavior_exemption_requires_structured_basis (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_normal_risk_does_not_remove_behavior_requirement (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_orphan_finding_is_rejected (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_placeholder_baseline_cannot_be_ready (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_placeholder_decisions_are_rejected (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_ready_requires_authority (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_release_evidence_baseline_must_match (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_release_evidence_must_link_a_passed_check (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_resolution_evidence_must_link_to_finding (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_resolved_evidence_must_match_current_baseline (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_surface_location_is_required (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_unhashable_evidence_ids_return_errors (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_valid_failed_check_can_complete_coverage (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_candidate_triage_and_agent_inheritance (test_adversarial.ReviewWorkflowContractTests) ... ok\ntest_evaluation_protocol_and_routing_cases (test_adversarial.ReviewWorkflowContractTests) ... ok\ntest_rereview_convergence_contract (test_adversarial.ReviewWorkflowContractTests) ... ok\ntest_rule_feedback_contract (test_adversarial.ReviewWorkflowContractTests) ... ok\ntest_any_error_forces_release_ready_false (test_adversarial.SecondRoundAuditTests) ... ok\ntest_behavior_exemption_requires_structured_basis (test_adversarial.SecondRoundAuditTests) ... ok\ntest_mixed_baseline_supporting_evidence_is_rejected (test_adversarial.SecondRoundAuditTests) ... ok\ntest_reviewer_has_no_shell_or_skill_tools (test_adversarial.SecondRoundAuditTests) ... ok\ntest_reviewer_inline_tools_are_rejected (test_adversarial.SecondRoundAuditTests) ... ok\ntest_reviewer_task_is_rejected (test_adversarial.SecondRoundAuditTests) ... ok\ntest_invalid_project_returns_errors (test_validators.MalformedInputTests) ... ok\ntest_invalid_reference_type_returns_errors (test_validators.MalformedInputTests) ... ok\ntest_non_string_eval_id_returns_errors (test_validators.MalformedInputTests) ... ok\ntest_claude_manifest_checks_agent_path (test_validators.PackageValidatorTests) ... ok\ntest_current_package_is_valid (test_validators.PackageValidatorTests) ... ok\ntest_eval_ids_must_be_unique (test_validators.PackageValidatorTests) ... ok\ntest_eval_input_boundaries (test_validators.PackageValidatorTests) ... ok\ntest_evaluation_activation_warning (test_validators.PackageValidatorTests) ... ok\ntest_frontmatter_reads_metadata_version (test_validators.PackageValidatorTests) ... ok\ntest_license_content_and_distribution_copies (test_validators.PackageValidatorTests) ... ok\ntest_manifest_consistency_in_both_directions (test_validators.PackageValidatorTests) ... ok\ntest_manifest_rejects_session_start (test_validators.PackageValidatorTests) ... ok\ntest_markdown_link_must_exist (test_validators.PackageValidatorTests) ... ok\ntest_missing_capability_reference_is_rejected (test_validators.PackageValidatorTests) ... ok\ntest_package_missing_root_and_optional_checks_do_not_raise (test_validators.PackageValidatorTests) ... ok\ntest_portable_manifest_rejects_unknown_top_level_field (test_validators.PackageValidatorTests) ... ok\ntest_portable_manifest_requires_canonical_schema (test_validators.PackageValidatorTests) ... ok\ntest_security_reference_is_required_without_inbound_links (test_validators.PackageValidatorTests) ... ok\ntest_skill_license_is_required (test_validators.PackageValidatorTests) ... ok\ntest_skill_name_must_match_directory (test_validators.PackageValidatorTests) ... ok\ntest_accepted_risk_requires_human_decision (test_validators.ReviewValidatorTests) ... ok\ntest_behavior_rejects_source_only_evidence (test_validators.ReviewValidatorTests) ... ok\ntest_failed_check_requires_finding (test_validators.ReviewValidatorTests) ... ok\ntest_finding_text_cannot_be_empty (test_validators.ReviewValidatorTests) ... ok\ntest_full_requires_all_declared_topics (test_validators.ReviewValidatorTests) ... ok\ntest_high_risk_surface_requires_behavior_evidence (test_validators.ReviewValidatorTests) ... ok\ntest_not_assessed_does_not_pass_require_ready (test_validators.ReviewValidatorTests) ... ok\ntest_pass_requires_evidence (test_validators.ReviewValidatorTests) ... ok\ntest_ready_rejects_blocked_check (test_validators.ReviewValidatorTests) ... ok\ntest_resolved_finding_requires_resolution_evidence (test_validators.ReviewValidatorTests) ... ok\ntest_specification_cannot_confirm_or_resolve (test_validators.ReviewValidatorTests) ... ok\ntest_template_is_valid_but_not_ready (test_validators.ReviewValidatorTests) ... ok\ntest_unknown_evidence_reference_fails (test_validators.ReviewValidatorTests) ... ok\ntest_valid_ready_review (test_validators.ReviewValidatorTests) ... ok\n\n----------------------------------------------------------------------\nRan 121 tests in 8.438s\n\nOK\n"
+      },
+      {
+        "name": "candidate-quick-.",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "C:\\Users\\Administrator\\.codex\\skills\\.system\\skill-creator\\scripts\\quick_validate.py",
+          "."
+        ],
+        "cwd": "<workspace>\\candidate",
+        "expected_exit": 0,
+        "exit_code": 0,
+        "duration_seconds": 0.078,
+        "stdout": "Skill is valid!\n",
+        "stderr": ""
+      },
+      {
+        "name": "candidate-quick-skills/lean-engineer",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "C:\\Users\\Administrator\\.codex\\skills\\.system\\skill-creator\\scripts\\quick_validate.py",
+          "skills/lean-engineer"
+        ],
+        "cwd": "<workspace>\\candidate",
+        "expected_exit": 0,
+        "exit_code": 0,
+        "duration_seconds": 0.062,
+        "stdout": "Skill is valid!\n",
+        "stderr": ""
+      },
+      {
+        "name": "candidate-ledger-0",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "skills/lean-engineer/scripts/validate_review.py",
+          "skills/lean-engineer/assets/backend-review-template.json"
+        ],
+        "cwd": "<workspace>\\candidate",
+        "expected_exit": 0,
+        "exit_code": 0,
+        "duration_seconds": 0.078,
+        "stdout": "{\n  \"ok\": true,\n  \"errors\": [],\n  \"warnings\": [\n    \"No surfaces registered. This is a template or an incomplete review.\"\n  ],\n  \"summary\": {\n    \"surfaces\": 0,\n    \"checks\": 0,\n    \"findings\": 0,\n    \"review_coverage_complete\": false,\n    \"release_ready\": false\n  }\n}\n",
+        "stderr": ""
+      },
+      {
+        "name": "candidate-ledger-2",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "skills/lean-engineer/scripts/validate_review.py",
+          "skills/lean-engineer/assets/backend-review-template.json",
+          "--require-ready"
+        ],
+        "cwd": "<workspace>\\candidate",
+        "expected_exit": 2,
+        "exit_code": 2,
+        "duration_seconds": 0.063,
+        "stdout": "{\n  \"ok\": true,\n  \"errors\": [],\n  \"warnings\": [\n    \"No surfaces registered. This is a template or an incomplete review.\"\n  ],\n  \"summary\": {\n    \"surfaces\": 0,\n    \"checks\": 0,\n    \"findings\": 0,\n    \"review_coverage_complete\": false,\n    \"release_ready\": false\n  }\n}\n",
+        "stderr": ""
+      },
+      {
+        "name": "candidate-claude-manifest",
+        "command": [
+          "pwsh",
+          "-NoProfile",
+          "-Command",
+          "claude plugin validate --strict ."
+        ],
+        "cwd": "<workspace>\\candidate",
+        "expected_exit": 0,
+        "exit_code": 0,
+        "duration_seconds": 0.656,
+        "stdout": "Validating plugin manifest: <workspace>\\candidate\\.claude-plugin\\plugin.json\n\n√ Validation passed\n",
+        "stderr": ""
+      }
+    ],
+    "completed_at": "2026-11-04T08:43:17.963026+00:00"
+  },
+  "quality_scope": {
+    "complexity": {
+      "status": "not_applicable",
+      "basis": "no_check_object",
+      "scope": "No new or changed production function or class; verified by AST comparison. The only production change is one string in the existing CORE_REFERENCES data list."
+    },
+    "architecture": {
+      "status": "passed",
+      "rule_sources": [
+        "Existing package validator required-file and reference rules",
+        "Existing reviewer readonly policy",
+        "Existing backend JSON schema and risk/verification authorities"
+      ],
+      "production_imports_unchanged": {
+        "scripts/package.py": true,
+        "scripts/validate_package.py": true,
+        "scripts/distribution_rules.py": true,
+        "skills/lean-engineer/scripts/validate_review.py": true
+      },
+      "preserved_contracts": [
+        "reviewer tool permissions",
+        "review JSON schema and template",
+        "risk tiers",
+        "verification states"
+      ]
+    },
+    "production_sha256": {
+      "scripts/package.py": "c14452a3cffbcb538f08107ae2b4cc45bb563320d666e428c4d4e0cfa5c84b93",
+      "scripts/validate_package.py": "35af880c1d3c8e515ceb18d3766bbb3a5f826842328b7035a02df72631f362bf",
+      "scripts/distribution_rules.py": "cd565f6ace5fc7d7544d5d349d275524d51b55be43dbc190dcbc16be9f2208c9",
+      "skills/lean-engineer/scripts/validate_review.py": "8962fe870fe62dcca3fa430039269dabc278560d17b4b7835942cd33c5156fa9"
+    }
+  },
+  "automated_mutation": {
+    "tool": "mutmut 2.5.1 API",
+    "scope": "Only changed production line: mandatory reference registration",
+    "baseline": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.410s\n\nOK\n"
+    },
+    "mutations": [
+      {
+        "line": 40,
+        "index": 0,
+        "diff": "--- \n+++ \n@@ -37,7 +37,7 @@\n     \"risk-gates.md\",\n     \"verification.md\",\n     \"review-protocol.md\",\n-    \"security-diff-review.md\",\n+    \"XXsecurity-diff-review.mdXX\",\n     \"backend-review.md\",\n     \"frontend-review.md\",\n     \"formal-verification.md\",\n",
+        "result": {
+          "exit_code": 1,
+          "stdout": "",
+          "stderr": "FF\n======================================================================\nFAIL: test_current_package_is_valid (test_validators.PackageValidatorTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"<workspace>\\mutation-check\\tests\\test_validators.py\", line 319, in test_current_package_is_valid\n    self.assertTrue(result[\"ok\"], result[\"errors\"])\nAssertionError: False is not true : ['missing required file: skills/lean-engineer/references/XXsecurity-diff-review.mdXX', 'evals/tasks.json.cases[14].expected_references: unknown reference', 'evals/tasks.json.cases[26].expected_references: unknown reference', 'evals/tasks.json.cases[33].expected_references: unknown reference', 'evals/tasks.json.cases[34].expected_references: unknown reference', 'evals/tasks.json.cases[35].expected_references: unknown reference', 'evals/tasks.json.cases[36].expected_references: unknown reference', 'evals/tasks.json.cases[37].expected_references: unknown reference', 'evals/tasks.json.cases[38].expected_references: unknown reference', 'evals/tasks.json.cases[39].expected_references: unknown reference', 'evals/tasks.json.cases[41].expected_references: unknown reference']\n\n======================================================================\nFAIL: test_security_reference_is_required_without_inbound_links (test_validators.PackageValidatorTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"<workspace>\\mutation-check\\tests\\test_validators.py\", line 347, in test_security_reference_is_required_without_inbound_links\n    self.assertIn(f\"missing required file: {relative}\", result[\"errors\"])\nAssertionError: 'missing required file: skills/lean-engineer/references/security-diff-review.md' not found in ['missing required file: skills/lean-engineer/references/XXsecurity-diff-review.mdXX', 'evals/tasks.json.cases[14].expected_references: unknown reference', 'evals/tasks.json.cases[26].expected_references: unknown reference', 'evals/tasks.json.cases[33].expected_references: unknown reference', 'evals/tasks.json.cases[34].expected_references: unknown reference', 'evals/tasks.json.cases[35].expected_references: unknown reference', 'evals/tasks.json.cases[36].expected_references: unknown reference', 'evals/tasks.json.cases[37].expected_references: unknown reference', 'evals/tasks.json.cases[38].expected_references: unknown reference', 'evals/tasks.json.cases[39].expected_references: unknown reference', 'evals/tasks.json.cases[41].expected_references: unknown reference']\n\n----------------------------------------------------------------------\nRan 2 tests in 0.280s\n\nFAILED (failures=2)\n"
+        }
+      }
+    ],
+    "restored": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.271s\n\nOK\n"
+    }
+  },
+  "routing_regression": {
+    "finding": "SEC-AUD-002",
+    "type": "targeted contract green-red-green, separate from automated production mutation",
+    "results": [
+      {
+        "phase": "green_before",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "test_adversarial.AuditClosureTests.test_readonly_history_routing_does_not_require_implementation"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ".\n----------------------------------------------------------------------\nRan 1 test in 0.005s\n\nOK\n"
+      },
+      {
+        "phase": "red_known_bad_requirement",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "test_adversarial.AuditClosureTests.test_readonly_history_routing_does_not_require_implementation"
+        ],
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "\n======================================================================\nFAIL: test_readonly_history_routing_does_not_require_implementation (test_adversarial.AuditClosureTests) (case='security-history-not-execution-permission')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"<workspace>\\routing-replay\\tests\\test_adversarial.py\", line 1114, in test_readonly_history_routing_does_not_require_implementation\n    self.assertNotIn(\"implementation.md\", references)\nAssertionError: 'implementation.md' unexpectedly found in ['security-diff-review.md', 'verification.md', 'review-protocol.md', 'implementation.md']\n\n----------------------------------------------------------------------\nRan 1 test in 0.007s\n\nFAILED (failures=1)\n"
+      },
+      {
+        "phase": "green_after",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "test_adversarial.AuditClosureTests.test_readonly_history_routing_does_not_require_implementation"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ".\n----------------------------------------------------------------------\nRan 1 test in 0.006s\n\nOK\n"
+      }
+    ]
+  },
+  "fixture_checks": {
+    "status": "passed",
+    "probes": [
+      {
+        "case": "case-a",
+        "entry": "detail",
+        "expected": {
+          "before": [
+            "alpha",
+            "denied"
+          ],
+          "after": [
+            "alpha",
+            "beta"
+          ]
+        },
+        "actual": {
+          "before": [
+            "alpha",
+            "denied"
+          ],
+          "after": [
+            "alpha",
+            "beta"
+          ]
+        }
+      },
+      {
+        "case": "case-b",
+        "entry": "detail",
+        "expected": {
+          "before": [
+            "alpha",
+            "denied"
+          ],
+          "after": [
+            "alpha",
+            "denied"
+          ]
+        },
+        "actual": {
+          "before": [
+            "alpha",
+            "denied"
+          ],
+          "after": [
+            "alpha",
+            "denied"
+          ]
+        }
+      },
+      {
+        "case": "case-b",
+        "entry": "task",
+        "expected": {
+          "before": [
+            "alpha",
+            "denied"
+          ],
+          "after": [
+            "alpha",
+            "beta"
+          ]
+        },
+        "actual": {
+          "before": [
+            "alpha",
+            "denied"
+          ],
+          "after": [
+            "alpha",
+            "beta"
+          ]
+        }
+      },
+      {
+        "case": "case-c",
+        "entry": "detail",
+        "expected": {
+          "before": [
+            "alpha",
+            "denied"
+          ],
+          "after": [
+            "alpha",
+            "denied"
+          ]
+        },
+        "actual": {
+          "before": [
+            "alpha",
+            "denied"
+          ],
+          "after": [
+            "alpha",
+            "denied"
+          ]
+        }
+      },
+      {
+        "case": "case-c",
+        "entry": "task",
+        "expected": {
+          "before": [
+            "alpha",
+            "denied"
+          ],
+          "after": [
+            "alpha",
+            "denied"
+          ]
+        },
+        "actual": {
+          "before": [
+            "alpha",
+            "denied"
+          ],
+          "after": [
+            "alpha",
+            "denied"
+          ]
+        }
+      },
+      {
+        "case": "case-d",
+        "side": "before",
+        "expected": "denied",
+        "actual": "denied"
+      },
+      {
+        "case": "case-d",
+        "side": "after",
+        "expected": "sensitive export",
+        "actual": "sensitive export"
+      },
+      {
+        "case": "case-f",
+        "expected": "org-z (contract violation)",
+        "actual": "org-z"
+      }
+    ]
+  },
+  "host_load": {
+    "command": [
+      "pwsh",
+      "-NoProfile",
+      "-Command",
+      "claude --plugin-dir . plugin list"
+    ],
+    "exit_code": 0,
+    "stdout": "Session-only plugins (--plugin-dir / --plugin-url):\n\n  > lean-engineer@inline\n    Version: 1.1.0\n    Path: <workspace>\\candidate\n    Status: √ loaded\n\n",
+    "stderr": "",
+    "redactions": "Unrelated host plugins omitted and local work path substituted."
+  },
+  "independent_audit_note": "Three completed rounds; SEC-AUD-002 resolved in round 3, no new or unresolved confirmed findings. Service invocations without completed reports were not counted as passed audits.",
+  "final_artifact_note": "Final archives and verification sidecar are built after adding audit records and final prose; their checksums are external to the ZIP to avoid self-reference.",
+  "independent_audit": {
+    "status": "passed",
+    "rounds": 3,
+    "finding": "SEC-AUD-002",
+    "finding_status": "resolved",
+    "new_confirmed_findings": 0,
+    "unresolved_confirmed_findings": 0,
+    "report_locator": "RELEASE-1.1.0-AUDIT-R3.json",
+    "artifact_postcondition": "Rebuild after adding this report and final prose; compare source bytes and rerun extraction checks."
+  }
+}

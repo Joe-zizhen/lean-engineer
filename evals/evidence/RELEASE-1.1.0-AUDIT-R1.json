@@ -1,0 +1,178 @@
+{
+  "report_type": "独立对抗审计",
+  "version": "1.1.0",
+  "round": 1,
+  "round_limit": 3,
+  "history_consistency": "not_applicable",
+  "history_reason": "1.0.0正式版完成后的新任务首轮，未重开旧版已关闭发现。",
+  "defect_count": 0,
+  "findings": [],
+  "old_id_mapping": [],
+  "unresolved_findings": [],
+  "independence": "审查者未参与候选实现，未修改候选、未运行测试/构建/安装/夹具，仅读取严格UTF-8文本、枚举文件和计算哈希；仅写本报告。",
+  "requirements": [
+    "安全保护历史溯源",
+    "同一安全不变量的必要传递路径",
+    "可达性、状态条件和有效防护反证",
+    "保留普通小改、原风险、证据、权限及复审规则",
+    "不按调用数定严重度、不增加平行流程"
+  ],
+  "baseline": {
+    "original": "baseline/，1.0.0",
+    "current": "candidate/，1.1.0",
+    "git": "非Git目录，使用完整清单、SHA-256和副本对照",
+    "baseline_files": 59,
+    "candidate_files": 60,
+    "changed_files": 15,
+    "new_files": 1,
+    "deleted_files": 0,
+    "manifest_mismatches": 0,
+    "unlisted_changes": 0,
+    "missing_changes": 0,
+    "manifest_sha256": "993489F5AD30D843F0A983C0F3E5EEDB6366CEA29516A05AD6A3F336F0234A8B",
+    "diff_sha256": "109653C399D634E67BB2AA4056919B7A60496342D950ED28BF349C76C11ED639",
+    "encoding": "候选60个分发文件均已通过显式UTF-8严格解码，未发现解码异常",
+    "production_check": "scripts/validate_package.py删除新增security-diff-review.md注册行后与基线完全一致；其他生产脚本哈希相同，生产函数无变化。"
+  },
+  "actual_read_modules": [
+    "SKILL.md兼容入口",
+    "skills/lean-engineer/SKILL.md",
+    "references/review-protocol.md",
+    "references/security-diff-review.md",
+    "references/risk-gates.md",
+    "references/verification.md",
+    "references/backend-review.md",
+    "references/frontend-review.md",
+    "references/backend/identity-access.md",
+    "references/backend/security-runtime.md",
+    "references/backend/ledger-contract.md",
+    "agents/lean-reviewer.md",
+    "evals/README.md",
+    "README.md",
+    "NOTICE",
+    "3个plugin清单",
+    "全部变更diff及变更测试上下文",
+    "evals/tasks.json全部语义变化",
+    "plan.md",
+    "全部合成夹具和SPEC/HISTORY",
+    "scenario-oracles.json",
+    "两版模型试用全部18条答案及读取哈希",
+    "source-checks.json",
+    "mutation-checks.json",
+    "fixture-checks.json",
+    "research/manifest.json及四份固定Git blob来源快照"
+  ],
+  "coverage": {
+    "requirements": "已覆盖批准范围，各新增方法均接回原协议。",
+    "rules": "主入口和独审入口均路由；前后端quick明确传递例外；原风险等级、三道门、证据和复审历史均保留。",
+    "security": "检查历史不足、未知边、条件状态、有效防护、权限与来源边界；无工具权限扩大。",
+    "evidence": "完整清单与哈希独立核对；测试输出与两版试用、固定oracle、源码逐项比对；上游固定blob对照完成。发布归档与最终产物复检尚待收尾。"
+  },
+  "adversarial_checks": [
+    {
+      "result": "规则明确不按数量触发；未知先取证而非默认安全；候选试用保持小改与行为验证缺口。",
+      "topic": "触发与退出",
+      "counterexample": "80处按钮引用但仅展示文案变化，或者共享变更是否安全相关尚未知。",
+      "status": "passed"
+    },
+    {
+      "result": "后端登记例外与安全专题共同要求追到敏感结果，case-b试用实际追到enqueue/dispatch/service/storage。不宣称full。",
+      "topic": "quick传递路径",
+      "counterexample": "HTTP有租户校验，任务经registry/service绕开HTTP。",
+      "status": "passed"
+    },
+    {
+      "result": "case-d确认源码条件缺陷；case-c拒绝误报。规则不排除特定状态，不把删除保护直接视为漏洞。",
+      "topic": "状态与防护反证",
+      "counterexample": "入队时admin、执行前撤权；或service检查删除但storage仍检查。",
+      "status": "passed"
+    },
+    {
+      "result": "case-a可相对快照确认introduced；case-f保留当前源码发现并使用origin_unknown/归因blocked。",
+      "topic": "无Git与缺历史",
+      "counterexample": "有原始/当前文件但无Git，或仅当前源码缺旧版。",
+      "status": "passed"
+    },
+    {
+      "result": "已知路径有效不外推；候选报告整体覆盖blocked/partial，不虚构漏洞或安全。",
+      "topic": "未知调用方",
+      "counterexample": "外部插件不可读且要求所有入口。",
+      "status": "passed"
+    },
+    {
+      "result": "文本明确source/runtime界限、隔离授权、只读方委托执行；agent工具清单与基线一致。",
+      "topic": "证据权限",
+      "counterexample": "仅source便宣称部署安全，或为复现执行真实生产操作。",
+      "status": "passed"
+    },
+    {
+      "result": "沿原六专题与补充记录汇总；schema、模板、校验器均未改；空台账仍非ready。",
+      "topic": "台账兼容",
+      "counterexample": "将新专题当成第七topic或只凭结构通过整体完成。",
+      "status": "passed"
+    },
+    {
+      "result": "case-a固定P1契约得到保留；规则按资产权限后果判断。",
+      "topic": "调用数与严重度",
+      "counterexample": "唯一敏感入口跨租户泄露被降级。",
+      "status": "passed"
+    }
+  ],
+  "verification": {
+    "source_checks": "已读取7条命令真实记录：包校验0、120项unittest通过、两个quick入口0、台账普通0/require-ready为2、Claude严格manifest0。由主agent执行，审查者未复跑。",
+    "mutation": "已读取mutmut 2.5.1 API输出：改动注册字符串唯一变异体导致两个相关测试失败，恢复后再次通过。此证据仅覆盖生产注册行。",
+    "fixtures": "已核对8条行为探针的预期/实际输出与SPEC和源码一致；均为隔离合成字典/任务夹具，不代表生产行为。",
+    "model_trials": "同一9场景两版试用，输入SHA-256一致；全部actual_read_files声明哈希匹配；两版主要判断均符合固定oracle。",
+    "model_effect_limit": "两版均能给出主要正确结论，不支持检出率改善或因果优势；单次合成运行、缺精确模型/工具/预算元数据及无skill组，不支持稳定性或严格三组效果对照。",
+    "test_sufficiency": "当前范围的注册机器检查、破坏反验与九场景行为试用足以支撑有限方法接入核验；不是所有领域、真实事故或生产认证。"
+  },
+  "non_defect_observations": [
+    {
+      "disposition": "主agent已同步概述并在本轮补充复查，单句变化已验证；不计缺陷。",
+      "id": "OBS-QUICK-SUMMARY",
+      "observation": "quick只覆盖diff和直接影响仍为旧概述，权威专题已明确必要传递例外。",
+      "location": "candidate/README.md:158"
+    },
+    {
+      "disposition": "进行中的发布待办，当前未虚报完成，不计确认缺陷；最终交付前须归档真实输出及哈希并同步计数、验证记录。",
+      "id": "OBS-RELEASE-ARCHIVE",
+      "observation": "本轮两份模型输出尚未进入包内runs/evidence；VALIDATION明确标为正在验证。",
+      "location": "candidate/evals/runs.json、candidate/VALIDATION.md"
+    }
+  ],
+  "unknowns": [
+    {
+      "status": "not_run",
+      "id": "LIMIT-FINAL-RELEASE",
+      "detail": "两形态最终压缩包、归档复检、源目录漂移核对、安装后读回不在本轮已提供15项候选快照中，须在发布收尾核验；本报告不授权发布。"
+    },
+    {
+      "status": "unknown",
+      "id": "LIMIT-EMPIRICAL",
+      "detail": "真实项目、跨模型稳定性和生产效果未验证；不得把本次合成试用解释为真实缺陷指标。"
+    }
+  ],
+  "independent_review": "completed_with_limits",
+  "delivery": "partial",
+  "release_ready": false,
+  "conclusion": "本轮确认缺陷0项。所审候选变更与授权方向一致，未发现需要修改规则或生产函数的确认缺陷。来源快照已按固定blob完成有限对照；README补充单句已核验。零发现仅限所审快照，最终证据归档、清单更新和发行复检仍须完成，不可将本报告写成最终发行verified。",
+  "next_review": "若只是归档与摘要同步，逐项核对新diff、原哈希和记录一致性；若规则或脚本再改，保持轮次历史并由独立方复验。",
+  "source_provenance_review": {
+    "status": "passed_with_limits",
+    "identity": "四份快照的SHA-256与Git blob SHA-1均独立核对一致，blob与plan.md记录一致。",
+    "observed": "候选没有纳入上游脚本、命令、示例或漏洞模板；中文条文按既有风险/证据/独审契约重新组织，保留来源链接。未发现逐段翻译或原文复制的可确认迹象。",
+    "rejected_rules": "未引入仓库大小分档、调用数严重度映射、仅diff过滤、特定状态问题排除、固定多agent模型、切换工作目录或自动发评论。",
+    "license_boundary": "已读取Trail of Bits来源许可标识及相关条款；这是来源与分发内容审查，不提供法律保证，不将一般方法相似直接推断为侵权。",
+    "upstream_bundled": false
+  },
+  "in_round_addendum": {
+    "reason": "报告保存后收到首轮补充证据与README单句同步；补充仍属本轮，不是修复已发布缺陷后的新轮次。",
+    "readme_sha256": "E515E5C17503A5CEB76CFD2F9F424301865AB0630D65FA1E7655179672F014B7",
+    "verified": "逆向恢复该句后README哈希等于原清单，确认仅此句改变；其余14项哈希不变。",
+    "manifest_state": "change-manifest.json和changes.diff仍描述初始15项快照，当前README已漂移；最终交付须刷新清单，不得把初始清单当最终哈希。"
+  },
+  "distribution_redaction": {
+    "original_sha256": "8ce413249e1de17b002e62ee525a81f6ffea51fe58ff3a0f1eb2f21b9bf05996",
+    "scope": "Local workspace path substitution only; audit judgments and hashes unchanged."
+  }
+}

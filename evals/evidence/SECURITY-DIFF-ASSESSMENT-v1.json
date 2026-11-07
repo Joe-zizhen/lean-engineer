@@ -1,0 +1,305 @@
+{
+  "kind": "synthetic routing and source-review trial",
+  "fixed_oracles": {
+    "kind": "synthetic",
+    "fixed_before_model_execution": true,
+    "basis": "User-approved scope plus supplied fixture contracts; no actual accident dataset",
+    "expectations": {
+      "security-guard-history": "Current cross-tenant read violates supplied contract; removal is introduced relative to supplied snapshot. Historical note is synthetic, not a real commit or incident.",
+      "security-transitive-worker": "HTTP detail still denies cross-tenant access; enqueue -> dispatch -> service -> storage leaks after the change. Trace indirect path and do not claim deployment or complete unrelated review.",
+      "security-effective-guard": "Both HTTP and task paths retain storage-level tenant enforcement; do not report a vulnerability solely from deletion of redundant service validation. Source-only scope remains explicit.",
+      "security-no-git": "Supplied original/current snapshots support behavior comparison without Git. Do not fabricate commit history; do not block all current-source work merely because Git is absent.",
+      "security-dynamic-unknown": "Known local paths retain protection; unavailable plugin edge prevents claiming all-entry coverage. Missing mandatory evidence remains a gap, not proof of vulnerability or safety.",
+      "security-state-dependent": "Revocation between enqueue and execute makes the changed authorization wrong. A state-dependent defect is not automatically excluded; no real-world harm magnitude is given.",
+      "security-one-caller": "Case-a contract explicitly classifies reachable cross-tenant disclosure as P1 regardless of one caller; do not count callers to reduce severity.",
+      "security-unrelated-many-callers": "Display-only change remains ordinary and does not require security tracing or thick-review gates solely from 80 uses. Relevant ordinary checks remain required.",
+      "security-missing-baseline": "Current implementation violates organization isolation, but origin is unknown; cannot attribute it to the current change. History gap does not erase current-source finding."
+    }
+  },
+  "versions": [
+    {
+      "version": "baseline",
+      "cases": [
+        {
+          "id": "security-guard-history",
+          "expected_findings": 1,
+          "observed_findings": 1,
+          "source_hash_checks": "passed",
+          "assessment": "Core finding and boundary judgments matched the fixed oracle on manual review; does not certify all possible assertions."
+        },
+        {
+          "id": "security-transitive-worker",
+          "expected_findings": 1,
+          "observed_findings": 1,
+          "source_hash_checks": "passed",
+          "assessment": "Core finding and boundary judgments matched the fixed oracle on manual review; does not certify all possible assertions."
+        },
+        {
+          "id": "security-effective-guard",
+          "expected_findings": 0,
+          "observed_findings": 0,
+          "source_hash_checks": "passed",
+          "assessment": "Core finding and boundary judgments matched the fixed oracle on manual review; does not certify all possible assertions."
+        },
+        {
+          "id": "security-no-git",
+          "expected_findings": 1,
+          "observed_findings": 1,
+          "source_hash_checks": "passed",
+          "assessment": "Core finding and boundary judgments matched the fixed oracle on manual review; does not certify all possible assertions."
+        },
+        {
+          "id": "security-dynamic-unknown",
+          "expected_findings": 0,
+          "observed_findings": 0,
+          "source_hash_checks": "passed",
+          "assessment": "Core finding and boundary judgments matched the fixed oracle on manual review; does not certify all possible assertions."
+        },
+        {
+          "id": "security-state-dependent",
+          "expected_findings": 1,
+          "observed_findings": 1,
+          "source_hash_checks": "passed",
+          "assessment": "Core finding and boundary judgments matched the fixed oracle on manual review; does not certify all possible assertions."
+        },
+        {
+          "id": "security-one-caller",
+          "expected_findings": 1,
+          "observed_findings": 1,
+          "source_hash_checks": "passed",
+          "assessment": "Core finding and boundary judgments matched the fixed oracle on manual review; does not certify all possible assertions."
+        },
+        {
+          "id": "security-unrelated-many-callers",
+          "expected_findings": 0,
+          "observed_findings": 0,
+          "source_hash_checks": "passed",
+          "assessment": "Core finding and boundary judgments matched the fixed oracle on manual review; does not certify all possible assertions."
+        },
+        {
+          "id": "security-missing-baseline",
+          "expected_findings": 1,
+          "observed_findings": 1,
+          "source_hash_checks": "passed",
+          "assessment": "Core finding and boundary judgments matched the fixed oracle on manual review; does not certify all possible assertions."
+        }
+      ]
+    },
+    {
+      "version": "candidate",
+      "cases": [
+        {
+          "id": "security-guard-history",
+          "expected_findings": 1,
+          "observed_findings": 1,
+          "source_hash_checks": "passed",
+          "assessment": "Core finding and boundary judgments matched the fixed oracle on manual review; does not certify all possible assertions."
+        },
+        {
+          "id": "security-transitive-worker",
+          "expected_findings": 1,
+          "observed_findings": 1,
+          "source_hash_checks": "passed",
+          "assessment": "Core finding and boundary judgments matched the fixed oracle on manual review; does not certify all possible assertions."
+        },
+        {
+          "id": "security-effective-guard",
+          "expected_findings": 0,
+          "observed_findings": 0,
+          "source_hash_checks": "passed",
+          "assessment": "Core finding and boundary judgments matched the fixed oracle on manual review; does not certify all possible assertions."
+        },
+        {
+          "id": "security-no-git",
+          "expected_findings": 1,
+          "observed_findings": 1,
+          "source_hash_checks": "passed",
+          "assessment": "Core finding and boundary judgments matched the fixed oracle on manual review; does not certify all possible assertions."
+        },
+        {
+          "id": "security-dynamic-unknown",
+          "expected_findings": 0,
+          "observed_findings": 0,
+          "source_hash_checks": "passed",
+          "assessment": "Core finding and boundary judgments matched the fixed oracle on manual review; does not certify all possible assertions."
+        },
+        {
+          "id": "security-state-dependent",
+          "expected_findings": 1,
+          "observed_findings": 1,
+          "source_hash_checks": "passed",
+          "assessment": "Core finding and boundary judgments matched the fixed oracle on manual review; does not certify all possible assertions."
+        },
+        {
+          "id": "security-one-caller",
+          "expected_findings": 1,
+          "observed_findings": 1,
+          "source_hash_checks": "passed",
+          "assessment": "Core finding and boundary judgments matched the fixed oracle on manual review; does not certify all possible assertions."
+        },
+        {
+          "id": "security-unrelated-many-callers",
+          "expected_findings": 0,
+          "observed_findings": 0,
+          "source_hash_checks": "passed",
+          "assessment": "Core finding and boundary judgments matched the fixed oracle on manual review; does not certify all possible assertions."
+        },
+        {
+          "id": "security-missing-baseline",
+          "expected_findings": 1,
+          "observed_findings": 1,
+          "source_hash_checks": "passed",
+          "assessment": "Core finding and boundary judgments matched the fixed oracle on manual review; does not certify all possible assertions."
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "One batched execution per version; cases share context inside each version.",
+    "Actual model identifier, exact host tool version and resource budget were not exposed; this is not a strictly controlled causal or statistical performance comparison.",
+    "Read lists are agent-reported. File hashes identify the supplied/read-reported material but do not independently prove every reading action.",
+    "Both versions identified the principal seeded failures and rejected the protected-path false positive; no claim of improved defect recall or production security follows."
+  ],
+  "fixture_execution": {
+    "status": "passed",
+    "probes": [
+      {
+        "case": "case-a",
+        "entry": "detail",
+        "expected": {
+          "before": [
+            "alpha",
+            "denied"
+          ],
+          "after": [
+            "alpha",
+            "beta"
+          ]
+        },
+        "actual": {
+          "before": [
+            "alpha",
+            "denied"
+          ],
+          "after": [
+            "alpha",
+            "beta"
+          ]
+        }
+      },
+      {
+        "case": "case-b",
+        "entry": "detail",
+        "expected": {
+          "before": [
+            "alpha",
+            "denied"
+          ],
+          "after": [
+            "alpha",
+            "denied"
+          ]
+        },
+        "actual": {
+          "before": [
+            "alpha",
+            "denied"
+          ],
+          "after": [
+            "alpha",
+            "denied"
+          ]
+        }
+      },
+      {
+        "case": "case-b",
+        "entry": "task",
+        "expected": {
+          "before": [
+            "alpha",
+            "denied"
+          ],
+          "after": [
+            "alpha",
+            "beta"
+          ]
+        },
+        "actual": {
+          "before": [
+            "alpha",
+            "denied"
+          ],
+          "after": [
+            "alpha",
+            "beta"
+          ]
+        }
+      },
+      {
+        "case": "case-c",
+        "entry": "detail",
+        "expected": {
+          "before": [
+            "alpha",
+            "denied"
+          ],
+          "after": [
+            "alpha",
+            "denied"
+          ]
+        },
+        "actual": {
+          "before": [
+            "alpha",
+            "denied"
+          ],
+          "after": [
+            "alpha",
+            "denied"
+          ]
+        }
+      },
+      {
+        "case": "case-c",
+        "entry": "task",
+        "expected": {
+          "before": [
+            "alpha",
+            "denied"
+          ],
+          "after": [
+            "alpha",
+            "denied"
+          ]
+        },
+        "actual": {
+          "before": [
+            "alpha",
+            "denied"
+          ],
+          "after": [
+            "alpha",
+            "denied"
+          ]
+        }
+      },
+      {
+        "case": "case-d",
+        "side": "before",
+        "expected": "denied",
+        "actual": "denied"
+      },
+      {
+        "case": "case-d",
+        "side": "after",
+        "expected": "sensitive export",
+        "actual": "sensitive export"
+      },
+      {
+        "case": "case-f",
+        "expected": "org-z (contract violation)",
+        "actual": "org-z"
+      }
+    ]
+  }
+}

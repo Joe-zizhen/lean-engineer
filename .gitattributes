@@ -1,0 +1,4 @@
+# Preserve source and archived evidence bytes across platforms.
+* -text
+# Archived JSON evidence may retain original CRLF line endings.
+evals/evidence/*.json whitespace=cr-at-eol

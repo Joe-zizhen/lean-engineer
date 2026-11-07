@@ -1,0 +1,178 @@
+{
+  "executed_at": "2026-11-04T06:57:21.5086449Z",
+  "input_raw": "[\n  {\n    \"id\": \"additive-display-field-closed\",\n    \"query\": \"现有响应增加可选 displayName 展示字段，直接使用已有可公开值，无新增 I/O 或副作用；既有字段、默认行为、错误语义、权限、隐私、数据含义和资源预算均不变。全部受支持调用方及版本已逐一点名，严格解析和字段枚举已核对，旧调用方兼容与新增字段行为测试已实际通过，回退方式明确。独立审查尚未执行。请按 skill 判定风险、剩余要求及当前交付状态。\"\n  },\n  {\n    \"id\": \"additive-field-unknown-client\",\n    \"query\": \"给已发布响应增加可选展示字段，发布者说应该向后兼容，但无法列全仓库外调用方和旧版本，也没有它们的解析兼容证据。请按 skill 判定风险与必要检查。\"\n  },\n  {\n    \"id\": \"resource-ownership-transfer\",\n    \"query\": \"工厂函数创建连接，初始化失败时自行关闭；成功时把连接返回调用方，调用方在 finally 中关闭，借用者不关闭。请按 skill 评价这种资源释放责任安排是否必须改为同层释放，以及仍需验证什么。\"\n  },\n  {\n    \"id\": \"mobile-permission-revocation\",\n    \"query\": \"只读审查 Android App 的权限撤销和进程重建处理，目前只能读源码，没有设备或运行日志。请按 skill 给出检查范围和可作出的结论。\"\n  },\n  {\n    \"id\": \"device-safety-deadline\",\n    \"query\": \"设备安全保护任务的截止时间判断将被修改，超时可能损坏设备。只有平均延迟日志，没有最坏情况分析或安全台架，也没有独立审查。请按 skill 决定验证与交付要求，不进行实际设备操作。\"\n  },\n  {\n    \"id\": \"pipeline-join-grain\",\n    \"query\": \"只读审查报表数据管道：JOIN 后总金额与基线相同，但不同租户的行数和金额出现一增一减，任务退出码为 0。请按 skill 给出应核对的证据和当前能否判定数据正确。\"\n  }\n]",
+  "input_sha256": "7edcfb92a2a3ba0e41b45ae8a097c4c6ec5fac95889b176b7f3a97949654dfbb",
+  "read_file_sha256": {
+    "skills/lean-engineer/references/backend-review.md": "7de7d0ab859dd442b1fdd5b9b560bd339bac1161f674026ad2da61f77a032ea0",
+    "skills/lean-engineer/references/backend/api-contracts.md": "9456aeef7af936233fdfc862091aab1e53e60f009473bc39435eb1b02f2da8f1",
+    "skills/lean-engineer/references/domains/data-engineering.md": "691d2aa4f28716704646272024534d0e20300da18ef90d32788d6125821b69d6",
+    "skills/lean-engineer/references/domains/embedded.md": "7dadbb0ba1eecaf503273f3e715d2eeccb8a2bc593208c83088d6af1b162403c",
+    "skills/lean-engineer/references/domains/mobile.md": "6289cb5bbad029a38de95e2cd9f36fe58143ffe68d42e20a4f205ec52fb6cc30",
+    "skills/lean-engineer/references/formal-verification.md": "cd09492617109f93472492f3dc56637c5f9f07bc29aa40307d08b3a587378057",
+    "skills/lean-engineer/references/implementation.md": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4",
+    "skills/lean-engineer/references/review-protocol.md": "c8b7969d9e2a95a7275216937d990c694aa98097abc5a4cc2db6b5be55354c99",
+    "skills/lean-engineer/references/risk-gates.md": "1156aa3397872cc727b19b77ceb79d9741d3f88f649a7e792ccf3530bf302fd4",
+    "skills/lean-engineer/references/verification.md": "6e830bdb906fd7eab42a9db8f699e74632d985eff13f14afc9ab4e9161a28ee2",
+    "skills/lean-engineer/SKILL.md": "50bd2c00fb18cb26cb86cbd498d1a7b4b37c3f7c02b182c4389c26d20b18d68d"
+  },
+  "cases": [
+    {
+      "id": "additive-display-field-closed",
+      "read_files": [
+        "skills/lean-engineer/SKILL.md",
+        "skills/lean-engineer/references/risk-gates.md",
+        "skills/lean-engineer/references/review-protocol.md",
+        "skills/lean-engineer/references/verification.md",
+        "skills/lean-engineer/references/backend-review.md",
+        "skills/lean-engineer/references/backend/api-contracts.md",
+        "skills/lean-engineer/references/formal-verification.md"
+      ],
+      "answer": {
+        "risk": "证据闭合的兼容性增补，可按受控大改执行；不是小改。独立审查是尚未完成的必需门，不能因此宣称例外的全部验收条件已满足。",
+        "necessary_actions": [
+          "列出 producer、consumer 及版本、增补字段、失败路径和回退方法，关联题设已通过的契约、旧调用方兼容与新增行为证据，并核对 schema、生成代码和手写 consumer 同基线。",
+          "由未参与实现的独立方核对新增范围、公开数据依据、严格解析和枚举路径、期望值来源、边界反例及实际测试输出。自审不得替代。",
+          "如新增或修改了关键契约测试，仍需该测试可失败的绿—红—绿实际记录；题设未给出这一条件是否适用及记录，不得自行补成通过。",
+          "不存在其他触发因素时，不自动要求厚审三道质量门。解析器只有在普通测试难覆盖可判定性质时才建立模型，不凭字段新增强行建模。"
+        ],
+        "conclusion": "independent_review=not_run；交付 partial。若无法获得独立方则为 blocked，仍为 partial。独立核对及所有其他适用必需项通过后才可 verified；发现增补前提不满足或未知则按厚审处理。",
+        "basis": [
+          "risk-gates：兼容性增补的允许范围、独立核对及 partial 条款；各档最低要求。",
+          "review-protocol：独立性与输入边界；verification：证据状态、关键契约测试与完成判定。",
+          "backend/api-contracts：新增可选字段消费者实测与同基线要求。"
+        ]
+      }
+    },
+    {
+      "id": "additive-field-unknown-client",
+      "read_files": [
+        "skills/lean-engineer/SKILL.md",
+        "skills/lean-engineer/references/risk-gates.md",
+        "skills/lean-engineer/references/review-protocol.md",
+        "skills/lean-engineer/references/verification.md",
+        "skills/lean-engineer/references/backend-review.md",
+        "skills/lean-engineer/references/backend/api-contracts.md",
+        "skills/lean-engineer/references/formal-verification.md"
+      ],
+      "answer": {
+        "risk": "厚审大改。已发布响应的形状变化触发大改，外部调用方与旧版本未知，不能适用兼容性增补例外。发布者的兼容声明不是运行证据。",
+        "necessary_actions": [
+          "枚举可知 producer、consumer、版本、字段与默认/错误语义、信任边界和兼容窗口；无法搜索的外部调用方记 unknown，搜索无命中仅记 not_found(scope)。",
+          "核对 schema、生成代码与手写消费者；针对未知字段拒绝、严格反序列化、字段枚举、旧 consumer 对新 producer、新 consumer 对旧 producer 做契约和行为验证。不得把一个真实调用方通过外推给全部外部调用方。",
+          "记录失败路径、兼容与回退办法，尝试独立审查，执行相关项目检查、风险专项、真实场景，以及复杂度、测试与变异、架构约束三门。纯无代码检查对象才可有依据豁免；缺工具或配置不是豁免。",
+          "取得实际实现与项目环境后再选择可判定的解析性质和验证方式；本题没有源码，不宣称已做形式化验证或测试。"
+        ],
+        "conclusion": "当前不能 verified；兼容证据缺失的必需项为 blocked，其余尚未执行项为 not_run，在无已证实失败项的题设下为 partial。未知调用方不得被标为闭合或兼容已证明；即使其他门通过也须保留该缺口，由授权者决定发布或风险接受。",
+        "basis": [
+          "risk-gates：对外调用方不在仓库或不能列全按厚审；unknown 不等于闭合。",
+          "verification：厚审三门与 blocked/not_run 状态。",
+          "backend/api-contracts：真实 consumer 与旧新组合的反例。"
+        ]
+      }
+    },
+    {
+      "id": "resource-ownership-transfer",
+      "read_files": [
+        "skills/lean-engineer/SKILL.md",
+        "skills/lean-engineer/references/risk-gates.md",
+        "skills/lean-engineer/references/implementation.md",
+        "skills/lean-engineer/references/review-protocol.md",
+        "skills/lean-engineer/references/verification.md"
+      ],
+      "answer": {
+        "risk": "这是给定资源责任方案的只读评价，没有实际 diff，不能仅据模式定一个改动风险档；也没有证据要求将其改为同层释放。为回答该规则本身，专门阅读了实现纪律的责任定义。",
+        "necessary_actions": [
+          "保留工厂失败时清理、成功后调用方 finally 关闭、借用者不关闭的明确所有权转交。接口或约定需说明转交何时完成、谁在何时关闭或取消。",
+          "核对所有实际创建、初始化失败和调用路径：部分初始化失败、返回交接边界异常、调用者业务异常/取消、提前返回、重试时都不泄漏或重复关闭。核对是否仍被其他调用方共享，借用者不得过早关闭。",
+          "用项目现有测试或可重跑步骤观察关闭次数、异常与取消后的状态；是否需要额外关闭失败处理由实际资源契约决定，不虚构不可能的失败路径。"
+        ],
+        "conclusion": "题设责任安排符合允许明确转交所有权的规则，不必强行同层释放。但没有源码、真实调用链及执行结果，只能确认设计责任分配与规则一致，不能确认实现无泄漏或已验收；相关验证未执行，不标 verified。",
+        "basis": [
+          "implementation：默认申请方释放，但允许返回值、上下文管理器或既有机制明确转交；转交前申请方清理，之后接收方负责，借用者不释放共享资源。",
+          "verification：方案或源码证据不能替代真实执行。"
+        ]
+      }
+    },
+    {
+      "id": "mobile-permission-revocation",
+      "read_files": [
+        "skills/lean-engineer/SKILL.md",
+        "skills/lean-engineer/references/risk-gates.md",
+        "skills/lean-engineer/references/review-protocol.md",
+        "skills/lean-engineer/references/verification.md",
+        "skills/lean-engineer/references/domains/mobile.md",
+        "skills/lean-engineer/references/formal-verification.md"
+      ],
+      "answer": {
+        "risk": "只读审查无实现变更，不能仅因 Android 领域自动定为大改。若后续改变权限语义或安全边界则按风险表重新定档；当前实际问题严重度须依源码与影响证据判断。",
+        "necessary_actions": [
+          "固定支持的 OS/API、机型类别、应用构建/版本、权限及受影响界面与后台任务，按目标版本查平台契约。",
+          "源码检查首次请求、拒绝、受限授权、撤销、设置重新授权与再次进入时当前权限判断；核对无权限时的可用行为、崩溃、越权和反复弹窗路径。服务端权限需要独立验证。",
+          "检查前后台切换、导航离开返回、系统回收进程后重建，以及适用配置变化；区分 Activity 重建、进程死亡、强制停止和卸载。检查关键状态持久化、旧回调污染、新实例恢复与重复副作用，不依赖退出回调必然执行。",
+          "交付可运行场景与预期来源；由具备环境的执行者补真机或相应平台证据，记录 OS、设备、构建、用例、日志和结果。状态机可先写性质；普通测试足够时不必建模，没有模型运行不得冒充已证明。"
+        ],
+        "conclusion": "仅有源码访问，当前只能得出被读源码范围的 source 发现和待验证风险。必需设备或平台运行项为 blocked，未尝试的可行检查为 not_run；不得声称撤销/进程死亡行为已通过。整体行为验收最多 partial，若源码已有证据表明违反契约则对应项 failed。当前题目并未提供实际源码，连源码发现也不能编造。",
+        "basis": [
+          "domains/mobile：生命周期、权限反例及无设备的结论边界。",
+          "verification：source 与 runtime/test 的区别，blocked 不等于 not_applicable。",
+          "review-protocol：只读审查提供场景，授权执行者运行后核对真实输出。"
+        ]
+      }
+    },
+    {
+      "id": "device-safety-deadline",
+      "read_files": [
+        "skills/lean-engineer/SKILL.md",
+        "skills/lean-engineer/references/risk-gates.md",
+        "skills/lean-engineer/references/review-protocol.md",
+        "skills/lean-engineer/references/verification.md",
+        "skills/lean-engineer/references/domains/embedded.md",
+        "skills/lean-engineer/references/formal-verification.md"
+      ],
+      "answer": {
+        "risk": "修改保护任务截止时间且超时可能损坏设备，命中大改触发项 9，并属于必须独立审查的高后果变更。高后果本身不自动升级厚审，但题设没有证明受控大改的全部前提，基础档位应暂按厚审处理，不能只凭一个判断变化降档。",
+        "necessary_actions": [
+          "固定板卡、固件、工具链、RTOS/SDK、任务/中断调用链、规定截止时间、安全状态和恢复依据；查明所有受支持调用方及影响范围，再判断是否满足受控条件。",
+          "验证截止时间前、恰等于、超过边界、任务停滞及适用计数器回绕，包含中断竞争、长临界区与外设等待。记录最大已观测延迟和抖动；硬截止时间须补项目要求的最坏情况分析，平均延迟不构成该证据。",
+          "没有安全台架时继续可行源码、主机单测、模型/仿真检查；硬件时序和安全状态仍需适当真机证据。设备故障注入须先有授权范围、隔离、输出限制、恢复与停止条件，本任务不操作设备。",
+          "由独立方核对安全依据、允许/拒绝路径、边界反例、恢复及原始证据。若厚审条件仍成立，执行三道质量门及风险专项；若后续证据足以改判受控，仍保留高后果独审和全部安全验证，不能用简化流程免除。"
+        ],
+        "conclusion": "平均延迟日志仅证明其已测条件，不能确认最坏情况符合期限。安全台架项 blocked，独立审查 not_run（若不可获得独立方则 blocked），最坏情况分析未完成。无已证实失败时整体 partial，禁止写安全验收 verified 或认证完成；如发现违反期限/安全性质则 failed。",
+        "basis": [
+          "risk-gates：设备保护/时序触发、高后果独审、受控附加条件与未知按厚审。",
+          "domains/embedded：平均值不证明硬实时、硬截止时间的最坏情况分析、安全试验边界。",
+          "formal-verification：模型性质、假设和代码映射限制；verification：原始证据与交付状态。"
+        ]
+      }
+    },
+    {
+      "id": "pipeline-join-grain",
+      "read_files": [
+        "skills/lean-engineer/SKILL.md",
+        "skills/lean-engineer/references/risk-gates.md",
+        "skills/lean-engineer/references/review-protocol.md",
+        "skills/lean-engineer/references/verification.md",
+        "skills/lean-engineer/references/domains/data-engineering.md"
+      ],
+      "answer": {
+        "risk": "只读审查，不据领域自动赋予改动档位。若后续修改已发布指标口径、数据含义或回填范围按大改判断；若用于结算、财务、监管或项目认定的高后果决策，额外独立审查。题设没有说明报表用途，不能擅定高后果。",
+        "necessary_actions": [
+          "先固定输入快照/分区、代码和口径版本、运行 ID、窗口/时区、输入输出行粒度、业务主键、去重键、租户归属、币种精度、空值与历史维度规则及下游消费者。以合同或独立算例确定预期，不从现有 SQL 反推。",
+          "按租户、分区和关键维度对照 JOIN 前后行数、唯一键、匹配率与分组金额，定位一增一减的差异；验证 JOIN 基数、租户键、重复维表键、缺失匹配、NULL、边界日期和适用历史维度，排查丢行、多对多放大或错误归属。",
+          "保留可手算/独立核对的小样例和受控快照对账，记录差异分布及原始报告；核对失败是否按合同阻断、隔离或标识不完整输出及通知下游。只读审查不擅自生产重算或覆盖。"
+        ],
+        "conclusion": "不能判定数据正确。总金额不变可能由分组错误相抵，退出码 0 只证明作业退出成功。若既定租户级契约要求与基线一致，则给定差异已使对账 failed；若口径合法变化与预期未明确，则该判断被合同/独立依据阻塞，保持 partial，不能仅据差异宣称确定的数据事故。当前至少不得 verified。",
+        "basis": [
+          "domains/data-engineering：固定行粒度与契约；JOIN 不得只核总量；任务退出成功不证明语义正确；合法变化与意外差异分开。",
+          "verification：独立预期与 failed/blocked 的区别。"
+        ]
+      }
+    }
+  ],
+  "limitations": [
+    "这是基于题面给定事实的合成任务独立试用，不是对实际项目、设备、API 或数据管道的验证。",
+    "本阶段仅阅读候选技能及相关引用和输入题面；未读取差异、基线、测试、评测任务或预期答案。保存本输出后不回改。",
+    "没有执行测试、设备或生产操作，没有把题设中的通过事实说成自己运行的结果，也没有针对未提供的具体平台版本查询外部文档。",
+    "实际读取内容与 SHA-256 一并保留；逐案 read_files 标识对应回答使用的候选相对路径，共用引用不重复读取。"
+  ]
+}

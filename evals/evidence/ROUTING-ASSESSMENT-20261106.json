@@ -1,0 +1,1498 @@
+{
+  "release": "1.1.2",
+  "recorded_at": "2026-11-06T01:07:52.495023+00:00",
+  "inputs": {
+    "kind": "synthetic route reasoning; no project execution",
+    "cases": [
+      {
+        "id": "routing-verb-aliases",
+        "query": "同一事实：已定位的普通内部函数错误，本轮要实际改两行代码；没有契约、安全、依赖或能力目录变化，现有实现与调用链已查明。用户分别说‘请编码修正它’、‘请实现这个修正’、‘请修改这段逻辑’、‘请修复这个错误’。逐一说明首次动手前的必读文件是否相同，是否可能只读风险分档。不要执行。"
+      },
+      {
+        "id": "routing-fix-with-reuse",
+        "query": "用户授权修复标题空白处理。项目已有已登记、适用且实际可调用的清洗能力，当前调用方复制了一份有缺陷的处理。本轮准备改调用方接入已有能力。说明要读哪些规则、查什么、哪些行为需要验证；不要执行。"
+      },
+      {
+        "id": "routing-local-refactor",
+        "query": "本轮获授权对内部函数做局部重构，未改变公开契约、权限或持久化；不抽模块，不触及已收录能力。应如何选择必读规则？是否一律要读能力库全文并创建库？不要执行。"
+      },
+      {
+        "id": "routing-code-delete",
+        "query": "用户已确认删除一个冗余内部函数，相关引用与影响已查明，不属于已收录能力。本轮只有删除，没有添加代码。动手前是否仍需实现纪律？是否自动触发能力收录？不要执行。"
+      },
+      {
+        "id": "routing-dependency-integration",
+        "query": "用户授权把项目已安装的库接入一个真实调用位置，不新增包或版本，也没有授权全局安装。说明基础读取、复用判断与实际调用验证的要求；是否仅因为叫‘依赖接入’就不用编码纪律，或必须另造包装库？不要执行。"
+      },
+      {
+        "id": "routing-source-copy",
+        "query": "用户要把Web组件源码里的按钮文字由‘保存’改为‘保存修改’，只改这一处显示文字。说明必读文件、适用检查和是否需要建立能力库；不要执行。"
+      },
+      {
+        "id": "routing-doc-only",
+        "query": "用户只改普通README介绍中的错别字，不涉及契约、运行配置、代码或产品行为。是否仅因叫‘修改’就属于代码实施并必须加载实现纪律、能力收录流程？请说明适用边界，不执行。"
+      },
+      {
+        "id": "routing-readonly-review",
+        "query": "用户只读评审一个普通内部函数的既有diff，不允许修复、安装或修改项目，也没有要求完整验收。当前阶段应读什么？是否必须按代码实施加载实现纪律并执行？不执行任何项目操作。"
+      },
+      {
+        "id": "routing-readonly-index",
+        "query": "用户只读核对项目能力索引与源码，发现索引路径可能过期，明确先不要修改。需要读能力库吗？读到补登记/索引维护规则后，可以直接修索引或创建目录吗？是否默认加载实现纪律？不要执行。"
+      },
+      {
+        "id": "routing-readonly-acceptance",
+        "query": "只读验收他人已经完成的局部修改，给定证据对应当前基线；本轮不允许改代码或CI。说明风险、验证、审查和实现纪律的读取边界，不把题设证据说成自己执行，不执行操作。"
+      },
+      {
+        "id": "routing-authorized-transition",
+        "query": "第一阶段用户只要求审查，未加载实现纪律。第二阶段用户明确授权修复已经定位的已收录能力调用错误。分别说明两个阶段的读取与权限；第二阶段第一次修改前需补什么？如果没有第二次授权又如何？不要实际修改。"
+      },
+      {
+        "id": "routing-thick-implementation",
+        "query": "本轮实际代码修复已经正确判为厚审大改。Agent计划只按照风险表中的编码前、验证与审查清单做完就开始写代码。请判断读取是否足够，并列基础与追加要求；没有新收录对象的事实，不要强制造库。不要执行。"
+      },
+      {
+        "id": "routing-first-capability",
+        "query": "用户真实要求新增一个功能。现有索引和源码已检查，没有适用实现；其中确有输入、输出、依赖和副作用边界明确的可复用能力，只有一个真实调用方，项目已有能力模块位置。应该读取哪些规则，何时收录，是否要等第二个调用方？不要执行。"
+      },
+      {
+        "id": "routing-private-orchestration",
+        "query": "用户要求实现页面私有编排，已查现有能力和源码。本次没有能独立封装的可复用对象，沿用页面内部编排即可。实现功能会触发读能力库规则吗？是否因此必须创建目录、抽模块、补一份空索引？不要执行。"
+      }
+    ]
+  },
+  "fixed_oracles": {
+    "fixed_before_model_execution": true,
+    "expected": {
+      "routing-verb-aliases": "四种说法的实际代码动作相同，均读风险与实现纪律；不按关键词择一。",
+      "routing-fix-with-reuse": "基础两份加能力库；先核对索引/源码再真实接入验证，修复不豁免复用，不复制现成功能。",
+      "routing-local-refactor": "读风险与实现纪律；按实际条件判断能力库，不因重构一律创建库或收录；先查已有能力原则保留。",
+      "routing-code-delete": "删除仍是代码实施，风险与实现纪律必读；普通删除不自动收录或建库。",
+      "routing-dependency-integration": "接入属于实施，读风险与纪律；按项目既有能力、版本与真实调用验证，不擅自全局安装或制造无用途封装。",
+      "routing-source-copy": "源码文案也是代码修改，读基础两份与相关前端要求；无收录对象不建库，仍需相关可观察行为证据或说明缺口。",
+      "routing-doc-only": "普通非代码说明改字不自动变为代码实施；技能可不主导，不能无条件扩成实现/收录流程。",
+      "routing-readonly-review": "读审查协议与其他实际适用资料；纯只读Review不默认进入实现纪律，不获得修改/安装权限。",
+      "routing-readonly-index": "能力库可因只读查找/核对而触发，但不得接入、创建、收录或改索引；不默认进入实施。",
+      "routing-readonly-acceptance": "验收保留风险与验证/审查读取，纯只读不默认加载实现纪律、不改CI或代码。",
+      "routing-authorized-transition": "原只读阶段不实施；明确授权转修复后首次改代码前补齐风险和实现纪律，并按已收录能力条件读能力库；没有授权不能转入写入。",
+      "routing-thick-implementation": "厚审不替代实现纪律，基础两份仍必需；验证/独审等叠加，不强制无对象建库。",
+      "routing-first-capability": "新功能读基础两份与能力库；真实独立能力可按现有位置首次收录，不等第二个调用方，不另造平行库。",
+      "routing-private-orchestration": "功能实现读能力库规则，但无独立对象不强行收录，不建空库；保留私有编排。"
+    },
+    "minimum_references": {
+      "routing-verb-aliases": [
+        "risk-gates.md",
+        "implementation.md"
+      ],
+      "routing-fix-with-reuse": [
+        "risk-gates.md",
+        "implementation.md",
+        "reusable-capabilities.md"
+      ],
+      "routing-local-refactor": [
+        "risk-gates.md",
+        "implementation.md"
+      ],
+      "routing-code-delete": [
+        "risk-gates.md",
+        "implementation.md"
+      ],
+      "routing-dependency-integration": [
+        "risk-gates.md",
+        "implementation.md"
+      ],
+      "routing-source-copy": [
+        "risk-gates.md",
+        "implementation.md",
+        "frontend-review.md"
+      ],
+      "routing-doc-only": [],
+      "routing-readonly-review": [
+        "review-protocol.md"
+      ],
+      "routing-readonly-index": [
+        "review-protocol.md",
+        "reusable-capabilities.md"
+      ],
+      "routing-readonly-acceptance": [
+        "risk-gates.md",
+        "verification.md",
+        "review-protocol.md"
+      ],
+      "routing-authorized-transition": [
+        "risk-gates.md",
+        "implementation.md",
+        "review-protocol.md",
+        "reusable-capabilities.md"
+      ],
+      "routing-thick-implementation": [
+        "risk-gates.md",
+        "implementation.md",
+        "verification.md",
+        "review-protocol.md"
+      ],
+      "routing-first-capability": [
+        "risk-gates.md",
+        "implementation.md",
+        "reusable-capabilities.md"
+      ],
+      "routing-private-orchestration": [
+        "risk-gates.md",
+        "implementation.md",
+        "reusable-capabilities.md"
+      ]
+    },
+    "scope": "Minimum required/used references are not a universal upper limit; assess mandatory interpretation and permissions separately from incidental extra reading."
+  },
+  "independent_evidence_review": {
+    "schema_version": 1,
+    "kind": "independent_existing_trial_evidence_review",
+    "reviewer_role": "独立证据核验子代理；未参与两份原试用或候选修改",
+    "completed_at": "2026-11-06T01:06:59.352678+00:00",
+    "status": "passed",
+    "status_scope": "已存两份输出的输入一致性、文件哈希、逐案规则理解及权限解释；不认证历史工具轨迹或真实项目执行",
+    "scope": {
+      "variants": [
+        "baseline 1.1.1",
+        "candidate 1.1.2"
+      ],
+      "cases_per_variant": 14,
+      "total_outputs_reviewed": 28,
+      "runtime_project_cases": 0,
+      "modified_paths": [
+        "trial-evidence-review.json"
+      ]
+    },
+    "inputs": [
+      {
+        "path": "plan.md",
+        "sha256": "1e5730eb7d521d5d53eed2567b60880bbe11ef64b352b610b23a4c26d750f08b"
+      },
+      {
+        "path": "scenario-inputs.json",
+        "sha256": "a57354cb2c844d1b5c915742faaf70244673f38370d953f9fb97fbea285ca9b5"
+      },
+      {
+        "path": "scenario-oracles.json",
+        "sha256": "55de47d12b44e5cce8fc7e1b126396964026ac5b1e7a23724f057946b9abcac0"
+      },
+      {
+        "path": "prepare_cases.py",
+        "sha256": "6a4bbcc0cf785bfdab62a29c5fb6dce7a41ffa8795ff249d5f1e37bbf6f63409"
+      },
+      {
+        "path": "baseline-trial.json",
+        "sha256": "36209a6be3e07bdc174b72ce20c0620b748668a4986026248dbedc7a69d6d905"
+      },
+      {
+        "path": "candidate-trial.json",
+        "sha256": "b51eb05f96a41ca6d3f165cc20fe5eebab1c41c9d9aab8b48d44079fc76e7130"
+      },
+      {
+        "path": "candidate/evals/README.md",
+        "sha256": "b07e12898fdbdcd75c2a43ce6e1b6fb02a8e4dfb3783f88813c3262c5097201a"
+      }
+    ],
+    "source_pair_comparison": [
+      {
+        "path": "SKILL.md",
+        "baseline_sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d",
+        "candidate_sha256": "673e6cb98b280fe76683b08f35de634cf4c5bece8227b4c6c8675098d175fb4b",
+        "bytes_equal": false
+      },
+      {
+        "path": "references/risk-gates.md",
+        "baseline_sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+        "candidate_sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+        "bytes_equal": true
+      },
+      {
+        "path": "references/implementation.md",
+        "baseline_sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4",
+        "candidate_sha256": "e739e886a227bde9518fdd9f03ff09819b634f6439106ccb32842de9a9391b2d",
+        "bytes_equal": false
+      },
+      {
+        "path": "references/reusable-capabilities.md",
+        "baseline_sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+        "candidate_sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+        "bytes_equal": true
+      },
+      {
+        "path": "references/review-protocol.md",
+        "baseline_sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+        "candidate_sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+        "bytes_equal": true
+      },
+      {
+        "path": "references/frontend-review.md",
+        "baseline_sha256": "b192273a234b340987b1e31ca0802701081926d9497bb37b12b0507f9ee6dbbe",
+        "candidate_sha256": "b192273a234b340987b1e31ca0802701081926d9497bb37b12b0507f9ee6dbbe",
+        "bytes_equal": true
+      },
+      {
+        "path": "references/frontend/routes-components.md",
+        "baseline_sha256": "1b54c10f589b7758ab058c6e77de655fd434203f3b5327116c362c036cdec75b",
+        "candidate_sha256": "1b54c10f589b7758ab058c6e77de655fd434203f3b5327116c362c036cdec75b",
+        "bytes_equal": true
+      },
+      {
+        "path": "references/frontend/accessibility-layout.md",
+        "baseline_sha256": "69e0259b5b92332d85aaf52b3e7e7e4472b54db0e702cc7b7b6598055f5b92f2",
+        "candidate_sha256": "69e0259b5b92332d85aaf52b3e7e7e4472b54db0e702cc7b7b6598055f5b92f2",
+        "bytes_equal": true
+      },
+      {
+        "path": "references/verification.md",
+        "baseline_sha256": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4",
+        "candidate_sha256": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4",
+        "bytes_equal": true
+      }
+    ],
+    "variants": [
+      {
+        "variant": "baseline",
+        "report_sha256": "36209a6be3e07bdc174b72ce20c0620b748668a4986026248dbedc7a69d6d905",
+        "reported_completed_at": "2026-11-06T08:49:58.4356680+08:00",
+        "case_count": 14,
+        "semantic_passed": 14,
+        "semantic_failed": 0,
+        "input_raw_matches": true,
+        "input_sha256_matches": true,
+        "unique_reported_source_files": {
+          "SKILL.md": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d",
+          "references/risk-gates.md": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+          "references/implementation.md": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4",
+          "references/reusable-capabilities.md": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+          "references/review-protocol.md": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+          "references/frontend-review.md": "b192273a234b340987b1e31ca0802701081926d9497bb37b12b0507f9ee6dbbe",
+          "references/frontend/routes-components.md": "1b54c10f589b7758ab058c6e77de655fd434203f3b5327116c362c036cdec75b",
+          "references/frontend/accessibility-layout.md": "69e0259b5b92332d85aaf52b3e7e7e4472b54db0e702cc7b7b6598055f5b92f2",
+          "references/verification.md": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4"
+        },
+        "cases": [
+          {
+            "id": "routing-verb-aliases",
+            "semantic_status": "passed",
+            "judgment": "四个动词均对应同一代码动作；两版均要求风险和实现纪律，不把两行修复变成只读风险。",
+            "oracle": "四种说法的实际代码动作相同，均读风险与实现纪律；不按关键词择一。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              },
+              {
+                "path": "references/review-protocol.md",
+                "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "baseline-trial.json#/cases/0"
+          },
+          {
+            "id": "routing-fix-with-reuse",
+            "semantic_status": "passed",
+            "judgment": "两版均累计能力库，并核对索引、源码、调用方；直接接入已有能力，不创建无用途封装，不虚报运行。",
+            "oracle": "基础两份加能力库；先核对索引/源码再真实接入验证，修复不豁免复用，不复制现成功能。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              },
+              {
+                "path": "references/review-protocol.md",
+                "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "baseline-trial.json#/cases/1"
+          },
+          {
+            "id": "routing-local-refactor",
+            "semantic_status": "passed",
+            "judgment": "两版均把局部重构视作实施；基础检查已有能力不等于强制能力库全文或建空库。",
+            "oracle": "读风险与实现纪律；按实际条件判断能力库，不因重构一律创建库或收录；先查已有能力原则保留。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "baseline-trial.json#/cases/2"
+          },
+          {
+            "id": "routing-code-delete",
+            "semantic_status": "passed",
+            "judgment": "两版均要求删除前读实现纪律及风险；已有授权和影响条件不自动触发收录。",
+            "oracle": "删除仍是代码实施，风险与实现纪律必读；普通删除不自动收录或建库。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "baseline-trial.json#/cases/3"
+          },
+          {
+            "id": "routing-dependency-integration",
+            "semantic_status": "passed",
+            "judgment": "两版均将依赖接入纳入实施、核对实际版本与真实调用，并保留全局安装边界；候选多读能力库有实际复用依据，不判错。",
+            "oracle": "接入属于实施，读风险与纪律；按项目既有能力、版本与真实调用验证，不擅自全局安装或制造无用途封装。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "baseline-trial.json#/cases/4"
+          },
+          {
+            "id": "routing-source-copy",
+            "semantic_status": "passed",
+            "judgment": "两版均将源码文案纳入实施并追加前端专题，要求可观察证据，限定局部范围，不强制造库。",
+            "oracle": "源码文案也是代码修改，读基础两份与相关前端要求；无收录对象不建库，仍需相关可观察行为证据或说明缺口。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4",
+                "matches_report": true
+              },
+              {
+                "path": "references/frontend-review.md",
+                "sha256": "b192273a234b340987b1e31ca0802701081926d9497bb37b12b0507f9ee6dbbe",
+                "matches_report": true
+              },
+              {
+                "path": "references/frontend/routes-components.md",
+                "sha256": "1b54c10f589b7758ab058c6e77de655fd434203f3b5327116c362c036cdec75b",
+                "matches_report": true
+              },
+              {
+                "path": "references/frontend/accessibility-layout.md",
+                "sha256": "69e0259b5b92332d85aaf52b3e7e7e4472b54db0e702cc7b7b6598055f5b92f2",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "baseline-trial.json#/cases/5"
+          },
+          {
+            "id": "routing-doc-only",
+            "semantic_status": "passed",
+            "judgment": "两版均不因普通说明文档使用修改一词而进入代码实施或收录；额外用于判断范围的阅读不计为失败。",
+            "oracle": "普通非代码说明改字不自动变为代码实施；技能可不主导，不能无条件扩成实现/收录流程。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "baseline-trial.json#/cases/6"
+          },
+          {
+            "id": "routing-readonly-review",
+            "semantic_status": "passed",
+            "judgment": "两版均只读审查并禁修复安装，不强制实施纪律。基线将 implementation 列为已用于判断边界的批次读取，不能等同于该案要求加载。",
+            "oracle": "读审查协议与其他实际适用资料；纯只读Review不默认进入实现纪律，不获得修改/安装权限。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d",
+                "matches_report": true
+              },
+              {
+                "path": "references/review-protocol.md",
+                "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/verification.md",
+                "sha256": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "baseline-trial.json#/cases/7"
+          },
+          {
+            "id": "routing-readonly-index",
+            "semantic_status": "passed",
+            "judgment": "两版均读取能力规则、对索引与源码失配取证但不直接修索引、建目录或搬源码；代码 Review 条件下审查协议亦已读。",
+            "oracle": "能力库可因只读查找/核对而触发，但不得接入、创建、收录或改索引；不默认进入实施。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4",
+                "matches_report": true
+              },
+              {
+                "path": "references/review-protocol.md",
+                "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "baseline-trial.json#/cases/8"
+          },
+          {
+            "id": "routing-readonly-acceptance",
+            "semantic_status": "passed",
+            "judgment": "两版均保留风险、验证与审查，排除修改代码、CI及安装；均明确他人证据不是本轮亲自运行。",
+            "oracle": "验收保留风险与验证/审查读取，纯只读不默认加载实现纪律、不改CI或代码。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/verification.md",
+                "sha256": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4",
+                "matches_report": true
+              },
+              {
+                "path": "references/review-protocol.md",
+                "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "baseline-trial.json#/cases/9"
+          },
+          {
+            "id": "routing-authorized-transition",
+            "semantic_status": "passed",
+            "judgment": "两版均区分只读与明确授权后的修复，首次实施前补风险和纪律并追加能力库；无第二阶段授权维持只读。基线将阶段一能力核对按同一问题处理，候选保留条件，未改变授权边界。",
+            "oracle": "原只读阶段不实施；明确授权转修复后首次改代码前补齐风险和实现纪律，并按已收录能力条件读能力库；没有授权不能转入写入。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              },
+              {
+                "path": "references/review-protocol.md",
+                "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+                "matches_report": true
+              },
+              {
+                "path": "references/verification.md",
+                "sha256": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "baseline-trial.json#/cases/10"
+          },
+          {
+            "id": "routing-thick-implementation",
+            "semantic_status": "passed",
+            "judgment": "两版均否定风险摘要替代实现纪律，累计验证和审查；按实际信号读其他专题，不因厚审强制造库。",
+            "oracle": "厚审不替代实现纪律，基础两份仍必需；验证/独审等叠加，不强制无对象建库。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4",
+                "matches_report": true
+              },
+              {
+                "path": "references/verification.md",
+                "sha256": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4",
+                "matches_report": true
+              },
+              {
+                "path": "references/review-protocol.md",
+                "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "baseline-trial.json#/cases/11"
+          },
+          {
+            "id": "routing-first-capability",
+            "semantic_status": "passed",
+            "judgment": "两版均在首个真实调用方且独立边界成立时沿用项目既有位置收录，不等第二个调用方、不造平行库；新收录本身不被直接当成大改触发。",
+            "oracle": "新功能读基础两份与能力库；真实独立能力可按现有位置首次收录，不等第二个调用方，不另造平行库。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              },
+              {
+                "path": "references/verification.md",
+                "sha256": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4",
+                "matches_report": true
+              },
+              {
+                "path": "references/review-protocol.md",
+                "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "baseline-trial.json#/cases/12"
+          },
+          {
+            "id": "routing-private-orchestration",
+            "semantic_status": "passed",
+            "judgment": "两版均读能力库但没有独立对象时不抽模块、不建空索引，并保留领域未知条件。",
+            "oracle": "功能实现读能力库规则，但无独立对象不强行收录，不建空库；保留私有编排。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              },
+              {
+                "path": "references/frontend-review.md",
+                "sha256": "b192273a234b340987b1e31ca0802701081926d9497bb37b12b0507f9ee6dbbe",
+                "matches_report": true
+              },
+              {
+                "path": "references/frontend/routes-components.md",
+                "sha256": "1b54c10f589b7758ab058c6e77de655fd434203f3b5327116c362c036cdec75b",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "baseline-trial.json#/cases/13"
+          }
+        ]
+      },
+      {
+        "variant": "candidate",
+        "report_sha256": "b51eb05f96a41ca6d3f165cc20fe5eebab1c41c9d9aab8b48d44079fc76e7130",
+        "reported_completed_at": "2026-11-06T08:50:19.3357737+08:00",
+        "case_count": 14,
+        "semantic_passed": 14,
+        "semantic_failed": 0,
+        "input_raw_matches": true,
+        "input_sha256_matches": true,
+        "unique_reported_source_files": {
+          "SKILL.md": "673e6cb98b280fe76683b08f35de634cf4c5bece8227b4c6c8675098d175fb4b",
+          "references/risk-gates.md": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+          "references/implementation.md": "e739e886a227bde9518fdd9f03ff09819b634f6439106ccb32842de9a9391b2d",
+          "references/reusable-capabilities.md": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+          "references/review-protocol.md": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+          "references/verification.md": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4",
+          "references/frontend-review.md": "b192273a234b340987b1e31ca0802701081926d9497bb37b12b0507f9ee6dbbe",
+          "references/frontend/routes-components.md": "1b54c10f589b7758ab058c6e77de655fd434203f3b5327116c362c036cdec75b",
+          "references/frontend/accessibility-layout.md": "69e0259b5b92332d85aaf52b3e7e7e4472b54db0e702cc7b7b6598055f5b92f2"
+        },
+        "cases": [
+          {
+            "id": "routing-verb-aliases",
+            "semantic_status": "passed",
+            "judgment": "四个动词均对应同一代码动作；两版均要求风险和实现纪律，不把两行修复变成只读风险。",
+            "oracle": "四种说法的实际代码动作相同，均读风险与实现纪律；不按关键词择一。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "673e6cb98b280fe76683b08f35de634cf4c5bece8227b4c6c8675098d175fb4b",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "e739e886a227bde9518fdd9f03ff09819b634f6439106ccb32842de9a9391b2d",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              },
+              {
+                "path": "references/review-protocol.md",
+                "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+                "matches_report": true
+              },
+              {
+                "path": "references/verification.md",
+                "sha256": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "candidate-trial.json#/cases/0"
+          },
+          {
+            "id": "routing-fix-with-reuse",
+            "semantic_status": "passed",
+            "judgment": "两版均累计能力库，并核对索引、源码、调用方；直接接入已有能力，不创建无用途封装，不虚报运行。",
+            "oracle": "基础两份加能力库；先核对索引/源码再真实接入验证，修复不豁免复用，不复制现成功能。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "673e6cb98b280fe76683b08f35de634cf4c5bece8227b4c6c8675098d175fb4b",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "e739e886a227bde9518fdd9f03ff09819b634f6439106ccb32842de9a9391b2d",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              },
+              {
+                "path": "references/review-protocol.md",
+                "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+                "matches_report": true
+              },
+              {
+                "path": "references/verification.md",
+                "sha256": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "candidate-trial.json#/cases/1"
+          },
+          {
+            "id": "routing-local-refactor",
+            "semantic_status": "passed",
+            "judgment": "两版均把局部重构视作实施；基础检查已有能力不等于强制能力库全文或建空库。",
+            "oracle": "读风险与实现纪律；按实际条件判断能力库，不因重构一律创建库或收录；先查已有能力原则保留。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "673e6cb98b280fe76683b08f35de634cf4c5bece8227b4c6c8675098d175fb4b",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "e739e886a227bde9518fdd9f03ff09819b634f6439106ccb32842de9a9391b2d",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "candidate-trial.json#/cases/2"
+          },
+          {
+            "id": "routing-code-delete",
+            "semantic_status": "passed",
+            "judgment": "两版均要求删除前读实现纪律及风险；已有授权和影响条件不自动触发收录。",
+            "oracle": "删除仍是代码实施，风险与实现纪律必读；普通删除不自动收录或建库。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "673e6cb98b280fe76683b08f35de634cf4c5bece8227b4c6c8675098d175fb4b",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "e739e886a227bde9518fdd9f03ff09819b634f6439106ccb32842de9a9391b2d",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "candidate-trial.json#/cases/3"
+          },
+          {
+            "id": "routing-dependency-integration",
+            "semantic_status": "passed",
+            "judgment": "两版均将依赖接入纳入实施、核对实际版本与真实调用，并保留全局安装边界；候选多读能力库有实际复用依据，不判错。",
+            "oracle": "接入属于实施，读风险与纪律；按项目既有能力、版本与真实调用验证，不擅自全局安装或制造无用途封装。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "673e6cb98b280fe76683b08f35de634cf4c5bece8227b4c6c8675098d175fb4b",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "e739e886a227bde9518fdd9f03ff09819b634f6439106ccb32842de9a9391b2d",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              },
+              {
+                "path": "references/verification.md",
+                "sha256": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4",
+                "matches_report": true
+              },
+              {
+                "path": "references/review-protocol.md",
+                "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "candidate-trial.json#/cases/4"
+          },
+          {
+            "id": "routing-source-copy",
+            "semantic_status": "passed",
+            "judgment": "两版均将源码文案纳入实施并追加前端专题，要求可观察证据，限定局部范围，不强制造库。",
+            "oracle": "源码文案也是代码修改，读基础两份与相关前端要求；无收录对象不建库，仍需相关可观察行为证据或说明缺口。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "673e6cb98b280fe76683b08f35de634cf4c5bece8227b4c6c8675098d175fb4b",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "e739e886a227bde9518fdd9f03ff09819b634f6439106ccb32842de9a9391b2d",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              },
+              {
+                "path": "references/frontend-review.md",
+                "sha256": "b192273a234b340987b1e31ca0802701081926d9497bb37b12b0507f9ee6dbbe",
+                "matches_report": true
+              },
+              {
+                "path": "references/frontend/routes-components.md",
+                "sha256": "1b54c10f589b7758ab058c6e77de655fd434203f3b5327116c362c036cdec75b",
+                "matches_report": true
+              },
+              {
+                "path": "references/frontend/accessibility-layout.md",
+                "sha256": "69e0259b5b92332d85aaf52b3e7e7e4472b54db0e702cc7b7b6598055f5b92f2",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "candidate-trial.json#/cases/5"
+          },
+          {
+            "id": "routing-doc-only",
+            "semantic_status": "passed",
+            "judgment": "两版均不因普通说明文档使用修改一词而进入代码实施或收录；额外用于判断范围的阅读不计为失败。",
+            "oracle": "普通非代码说明改字不自动变为代码实施；技能可不主导，不能无条件扩成实现/收录流程。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "673e6cb98b280fe76683b08f35de634cf4c5bece8227b4c6c8675098d175fb4b",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "e739e886a227bde9518fdd9f03ff09819b634f6439106ccb32842de9a9391b2d",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "candidate-trial.json#/cases/6"
+          },
+          {
+            "id": "routing-readonly-review",
+            "semantic_status": "passed",
+            "judgment": "两版均只读审查并禁修复安装，不强制实施纪律。基线将 implementation 列为已用于判断边界的批次读取，不能等同于该案要求加载。",
+            "oracle": "读审查协议与其他实际适用资料；纯只读Review不默认进入实现纪律，不获得修改/安装权限。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "673e6cb98b280fe76683b08f35de634cf4c5bece8227b4c6c8675098d175fb4b",
+                "matches_report": true
+              },
+              {
+                "path": "references/review-protocol.md",
+                "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/verification.md",
+                "sha256": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "candidate-trial.json#/cases/7"
+          },
+          {
+            "id": "routing-readonly-index",
+            "semantic_status": "passed",
+            "judgment": "两版均读取能力规则、对索引与源码失配取证但不直接修索引、建目录或搬源码；代码 Review 条件下审查协议亦已读。",
+            "oracle": "能力库可因只读查找/核对而触发，但不得接入、创建、收录或改索引；不默认进入实施。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "673e6cb98b280fe76683b08f35de634cf4c5bece8227b4c6c8675098d175fb4b",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              },
+              {
+                "path": "references/review-protocol.md",
+                "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "e739e886a227bde9518fdd9f03ff09819b634f6439106ccb32842de9a9391b2d",
+                "matches_report": true
+              },
+              {
+                "path": "references/verification.md",
+                "sha256": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "candidate-trial.json#/cases/8"
+          },
+          {
+            "id": "routing-readonly-acceptance",
+            "semantic_status": "passed",
+            "judgment": "两版均保留风险、验证与审查，排除修改代码、CI及安装；均明确他人证据不是本轮亲自运行。",
+            "oracle": "验收保留风险与验证/审查读取，纯只读不默认加载实现纪律、不改CI或代码。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "673e6cb98b280fe76683b08f35de634cf4c5bece8227b4c6c8675098d175fb4b",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/verification.md",
+                "sha256": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4",
+                "matches_report": true
+              },
+              {
+                "path": "references/review-protocol.md",
+                "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "e739e886a227bde9518fdd9f03ff09819b634f6439106ccb32842de9a9391b2d",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "candidate-trial.json#/cases/9"
+          },
+          {
+            "id": "routing-authorized-transition",
+            "semantic_status": "passed",
+            "judgment": "两版均区分只读与明确授权后的修复，首次实施前补风险和纪律并追加能力库；无第二阶段授权维持只读。基线将阶段一能力核对按同一问题处理，候选保留条件，未改变授权边界。",
+            "oracle": "原只读阶段不实施；明确授权转修复后首次改代码前补齐风险和实现纪律，并按已收录能力条件读能力库；没有授权不能转入写入。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "673e6cb98b280fe76683b08f35de634cf4c5bece8227b4c6c8675098d175fb4b",
+                "matches_report": true
+              },
+              {
+                "path": "references/review-protocol.md",
+                "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "e739e886a227bde9518fdd9f03ff09819b634f6439106ccb32842de9a9391b2d",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              },
+              {
+                "path": "references/verification.md",
+                "sha256": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "candidate-trial.json#/cases/10"
+          },
+          {
+            "id": "routing-thick-implementation",
+            "semantic_status": "passed",
+            "judgment": "两版均否定风险摘要替代实现纪律，累计验证和审查；按实际信号读其他专题，不因厚审强制造库。",
+            "oracle": "厚审不替代实现纪律，基础两份仍必需；验证/独审等叠加，不强制无对象建库。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "673e6cb98b280fe76683b08f35de634cf4c5bece8227b4c6c8675098d175fb4b",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "e739e886a227bde9518fdd9f03ff09819b634f6439106ccb32842de9a9391b2d",
+                "matches_report": true
+              },
+              {
+                "path": "references/verification.md",
+                "sha256": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4",
+                "matches_report": true
+              },
+              {
+                "path": "references/review-protocol.md",
+                "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "candidate-trial.json#/cases/11"
+          },
+          {
+            "id": "routing-first-capability",
+            "semantic_status": "passed",
+            "judgment": "两版均在首个真实调用方且独立边界成立时沿用项目既有位置收录，不等第二个调用方、不造平行库；新收录本身不被直接当成大改触发。",
+            "oracle": "新功能读基础两份与能力库；真实独立能力可按现有位置首次收录，不等第二个调用方，不另造平行库。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "673e6cb98b280fe76683b08f35de634cf4c5bece8227b4c6c8675098d175fb4b",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "e739e886a227bde9518fdd9f03ff09819b634f6439106ccb32842de9a9391b2d",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              },
+              {
+                "path": "references/verification.md",
+                "sha256": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4",
+                "matches_report": true
+              },
+              {
+                "path": "references/review-protocol.md",
+                "sha256": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "candidate-trial.json#/cases/12"
+          },
+          {
+            "id": "routing-private-orchestration",
+            "semantic_status": "passed",
+            "judgment": "两版均读能力库但没有独立对象时不抽模块、不建空索引，并保留领域未知条件。",
+            "oracle": "功能实现读能力库规则，但无独立对象不强行收录，不建空库；保留私有编排。",
+            "input_identity_status": "passed",
+            "reported_read_hash_status": "passed",
+            "minimum_reference_set_status": "passed",
+            "checked_reported_reads": [
+              {
+                "path": "SKILL.md",
+                "sha256": "673e6cb98b280fe76683b08f35de634cf4c5bece8227b4c6c8675098d175fb4b",
+                "matches_report": true
+              },
+              {
+                "path": "references/risk-gates.md",
+                "sha256": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+                "matches_report": true
+              },
+              {
+                "path": "references/implementation.md",
+                "sha256": "e739e886a227bde9518fdd9f03ff09819b634f6439106ccb32842de9a9391b2d",
+                "matches_report": true
+              },
+              {
+                "path": "references/reusable-capabilities.md",
+                "sha256": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+                "matches_report": true
+              },
+              {
+                "path": "references/frontend-review.md",
+                "sha256": "b192273a234b340987b1e31ca0802701081926d9497bb37b12b0507f9ee6dbbe",
+                "matches_report": true
+              },
+              {
+                "path": "references/frontend/routes-components.md",
+                "sha256": "1b54c10f589b7758ab058c6e77de655fd434203f3b5327116c362c036cdec75b",
+                "matches_report": true
+              }
+            ],
+            "permission_interpretation_status": "passed",
+            "project_execution_status": "not_run_by_design",
+            "read_sequence_evidence": "not_available",
+            "evidence_locator": "candidate-trial.json#/cases/13"
+          }
+        ]
+      }
+    ],
+    "findings": [],
+    "nonblocking_observations": [
+      {
+        "id": "TRIAL-NOTE-001",
+        "case": "routing-authorized-transition",
+        "variant": "candidate",
+        "text": "回答末尾使用修复后独立复验一语，但未在该句重申风险条件。已列 conditional_readings 并明确不得自称独立；额外独立审查是允许行为，本案固定判据无失败。不要据这句话概括成所有小修复都强制独立方。"
+      }
+    ],
+    "provenance": {
+      "historical_model_outputs": "两份完整输出现存并已核对；来源为交接保存的独立代理报告，非本核验器生成",
+      "reported_file_hashes": "逐项与当前对应副本复算一致；证明文件版本身份，不单独证明曾打开或完整阅读",
+      "historical_tool_call_transcripts": "未提供原始工具调用序列，故未独立认证读取先后、完整阅读或没有其他读取",
+      "context_independence": "两报告自述未读对方、oracle等；缺独立原始上下文轨迹，保持自报性质",
+      "oracle_prefixed_timing": "scenario-oracles.json 有 fixed_before_model_execution=true，prepare_cases.py 同时定义输入与判据；缺可信历史时序日志，不能单凭文件当前内容认证前置固定时点",
+      "read_set_interpretation": "actual_read_files 是该批次已经读过且用于某案判断的集合；不是每案独立重新读取日志。合理额外阅读不是失败",
+      "model_tool_budget_comparability": "原报告无可核对的精确模型版本、工具版本、预算与逐案耗时/token；这些计量未知，不推算",
+      "project_action_side_effects": "题面均禁止执行，报告均自述未执行；本次没有把此自述提升为经项目文件前后快照认证的零写入事实"
+    },
+    "limitations": [
+      "14 个显式询问规则和边界的合成题组成一批，不是 14 个互相隔离的真实工程执行；跨案共享阅读会影响代表性。",
+      "题面直接点出可能的错误，不能据正确回答估计自然任务中的自发漏读率。",
+      "每版仅一批样本；两版各 14 个核心判断均满足固定判据，因此没有显示该组旧版发生路由错误。",
+      "未使用静态单元测试代替模型输出；未开展真实项目修改、安装或运行验证。",
+      "输出合规和哈希一致不足以证明任意模型、任意任务下的稳定表现，也不足以证明发布质量改善。"
+    ],
+    "conclusion": "两份已有条件推理输出各 14 案的核心路由与权限解释均通过独立核对，输入和所报文件版本一致。结果支持本次入口表达澄清未在这些案例中引入路由判断回退；不支持旧版已实测漏读或新版漏读率下降的结论。",
+    "allowed_claims": [
+      "已核对两版各 14 案已有规则推理输出",
+      "固定输入完全一致、所报读取哈希均匹配",
+      "这组案例两版核心判断均正确",
+      "本轮改进是入口表达更明确"
+    ],
+    "disallowed_claims": [
+      "已证明旧版会漏读",
+      "已证明新版降低漏读率",
+      "28 次真实项目执行成功",
+      "已认证全部历史工具读取时序或零写入行为",
+      "对所有模型稳定有效"
+    ]
+  },
+  "conclusion": "两版各14案的核心路由解释均符合固定判据。本轮改进为入口表达澄清；不证明旧版曾漏读或新版降低漏读率。",
+  "limitations": [
+    "继承的是独立子代理报告，缺少原始工具轨迹；哈希证明材料身份，不能独立认证每次读取、上下文隔离和零写入。",
+    "同批案例共享上下文；每版仅一次批量试用，精确模型、工具版本、预算无法核实。",
+    "合成条件推理，不是业务项目执行、事故评估或稳定成功率实验。"
+  ]
+}

@@ -1,0 +1,497 @@
+{
+  "audit_id": "LEAN-ENGINEER-1.1.1-AUDIT-R1",
+  "language": "zh-CN",
+  "completed_at_utc": "2026-11-05T14:41:15.243396+00:00",
+  "round": 1,
+  "round_limit": 3,
+  "summary": "确认缺陷0项，未决候选缺陷0项。独立只读审计已完成；两项限定规则修订未发现必须修改的问题。最终证据归档、打包和安装复检仍是后置条件，本报告不是发行完成声明。",
+  "finding_count": 0,
+  "findings": [],
+  "unresolved_candidates": [],
+  "scope": {
+    "requirement": "plan.md的RISK-EXTERNAL-01及VERIFY-CI-SCOPE-01。只修仓库位置与CI范围两项，不新增领域，不重开1.1.0闭环历史。",
+    "acceptance": "仓库位置不能单独决定风险，保留全部受控证据、兼容窗口和恢复条件、高后果及兼容性增补独审；验收不自动授权CI建设，但明确必需CI不得略过。",
+    "independence": "审计者未参与候选修改及试用答案生成；自行核对完整变更、规则、预期与实际答案，不根据主agent自评下结论。",
+    "operations": "只做目录枚举、严格UTF-8文本读取、二进制哈希和内容比较。未运行项目测试/构建/安装/网络/CI，未修改候选或基线；仅写本报告。"
+  },
+  "history_consistency": {
+    "status": "not_applicable",
+    "reason": "授权的1.1.1两项规则维护新首轮；1.1.0三轮为不同范围且已闭环，不重新发布旧发现。",
+    "prior_id_mapping": [],
+    "limit_basis": "任务明确第1轮、上限3轮，与默认协议一致。"
+  },
+  "inventory": {
+    "method": "无Git；独立递归枚举含隐藏文件，逐文件SHA-256，对照两份manifest；按changes.diff路径顺序重建unified diff并逐字符核对。",
+    "baseline_version": "1.1.0",
+    "candidate_version": "1.1.1",
+    "baseline_count": 70,
+    "candidate_count": 73,
+    "changed_count": 15,
+    "changed_paths": [
+      ".claude-plugin/plugin.json",
+      "README.md",
+      "SKILL.md",
+      "VALIDATION.md",
+      "evals/evidence/BOUNDARY-ASSESSMENT-20261105.json",
+      "evals/evidence/RUN-20261105-BOUNDARY-BASELINE.json",
+      "evals/evidence/RUN-20261105-BOUNDARY-CANDIDATE.json",
+      "evals/runs.json",
+      "evals/tasks.json",
+      "kimi.plugin.json",
+      "plugin.json",
+      "skills/lean-engineer/SKILL.md",
+      "skills/lean-engineer/references/risk-gates.md",
+      "skills/lean-engineer/references/verification.md",
+      "tests/test_adversarial.py"
+    ],
+    "added_paths": [],
+    "removed_paths": [],
+    "baseline_manifest_match": true,
+    "candidate_manifest_match": false,
+    "diff_exact_match": true,
+    "diff_note": "初次重建的路径大小写排序不同，按原diff路径顺序重新比较后逐字符完全相同。",
+    "encoding": "全部140份基线/候选文件严格UTF-8解码成功，无BOM；11个改动文件未改变LF/CRLF存在方式。",
+    "baseline_hashes": {
+      ".claude-plugin/plugin.json": "9149ad31b13ff275d75a7f6af8842ab980181764e57caf5aee0eb375ff2dceec",
+      "agents/lean-reviewer.md": "c9817fc46a03a3d1d9ab77c8fd2e8df5632c2b6c0817bac6fb461c95b52ddff9",
+      "agents/openai.yaml": "d284c062b0f2bb6df0105c2364cd2509efca7054b9a85fbfe559eee7966e7504",
+      "evals/evidence/RELEASE-1.0.0-QA.json": "9652edf91091867a22eb9d8c030a0cd101a15cab6e20dcdcf508d87719934453",
+      "evals/evidence/RELEASE-1.0.0-REVIEW.json": "bcc5b9ab4a1ab74e20506262d87e2ada9ec66d0126e277fe5a1b1777cba12bb9",
+      "evals/evidence/RELEASE-1.1.0-AUDIT-R1.json": "2f374a3c3d426dbb48bf4d8fc63ba3c1e141de782f584cdccde7553a55b3d61a",
+      "evals/evidence/RELEASE-1.1.0-AUDIT-R2.json": "d827f79d0eb91f811054809ac80efc69580d16ac5e092f65cf7f8ee3c09adc37",
+      "evals/evidence/RELEASE-1.1.0-AUDIT-R3.json": "8dd898ca1c6af10cbd7d921cc045219e8496bec396e71f8d45425d1946de7ee0",
+      "evals/evidence/RELEASE-1.1.0-QA.json": "a558beb1e0a7d5cda680755094eee8e8e02a7ae7c67f25665e541400e6a8a4c8",
+      "evals/evidence/RUN-20261029-CAPABILITY-FIRST.json": "9f5b96d9e1feb33ca705604f67f06d543486be35c74cc66e875235d19a539453",
+      "evals/evidence/RUN-20261029-CAPABILITY-REUSE.json": "8fc834e43d9bd740bc51ca430547a380ef9f81cfee1aa743070d9c514eb876f2",
+      "evals/evidence/RUN-20261029-EXISTING-CONVENTIONS.json": "bee6edaba3d8c8e330d45b16f6a10d7bfc7cf3179a047533d32b430e488e26fe",
+      "evals/evidence/RUN-20261029-POLICY-BASELINE.json": "7151e111a713f3294969f7255dfb633fd33a873b9eb653906a2f0ec051eac5f4",
+      "evals/evidence/RUN-20261029-POLICY-CANDIDATE.json": "5847465789645065870f7efb62c134b9977b16dadcee48549eef74adf651e3a3",
+      "evals/evidence/RUN-20261029-READONLY-INDEX.json": "0b8faac5d9cd4f1371a3b800122e00a25808e7ad8cfe944914b5b577978bcfb4",
+      "evals/evidence/RUN-20261104-PENDING-REVIEW.json": "52dc43d5f1709ec5deb1f4bb0914e6fddb771fd7db193b69e7efb05b33a2b704",
+      "evals/evidence/RUN-20261104-RELEASE-ROUTING.json": "68d01cc956431ca9b371231a308bf9e30241ddae0dfcefdad82279bab4862c1c",
+      "evals/evidence/RUN-20261104-SECURITY-BASELINE.json": "6fd61b8b8ebcb0c117f13b46aed02946a48f61f25d2d8db0e2fe49c66e0bfa35",
+      "evals/evidence/RUN-20261104-SECURITY-CANDIDATE.json": "cf4b2b7ce29f48f76ff8f15ba0977eec60a07361b0ea1f590dd802f4ceade2e8",
+      "evals/evidence/RUN-20261104-SECURITY-FINAL.json": "5bfe335fdbd2786e6a6b265feb2539f56a19e0d1cb3adb8643052e00c50b93be",
+      "evals/evidence/SECURITY-DIFF-ASSESSMENT-v1.json": "1a62e8909e0f42261880a9685875ebd3f2ad015a5c00175eb8498b78eb38d15a",
+      "evals/evidence/SECURITY-DIFF-ASSESSMENT-v2.json": "9aa0d1f20f025941f98699fbd140d1226966c942a0665f26d3ecf23c0d65b522",
+      "evals/evidence/SECURITY-DIFF-FIXTURES-v1.json": "2f93e5fbb26f40c88cfda5b918c4fcaa19c5b0d8705b86621edd1f276b1fd5af",
+      "evals/README.md": "b07e12898fdbdcd75c2a43ce6e1b6fb02a8e4dfb3783f88813c3262c5097201a",
+      "evals/runs.json": "8f80664d07f5b980ffb650927b32697386c4e326831e4cac8d4821673e6260ec",
+      "evals/tasks.json": "79628420695f80ee740e29a555b32353f2fd3137a9dbcc5a00091406f7971f03",
+      "kimi.plugin.json": "d7f16e64610cce8a9d00464c88754f8db89e600e789738fb4d278ee3c55f76b5",
+      "LICENSE": "cfe26ca8616c7aaacd65df6bc713a54fa4f78b40e01e9e36c7122d69e9400296",
+      "NOTICE": "9b0c3961fc23b0e80d6880ee0f7ae277d1e8bb4b899e225bf28c4013709765c8",
+      "plugin.json": "1b792299424afae7645c398192a17726cf79110d80890132b3583609e2efa415",
+      "README.md": "e515e5c17503a5ceb76cfd2f9f424301865ab0630d65fa1e7655179672f014b7",
+      "scripts/distribution_rules.py": "cd565f6ace5fc7d7544d5d349d275524d51b55be43dbc190dcbc16be9f2208c9",
+      "scripts/package.py": "c14452a3cffbcb538f08107ae2b4cc45bb563320d666e428c4d4e0cfa5c84b93",
+      "scripts/validate_package.py": "35af880c1d3c8e515ceb18d3766bbb3a5f826842328b7035a02df72631f362bf",
+      "SKILL.md": "7abfa73c723a644cfa157234394701781db9afb1ffaf3346bc23f629d33562a6",
+      "skills/lean-engineer/agents/openai.yaml": "eb31ff5f9c2bded829f1639b895a32ad0f2add60ed6cf3ba2b792023b452c412",
+      "skills/lean-engineer/assets/backend-review-template.json": "5f2289dcec40a75f03f9d528011b4d15dc23f60f371051d530316a71f1c20476",
+      "skills/lean-engineer/LICENSE": "cfe26ca8616c7aaacd65df6bc713a54fa4f78b40e01e9e36c7122d69e9400296",
+      "skills/lean-engineer/NOTICE": "9b0c3961fc23b0e80d6880ee0f7ae277d1e8bb4b899e225bf28c4013709765c8",
+      "skills/lean-engineer/references/backend/api-contracts.md": "9456aeef7af936233fdfc862091aab1e53e60f009473bc39435eb1b02f2da8f1",
+      "skills/lean-engineer/references/backend/concurrency-messaging.md": "6297682ea74cf79aed71b1530dd23e139791f6805a07d9fb265bf7e403a319f6",
+      "skills/lean-engineer/references/backend/data-consistency.md": "38c874cfe12aa8cf20ad97a9a3c2d3976f0cd91e8c5ea57040b8b1021811bfd1",
+      "skills/lean-engineer/references/backend/delivery-operations.md": "6f8af2296d1b5dd77944cd91d972d4a3230202ef0e978434b3d2d22cfa762a67",
+      "skills/lean-engineer/references/backend/identity-access.md": "bb2b90997117cb0df0a4da06a93c9311baf55645e641e2b941db72dbbfdb8170",
+      "skills/lean-engineer/references/backend/ledger-contract.md": "43a86d10fdea76a2fd3a732e059c497f63cd370c4bf3cfca1e72b48928517d1a",
+      "skills/lean-engineer/references/backend/security-runtime.md": "3cd156c40aedde83a37e90aa5b702e3866376e5cee7b1a6f1075f612931c30f7",
+      "skills/lean-engineer/references/backend-review.md": "701be323a460cbe7da293448d5f1a98634bb0dc27b6975cf2564113b057256d3",
+      "skills/lean-engineer/references/domains/data-engineering.md": "691d2aa4f28716704646272024534d0e20300da18ef90d32788d6125821b69d6",
+      "skills/lean-engineer/references/domains/embedded.md": "7dadbb0ba1eecaf503273f3e715d2eeccb8a2bc593208c83088d6af1b162403c",
+      "skills/lean-engineer/references/domains/mobile.md": "6289cb5bbad029a38de95e2cd9f36fe58143ffe68d42e20a4f205ec52fb6cc30",
+      "skills/lean-engineer/references/formal-verification.md": "cd09492617109f93472492f3dc56637c5f9f07bc29aa40307d08b3a587378057",
+      "skills/lean-engineer/references/frontend/accessibility-layout.md": "69e0259b5b92332d85aaf52b3e7e7e4472b54db0e702cc7b7b6598055f5b92f2",
+      "skills/lean-engineer/references/frontend/delivery-evidence.md": "1326d4f4bb796f04033739acd5f3e6ac0acde55af0158b7b0f40911430c78eed",
+      "skills/lean-engineer/references/frontend/performance-lifecycle.md": "b64a630ddcd87d617c45925581d3af3c2325637ef0ed50147e12891288f82347",
+      "skills/lean-engineer/references/frontend/routes-components.md": "1b54c10f589b7758ab058c6e77de655fd434203f3b5327116c362c036cdec75b",
+      "skills/lean-engineer/references/frontend/security-privacy.md": "23e455cf4042cbf4923b4d895ffb7d6516418d29797f0b72529d31d245d2129e",
+      "skills/lean-engineer/references/frontend/state-data.md": "93d39b538b28296d6065a57048d64e82f383e41a682f8e7dc38af7edd1b40724",
+      "skills/lean-engineer/references/frontend-review.md": "b192273a234b340987b1e31ca0802701081926d9497bb37b12b0507f9ee6dbbe",
+      "skills/lean-engineer/references/implementation.md": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4",
+      "skills/lean-engineer/references/reusable-capabilities.md": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+      "skills/lean-engineer/references/review-protocol.md": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+      "skills/lean-engineer/references/risk-gates.md": "1156aa3397872cc727b19b77ceb79d9741d3f88f649a7e792ccf3530bf302fd4",
+      "skills/lean-engineer/references/security-diff-review.md": "4806fef88be68385dc7a2dbbedf121df2feff63a96d3af22a2d6da2ca77959db",
+      "skills/lean-engineer/references/tooling.md": "9ba9fa972c863cecf54fb3b65ab014b4dbed99792fb880eeef6094aad106c702",
+      "skills/lean-engineer/references/verification.md": "6e830bdb906fd7eab42a9db8f699e74632d985eff13f14afc9ab4e9161a28ee2",
+      "skills/lean-engineer/scripts/validate_review.py": "8962fe870fe62dcca3fa430039269dabc278560d17b4b7835942cd33c5156fa9",
+      "skills/lean-engineer/SKILL.md": "137f827325192263d3a2ac27ae5145593f6c433dc4ce2fccda644f0ed25e615b",
+      "tests/test_adversarial.py": "e5254c0812f9c78e97878d13d45a1de9c208db53d6ee1581d0f9c513fba56553",
+      "tests/test_validators.py": "1556c010e361a5be94f5d249b3633fac8e7facf9a68c5cb2ac0b8c7435fdac0e",
+      "VALIDATION.md": "959abe561dc748420ebbcca97d03720ec61d38e19b6a51b823804b4ebeb0a0c7"
+    },
+    "candidate_hashes": {
+      ".claude-plugin/plugin.json": "b6b5c3bab0cf5d92cc3d0fcba32b8a57eeb673ada6bfccfb00fbe420ff9b3dfa",
+      "agents/lean-reviewer.md": "c9817fc46a03a3d1d9ab77c8fd2e8df5632c2b6c0817bac6fb461c95b52ddff9",
+      "agents/openai.yaml": "d284c062b0f2bb6df0105c2364cd2509efca7054b9a85fbfe559eee7966e7504",
+      "evals/evidence/BOUNDARY-ASSESSMENT-20261105.json": "4d104bea19adabb8ef98ae312e21524b73d1e3602dfe280e7a87691ea83c5b10",
+      "evals/evidence/RELEASE-1.0.0-QA.json": "9652edf91091867a22eb9d8c030a0cd101a15cab6e20dcdcf508d87719934453",
+      "evals/evidence/RELEASE-1.0.0-REVIEW.json": "bcc5b9ab4a1ab74e20506262d87e2ada9ec66d0126e277fe5a1b1777cba12bb9",
+      "evals/evidence/RELEASE-1.1.0-AUDIT-R1.json": "2f374a3c3d426dbb48bf4d8fc63ba3c1e141de782f584cdccde7553a55b3d61a",
+      "evals/evidence/RELEASE-1.1.0-AUDIT-R2.json": "d827f79d0eb91f811054809ac80efc69580d16ac5e092f65cf7f8ee3c09adc37",
+      "evals/evidence/RELEASE-1.1.0-AUDIT-R3.json": "8dd898ca1c6af10cbd7d921cc045219e8496bec396e71f8d45425d1946de7ee0",
+      "evals/evidence/RELEASE-1.1.0-QA.json": "a558beb1e0a7d5cda680755094eee8e8e02a7ae7c67f25665e541400e6a8a4c8",
+      "evals/evidence/RUN-20261029-CAPABILITY-FIRST.json": "9f5b96d9e1feb33ca705604f67f06d543486be35c74cc66e875235d19a539453",
+      "evals/evidence/RUN-20261029-CAPABILITY-REUSE.json": "8fc834e43d9bd740bc51ca430547a380ef9f81cfee1aa743070d9c514eb876f2",
+      "evals/evidence/RUN-20261029-EXISTING-CONVENTIONS.json": "bee6edaba3d8c8e330d45b16f6a10d7bfc7cf3179a047533d32b430e488e26fe",
+      "evals/evidence/RUN-20261029-POLICY-BASELINE.json": "7151e111a713f3294969f7255dfb633fd33a873b9eb653906a2f0ec051eac5f4",
+      "evals/evidence/RUN-20261029-POLICY-CANDIDATE.json": "5847465789645065870f7efb62c134b9977b16dadcee48549eef74adf651e3a3",
+      "evals/evidence/RUN-20261029-READONLY-INDEX.json": "0b8faac5d9cd4f1371a3b800122e00a25808e7ad8cfe944914b5b577978bcfb4",
+      "evals/evidence/RUN-20261104-PENDING-REVIEW.json": "52dc43d5f1709ec5deb1f4bb0914e6fddb771fd7db193b69e7efb05b33a2b704",
+      "evals/evidence/RUN-20261104-RELEASE-ROUTING.json": "68d01cc956431ca9b371231a308bf9e30241ddae0dfcefdad82279bab4862c1c",
+      "evals/evidence/RUN-20261104-SECURITY-BASELINE.json": "6fd61b8b8ebcb0c117f13b46aed02946a48f61f25d2d8db0e2fe49c66e0bfa35",
+      "evals/evidence/RUN-20261104-SECURITY-CANDIDATE.json": "cf4b2b7ce29f48f76ff8f15ba0977eec60a07361b0ea1f590dd802f4ceade2e8",
+      "evals/evidence/RUN-20261104-SECURITY-FINAL.json": "5bfe335fdbd2786e6a6b265feb2539f56a19e0d1cb3adb8643052e00c50b93be",
+      "evals/evidence/RUN-20261105-BOUNDARY-BASELINE.json": "fe76851e7ce15c217e275258843a207c6621db2277b549d8b975e07745fa44fd",
+      "evals/evidence/RUN-20261105-BOUNDARY-CANDIDATE.json": "5bba7073ae3fad6ea554c969d978d06e856e547f8e33e3807f42b8d61ce7ee3e",
+      "evals/evidence/SECURITY-DIFF-ASSESSMENT-v1.json": "1a62e8909e0f42261880a9685875ebd3f2ad015a5c00175eb8498b78eb38d15a",
+      "evals/evidence/SECURITY-DIFF-ASSESSMENT-v2.json": "9aa0d1f20f025941f98699fbd140d1226966c942a0665f26d3ecf23c0d65b522",
+      "evals/evidence/SECURITY-DIFF-FIXTURES-v1.json": "2f93e5fbb26f40c88cfda5b918c4fcaa19c5b0d8705b86621edd1f276b1fd5af",
+      "evals/README.md": "b07e12898fdbdcd75c2a43ce6e1b6fb02a8e4dfb3783f88813c3262c5097201a",
+      "evals/runs.json": "ddbdd2e1ee1b459efa2e2a3dd0917652dd7897a2df73a70a636a4b453ef3e0a4",
+      "evals/tasks.json": "594fcf0dc93db5e0f0720199de4748422727021c2de90fcfaacaeda457e79439",
+      "kimi.plugin.json": "f2ba493a75095c3b6ad97c347900b79fd6ecdeb8bb4c51c32b0a635409fd61cf",
+      "LICENSE": "cfe26ca8616c7aaacd65df6bc713a54fa4f78b40e01e9e36c7122d69e9400296",
+      "NOTICE": "9b0c3961fc23b0e80d6880ee0f7ae277d1e8bb4b899e225bf28c4013709765c8",
+      "plugin.json": "0b37ec392b789f1f071176690a28225656c769054653b56942119f6657aab0f8",
+      "README.md": "975b47488bec37cb8de88b19384a3ef03dc8b0607096384771416c2eaedfae9f",
+      "scripts/distribution_rules.py": "cd565f6ace5fc7d7544d5d349d275524d51b55be43dbc190dcbc16be9f2208c9",
+      "scripts/package.py": "c14452a3cffbcb538f08107ae2b4cc45bb563320d666e428c4d4e0cfa5c84b93",
+      "scripts/validate_package.py": "35af880c1d3c8e515ceb18d3766bbb3a5f826842328b7035a02df72631f362bf",
+      "SKILL.md": "38240beb75cf63ca2d926b8fa7fd5a0a8e954ec1e3730734334f2f27c0574891",
+      "skills/lean-engineer/agents/openai.yaml": "eb31ff5f9c2bded829f1639b895a32ad0f2add60ed6cf3ba2b792023b452c412",
+      "skills/lean-engineer/assets/backend-review-template.json": "5f2289dcec40a75f03f9d528011b4d15dc23f60f371051d530316a71f1c20476",
+      "skills/lean-engineer/LICENSE": "cfe26ca8616c7aaacd65df6bc713a54fa4f78b40e01e9e36c7122d69e9400296",
+      "skills/lean-engineer/NOTICE": "9b0c3961fc23b0e80d6880ee0f7ae277d1e8bb4b899e225bf28c4013709765c8",
+      "skills/lean-engineer/references/backend/api-contracts.md": "9456aeef7af936233fdfc862091aab1e53e60f009473bc39435eb1b02f2da8f1",
+      "skills/lean-engineer/references/backend/concurrency-messaging.md": "6297682ea74cf79aed71b1530dd23e139791f6805a07d9fb265bf7e403a319f6",
+      "skills/lean-engineer/references/backend/data-consistency.md": "38c874cfe12aa8cf20ad97a9a3c2d3976f0cd91e8c5ea57040b8b1021811bfd1",
+      "skills/lean-engineer/references/backend/delivery-operations.md": "6f8af2296d1b5dd77944cd91d972d4a3230202ef0e978434b3d2d22cfa762a67",
+      "skills/lean-engineer/references/backend/identity-access.md": "bb2b90997117cb0df0a4da06a93c9311baf55645e641e2b941db72dbbfdb8170",
+      "skills/lean-engineer/references/backend/ledger-contract.md": "43a86d10fdea76a2fd3a732e059c497f63cd370c4bf3cfca1e72b48928517d1a",
+      "skills/lean-engineer/references/backend/security-runtime.md": "3cd156c40aedde83a37e90aa5b702e3866376e5cee7b1a6f1075f612931c30f7",
+      "skills/lean-engineer/references/backend-review.md": "701be323a460cbe7da293448d5f1a98634bb0dc27b6975cf2564113b057256d3",
+      "skills/lean-engineer/references/domains/data-engineering.md": "691d2aa4f28716704646272024534d0e20300da18ef90d32788d6125821b69d6",
+      "skills/lean-engineer/references/domains/embedded.md": "7dadbb0ba1eecaf503273f3e715d2eeccb8a2bc593208c83088d6af1b162403c",
+      "skills/lean-engineer/references/domains/mobile.md": "6289cb5bbad029a38de95e2cd9f36fe58143ffe68d42e20a4f205ec52fb6cc30",
+      "skills/lean-engineer/references/formal-verification.md": "cd09492617109f93472492f3dc56637c5f9f07bc29aa40307d08b3a587378057",
+      "skills/lean-engineer/references/frontend/accessibility-layout.md": "69e0259b5b92332d85aaf52b3e7e7e4472b54db0e702cc7b7b6598055f5b92f2",
+      "skills/lean-engineer/references/frontend/delivery-evidence.md": "1326d4f4bb796f04033739acd5f3e6ac0acde55af0158b7b0f40911430c78eed",
+      "skills/lean-engineer/references/frontend/performance-lifecycle.md": "b64a630ddcd87d617c45925581d3af3c2325637ef0ed50147e12891288f82347",
+      "skills/lean-engineer/references/frontend/routes-components.md": "1b54c10f589b7758ab058c6e77de655fd434203f3b5327116c362c036cdec75b",
+      "skills/lean-engineer/references/frontend/security-privacy.md": "23e455cf4042cbf4923b4d895ffb7d6516418d29797f0b72529d31d245d2129e",
+      "skills/lean-engineer/references/frontend/state-data.md": "93d39b538b28296d6065a57048d64e82f383e41a682f8e7dc38af7edd1b40724",
+      "skills/lean-engineer/references/frontend-review.md": "b192273a234b340987b1e31ca0802701081926d9497bb37b12b0507f9ee6dbbe",
+      "skills/lean-engineer/references/implementation.md": "dd9c6649022cd2015e1726b30fcb8195101f539bfe2a58aab6ed3372e76713e4",
+      "skills/lean-engineer/references/reusable-capabilities.md": "773d84a826b6de9de2f565e43621bf46e2f7aeb560d912534f1ad79e1af1e084",
+      "skills/lean-engineer/references/review-protocol.md": "8ff19966cae4b81a007364f5c8c73addb00c2247989bb28fb9f5d6ad7965f598",
+      "skills/lean-engineer/references/risk-gates.md": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+      "skills/lean-engineer/references/security-diff-review.md": "4806fef88be68385dc7a2dbbedf121df2feff63a96d3af22a2d6da2ca77959db",
+      "skills/lean-engineer/references/tooling.md": "9ba9fa972c863cecf54fb3b65ab014b4dbed99792fb880eeef6094aad106c702",
+      "skills/lean-engineer/references/verification.md": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4",
+      "skills/lean-engineer/scripts/validate_review.py": "8962fe870fe62dcca3fa430039269dabc278560d17b4b7835942cd33c5156fa9",
+      "skills/lean-engineer/SKILL.md": "8988e6da8295da4b528496a862852edd85b94e49a9dad1583b7b000b1cc3aa5d",
+      "tests/test_adversarial.py": "30a385d7ef9d1af9a2b89e8f0a3b8cafaaf530d27384fd2744089ab3e1c76b4f",
+      "tests/test_validators.py": "1556c010e361a5be94f5d249b3633fac8e7facf9a68c5cb2ac0b8c7435fdac0e",
+      "VALIDATION.md": "f3864529e5a60fb1712c7adc328ab955409f36f3f4857b69e99834d2aeae904f"
+    }
+  },
+  "unchanged_claims": {
+    "production_python": "scripts下3个生产Python及skills/lean-engineer/scripts/validate_review.py字节相同；Python修改仅tests/test_adversarial.py的2项字面回归和11案路由矩阵。",
+    "permissions": "agents/lean-reviewer.md和两个openai.yaml字节相同；3份插件清单仅版本号变更。工具权限未扩张。",
+    "schema": "backend-review-template.json、backend/ledger-contract.md和validate_review.py字节相同。",
+    "rule_scope": "主SKILL只变版本号；运行规则仅risk-gates.md、verification.md局部修订；其余为元数据、验证说明、案例与测试。"
+  },
+  "coverage": {
+    "read_modules": [
+      "skills/lean-engineer/SKILL.md",
+      "skills/lean-engineer/references/risk-gates.md",
+      "skills/lean-engineer/references/verification.md",
+      "skills/lean-engineer/references/review-protocol.md",
+      "skills/lean-engineer/references/implementation.md",
+      "skills/lean-engineer/references/backend/api-contracts.md",
+      "agents/lean-reviewer.md"
+    ],
+    "requirement_axis": "修改逐项追溯到两项授权目标；未扩展领域或CI任务。",
+    "rules_axis": "读取完整适用规则并检查相互约束，未确认本轮新冲突。",
+    "safety_axis": "未知调用方、未实测旧版、动态入口不明仍厚审；高后果与增补独审保留；只读不写入；必需CI不能静默豁免。",
+    "evidence_axis": "核对固定输入/预期、实际试用、123项逐条ok、7项命令退出码和两组字面回归0/1/0。未把静态或字面检查冒充全面语义证明。"
+  },
+  "candidate_checks": [
+    {
+      "hypothesis": "删除跨仓强制厚审后，未验证消费者可以受控。",
+      "counterevidence": "新厚审条款明确缺实际兼容证据即厚审；受控条件4继续要求全部受支持调用方/版本点名并实测。未知外部、仅最新版、同仓动态未知三个实际试用均保持厚审/partial。",
+      "disposition": "未成立，不发布缺陷。"
+    },
+    {
+      "hypothesis": "CI范围限定会略过明确必需CI。",
+      "counterevidence": "verification第5项明定用户/项目要求CI仍必需，缺权限/配置blocked；状态聚合为partial。只读CI必需案符合。",
+      "disposition": "未成立，不发布缺陷。"
+    },
+    {
+      "hypothesis": "预检范围声明把厚审三门改成可选。",
+      "counterevidence": "首段保留必需检查原状态，测试与质量门第5—9项及risk-gates厚审表不变，禁止缺工具/配置/规则当不适用。",
+      "disposition": "未成立，不发布缺陷。"
+    },
+    {
+      "hypothesis": "增补独审未执行应自动升级三门。",
+      "counterevidence": "既有专门分支明确not_run/partial，且兼容增补不自动三门；候选未把待审写成已完成。这不是本轮新规则。",
+      "disposition": "不构成本轮缺陷，不重开旧版历史。"
+    },
+    {
+      "hypothesis": "新增字面测试全绿被用作假完成。",
+      "counterevidence": "回归scope明确只防字面回退；另外核对固定合成题面。VALIDATION当前仍为正在进行，最终归档明确后置。",
+      "disposition": "未发现假完成，归档后须继续保留证据限制。"
+    }
+  ],
+  "scenario_review": {
+    "baseline_count": 11,
+    "candidate_count": 11,
+    "inputs_identical": true,
+    "input_sha256": "5a13fa7b149241303bd49d66c8313964467557694246375e190c3a6442ead429",
+    "candidate_source_snapshots_verified": 14,
+    "baseline_read_hashes_verified": 5,
+    "eval_tasks_queries_match": true,
+    "expectation_basis": "先按plan的两项目标及未修改的受控/独审/授权/证据规则独立推导，再核对scenario-oracles.json；不依据候选答案倒推期望。",
+    "results": [
+      {
+        "id": "final-crossrepo-known",
+        "oracle": "受控；仓库位置不是额外门槛，不因跨仓单独强制三门；结论仅在题设全部前提下成立。",
+        "audit_status": "符合",
+        "reason": "受控且不因跨仓追加三门；兼容通过未被外推为全部工程验证通过。基线因跨仓判厚审，差异正是本轮目标。"
+      },
+      {
+        "id": "final-crossrepo-additive-review-pending",
+        "oracle": "受控；兼容性增补独审仍必需，not_run、partial；不因跨仓或尚未独审单独升级三门。",
+        "audit_status": "符合",
+        "reason": "兼容性增补符合给定条件，独审未执行保持not_run/partial；未豁免独审，也未因待审单独升级三门。"
+      },
+      {
+        "id": "final-crossrepo-unknown",
+        "oracle": "厚审；真实外部调用方及版本未知，不以两个已知仓库冒充全部闭合。",
+        "audit_status": "符合",
+        "reason": "未知外部消费者与版本仍厚审/partial；两个已知仓库不能代表全部消费者，兼容判断blocked。"
+      },
+      {
+        "id": "final-crossrepo-latest-only",
+        "oracle": "厚审；列名不替代全部受支持版本的实际兼容证据；未验证不能通过。",
+        "audit_status": "符合",
+        "reason": "列名不能替代旧版实测，仍厚审；区分not_run/blocked，最新版结果不能闭合兼容窗口。"
+      },
+      {
+        "id": "final-monorepo-unknown",
+        "oracle": "厚审；同仓不免除动态入口、版本与链路未知。",
+        "audit_status": "符合",
+        "reason": "同仓动态入口不可读仍厚审/partial，未把源码位置当作真实调用链完整性。"
+      },
+      {
+        "id": "final-crossrepo-high-consequence",
+        "oracle": "全部受控前提下基础受控；高后果仍必须独审，not_run/partial，不仅因独审要求强制三门。",
+        "audit_status": "符合",
+        "reason": "基础受控但租户授权属于高后果，独审not_run使整体partial；保留允许/拒绝路径与恢复检查。"
+      },
+      {
+        "id": "final-local-copy-no-ci",
+        "oracle": "不新增无关工具、三门或CI建设；按给定全部必需项通过完成本轮，不冒充真实亲自执行。",
+        "audit_status": "符合",
+        "reason": "纯文案可观察小改，全部必需证据已给时仅本地范围条件性verified；不追加无关工具、三门或CI。"
+      },
+      {
+        "id": "final-readonly-acceptance-no-ci",
+        "oracle": "保持只读，不增加无关CI建设或把其缺失新增为本轮阻塞；说明实际覆盖，不声称建立CI。",
+        "audit_status": "符合",
+        "reason": "只读证据核对保留原改动适用要求；没有CI要求不新增CI缺口，不写CI，未凭局部二字臆造原风险或独立性。"
+      },
+      {
+        "id": "final-thick-local-gates-no-ci-change",
+        "oracle": "三门仍已作为必需完成；CI改造不在本轮范围，不因此另加阻塞；不得把本地验收冒充部署/CI/分支保护已验证。",
+        "audit_status": "符合",
+        "reason": "厚审三门仍必需且仅按题设已通过，不追加CI改造，也不把本地证据冒充CI、分支保护、生产或发布验证。"
+      },
+      {
+        "id": "final-ci-required-readonly",
+        "oracle": "CI是明确必需项，缺权限/配置为blocked，整体partial；不能静默降为建议或报告verified，也不能越权写入。",
+        "audit_status": "符合",
+        "reason": "项目明定CI仍必需；缺权限/配置blocked，整体partial，保持只读，不能verified。"
+      },
+      {
+        "id": "final-ci-authorized",
+        "oracle": "属于授权任务，可配置并实际运行同一基线的检查；当前未执行not_run，不能已通过；实际CI必需检查和分支保护才支持阻断合并声明。",
+        "audit_status": "符合",
+        "reason": "CI接入属于授权任务，当前not_run/partial；须实际运行及生效的必需检查/分支保护才可声明CI通过和合并阻断。"
+      }
+    ],
+    "baseline_comparison": "跨仓已闭合、增补及高后果三案的基础档位变化符合目标；原版在局部/只读/本地厚审CI范围存在文本张力，候选消除。未知/旧版/动态入口/明确必需CI保护未退化。"
+  },
+  "provided_checks": {
+    "source": "source-checks.json；仅核对记录，审计者没有重跑。",
+    "checks": [
+      {
+        "name": "candidate-package",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "scripts/validate_package.py",
+          "."
+        ],
+        "expected_exit": 0,
+        "actual_exit": 0,
+        "duration_seconds": 0.125
+      },
+      {
+        "name": "candidate-tests",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-v"
+        ],
+        "expected_exit": 0,
+        "actual_exit": 0,
+        "duration_seconds": 9.406
+      },
+      {
+        "name": "candidate-quick-.",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "C:\\Users\\Administrator\\.codex\\skills\\.system\\skill-creator\\scripts\\quick_validate.py",
+          "."
+        ],
+        "expected_exit": 0,
+        "actual_exit": 0,
+        "duration_seconds": 0.125
+      },
+      {
+        "name": "candidate-quick-skills/lean-engineer",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "C:\\Users\\Administrator\\.codex\\skills\\.system\\skill-creator\\scripts\\quick_validate.py",
+          "skills/lean-engineer"
+        ],
+        "expected_exit": 0,
+        "actual_exit": 0,
+        "duration_seconds": 0.094
+      },
+      {
+        "name": "candidate-ledger-0",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "skills/lean-engineer/scripts/validate_review.py",
+          "skills/lean-engineer/assets/backend-review-template.json"
+        ],
+        "expected_exit": 0,
+        "actual_exit": 0,
+        "duration_seconds": 0.063
+      },
+      {
+        "name": "candidate-ledger-2",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "skills/lean-engineer/scripts/validate_review.py",
+          "skills/lean-engineer/assets/backend-review-template.json",
+          "--require-ready"
+        ],
+        "expected_exit": 2,
+        "actual_exit": 2,
+        "duration_seconds": 0.078
+      },
+      {
+        "name": "candidate-claude-manifest",
+        "command": [
+          "pwsh",
+          "-NoProfile",
+          "-Command",
+          "claude plugin validate --strict ."
+        ],
+        "expected_exit": 0,
+        "actual_exit": 0,
+        "duration_seconds": 1.094
+      }
+    ],
+    "unit_test_ok_count": 123,
+    "reported_total": 123,
+    "old_rules_red": {
+      "exit": 1,
+      "failures": 2
+    },
+    "green_red_green": [
+      {
+        "id": "RISK-EXTERNAL-01",
+        "exits": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "id": "VERIFY-CI-SCOPE-01",
+        "exits": [
+          0,
+          1,
+          0
+        ]
+      }
+    ],
+    "proof_limit": "字面断言只能证明这些文本保护存在/旧规则被拒绝，不是完整自然语言规则语义证明；日志不能替代真实项目行为。"
+  },
+  "limitations": [
+    "只核对已提供命令实际输出，未重跑测试。当前候选与manifest、试用源码快照一致；最终归档后须按计划复检。",
+    "11个合成题面内通过事实是条件输入，不是对真实producer/consumer/CI的执行证据，不支持统计效果、全面正确或未来效果保证。",
+    "预期文件声明fixed_before_trial，题面、答案与快照一致性可核实；单靠文件无法密码学证明创建先后或代理完全未见预期。没有发现反证，但不把不可核实细节作保证。",
+    "未检查真实业务工程、生产部署、全部技术领域或1.1.0历史闭环细节；不凭局部审计扩大结论。",
+    "发行证据尚未归档，VALIDATION保留正在进行；这是明确后置步骤，不算本轮已完成。"
+  ],
+  "postconditions": [
+    {
+      "id": "POST-ARCHIVE",
+      "status": "not_run",
+      "required": "按既有协议归档本轮输入、固定预期、基线/候选原始试用、回归、命令输出与审计；登记evals/runs及VALIDATION实际结论，保留旧版历史。"
+    },
+    {
+      "id": "POST-PACKAGE",
+      "status": "not_run",
+      "required": "最终归档后重跑适用检查，重复生成完整/单技能包，逐文件比较与解包复检；新增归档文件进入最终清单。规则若再改需复审。"
+    },
+    {
+      "id": "POST-INSTALL",
+      "status": "not_run",
+      "required": "写前检查原安装目录未漂移，在已有授权范围内安装，读回逐文件比较并完成计划中的安装后测试。"
+    }
+  ],
+  "conclusion": {
+    "independent_review": "completed",
+    "finding_outcome": "本轮零确认缺陷，无需为产出更多发现而扩展范围。",
+    "release_conditions_satisfied": false,
+    "reason": "审计完成不等于发行完成；最终证据归档、打包、安装复检待主agent完成。"
+  },
+  "evidence_sha256": {
+    "plan.md": "7aa960c6052dc4943da0dfdda20db242c9c38959e8c280497ebf6a0af0da99f4",
+    "changes.diff": "a37faaaa7bef2b35b27a71138b4ca421fb455bde4fcfd2a2a16c890b17d66c06",
+    "baseline-manifest.json": "244e78c7f0010fcd0de74653f5101eebbc93a9d9c2acd2feec5522da0d988dce",
+    "change-manifest.json": "071a493dff4b9d3e497a1664b95f0d3fbaf3b0181ece42caf10666f8f999c652",
+    "scenario-inputs.json": "5a13fa7b149241303bd49d66c8313964467557694246375e190c3a6442ead429",
+    "scenario-oracles.json": "0937d41f63ff22ee4c3b12dae5b0b883c55a2dd22286d4f5ecad538bdf1892cf",
+    "baseline-trial.json": "2df4e052dd7a57f6455b4a38b76c59797558123138310bcd48b64ec3e28d81ad",
+    "candidate-trial.json": "38f15737fe4809878b1be8b584a6022b32e360c986a33c9686f8811c4db17a02",
+    "source-checks.json": "eb2e7e4efc296ae03df86c5c92803d73bac08cfb7c60439aeb17fe0e635d7434",
+    "old-rules-regression-red.json": "378426582cc2903d1a657e62313fab99a6352b66f73ceaecda221c2bcf3d9ed6",
+    "rule-regression-checks.json": "5358b480011ee49b1495701797da14e2ebf596ccdcee198bb824ad098a4306f5",
+    "quality-scope.json": "abfd85818bce2914260e0ff22f760b5303f8765667d736b82e57d13893d94353"
+  },
+  "report_write_note": "首次使用Path.write_text的newline参数不受当前Python支持，在写入前TypeError失败；已确认文件不存在，改用显式UTF-8 open独占创建，未覆盖任何文件。",
+  "distribution_redaction": {
+    "original_sha256": "ed60f68478e8a8c6f431ae7235164fe79ae83d3ad02b2facb5cd4458f0b8bbee",
+    "scope": "Local workspace path substitution only; audit judgments and hashes unchanged."
+  }
+}

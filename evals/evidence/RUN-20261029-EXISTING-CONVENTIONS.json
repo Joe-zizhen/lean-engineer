@@ -1,0 +1,759 @@
+{
+  "case_type": "synthetic",
+  "task_input": "After the read-only audit, implement src/app.py to accept one title, trim and collapse whitespace, print the result and print an empty line for an empty title. Follow the existing project rules. No dependencies or unrelated features.",
+  "context_note": "Same evaluator context as the preceding read-only audit; not a new cold-context run.",
+  "skill_input_sha256": {
+    "SKILL.md": "dc63b1927369960eab5406f90ac4c65ff73ee10b1ca29343f63cb37667ae69c0",
+    "skills/lean-engineer/SKILL.md": "6c61f60c320c93c974c46907b9e6c7ad9ea59d0f634de9e8616a5c4dcde7b55f",
+    "skills/lean-engineer/references/implementation.md": "576296b25148410cafa181f2a61ad3e3d4d158df630c54d6ca60fcc2f267aa41",
+    "skills/lean-engineer/references/risk-gates.md": "ebe979d48889a73c48fc8b9d1c6d3697fcf75fdb401b4c3f1e086e818114373d",
+    "skills/lean-engineer/references/review-protocol.md": "89acf455f93dcbf4e8773e4d8b61acdf1c9b07e0d036201de20eb12d55608dec",
+    "skills/lean-engineer/references/verification.md": "ee05566290a2c5e3d991b92dced28cbee03705b985e237f8c5c331bbc1a4cad7",
+    "skills/lean-engineer/references/reusable-capabilities.md": "4fffdc49f1331ecb9667b1b644a93be1ae808b62cff362d83398be0bf51662de"
+  },
+  "input_files": {
+    "AGENTS.md": {
+      "content": "本项目共享能力放在 src/shared/，能力索引为 docs/capabilities.md。CLI 源码放在 src/。不新增其他能力库或依赖。所有文本读写显式 UTF-8。\r\n",
+      "sha256": "d28912840224b3643f4b444f8608e2a286bb1caa688e80a607306691ea8928f4"
+    },
+    "src/shared/titles.py": {
+      "content": "def normalize_title(title: str) -> str:\r\n    return \" \".join(title.split())\r\n",
+      "sha256": "583d9300e41c33fdabac3c83402b9fb4da5e0e9582c585146b954fe8bde25da4"
+    },
+    "docs/capabilities.md": {
+      "content": "# 能力索引\r\n\r\n| 能力 | 文件 | 调用 | 条件 |\r\n| --- | --- | --- | --- |\r\n| 标题空白归一化 | `src/shared/old_titles.py` | `from shared.old_titles import normalize_title` | Python 字符串，无副作用 |\r\n",
+      "sha256": "267a132f1df4559769c8e171948e80a4aafd9e33baf52500146fd12c0f374d1d"
+    },
+    "src/app.py": {
+      "content": "raise NotImplementedError(\"CLI not implemented\")\r\n",
+      "sha256": "b8101baff838970f9b8a23a53e7bd12c43d2de7fc1c2efdef2b51b6e5f21558f"
+    }
+  },
+  "prior_model_output": "发现 **1 项索引失配**，审查状态 `partial`，未修改任何文件。\n\n- **CAP-001｜open｜origin_unknown｜中等｜高置信度**：`docs/capabilities.md:5` 指向不存在的 `src/shared/old_titles.py`，导入示例同样失效。实际实现位于 `src/shared/titles.py:1`。建议后续授权修复时同时更新路径与示例，并验证正常导入。\n- **可复用候选**：`normalize_title(title: str) -> str`，将首尾及连续空白归一化；源码没有外部依赖或副作用。正确导入为 `from shared.titles import normalize_title`，前提是运行入口能够解析项目的 `src/` 源码路径。\n- `src/app.py:1` 仅抛出 `NotImplementedError`，当前没有接入该能力的实际调用方。索引也未记录验证入口或结果，不能宣称已验证可直接使用。\n\n实际读取：\n- 指定技能的 `SKILL.md`、`references/risk-gates.md`、`references/reusable-capabilities.md`、`references/review-protocol.md`。\n- 指定项目的全部四个文件：`AGENTS.md`、`docs/capabilities.md`、`src/shared/titles.py`、`src/app.py`。均显式使用严格 UTF-8；另执行了文件清单与 SHA-256 核查。\n\n未运行：导入检查、行为测试、CLI 执行及构建；没有安装依赖、创建子代理或落盘报告。建议复验空串、纯空白、连续空白和制表符/换行，期望分别返回空串或单空格分隔的文字。\n\n`history_consistency=not_applicable`（首轮）。**准确模型 ID 不可见**，不能用角色名称推断。",
+  "agent_output": "# 实现结果\n\n交付状态：partial。需求对应的真实行为检查通过；完整质量门与独立审查尚未完成。\n\n- src/app.py 用标准库 argparse 接收一个位置参数，直接调用 src/shared/titles.py 的 normalize_title 后输出。\n- 空字符串或纯空白标题输出一个换行；中文、连续空白、制表符、换行及 Unicode 空白经过真实 CLI 验证。\n- 沿用 src/shared/ 和 docs/capabilities.md；修正 CAP-001 的源码路径和导入示例，补充运行条件与验证依据。没有新依赖或平行能力库。\n- 调用示例：python -X utf8 -B src/app.py \"  中文   标题  \"，输出“中文 标题”。连字符开头的标题可放在 -- 后。\n- 10 个 CLI 场景及 1 个共享模块导入场景通过。临时绕过归一化后，两个反例成功检测错误；恢复源码后 10 个 CLI 场景再次通过。临时破坏完全恢复。\n- 新 CLI 属于新增对外契约元素，依技能保守按厚审处理。复杂度、自动变异测试、架构机器质量门缺少配置而阻塞；独立审查未运行。未安装工具或创建子代理，手工负控制不冒充自动变异门通过。\n- 原四个文件保持 UTF-8 无 BOM、CRLF。只有 src/app.py 与 docs/capabilities.md 有预期改动；新增 verification.json 与本报告使用 UTF-8 无 BOM、LF。\n- 实际测试命令、工作目录、stdout、stderr、退出码、断言、diff 与文件哈希见 verification.json。准确模型 ID 不可见。\n\n实际读取：项目 AGENTS.md、docs/capabilities.md、src/shared/titles.py、src/app.py；指定技能 SKILL.md 及 risk-gates.md、reusable-capabilities.md、review-protocol.md、implementation.md、verification.md。未读取其他试验或上级评判文件。\n",
+  "agent_command_records": {
+    "timestamp_utc": "2026-10-29T15:40:01.889025+00:00",
+    "project": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+    "delivery_status": "partial",
+    "risk": {
+      "tier": "厚审大改",
+      "basis": "从未实现入口新增单位置参数 CLI 契约，依照技能新增对外契约元素规则保守定档。",
+      "effects": "仅输入字符串和标准输出；无持久化、网络或权限变化。"
+    },
+    "environment": {
+      "python": "3.8.8 (default, Apr 13 2021, 15:08:03) [MSC v.1916 64 bit (AMD64)]",
+      "executable": "D:\\Anaconda\\python.exe",
+      "platform": "Windows-10-10.0.26100-SP0"
+    },
+    "scope_before": [
+      "AGENTS.md",
+      "docs/capabilities.md",
+      "src/app.py",
+      "src/shared/titles.py"
+    ],
+    "runtime_checks": [
+      {
+        "id": "plain",
+        "phase": "green",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py",
+          "Hello"
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py Hello",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": "Hello\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "Hello\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "matches_contract": true,
+        "expected_rejection": false,
+        "status": "passed"
+      },
+      {
+        "id": "edges_and_repeated_spaces",
+        "phase": "green",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py",
+          "  alpha   beta  "
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py \"  alpha   beta  \"",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": "alpha beta\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "alpha beta\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "matches_contract": true,
+        "expected_rejection": false,
+        "status": "passed"
+      },
+      {
+        "id": "chinese",
+        "phase": "green",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py",
+          "  中文   标题  "
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py \"  中文   标题  \"",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": "中文 标题\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "中文 标题\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "matches_contract": true,
+        "expected_rejection": false,
+        "status": "passed"
+      },
+      {
+        "id": "empty",
+        "phase": "green",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py",
+          ""
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py \"\"",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": "\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "matches_contract": true,
+        "expected_rejection": false,
+        "status": "passed"
+      },
+      {
+        "id": "whitespace_only",
+        "phase": "green",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py",
+          " \t\r\n "
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py \" \t\r\n \"",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": "\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "matches_contract": true,
+        "expected_rejection": false,
+        "status": "passed"
+      },
+      {
+        "id": "mixed_whitespace",
+        "phase": "green",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py",
+          "\talpha\n beta\r\n gamma\t"
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py \"\talpha\n beta\r\n gamma\t\"",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": "alpha beta gamma\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "alpha beta gamma\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "matches_contract": true,
+        "expected_rejection": false,
+        "status": "passed"
+      },
+      {
+        "id": "unicode_whitespace",
+        "phase": "green",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py",
+          "　甲  乙　"
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py 　甲  乙　",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": "甲 乙\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "甲 乙\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "matches_contract": true,
+        "expected_rejection": false,
+        "status": "passed"
+      },
+      {
+        "id": "dash_title",
+        "phase": "green",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py",
+          "--",
+          "  --title  "
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py -- \"  --title  \"",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": "--title\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "--title\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "matches_contract": true,
+        "expected_rejection": false,
+        "status": "passed"
+      },
+      {
+        "id": "missing_argument",
+        "phase": "green",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py"
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": "",
+        "stderr": "usage: app.py [-h] title\r\napp.py: error: the following arguments are required: title\r\n",
+        "exit_code": 2,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "",
+        "expected_exit_code": 2,
+        "expected_stderr_contains": "the following arguments are required: title",
+        "matches_contract": true,
+        "expected_rejection": false,
+        "status": "passed"
+      },
+      {
+        "id": "extra_argument",
+        "phase": "green",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py",
+          "one",
+          "two"
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py one two",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": "",
+        "stderr": "usage: app.py [-h] title\r\napp.py: error: unrecognized arguments: two\r\n",
+        "exit_code": 2,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "",
+        "expected_exit_code": 2,
+        "expected_stderr_contains": "unrecognized arguments: two",
+        "matches_contract": true,
+        "expected_rejection": false,
+        "status": "passed"
+      },
+      {
+        "id": "shared_import",
+        "phase": "green",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "-c",
+          "from shared.titles import normalize_title; print(normalize_title('  alpha   beta  '))"
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B -c \"from shared.titles import normalize_title; print(normalize_title('  alpha   beta  '))\"",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions\\src",
+        "stdout": "alpha beta\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "alpha beta\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "matches_contract": true,
+        "expected_rejection": false,
+        "status": "passed"
+      },
+      {
+        "id": "negative_control_spaces",
+        "phase": "red",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py",
+          "  alpha   beta  "
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py \"  alpha   beta  \"",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": "  alpha   beta  \r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "alpha beta\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "matches_contract": false,
+        "expected_rejection": true,
+        "status": "passed"
+      },
+      {
+        "id": "negative_control_blank",
+        "phase": "red",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py",
+          " \t "
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py \" \t \"",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": " \t \r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "matches_contract": false,
+        "expected_rejection": true,
+        "status": "passed"
+      },
+      {
+        "id": "restored_plain",
+        "phase": "restored_green",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py",
+          "Hello"
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py Hello",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": "Hello\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "Hello\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "matches_contract": true,
+        "expected_rejection": false,
+        "status": "passed"
+      },
+      {
+        "id": "restored_edges_and_repeated_spaces",
+        "phase": "restored_green",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py",
+          "  alpha   beta  "
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py \"  alpha   beta  \"",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": "alpha beta\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "alpha beta\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "matches_contract": true,
+        "expected_rejection": false,
+        "status": "passed"
+      },
+      {
+        "id": "restored_chinese",
+        "phase": "restored_green",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py",
+          "  中文   标题  "
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py \"  中文   标题  \"",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": "中文 标题\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "中文 标题\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "matches_contract": true,
+        "expected_rejection": false,
+        "status": "passed"
+      },
+      {
+        "id": "restored_empty",
+        "phase": "restored_green",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py",
+          ""
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py \"\"",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": "\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "matches_contract": true,
+        "expected_rejection": false,
+        "status": "passed"
+      },
+      {
+        "id": "restored_whitespace_only",
+        "phase": "restored_green",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py",
+          " \t\r\n "
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py \" \t\r\n \"",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": "\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "matches_contract": true,
+        "expected_rejection": false,
+        "status": "passed"
+      },
+      {
+        "id": "restored_mixed_whitespace",
+        "phase": "restored_green",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py",
+          "\talpha\n beta\r\n gamma\t"
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py \"\talpha\n beta\r\n gamma\t\"",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": "alpha beta gamma\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "alpha beta gamma\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "matches_contract": true,
+        "expected_rejection": false,
+        "status": "passed"
+      },
+      {
+        "id": "restored_unicode_whitespace",
+        "phase": "restored_green",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py",
+          "　甲  乙　"
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py 　甲  乙　",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": "甲 乙\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "甲 乙\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "matches_contract": true,
+        "expected_rejection": false,
+        "status": "passed"
+      },
+      {
+        "id": "restored_dash_title",
+        "phase": "restored_green",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py",
+          "--",
+          "  --title  "
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py -- \"  --title  \"",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": "--title\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "--title\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "matches_contract": true,
+        "expected_rejection": false,
+        "status": "passed"
+      },
+      {
+        "id": "restored_missing_argument",
+        "phase": "restored_green",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py"
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": "",
+        "stderr": "usage: app.py [-h] title\r\napp.py: error: the following arguments are required: title\r\n",
+        "exit_code": 2,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "",
+        "expected_exit_code": 2,
+        "expected_stderr_contains": "the following arguments are required: title",
+        "matches_contract": true,
+        "expected_rejection": false,
+        "status": "passed"
+      },
+      {
+        "id": "restored_extra_argument",
+        "phase": "restored_green",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "src/app.py",
+          "one",
+          "two"
+        ],
+        "command_line": "D:\\Anaconda\\python.exe -X utf8 -B src/app.py one two",
+        "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions",
+        "stdout": "",
+        "stderr": "usage: app.py [-h] title\r\napp.py: error: unrecognized arguments: two\r\n",
+        "exit_code": 2,
+        "expectation_source": "用户要求的单标题空白归一化及 argparse 参数数量约束",
+        "expected_stdout": "",
+        "expected_exit_code": 2,
+        "expected_stderr_contains": "unrecognized arguments: two",
+        "matches_contract": true,
+        "expected_rejection": false,
+        "status": "passed"
+      }
+    ],
+    "manual_negative_control": {
+      "purpose": "证明检查能识别绕过归一化的已知破坏；不是自动变异质量门。",
+      "diff": "--- src/app.py\n+++ known-broken/src/app.py\n@@ -7,4 +7,4 @@\n     parser = argparse.ArgumentParser()\r\n     parser.add_argument(\"title\")\r\n     args = parser.parse_args()\r\n-    print(normalize_title(args.title))\r\n+    print(args.title)\r\n",
+      "restored": true
+    },
+    "quality_gates": {
+      "complexity": {
+        "status": "blocked",
+        "reason": "项目没有复杂度配置；未安装额外工具。"
+      },
+      "tests_and_mutation": {
+        "status": "blocked",
+        "reason": "真实行为与手工负控制通过，但没有自动变异测试配置；手工验证不替代自动变异质量门。"
+      },
+      "architecture": {
+        "status": "blocked",
+        "reason": "没有项目架构机器检查配置；人工核对不替代质量门。"
+      },
+      "independent_review": {
+        "status": "not_run",
+        "reason": "本轮禁止创建子代理；本人检查不称为独立审查。"
+      }
+    },
+    "tool_preflight": {
+      "radon": false,
+      "mutmut": false,
+      "cosmic_ray": false,
+      "importlinter": false
+    },
+    "diffs": [
+      {
+        "path": "docs/capabilities.md",
+        "diff": "--- before/docs/capabilities.md\n+++ after/docs/capabilities.md\n@@ -1,5 +1,5 @@\n # 能力索引\r\n \r\n-| 能力 | 文件 | 调用 | 条件 |\r\n-| --- | --- | --- | --- |\r\n-| 标题空白归一化 | `src/shared/old_titles.py` | `from shared.old_titles import normalize_title` | Python 字符串，无副作用 |\r\n+| 能力 | 文件 | 调用 | 条件 | 验证依据 |\r\n+| --- | --- | --- | --- | --- |\r\n+| 标题空白归一化 | `src/shared/titles.py` | `from shared.titles import normalize_title` | Python 字符串，无副作用；运行入口须能解析 `src/` | `python -X utf8 -B src/app.py \"  alpha   beta  \"` 输出 `alpha beta`；本次真实 CLI 与导入检查通过，见 [verification.json](../verification.json) |\r\n"
+      },
+      {
+        "path": "src/app.py",
+        "diff": "--- before/src/app.py\n+++ after/src/app.py\n@@ -1 +1,10 @@\n-raise NotImplementedError(\"CLI not implemented\")\r\n+import argparse\r\n+\r\n+from shared.titles import normalize_title\r\n+\r\n+\r\n+if __name__ == \"__main__\":\r\n+    parser = argparse.ArgumentParser()\r\n+    parser.add_argument(\"title\")\r\n+    args = parser.parse_args()\r\n+    print(normalize_title(args.title))\r\n"
+      }
+    ],
+    "file_integrity": [
+      {
+        "path": "src/shared/titles.py",
+        "sha256_before": "583d9300e41c33fdabac3c83402b9fb4da5e0e9582c585146b954fe8bde25da4",
+        "sha256_after": "583d9300e41c33fdabac3c83402b9fb4da5e0e9582c585146b954fe8bde25da4",
+        "encoding": "UTF-8 without BOM",
+        "line_endings": "CRLF",
+        "unchanged": true
+      },
+      {
+        "path": "docs/capabilities.md",
+        "sha256_before": "267a132f1df4559769c8e171948e80a4aafd9e33baf52500146fd12c0f374d1d",
+        "sha256_after": "b8c14d2d757be9912e79a204ccfd76751f46477ef0cddb8c2accd2c28f735fbd",
+        "encoding": "UTF-8 without BOM",
+        "line_endings": "CRLF",
+        "unchanged": false
+      },
+      {
+        "path": "AGENTS.md",
+        "sha256_before": "d28912840224b3643f4b444f8608e2a286bb1caa688e80a607306691ea8928f4",
+        "sha256_after": "d28912840224b3643f4b444f8608e2a286bb1caa688e80a607306691ea8928f4",
+        "encoding": "UTF-8 without BOM",
+        "line_endings": "CRLF",
+        "unchanged": true
+      },
+      {
+        "path": "src/app.py",
+        "sha256_before": "b8101baff838970f9b8a23a53e7bd12c43d2de7fc1c2efdef2b51b6e5f21558f",
+        "sha256_after": "9c4af02b33b7919c2b7952e063e6047160f387d2ffe37b26d00b29b1934651cb",
+        "encoding": "UTF-8 without BOM",
+        "line_endings": "CRLF",
+        "unchanged": false
+      }
+    ],
+    "model_id": {
+      "visible": false,
+      "value": null
+    },
+    "prior_review_findings": [
+      {
+        "id": "CAP-001",
+        "status": "resolved",
+        "resolution": "索引路径与调用示例已更新为真实源码；shared_import 真实导入通过。"
+      }
+    ]
+  },
+  "output_files": {
+    "src/app.py": "import argparse\r\n\r\nfrom shared.titles import normalize_title\r\n\r\n\r\nif __name__ == \"__main__\":\r\n    parser = argparse.ArgumentParser()\r\n    parser.add_argument(\"title\")\r\n    args = parser.parse_args()\r\n    print(normalize_title(args.title))\r\n",
+    "docs/capabilities.md": "# 能力索引\r\n\r\n| 能力 | 文件 | 调用 | 条件 | 验证依据 |\r\n| --- | --- | --- | --- | --- |\r\n| 标题空白归一化 | `src/shared/titles.py` | `from shared.titles import normalize_title` | Python 字符串，无副作用；运行入口须能解析 `src/` | `python -X utf8 -B src/app.py \"  alpha   beta  \"` 输出 `alpha beta`；本次真实 CLI 与导入检查通过，见 [verification.json](../verification.json) |\r\n",
+    "src/shared/titles.py": "def normalize_title(title: str) -> str:\r\n    return \" \".join(title.split())\r\n"
+  },
+  "parent_verification": {
+    "shared_source_unchanged": true,
+    "no_parallel_default_library": true,
+    "existing_index_repaired": true,
+    "process_checks": [
+      {
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions\\src\\app.py",
+          "  中文\t 标题  "
+        ],
+        "stdout": "中文 标题\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expected_stdout": "中文 标题\n",
+        "passed": true
+      },
+      {
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions\\src\\app.py",
+          ""
+        ],
+        "stdout": "\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expected_stdout": "\n",
+        "passed": true
+      },
+      {
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-conventions\\src\\app.py",
+          " \t\n"
+        ],
+        "stdout": "\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expected_stdout": "\n",
+        "passed": true
+      }
+    ]
+  },
+  "evidence_limits": [
+    "The evaluator classified the new CLI as thick change and reported partial because quality-gate tooling and independent review were unavailable.",
+    "Other title-tool executions classified their local CLI additions as small changes. Risk classification consistency is not established by these executions.",
+    "Functional checks and convention/index checks passed. This does not establish that all skill checks passed.",
+    "Exact model identity, token usage and complete tool-read traces are unavailable.",
+    "No real-incident or no-skill controlled comparison was executed."
+  ]
+}

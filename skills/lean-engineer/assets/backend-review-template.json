@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.3",
+  "project": {
+    "name": "unassessed",
+    "mode": "quick",
+    "baseline": "unprovided",
+    "scope": "Template only. No review has been executed.",
+    "access": "source_only",
+    "required_topics": [
+      "api_contracts",
+      "identity_access",
+      "data_consistency",
+      "concurrency_messaging",
+      "security_runtime",
+      "delivery_operations"
+    ]
+  },
+  "surfaces": [],
+  "evidence": [],
+  "checks": [],
+  "findings": [],
+  "release": {
+    "status": "not_assessed",
+    "reason": "Template only. No release assessment has been executed.",
+    "evidence_ids": []
+  }
+}

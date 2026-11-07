@@ -1,0 +1,1097 @@
+{
+  "kind": "synthetic_readonly_baseline_trial",
+  "raw_scenario_inputs": "{\n  \"kind\": \"synthetic_readonly\",\n  \"scenarios\": [\n    {\n      \"id\": \"security-guard-history\",\n      \"files\": [\n        \"case-a\"\n      ],\n      \"query\": \"对 case-a 的前后变化做只读安全差异审查，核对保护的作用和可能后果。输出来源、证据和未验证范围。\"\n    },\n    {\n      \"id\": \"security-transitive-worker\",\n      \"files\": [\n        \"case-b\"\n      ],\n      \"query\": \"以 quick 模式审查 case-b。调用链中还存在任务分发；请确定需要追踪的范围、停止依据和发现。\"\n    },\n    {\n      \"id\": \"security-effective-guard\",\n      \"files\": [\n        \"case-c\"\n      ],\n      \"query\": \"只读审查 case-c 的变化，核对是否违反安全契约。允许零发现，但须说明依据和覆盖范围。\"\n    },\n    {\n      \"id\": \"security-no-git\",\n      \"files\": [\n        \"case-a/before\",\n        \"case-a/after\",\n        \"case-a/SPEC.md\"\n      ],\n      \"query\": \"这是无 Git 项目，只提供所列原始和当前文件，不提供历史说明。安全差异审查能继续吗？哪些结论能成立，哪些不能成立？\"\n    },\n    {\n      \"id\": \"security-dynamic-unknown\",\n      \"files\": [\n        \"case-c\"\n      ],\n      \"query\": \"case-c 还有一个由外部配置注入的插件入口，其源码与配置目前不可读。用户要求覆盖全部受支持入口。请报告已知路径与整体覆盖状态。\"\n    },\n    {\n      \"id\": \"security-state-dependent\",\n      \"files\": [\n        \"case-d\"\n      ],\n      \"query\": \"只读审查 case-d。候选问题如果只在特定状态变化后出现，应如何判断？不得运行代码或操作真实服务。\"\n    },\n    {\n      \"id\": \"security-one-caller\",\n      \"files\": [\n        \"case-a\"\n      ],\n      \"query\": \"case-a 的敏感读取仅有 detail 这一个调用入口。请按给定契约和严重度约定给出判断。\"\n    },\n    {\n      \"id\": \"security-unrelated-many-callers\",\n      \"files\": [\n        \"case-e\"\n      ],\n      \"query\": \"只读审查 case-e 的变化。是否必须进入安全差异专题、升级厚审或全仓追踪？说明必需检查。\"\n    },\n    {\n      \"id\": \"security-missing-baseline\",\n      \"files\": [\n        \"case-f\"\n      ],\n      \"query\": \"只读审查 case-f 当前实现。用户还问它是不是这次改动引入的回归；请区分能确认的内容、来源分类和缺失证据。\"\n    }\n  ]\n}\n",
+  "scenario_input_sha256": "1641410fa3a134f6b696d167c761faad586df57e1a852d2005370fd937668119",
+  "skill_root": "baseline/skills/lean-engineer",
+  "scenarios": [
+    {
+      "id": "security-guard-history",
+      "raw_scenario_input": {
+        "id": "security-guard-history",
+        "files": [
+          "case-a"
+        ],
+        "query": "对 case-a 的前后变化做只读安全差异审查，核对保护的作用和可能后果。输出来源、证据和未验证范围。"
+      },
+      "actual_read_files": [
+        {
+          "path": "skill/SKILL.md",
+          "sha256": "50bd2c00fb18cb26cb86cbd498d1a7b4b37c3f7c02b182c4389c26d20b18d68d"
+        },
+        {
+          "path": "skill/references/review-protocol.md",
+          "sha256": "c8b7969d9e2a95a7275216937d990c694aa98097abc5a4cc2db6b5be55354c99"
+        },
+        {
+          "path": "skill/references/risk-gates.md",
+          "sha256": "1156aa3397872cc727b19b77ceb79d9741d3f88f649a7e792ccf3530bf302fd4"
+        },
+        {
+          "path": "skill/references/verification.md",
+          "sha256": "6e830bdb906fd7eab42a9db8f699e74632d985eff13f14afc9ab4e9161a28ee2"
+        },
+        {
+          "path": "skill/references/backend-review.md",
+          "sha256": "7de7d0ab859dd442b1fdd5b9b560bd339bac1161f674026ad2da61f77a032ea0"
+        },
+        {
+          "path": "skill/references/backend/identity-access.md",
+          "sha256": "bb2b90997117cb0df0a4da06a93c9311baf55645e641e2b941db72dbbfdb8170"
+        },
+        {
+          "path": "skill/references/backend/api-contracts.md",
+          "sha256": "9456aeef7af936233fdfc862091aab1e53e60f009473bc39435eb1b02f2da8f1"
+        },
+        {
+          "path": "skill/references/backend/security-runtime.md",
+          "sha256": "3cd156c40aedde83a37e90aa5b702e3866376e5cee7b1a6f1075f612931c30f7"
+        },
+        {
+          "path": "skill/references/formal-verification.md",
+          "sha256": "cd09492617109f93472492f3dc56637c5f9f07bc29aa40307d08b3a587378057"
+        },
+        {
+          "path": "fixtures/case-a/HISTORY.md",
+          "sha256": "361e6e1df35d2f2f779e77133977936c4be13237abd9691535da04751fff9fbc"
+        },
+        {
+          "path": "fixtures/case-a/SPEC.md",
+          "sha256": "cc9b722cc536c849bdf73829a575b29badbff09d3479941970dc75e7895184b8"
+        },
+        {
+          "path": "fixtures/case-a/after/routes.py",
+          "sha256": "fbed70b1499ccc63d955cb335930c8dcdfc6ea7658e1ade85ee99439477ee54a"
+        },
+        {
+          "path": "fixtures/case-a/after/storage.py",
+          "sha256": "7b0f27161b8365ef518c9e1504c664afabfe1d6eb2ad8d551fcfd76c148365e6"
+        },
+        {
+          "path": "fixtures/case-a/before/routes.py",
+          "sha256": "fbed70b1499ccc63d955cb335930c8dcdfc6ea7658e1ade85ee99439477ee54a"
+        },
+        {
+          "path": "fixtures/case-a/before/storage.py",
+          "sha256": "ca9ff074c3e36684a5810dd92756111ba7d8ba65214efc9d9db84027b899f6be"
+        }
+      ],
+      "routing": {
+        "dedicated_security_difference_topic": "基线主文件无独立的安全差异专题路由；使用已有身份、安全资源、审查协议和对应方法。",
+        "security_related_trigger": true,
+        "methods": [
+          "身份与访问控制",
+          "API 与契约",
+          "安全与资源",
+          "安全不变量静态反例",
+          "风险分档"
+        ]
+      },
+      "full_answer": {
+        "defect_count": 1,
+        "scope_and_stop": "对比 before/after 的 routes.py、storage.py，并核对 SPEC.md 与 HISTORY.md。detail→read_row 是所见链；止于本地内存字典返回，未延伸任何真实数据库或系统。",
+        "findings": [
+          {
+            "id": "A-TENANT-GUARD",
+            "severity": "P1",
+            "confidence": "confirmed",
+            "origin": "introduced",
+            "location": "fixtures/case-a/after/storage.py:3-5；before/storage.py:5-6；after/routes.py:3-6",
+            "actual": "原始 read_row 拒绝不同租户，当前直接返回记录副本。",
+            "expected": "任何公开入口拒绝返回其他租户记录，同时允许同租户访问。",
+            "impact": "在给定夹具假设中，已认证 alpha 用户选 key=b 可获得 beta 记录。静态可达缺陷，不是已发生事故。",
+            "support": [
+              "SPEC.md:1-3 给出可信身份、任意 key、隔离契约和 P1 约定",
+              "before/after storage 对比直接证明检查删除",
+              "HISTORY.md:1 明确记录原保护目的，但不是 Git 提交"
+            ],
+            "counterevidence": "detail 仍认证，但只确认 authenticated，未比较 tenant；dict(row) 只复制而不隔离。反证不足以排除越权。",
+            "remedy": "恢复读取处租户检查或等效覆盖全部入口的可信授权。",
+            "retest": "授权人员在隔离环境从 detail 覆盖匿名拒绝、alpha/a 允许、alpha/b 拒绝且不返回受限字段；前后对比。",
+            "owner": "授权实现者，未指定",
+            "status": "open"
+          }
+        ],
+        "unknowns": "运行环境、真实部署、实际事故、外部入口未知。历史仅合成说明，不能证明真实提交动机。",
+        "deliverable_conclusion": "1 个静态确认缺陷。隔离契约检查 failed；审查意见可交付，运行验证 not_run，不可宣称 verified 或上线可用。"
+      },
+      "verification": {
+        "evidence_types": [
+          "source",
+          "specification"
+        ],
+        "runtime": "not_run",
+        "tests": "not_run",
+        "formal_verification": "not_run",
+        "independent_review": "本代理未参与夹具实现；本次为独立只读合成审查，未再次委派",
+        "history_consistency": "not_applicable：独立首轮场景试用，不是修复复审"
+      },
+      "completed_at": "2026-11-04T08:17:26.0039632+00:00",
+      "limitations": [
+        "只读静态合成代码审查，不是真实事故评估；confirmed 仅表示给定源码与假设下机制确定，不表示运行复现或事故发生。",
+        "不运行夹具、测试、模型或外部服务；源码和规范不能证明真实生产运行通过。",
+        "每案仅使用其 files 指定材料；无 Git 案不采用 HISTORY；缺基线案不采用其他夹具。"
+      ]
+    },
+    {
+      "id": "security-transitive-worker",
+      "raw_scenario_input": {
+        "id": "security-transitive-worker",
+        "files": [
+          "case-b"
+        ],
+        "query": "以 quick 模式审查 case-b。调用链中还存在任务分发；请确定需要追踪的范围、停止依据和发现。"
+      },
+      "actual_read_files": [
+        {
+          "path": "skill/SKILL.md",
+          "sha256": "50bd2c00fb18cb26cb86cbd498d1a7b4b37c3f7c02b182c4389c26d20b18d68d"
+        },
+        {
+          "path": "skill/references/review-protocol.md",
+          "sha256": "c8b7969d9e2a95a7275216937d990c694aa98097abc5a4cc2db6b5be55354c99"
+        },
+        {
+          "path": "skill/references/risk-gates.md",
+          "sha256": "1156aa3397872cc727b19b77ceb79d9741d3f88f649a7e792ccf3530bf302fd4"
+        },
+        {
+          "path": "skill/references/verification.md",
+          "sha256": "6e830bdb906fd7eab42a9db8f699e74632d985eff13f14afc9ab4e9161a28ee2"
+        },
+        {
+          "path": "skill/references/backend-review.md",
+          "sha256": "7de7d0ab859dd442b1fdd5b9b560bd339bac1161f674026ad2da61f77a032ea0"
+        },
+        {
+          "path": "skill/references/backend/identity-access.md",
+          "sha256": "bb2b90997117cb0df0a4da06a93c9311baf55645e641e2b941db72dbbfdb8170"
+        },
+        {
+          "path": "skill/references/backend/api-contracts.md",
+          "sha256": "9456aeef7af936233fdfc862091aab1e53e60f009473bc39435eb1b02f2da8f1"
+        },
+        {
+          "path": "skill/references/backend/security-runtime.md",
+          "sha256": "3cd156c40aedde83a37e90aa5b702e3866376e5cee7b1a6f1075f612931c30f7"
+        },
+        {
+          "path": "skill/references/backend/concurrency-messaging.md",
+          "sha256": "6297682ea74cf79aed71b1530dd23e139791f6805a07d9fb265bf7e403a319f6"
+        },
+        {
+          "path": "skill/references/formal-verification.md",
+          "sha256": "cd09492617109f93472492f3dc56637c5f9f07bc29aa40307d08b3a587378057"
+        },
+        {
+          "path": "fixtures/case-b/SPEC.md",
+          "sha256": "93242b5bcf3b9a98534718fdef9f899033b27d7791608f534b50c4fe2dc60230"
+        },
+        {
+          "path": "fixtures/case-b/after/routes.py",
+          "sha256": "f0f09100cb3463ef5ec20bd5808ebb5632ff38cb427badb34a67073b472e75b2"
+        },
+        {
+          "path": "fixtures/case-b/after/service.py",
+          "sha256": "b910fa6c51056dad85433cdc6a9801ca7c7b1e2cabc835050a3fb7e729a91b7b"
+        },
+        {
+          "path": "fixtures/case-b/after/storage.py",
+          "sha256": "7b0f27161b8365ef518c9e1504c664afabfe1d6eb2ad8d551fcfd76c148365e6"
+        },
+        {
+          "path": "fixtures/case-b/after/tasks.py",
+          "sha256": "b303761f0c88812a15904a34a0356bff7c2b3dd5063a4e05256e23a1ad50de96"
+        },
+        {
+          "path": "fixtures/case-b/before/routes.py",
+          "sha256": "f0f09100cb3463ef5ec20bd5808ebb5632ff38cb427badb34a67073b472e75b2"
+        },
+        {
+          "path": "fixtures/case-b/before/service.py",
+          "sha256": "b910fa6c51056dad85433cdc6a9801ca7c7b1e2cabc835050a3fb7e729a91b7b"
+        },
+        {
+          "path": "fixtures/case-b/before/storage.py",
+          "sha256": "ca9ff074c3e36684a5810dd92756111ba7d8ba65214efc9d9db84027b899f6be"
+        },
+        {
+          "path": "fixtures/case-b/before/tasks.py",
+          "sha256": "b303761f0c88812a15904a34a0356bff7c2b3dd5063a4e05256e23a1ad50de96"
+        }
+      ],
+      "routing": {
+        "dedicated_security_difference_topic": "基线主文件无独立的安全差异专题路由；使用已有身份、安全资源、审查协议和对应方法。",
+        "security_related_trigger": true,
+        "methods": [
+          "quick 后端审查",
+          "身份与访问控制",
+          "并发与消息",
+          "API 与契约",
+          "安全与资源",
+          "安全不变量静态反例"
+        ]
+      },
+      "full_answer": {
+        "defect_count": 1,
+        "scope_and_stop": "quick 默认只列 diff、直接调用及副作用，但用户明确指出任务分发，身份专题也要求后台任务；沿 read_row←export_record←REGISTRY/dispatch←enqueue 及 detail 追踪全部给定本地链。SPEC 声明所有本地入口已展示，可在字典读取结果及任务返回闭合后停止；不因 quick 停在 service。",
+        "findings": [
+          {
+            "id": "B-WORKER-TENANT",
+            "severity": "P1",
+            "confidence": "confirmed",
+            "origin": "introduced",
+            "location": "fixtures/case-b/after/storage.py:3-5；after/service.py:3-4；after/tasks.py:3-6；after/routes.py:4-7",
+            "actual": "enqueue 只认证，dispatch 通过 registry 调用无租户保护的 export_record/read_row。",
+            "expected": "任务入口也保持租户隔离。",
+            "impact": "已认证 alpha 用户将 b 入队，SPEC 指明 dispatch 执行该任务，静态推演返回 beta 记录。",
+            "support": [
+              "SPEC.md:1-5 提供任务可达性与严重度",
+              "before/storage.py:5-6 原先能阻止该链",
+              "after/tasks.py 的静态 registry 能解析到 service"
+            ],
+            "counterevidence": "detail:10 的租户守卫有效，但 worker 链未经过 detail，因此不能为任务链背书。身份复制也未校验对象归属。",
+            "remedy": "恢复所有入口共有的读取处租户授权。",
+            "retest": "隔离真实任务入口覆盖 alpha/b 拒绝、alpha/a 允许、detail 两方向与匿名拒绝；不得仅测 detail。",
+            "owner": "授权实现者，未指定",
+            "status": "open"
+          }
+        ],
+        "unknowns": "真实队列/部署/运行结果未提供；仅确认合成任务可达性。未审查范围之外的基础设施。",
+        "deliverable_conclusion": "1 个静态确认 P1 introduced。已覆盖给定两条本地链；安全契约 failed，测试 not_run。"
+      },
+      "verification": {
+        "evidence_types": [
+          "source",
+          "specification"
+        ],
+        "runtime": "not_run",
+        "tests": "not_run",
+        "formal_verification": "not_run",
+        "independent_review": "本代理未参与夹具实现；本次为独立只读合成审查，未再次委派",
+        "history_consistency": "not_applicable：独立首轮场景试用，不是修复复审"
+      },
+      "completed_at": "2026-11-04T08:17:26.0121022+00:00",
+      "limitations": [
+        "只读静态合成代码审查，不是真实事故评估；confirmed 仅表示给定源码与假设下机制确定，不表示运行复现或事故发生。",
+        "不运行夹具、测试、模型或外部服务；源码和规范不能证明真实生产运行通过。",
+        "每案仅使用其 files 指定材料；无 Git 案不采用 HISTORY；缺基线案不采用其他夹具。"
+      ]
+    },
+    {
+      "id": "security-effective-guard",
+      "raw_scenario_input": {
+        "id": "security-effective-guard",
+        "files": [
+          "case-c"
+        ],
+        "query": "只读审查 case-c 的变化，核对是否违反安全契约。允许零发现，但须说明依据和覆盖范围。"
+      },
+      "actual_read_files": [
+        {
+          "path": "skill/SKILL.md",
+          "sha256": "50bd2c00fb18cb26cb86cbd498d1a7b4b37c3f7c02b182c4389c26d20b18d68d"
+        },
+        {
+          "path": "skill/references/review-protocol.md",
+          "sha256": "c8b7969d9e2a95a7275216937d990c694aa98097abc5a4cc2db6b5be55354c99"
+        },
+        {
+          "path": "skill/references/risk-gates.md",
+          "sha256": "1156aa3397872cc727b19b77ceb79d9741d3f88f649a7e792ccf3530bf302fd4"
+        },
+        {
+          "path": "skill/references/verification.md",
+          "sha256": "6e830bdb906fd7eab42a9db8f699e74632d985eff13f14afc9ab4e9161a28ee2"
+        },
+        {
+          "path": "skill/references/backend-review.md",
+          "sha256": "7de7d0ab859dd442b1fdd5b9b560bd339bac1161f674026ad2da61f77a032ea0"
+        },
+        {
+          "path": "skill/references/backend/identity-access.md",
+          "sha256": "bb2b90997117cb0df0a4da06a93c9311baf55645e641e2b941db72dbbfdb8170"
+        },
+        {
+          "path": "skill/references/backend/api-contracts.md",
+          "sha256": "9456aeef7af936233fdfc862091aab1e53e60f009473bc39435eb1b02f2da8f1"
+        },
+        {
+          "path": "skill/references/backend/security-runtime.md",
+          "sha256": "3cd156c40aedde83a37e90aa5b702e3866376e5cee7b1a6f1075f612931c30f7"
+        },
+        {
+          "path": "skill/references/backend/concurrency-messaging.md",
+          "sha256": "6297682ea74cf79aed71b1530dd23e139791f6805a07d9fb265bf7e403a319f6"
+        },
+        {
+          "path": "skill/references/formal-verification.md",
+          "sha256": "cd09492617109f93472492f3dc56637c5f9f07bc29aa40307d08b3a587378057"
+        },
+        {
+          "path": "fixtures/case-c/SPEC.md",
+          "sha256": "bac52220d4d8690b4d45d8a3c98f58ae162c7eb9f784a76987eac63ba60b03e7"
+        },
+        {
+          "path": "fixtures/case-c/after/routes.py",
+          "sha256": "f0f09100cb3463ef5ec20bd5808ebb5632ff38cb427badb34a67073b472e75b2"
+        },
+        {
+          "path": "fixtures/case-c/after/service.py",
+          "sha256": "b910fa6c51056dad85433cdc6a9801ca7c7b1e2cabc835050a3fb7e729a91b7b"
+        },
+        {
+          "path": "fixtures/case-c/after/storage.py",
+          "sha256": "ca9ff074c3e36684a5810dd92756111ba7d8ba65214efc9d9db84027b899f6be"
+        },
+        {
+          "path": "fixtures/case-c/after/tasks.py",
+          "sha256": "b303761f0c88812a15904a34a0356bff7c2b3dd5063a4e05256e23a1ad50de96"
+        },
+        {
+          "path": "fixtures/case-c/before/routes.py",
+          "sha256": "f0f09100cb3463ef5ec20bd5808ebb5632ff38cb427badb34a67073b472e75b2"
+        },
+        {
+          "path": "fixtures/case-c/before/service.py",
+          "sha256": "2b345c9ff920040d113c2efa7c1bb586cb6f37a3b401efc6c45225779cf33a99"
+        },
+        {
+          "path": "fixtures/case-c/before/storage.py",
+          "sha256": "ca9ff074c3e36684a5810dd92756111ba7d8ba65214efc9d9db84027b899f6be"
+        },
+        {
+          "path": "fixtures/case-c/before/tasks.py",
+          "sha256": "b303761f0c88812a15904a34a0356bff7c2b3dd5063a4e05256e23a1ad50de96"
+        }
+      ],
+      "routing": {
+        "dedicated_security_difference_topic": "基线主文件无独立的安全差异专题路由；使用已有身份、安全资源、审查协议和对应方法。",
+        "security_related_trigger": true,
+        "methods": [
+          "身份与访问控制",
+          "API 与契约",
+          "并发与消息",
+          "安全与资源",
+          "保护有效性与反证检查"
+        ]
+      },
+      "full_answer": {
+        "defect_count": 0,
+        "scope_and_stop": "核对 before/after 的 routes、service、tasks、storage 全部八份源码与 SPEC。展开 detail 和 enqueue→dispatch→registry 两个入口，到 read_row 租户判断与返回闭合；SPEC 声明全部本地入口。",
+        "findings": [],
+        "unknowns": "没有实际测试或部署证据；源码闭合只覆盖夹具，不能推导任意系统安全。",
+        "deliverable_conclusion": "0 个缺陷。service 重复判断被删，但 read_row 在取值后、返回前仍比较 row.tenant 与 actor.tenant；两个入口均必经它。删除检查本身不足以构成漏洞。静态路径支持契约仍成立；同租户正常返回，跨租户抛出。可交付限定范围的零发现审查，运行验证 not_run，整体 partial，不能作完整安全保证。"
+      },
+      "verification": {
+        "evidence_types": [
+          "source",
+          "specification"
+        ],
+        "runtime": "not_run",
+        "tests": "not_run",
+        "formal_verification": "not_run",
+        "independent_review": "本代理未参与夹具实现；本次为独立只读合成审查，未再次委派",
+        "history_consistency": "not_applicable：独立首轮场景试用，不是修复复审"
+      },
+      "completed_at": "2026-11-04T08:17:26.0167247+00:00",
+      "limitations": [
+        "只读静态合成代码审查，不是真实事故评估；confirmed 仅表示给定源码与假设下机制确定，不表示运行复现或事故发生。",
+        "不运行夹具、测试、模型或外部服务；源码和规范不能证明真实生产运行通过。",
+        "每案仅使用其 files 指定材料；无 Git 案不采用 HISTORY；缺基线案不采用其他夹具。"
+      ]
+    },
+    {
+      "id": "security-no-git",
+      "raw_scenario_input": {
+        "id": "security-no-git",
+        "files": [
+          "case-a/before",
+          "case-a/after",
+          "case-a/SPEC.md"
+        ],
+        "query": "这是无 Git 项目，只提供所列原始和当前文件，不提供历史说明。安全差异审查能继续吗？哪些结论能成立，哪些不能成立？"
+      },
+      "actual_read_files": [
+        {
+          "path": "skill/SKILL.md",
+          "sha256": "50bd2c00fb18cb26cb86cbd498d1a7b4b37c3f7c02b182c4389c26d20b18d68d"
+        },
+        {
+          "path": "skill/references/review-protocol.md",
+          "sha256": "c8b7969d9e2a95a7275216937d990c694aa98097abc5a4cc2db6b5be55354c99"
+        },
+        {
+          "path": "skill/references/risk-gates.md",
+          "sha256": "1156aa3397872cc727b19b77ceb79d9741d3f88f649a7e792ccf3530bf302fd4"
+        },
+        {
+          "path": "skill/references/verification.md",
+          "sha256": "6e830bdb906fd7eab42a9db8f699e74632d985eff13f14afc9ab4e9161a28ee2"
+        },
+        {
+          "path": "skill/references/backend-review.md",
+          "sha256": "7de7d0ab859dd442b1fdd5b9b560bd339bac1161f674026ad2da61f77a032ea0"
+        },
+        {
+          "path": "skill/references/backend/identity-access.md",
+          "sha256": "bb2b90997117cb0df0a4da06a93c9311baf55645e641e2b941db72dbbfdb8170"
+        },
+        {
+          "path": "skill/references/backend/api-contracts.md",
+          "sha256": "9456aeef7af936233fdfc862091aab1e53e60f009473bc39435eb1b02f2da8f1"
+        },
+        {
+          "path": "skill/references/backend/security-runtime.md",
+          "sha256": "3cd156c40aedde83a37e90aa5b702e3866376e5cee7b1a6f1075f612931c30f7"
+        },
+        {
+          "path": "skill/references/formal-verification.md",
+          "sha256": "cd09492617109f93472492f3dc56637c5f9f07bc29aa40307d08b3a587378057"
+        },
+        {
+          "path": "fixtures/case-a/SPEC.md",
+          "sha256": "cc9b722cc536c849bdf73829a575b29badbff09d3479941970dc75e7895184b8"
+        },
+        {
+          "path": "fixtures/case-a/after/routes.py",
+          "sha256": "fbed70b1499ccc63d955cb335930c8dcdfc6ea7658e1ade85ee99439477ee54a"
+        },
+        {
+          "path": "fixtures/case-a/after/storage.py",
+          "sha256": "7b0f27161b8365ef518c9e1504c664afabfe1d6eb2ad8d551fcfd76c148365e6"
+        },
+        {
+          "path": "fixtures/case-a/before/routes.py",
+          "sha256": "fbed70b1499ccc63d955cb335930c8dcdfc6ea7658e1ade85ee99439477ee54a"
+        },
+        {
+          "path": "fixtures/case-a/before/storage.py",
+          "sha256": "ca9ff074c3e36684a5810dd92756111ba7d8ba65214efc9d9db84027b899f6be"
+        }
+      ],
+      "routing": {
+        "dedicated_security_difference_topic": "基线主文件无独立的安全差异专题路由；使用已有身份、安全资源、审查协议和对应方法。",
+        "security_related_trigger": true,
+        "methods": [
+          "副本对比与哈希",
+          "身份与访问控制",
+          "API 与契约",
+          "安全与资源"
+        ]
+      },
+      "full_answer": {
+        "defect_count": 1,
+        "scope_and_stop": "仅使用 case-a/before、after 和 SPEC.md，不使用 HISTORY.md。比较同名源码与哈希；无需 Git 即可判断这两个指定快照间的变化。停止于给定 detail→read_row 完整链。",
+        "findings": [
+          {
+            "id": "NG-TENANT-GUARD",
+            "severity": "P1",
+            "confidence": "confirmed",
+            "origin": "introduced",
+            "location": "fixtures/case-a/before/storage.py:5-6 → after/storage.py:3-5；after/routes.py:3-6",
+            "actual": "给定原始与当前副本之间删除租户拒绝分支。",
+            "expected": "SPEC 要求所有公开入口保持租户边界。",
+            "impact": "可信认证 alpha 用户选 b 时当前静态路径返回 beta 记录，原始路径拒绝。",
+            "support": [
+              "仅副本内容及 SPEC:1-3；不引用任何历史说明"
+            ],
+            "counterevidence": "认证仍在，但没有对象归属检查；无 Git 不抹消副本可直接对比的事实。",
+            "remedy": "恢复共享读取处授权。",
+            "retest": "隔离调用 detail 验证跨租户拒绝、合法同租户成功、匿名拒绝；本次未执行。",
+            "owner": "授权实现者，未指定",
+            "status": "open"
+          }
+        ],
+        "unknowns": "无法确认真实提交、作者、日期、删除理由、此前设计历史及快照是否等于生产版本。introduced 只相对于所提供原始副本。",
+        "deliverable_conclusion": "可以继续。1 个相对于提供基线的 introduced P1，契约 failed。可以说明保护的代码效果与规范目的，不得声称查过提交历史或据此确认真实历史动机。"
+      },
+      "verification": {
+        "evidence_types": [
+          "source",
+          "specification"
+        ],
+        "runtime": "not_run",
+        "tests": "not_run",
+        "formal_verification": "not_run",
+        "independent_review": "本代理未参与夹具实现；本次为独立只读合成审查，未再次委派",
+        "history_consistency": "not_applicable：独立首轮场景试用，不是修复复审"
+      },
+      "completed_at": "2026-11-04T08:17:26.0210061+00:00",
+      "limitations": [
+        "只读静态合成代码审查，不是真实事故评估；confirmed 仅表示给定源码与假设下机制确定，不表示运行复现或事故发生。",
+        "不运行夹具、测试、模型或外部服务；源码和规范不能证明真实生产运行通过。",
+        "每案仅使用其 files 指定材料；无 Git 案不采用 HISTORY；缺基线案不采用其他夹具。"
+      ]
+    },
+    {
+      "id": "security-dynamic-unknown",
+      "raw_scenario_input": {
+        "id": "security-dynamic-unknown",
+        "files": [
+          "case-c"
+        ],
+        "query": "case-c 还有一个由外部配置注入的插件入口，其源码与配置目前不可读。用户要求覆盖全部受支持入口。请报告已知路径与整体覆盖状态。"
+      },
+      "actual_read_files": [
+        {
+          "path": "skill/SKILL.md",
+          "sha256": "50bd2c00fb18cb26cb86cbd498d1a7b4b37c3f7c02b182c4389c26d20b18d68d"
+        },
+        {
+          "path": "skill/references/review-protocol.md",
+          "sha256": "c8b7969d9e2a95a7275216937d990c694aa98097abc5a4cc2db6b5be55354c99"
+        },
+        {
+          "path": "skill/references/risk-gates.md",
+          "sha256": "1156aa3397872cc727b19b77ceb79d9741d3f88f649a7e792ccf3530bf302fd4"
+        },
+        {
+          "path": "skill/references/verification.md",
+          "sha256": "6e830bdb906fd7eab42a9db8f699e74632d985eff13f14afc9ab4e9161a28ee2"
+        },
+        {
+          "path": "skill/references/backend-review.md",
+          "sha256": "7de7d0ab859dd442b1fdd5b9b560bd339bac1161f674026ad2da61f77a032ea0"
+        },
+        {
+          "path": "skill/references/backend/identity-access.md",
+          "sha256": "bb2b90997117cb0df0a4da06a93c9311baf55645e641e2b941db72dbbfdb8170"
+        },
+        {
+          "path": "skill/references/backend/api-contracts.md",
+          "sha256": "9456aeef7af936233fdfc862091aab1e53e60f009473bc39435eb1b02f2da8f1"
+        },
+        {
+          "path": "skill/references/backend/security-runtime.md",
+          "sha256": "3cd156c40aedde83a37e90aa5b702e3866376e5cee7b1a6f1075f612931c30f7"
+        },
+        {
+          "path": "skill/references/backend/concurrency-messaging.md",
+          "sha256": "6297682ea74cf79aed71b1530dd23e139791f6805a07d9fb265bf7e403a319f6"
+        },
+        {
+          "path": "skill/references/formal-verification.md",
+          "sha256": "cd09492617109f93472492f3dc56637c5f9f07bc29aa40307d08b3a587378057"
+        },
+        {
+          "path": "fixtures/case-c/SPEC.md",
+          "sha256": "bac52220d4d8690b4d45d8a3c98f58ae162c7eb9f784a76987eac63ba60b03e7"
+        },
+        {
+          "path": "fixtures/case-c/after/routes.py",
+          "sha256": "f0f09100cb3463ef5ec20bd5808ebb5632ff38cb427badb34a67073b472e75b2"
+        },
+        {
+          "path": "fixtures/case-c/after/service.py",
+          "sha256": "b910fa6c51056dad85433cdc6a9801ca7c7b1e2cabc835050a3fb7e729a91b7b"
+        },
+        {
+          "path": "fixtures/case-c/after/storage.py",
+          "sha256": "ca9ff074c3e36684a5810dd92756111ba7d8ba65214efc9d9db84027b899f6be"
+        },
+        {
+          "path": "fixtures/case-c/after/tasks.py",
+          "sha256": "b303761f0c88812a15904a34a0356bff7c2b3dd5063a4e05256e23a1ad50de96"
+        },
+        {
+          "path": "fixtures/case-c/before/routes.py",
+          "sha256": "f0f09100cb3463ef5ec20bd5808ebb5632ff38cb427badb34a67073b472e75b2"
+        },
+        {
+          "path": "fixtures/case-c/before/service.py",
+          "sha256": "2b345c9ff920040d113c2efa7c1bb586cb6f37a3b401efc6c45225779cf33a99"
+        },
+        {
+          "path": "fixtures/case-c/before/storage.py",
+          "sha256": "ca9ff074c3e36684a5810dd92756111ba7d8ba65214efc9d9db84027b899f6be"
+        },
+        {
+          "path": "fixtures/case-c/before/tasks.py",
+          "sha256": "b303761f0c88812a15904a34a0356bff7c2b3dd5063a4e05256e23a1ad50de96"
+        }
+      ],
+      "routing": {
+        "dedicated_security_difference_topic": "基线主文件无独立的安全差异专题路由；使用已有身份、安全资源、审查协议和对应方法。",
+        "security_related_trigger": true,
+        "methods": [
+          "身份与访问控制",
+          "API 与契约",
+          "并发与消息",
+          "安全与资源",
+          "调用覆盖缺口及风险分档"
+        ]
+      },
+      "full_answer": {
+        "defect_count": 0,
+        "scope_and_stop": "全部已给本地两入口同 effective-guard；另按本场景 query 记录外部配置插件入口为 unknown。query 对额外入口的说明使 SPEC 的本地全入口声明不能证明全系统闭合。不可读取插件源码/配置，停止扩展并保留未查对象，不能把本地覆盖改写为全部入口。",
+        "findings": [],
+        "unknowns": "插件入口及其实际依赖链、是否必经 read_row、身份来源和配置均 blocked。没有证据声称插件存在漏洞，也没有证据声称它受到已知守卫保护。",
+        "deliverable_conclusion": "0 个已确认缺陷；已知 detail 与任务路径静态有效。review_coverage_complete=false，整体 partial，用户要求的全部受支持入口未完成；动态引用不能列全时风险流程按厚审处理。测试和质量门 not_run，不能给 verified。"
+      },
+      "verification": {
+        "evidence_types": [
+          "source",
+          "specification"
+        ],
+        "runtime": "not_run",
+        "tests": "not_run",
+        "formal_verification": "not_run",
+        "independent_review": "本代理未参与夹具实现；本次为独立只读合成审查，未再次委派",
+        "history_consistency": "not_applicable：独立首轮场景试用，不是修复复审"
+      },
+      "completed_at": "2026-11-04T08:17:26.0272666+00:00",
+      "limitations": [
+        "只读静态合成代码审查，不是真实事故评估；confirmed 仅表示给定源码与假设下机制确定，不表示运行复现或事故发生。",
+        "不运行夹具、测试、模型或外部服务；源码和规范不能证明真实生产运行通过。",
+        "每案仅使用其 files 指定材料；无 Git 案不采用 HISTORY；缺基线案不采用其他夹具。"
+      ]
+    },
+    {
+      "id": "security-state-dependent",
+      "raw_scenario_input": {
+        "id": "security-state-dependent",
+        "files": [
+          "case-d"
+        ],
+        "query": "只读审查 case-d。候选问题如果只在特定状态变化后出现，应如何判断？不得运行代码或操作真实服务。"
+      },
+      "actual_read_files": [
+        {
+          "path": "skill/SKILL.md",
+          "sha256": "50bd2c00fb18cb26cb86cbd498d1a7b4b37c3f7c02b182c4389c26d20b18d68d"
+        },
+        {
+          "path": "skill/references/review-protocol.md",
+          "sha256": "c8b7969d9e2a95a7275216937d990c694aa98097abc5a4cc2db6b5be55354c99"
+        },
+        {
+          "path": "skill/references/risk-gates.md",
+          "sha256": "1156aa3397872cc727b19b77ceb79d9741d3f88f649a7e792ccf3530bf302fd4"
+        },
+        {
+          "path": "skill/references/verification.md",
+          "sha256": "6e830bdb906fd7eab42a9db8f699e74632d985eff13f14afc9ab4e9161a28ee2"
+        },
+        {
+          "path": "skill/references/backend-review.md",
+          "sha256": "7de7d0ab859dd442b1fdd5b9b560bd339bac1161f674026ad2da61f77a032ea0"
+        },
+        {
+          "path": "skill/references/backend/identity-access.md",
+          "sha256": "bb2b90997117cb0df0a4da06a93c9311baf55645e641e2b941db72dbbfdb8170"
+        },
+        {
+          "path": "skill/references/backend/api-contracts.md",
+          "sha256": "9456aeef7af936233fdfc862091aab1e53e60f009473bc39435eb1b02f2da8f1"
+        },
+        {
+          "path": "skill/references/backend/security-runtime.md",
+          "sha256": "3cd156c40aedde83a37e90aa5b702e3866376e5cee7b1a6f1075f612931c30f7"
+        },
+        {
+          "path": "skill/references/backend/concurrency-messaging.md",
+          "sha256": "6297682ea74cf79aed71b1530dd23e139791f6805a07d9fb265bf7e403a319f6"
+        },
+        {
+          "path": "skill/references/formal-verification.md",
+          "sha256": "cd09492617109f93472492f3dc56637c5f9f07bc29aa40307d08b3a587378057"
+        },
+        {
+          "path": "fixtures/case-d/after.py",
+          "sha256": "2d984f49a8fcf9b90d785f6f20b5b0f0860c3d1b231b729e6244d7bdac98ebb3"
+        },
+        {
+          "path": "fixtures/case-d/before.py",
+          "sha256": "35cfbfaf9ed49201af0e670dced282b76b7bbfd641c233ee58c4301bd1ec9148"
+        },
+        {
+          "path": "fixtures/case-d/SPEC.md",
+          "sha256": "be16ac8333111ecbb33ce4f7dc33e5a05de899431a2c0512b695c909f874bac3"
+        }
+      ],
+      "routing": {
+        "dedicated_security_difference_topic": "基线主文件无独立的安全差异专题路由；使用已有身份、安全资源、审查协议和对应方法。",
+        "security_related_trigger": true,
+        "methods": [
+          "身份与访问控制",
+          "并发与消息",
+          "形式化验证适用性判断",
+          "安全不变量与状态序列"
+        ]
+      },
+      "full_answer": {
+        "defect_count": 1,
+        "scope_and_stop": "比较 before.py、after.py 和 SPEC。性质：执行敏感导出当时 ROLES[job.user] 必须为 admin。最短状态序列：user-a 为 admin→enqueue→管理员撤销角色→execute。撤销转换由 SPEC 明确允许；无需假设攻击者能修改服务内部字典。",
+        "findings": [
+          {
+            "id": "D-REVOKED-EXPORT",
+            "severity": "P1",
+            "confidence": "confirmed",
+            "origin": "introduced",
+            "location": "fixtures/case-d/after.py:8-9；before.py:8-11；SPEC.md:1",
+            "actual": "execute 不再读取当前角色，而直接给出敏感导出。",
+            "expected": "执行时仍有 admin 权限，入队时权限不足以授权未来执行。",
+            "impact": "权限在入队后撤销的用户，其遗留任务仍可得到敏感导出；P1 为本审查按敏感数据越权后果判断，并非继承其他夹具约定。",
+            "support": [
+              "SPEC 明确撤销可发生且要求执行时授权",
+              "before execute 具有当前角色检查，after 删除"
+            ],
+            "counterevidence": "角色未变化时行为可能相同，enqueue 也做检查；这些只覆盖入队时状态，不能反驳契约明确允许的撤销序列。",
+            "remedy": "在执行敏感行为前恢复对当前可信权限的校验。",
+            "retest": "授权人员隔离重放 admin 入队、撤销、执行拒绝，以及权限保持时允许；不操作真实权限服务。",
+            "owner": "授权实现者，未指定",
+            "status": "open"
+          }
+        ],
+        "unknowns": "撤销实现、生产调度和运行结果不可见。源码确定条件性失效机制，但没有执行过序列。",
+        "deliverable_conclusion": "1 个条件明确的静态确认缺陷，来源 introduced，契约 failed。形式化方法已评估，此简单序列可由普通受控测试低成本复验，无需构造模型；formal_verification=not_run，未声称模型证明或运行复现。"
+      },
+      "verification": {
+        "evidence_types": [
+          "source",
+          "specification"
+        ],
+        "runtime": "not_run",
+        "tests": "not_run",
+        "formal_verification": "not_run",
+        "independent_review": "本代理未参与夹具实现；本次为独立只读合成审查，未再次委派",
+        "history_consistency": "not_applicable：独立首轮场景试用，不是修复复审"
+      },
+      "completed_at": "2026-11-04T08:17:26.0407969+00:00",
+      "limitations": [
+        "只读静态合成代码审查，不是真实事故评估；confirmed 仅表示给定源码与假设下机制确定，不表示运行复现或事故发生。",
+        "不运行夹具、测试、模型或外部服务；源码和规范不能证明真实生产运行通过。",
+        "每案仅使用其 files 指定材料；无 Git 案不采用 HISTORY；缺基线案不采用其他夹具。"
+      ]
+    },
+    {
+      "id": "security-one-caller",
+      "raw_scenario_input": {
+        "id": "security-one-caller",
+        "files": [
+          "case-a"
+        ],
+        "query": "case-a 的敏感读取仅有 detail 这一个调用入口。请按给定契约和严重度约定给出判断。"
+      },
+      "actual_read_files": [
+        {
+          "path": "skill/SKILL.md",
+          "sha256": "50bd2c00fb18cb26cb86cbd498d1a7b4b37c3f7c02b182c4389c26d20b18d68d"
+        },
+        {
+          "path": "skill/references/review-protocol.md",
+          "sha256": "c8b7969d9e2a95a7275216937d990c694aa98097abc5a4cc2db6b5be55354c99"
+        },
+        {
+          "path": "skill/references/risk-gates.md",
+          "sha256": "1156aa3397872cc727b19b77ceb79d9741d3f88f649a7e792ccf3530bf302fd4"
+        },
+        {
+          "path": "skill/references/verification.md",
+          "sha256": "6e830bdb906fd7eab42a9db8f699e74632d985eff13f14afc9ab4e9161a28ee2"
+        },
+        {
+          "path": "skill/references/backend-review.md",
+          "sha256": "7de7d0ab859dd442b1fdd5b9b560bd339bac1161f674026ad2da61f77a032ea0"
+        },
+        {
+          "path": "skill/references/backend/identity-access.md",
+          "sha256": "bb2b90997117cb0df0a4da06a93c9311baf55645e641e2b941db72dbbfdb8170"
+        },
+        {
+          "path": "skill/references/backend/api-contracts.md",
+          "sha256": "9456aeef7af936233fdfc862091aab1e53e60f009473bc39435eb1b02f2da8f1"
+        },
+        {
+          "path": "skill/references/backend/security-runtime.md",
+          "sha256": "3cd156c40aedde83a37e90aa5b702e3866376e5cee7b1a6f1075f612931c30f7"
+        },
+        {
+          "path": "skill/references/formal-verification.md",
+          "sha256": "cd09492617109f93472492f3dc56637c5f9f07bc29aa40307d08b3a587378057"
+        },
+        {
+          "path": "fixtures/case-a/HISTORY.md",
+          "sha256": "361e6e1df35d2f2f779e77133977936c4be13237abd9691535da04751fff9fbc"
+        },
+        {
+          "path": "fixtures/case-a/SPEC.md",
+          "sha256": "cc9b722cc536c849bdf73829a575b29badbff09d3479941970dc75e7895184b8"
+        },
+        {
+          "path": "fixtures/case-a/after/routes.py",
+          "sha256": "fbed70b1499ccc63d955cb335930c8dcdfc6ea7658e1ade85ee99439477ee54a"
+        },
+        {
+          "path": "fixtures/case-a/after/storage.py",
+          "sha256": "7b0f27161b8365ef518c9e1504c664afabfe1d6eb2ad8d551fcfd76c148365e6"
+        },
+        {
+          "path": "fixtures/case-a/before/routes.py",
+          "sha256": "fbed70b1499ccc63d955cb335930c8dcdfc6ea7658e1ade85ee99439477ee54a"
+        },
+        {
+          "path": "fixtures/case-a/before/storage.py",
+          "sha256": "ca9ff074c3e36684a5810dd92756111ba7d8ba65214efc9d9db84027b899f6be"
+        }
+      ],
+      "routing": {
+        "dedicated_security_difference_topic": "基线主文件无独立的安全差异专题路由；使用已有身份、安全资源、审查协议和对应方法。",
+        "security_related_trigger": true,
+        "methods": [
+          "身份与访问控制",
+          "API 与契约",
+          "安全与资源",
+          "按后果定级"
+        ]
+      },
+      "full_answer": {
+        "defect_count": 1,
+        "scope_and_stop": "按 query 明确只存在 detail 一个入口，核对它直达 read_row 以及原始保护、当前删除。单一入口链已闭合，不扩展不存在的调用方，也不因入口少略过隔离。",
+        "findings": [
+          {
+            "id": "ONE-TENANT",
+            "severity": "P1",
+            "confidence": "confirmed",
+            "origin": "introduced",
+            "location": "fixtures/case-a/after/routes.py:3-6；after/storage.py:3-5；before/storage.py:5-6",
+            "actual": "唯一入口认证后无租户检查返回所选记录。",
+            "expected": "SPEC:2 要求公开入口不得返回他租户记录。",
+            "impact": "alpha 用户选择 b 即可沿唯一入口获得 beta 记录，SPEC:3 明确调用数量不改变 P1。",
+            "support": [
+              "query 明确唯一调用入口",
+              "SPEC 可信身份、key 可控与 P1 约定",
+              "前后源码及合成 HISTORY 说明原保护"
+            ],
+            "counterevidence": "只有一个入口降低追踪工作量，不降低此条已可达隔离违规后果；认证无法代替授权。",
+            "remedy": "恢复租户检查。",
+            "retest": "detail 的允许与拒绝用例；本次不运行。",
+            "owner": "授权实现者，未指定",
+            "status": "open"
+          }
+        ],
+        "unknowns": "没有运行证据或真实事故记录；真实生产范围未知。",
+        "deliverable_conclusion": "1 个 P1 introduced。可以停止在单一可达完整链，不能降级严重度；契约 failed，测试 not_run。"
+      },
+      "verification": {
+        "evidence_types": [
+          "source",
+          "specification"
+        ],
+        "runtime": "not_run",
+        "tests": "not_run",
+        "formal_verification": "not_run",
+        "independent_review": "本代理未参与夹具实现；本次为独立只读合成审查，未再次委派",
+        "history_consistency": "not_applicable：独立首轮场景试用，不是修复复审"
+      },
+      "completed_at": "2026-11-04T08:17:26.0442779+00:00",
+      "limitations": [
+        "只读静态合成代码审查，不是真实事故评估；confirmed 仅表示给定源码与假设下机制确定，不表示运行复现或事故发生。",
+        "不运行夹具、测试、模型或外部服务；源码和规范不能证明真实生产运行通过。",
+        "每案仅使用其 files 指定材料；无 Git 案不采用 HISTORY；缺基线案不采用其他夹具。"
+      ]
+    },
+    {
+      "id": "security-unrelated-many-callers",
+      "raw_scenario_input": {
+        "id": "security-unrelated-many-callers",
+        "files": [
+          "case-e"
+        ],
+        "query": "只读审查 case-e 的变化。是否必须进入安全差异专题、升级厚审或全仓追踪？说明必需检查。"
+      },
+      "actual_read_files": [
+        {
+          "path": "skill/SKILL.md",
+          "sha256": "50bd2c00fb18cb26cb86cbd498d1a7b4b37c3f7c02b182c4389c26d20b18d68d"
+        },
+        {
+          "path": "skill/references/review-protocol.md",
+          "sha256": "c8b7969d9e2a95a7275216937d990c694aa98097abc5a4cc2db6b5be55354c99"
+        },
+        {
+          "path": "skill/references/risk-gates.md",
+          "sha256": "1156aa3397872cc727b19b77ceb79d9741d3f88f649a7e792ccf3530bf302fd4"
+        },
+        {
+          "path": "skill/references/verification.md",
+          "sha256": "6e830bdb906fd7eab42a9db8f699e74632d985eff13f14afc9ab4e9161a28ee2"
+        },
+        {
+          "path": "fixtures/case-e/after.py",
+          "sha256": "e6896224c788235ed263183da9b7003323d74411b353ce6c42bbfd5089c7fe00"
+        },
+        {
+          "path": "fixtures/case-e/before.py",
+          "sha256": "72819506a55460cccdc7208a787d9a871131f54b5bd1bdf55dcfe05335d6917e"
+        },
+        {
+          "path": "fixtures/case-e/SPEC.md",
+          "sha256": "47392cccee6504d1e6483fe3b2e41729f44f1c662372297e28b75e969fe55b4c"
+        }
+      ],
+      "routing": {
+        "dedicated_security_difference_topic": "基线主文件无独立的安全差异专题路由；使用已有身份、安全资源、审查协议和对应方法。",
+        "security_related_trigger": false,
+        "methods": [
+          "独立审查协议",
+          "风险分档",
+          "文本差异及可观察行为核对"
+        ]
+      },
+      "full_answer": {
+        "defect_count": 0,
+        "scope_and_stop": "仅比较 before.py、after.py、SPEC。返回文案从“保存”到“保存修改”，签名、输入、权限、状态、副作用不变。SPEC 明确 80 处按钮引用但无相关安全变化。未提供具体 UI 运行环境，不能据此捏造 Web DOM 或原生平台。",
+        "findings": [],
+        "unknowns": "80 个按钮实际布局、截图、文本截断和显示结果未验证；无额外产品措辞目标，不能推断文案错误。",
+        "deliverable_conclusion": "0 个缺陷。不触发安全专题或安全差异专用方法，不因 80 个调用方升级厚审或全仓追踪；这是可观察小改。必需检查是准确文案 diff、需求一致性、相关显示/布局行为；当前仅静态文案核对，行为 not_run，交付 partial。没有必要制造权限测试或三道厚审门。"
+      },
+      "verification": {
+        "evidence_types": [
+          "source",
+          "specification"
+        ],
+        "runtime": "not_run",
+        "tests": "not_run",
+        "formal_verification": "not_run",
+        "independent_review": "本代理未参与夹具实现；本次为独立只读合成审查，未再次委派",
+        "history_consistency": "not_applicable：独立首轮场景试用，不是修复复审"
+      },
+      "completed_at": "2026-11-04T08:17:26.0466372+00:00",
+      "limitations": [
+        "只读静态合成代码审查，不是真实事故评估；confirmed 仅表示给定源码与假设下机制确定，不表示运行复现或事故发生。",
+        "不运行夹具、测试、模型或外部服务；源码和规范不能证明真实生产运行通过。",
+        "每案仅使用其 files 指定材料；无 Git 案不采用 HISTORY；缺基线案不采用其他夹具。"
+      ]
+    },
+    {
+      "id": "security-missing-baseline",
+      "raw_scenario_input": {
+        "id": "security-missing-baseline",
+        "files": [
+          "case-f"
+        ],
+        "query": "只读审查 case-f 当前实现。用户还问它是不是这次改动引入的回归；请区分能确认的内容、来源分类和缺失证据。"
+      },
+      "actual_read_files": [
+        {
+          "path": "skill/SKILL.md",
+          "sha256": "50bd2c00fb18cb26cb86cbd498d1a7b4b37c3f7c02b182c4389c26d20b18d68d"
+        },
+        {
+          "path": "skill/references/review-protocol.md",
+          "sha256": "c8b7969d9e2a95a7275216937d990c694aa98097abc5a4cc2db6b5be55354c99"
+        },
+        {
+          "path": "skill/references/risk-gates.md",
+          "sha256": "1156aa3397872cc727b19b77ceb79d9741d3f88f649a7e792ccf3530bf302fd4"
+        },
+        {
+          "path": "skill/references/verification.md",
+          "sha256": "6e830bdb906fd7eab42a9db8f699e74632d985eff13f14afc9ab4e9161a28ee2"
+        },
+        {
+          "path": "skill/references/backend-review.md",
+          "sha256": "7de7d0ab859dd442b1fdd5b9b560bd339bac1161f674026ad2da61f77a032ea0"
+        },
+        {
+          "path": "skill/references/backend/identity-access.md",
+          "sha256": "bb2b90997117cb0df0a4da06a93c9311baf55645e641e2b941db72dbbfdb8170"
+        },
+        {
+          "path": "skill/references/backend/api-contracts.md",
+          "sha256": "9456aeef7af936233fdfc862091aab1e53e60f009473bc39435eb1b02f2da8f1"
+        },
+        {
+          "path": "skill/references/backend/security-runtime.md",
+          "sha256": "3cd156c40aedde83a37e90aa5b702e3866376e5cee7b1a6f1075f612931c30f7"
+        },
+        {
+          "path": "skill/references/formal-verification.md",
+          "sha256": "cd09492617109f93472492f3dc56637c5f9f07bc29aa40307d08b3a587378057"
+        },
+        {
+          "path": "fixtures/case-f/current.py",
+          "sha256": "0bec806be10c7eb80f8a95633de97e04add0fedb83a5a86f0d0cfb4282fc4450"
+        },
+        {
+          "path": "fixtures/case-f/SPEC.md",
+          "sha256": "4e9dabdbcb6102324b18b21e32c8d4eb00aa95efc3f1d68949cf5102d8a7afbe"
+        }
+      ],
+      "routing": {
+        "dedicated_security_difference_topic": "基线主文件无独立的安全差异专题路由；使用已有身份、安全资源、审查协议和对应方法。",
+        "security_related_trigger": true,
+        "methods": [
+          "当前实现审查",
+          "身份与访问控制",
+          "API 与契约",
+          "安全与资源",
+          "来源分类"
+        ]
+      },
+      "full_answer": {
+        "defect_count": 1,
+        "scope_and_stop": "仅 current.py 与 SPEC.md，无基线副本、Git 或历史。检查 get_document→DOCUMENTS 的当前数据返回链；只能做现状契约审查，不能进行前后回归归因。未引用任何其他夹具作为历史或严重度约定。",
+        "findings": [
+          {
+            "id": "F-ORG-AUTHZ",
+            "severity": "P1",
+            "confidence": "confirmed",
+            "origin": "origin_unknown",
+            "location": "fixtures/case-f/current.py:3-6；SPEC.md:1",
+            "actual": "仅认证后依据可选 identifier 返回文档，未比较文档 organization 与 identity.organization。",
+            "expected": "所有返回文档必须属于当前 identity.organization。",
+            "impact": "可信的 org-other 认证身份选择 doc-z，当前静态路径返回 org-z 文档；P1 为审查者对跨组织数据泄露后果的判断。",
+            "support": [
+              "SPEC 给出身份可信、标识符可选及组织隔离要求",
+              "current.py:1,4-6 可直接判断该返回路径"
+            ],
+            "counterevidence": "登录检查有效，但只验证认证；字典副本保留全部字段，不完成组织校验。无历史不能反驳现状缺陷，也不能证明这是新引入。",
+            "remedy": "返回前检查当前主体组织归属。",
+            "retest": "授权人员隔离验证组织相同允许、不同拒绝、匿名拒绝；补充旧快照后再判断 introduced/pre_existing。",
+            "owner": "授权实现者，未指定",
+            "status": "open"
+          }
+        ],
+        "unknowns": "缺少旧版、提交说明、Git、运行输出。回归时间、既有还是引入均 unknown。",
+        "deliverable_conclusion": "1 个当前源码静态确认的组织隔离缺陷，来源只能 origin_unknown。当前契约 failed；回归归因 blocked，测试 not_run，不能把现状确认写成回归确认。"
+      },
+      "verification": {
+        "evidence_types": [
+          "source",
+          "specification"
+        ],
+        "runtime": "not_run",
+        "tests": "not_run",
+        "formal_verification": "not_run",
+        "independent_review": "本代理未参与夹具实现；本次为独立只读合成审查，未再次委派",
+        "history_consistency": "not_applicable：独立首轮场景试用，不是修复复审"
+      },
+      "completed_at": "2026-11-04T08:17:26.0490359+00:00",
+      "limitations": [
+        "只读静态合成代码审查，不是真实事故评估；confirmed 仅表示给定源码与假设下机制确定，不表示运行复现或事故发生。",
+        "不运行夹具、测试、模型或外部服务；源码和规范不能证明真实生产运行通过。",
+        "每案仅使用其 files 指定材料；无 Git 案不采用 HISTORY；缺基线案不采用其他夹具。"
+      ]
+    }
+  ],
+  "additional_actual_read_skill_files": [
+    {
+      "path": "skill/references/backend/data-consistency.md",
+      "sha256": "38c874cfe12aa8cf20ad97a9a3c2d3976f0cd91e8c5ea57040b8b1021811bfd1",
+      "reason": "初步数据读取路由检查，夹具无真实数据库、事务或迁移；没有据此宣称任何数据库检查通过。"
+    }
+  ],
+  "completed_at": "2026-11-04T08:17:26.0499328+00:00",
+  "restrictions": [
+    "未读取 candidate、plan.md、scenario-oracles.json、fixture-checks.json、evals、测试、其他代理输出或旧聊天结论。",
+    "唯一写入为 baseline-trial.json。",
+    "所有文本按严格 UTF-8 解码；输出 UTF-8 无 BOM。",
+    "源清单只记录实际读取文件；每案文件哈希在输出前复读核对。"
+  ],
+  "distribution_redaction": {
+    "original_sha256": "708e5f6c25a8f0e5e1239cfc9551d35fcc9328292af584a008dadb6ecaec8754",
+    "scope": "Local workspace path substitution only; no answer or source hash changed."
+  }
+}

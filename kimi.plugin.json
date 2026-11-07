@@ -1,0 +1,24 @@
+{
+  "name": "lean-engineer",
+  "version": "1.1.2",
+  "description": "Reusable project capabilities, lean implementation, risk-based verification, and independent cross-domain code review",
+  "license": "MIT",
+  "keywords": [
+    "coding",
+    "code-review",
+    "backend",
+    "frontend",
+    "mobile",
+    "embedded",
+    "data-engineering",
+    "verification",
+    "quality-gates"
+  ],
+  "skills": "./skills/",
+  "agents": "./agents/",
+  "interface": {
+    "displayName": "Lean Engineer",
+    "shortDescription": "能力复用、最小实现、风险验证和多领域独立审查",
+    "longDescription": "一个主 skill，内置 Web 前后端、移动端、嵌入式和数据工程专题，另附只读独立审查 agent。按任务加载规则，保留真实验证和交付证据。"
+  }
+}

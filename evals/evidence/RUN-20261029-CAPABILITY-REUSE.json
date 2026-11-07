@@ -1,0 +1,375 @@
+{
+  "case_type": "synthetic",
+  "task_input": "Add reminders/preview.py accepting one or more title strings, strip and collapse whitespace, preserve empty titles as empty output lines, print in input order. Do not add timers, notifications or UI. Do not read previous trial reports.",
+  "skill_input_sha256": {
+    "SKILL.md": "dc63b1927369960eab5406f90ac4c65ff73ee10b1ca29343f63cb37667ae69c0",
+    "skills/lean-engineer/SKILL.md": "6c61f60c320c93c974c46907b9e6c7ad9ea59d0f634de9e8616a5c4dcde7b55f",
+    "skills/lean-engineer/references/implementation.md": "576296b25148410cafa181f2a61ad3e3d4d158df630c54d6ca60fcc2f267aa41",
+    "skills/lean-engineer/references/risk-gates.md": "ebe979d48889a73c48fc8b9d1c6d3697fcf75fdb401b4c3f1e086e818114373d",
+    "skills/lean-engineer/references/review-protocol.md": "89acf455f93dcbf4e8773e4d8b61acdf1c9b07e0d036201de20eb12d55608dec",
+    "skills/lean-engineer/references/verification.md": "ee05566290a2c5e3d991b92dced28cbee03705b985e237f8c5c331bbc1a4cad7",
+    "skills/lean-engineer/references/reusable-capabilities.md": "4fffdc49f1331ecb9667b1b644a93be1ae808b62cff362d83398be0bf51662de"
+  },
+  "input_files": {
+    "powers.md": {
+      "content": "# 项目能力索引\n\n`reminders/` 是可直接执行的命令入口目录，因此可复用源码位于 `reminders/mymodule/`，无需修改全局模块搜索路径。从项目根目录导入时使用以下完整路径。\n\n| 能力与检索词 | 项目相对代码路径 | 公开入口与最小调用 | 使用条件与边界 | 验证依据 |\n| --- | --- | --- | --- | --- |\n| 提醒标题格式化、空白折叠、去首尾空白 | `reminders/mymodule/format_title.py` | `from reminders.mymodule.format_title import format_title; format_title(\"  a   b  \")` → `\"a b\"` | Python 3 标准库；输入 `str`，输出 `str`；按 Python 空白定义处理；空或全空白返回 `\"\"`；无副作用 | `python -B -X utf8 reminders/app.py \"  a   b  \"`；最近结果：`passed`，输出 `a b`（2026-10-29） |\n",
+      "sha256": "9419db14e36e4013004e538ce56f12a3fd18b429271d2b5ae494328edae58e0c"
+    },
+    "reminders/app.py": {
+      "content": "import argparse\r\n\r\nfrom mymodule.format_title import format_title\r\n\r\n\r\ndef main():\r\n    parser = argparse.ArgumentParser(description=\"Format a reminder title.\")\r\n    parser.add_argument(\"title\")\r\n    args = parser.parse_args()\r\n    print(format_title(args.title))\r\n\r\n\r\nif __name__ == \"__main__\":\r\n    main()\r\n",
+      "sha256": "0d314f4e8109137553a7a44543f984858fe15ace2a4128349e5787ebb91d6b39"
+    },
+    "reminders/mymodule/format_title.py": {
+      "content": "def format_title(title: str) -> str:\n    \"\"\"Trim and collapse whitespace; empty or blank input returns an empty string.\"\"\"\n    return \" \".join(title.split())\n",
+      "sha256": "a9a7b556dfbee833d07e28d8cedfc0cb26c327592aafb2c4c951aec7b7205b13"
+    }
+  },
+  "agent_output": "# 标题预览实现结果\n\n状态：verified。按小改执行；新增本地命令入口，未修改既有能力边界。\n\n`reminders/preview.py` 直接复用 `mymodule.format_title.format_title`。接收一个或多个标题，去首尾空白、折叠连续空白，按顺序逐行输出，空标题保留空行。沿用现有项目直接执行脚本的方式：\n\n```text\npython -B -X utf8 reminders/preview.py \"  first   title  \" \"\" \"  next  \"\n```\n\n实际新增文件：\n- `reminders/preview.py`：15 行命令入口。\n- `verification-reuse.json`：实际命令、stdout、stderr、退出码、预期结果、基线哈希与新增文件 diff。\n- `result-reuse.md`：本报告。\n\n先读 `powers.md`，再核对 `reminders/mymodule/format_title.py` 与 `reminders/app.py`。已有能力完全符合需求，所以直接调用；未另建能力或平行索引。三个原文件的前后 SHA-256 均一致。没有安装依赖，没有加入计时、系统通知或界面。\n\n8 项实际运行检查通过，覆盖单标题、多标题顺序、空字符串、全空白、中文、多种空白、标点与连字符标题、缺少必需参数、原入口回归和共享模块导入。无参数返回预期退出码 2，其余调用为 0；成功调用 stderr 均为空。源码语法检查通过，UTF-8 无 BOM，CRLF 沿用相邻入口。没有项目内 Git 仓库，采用原文件哈希与完整新增文件 diff，不冒称 Git diff。\n\n实际读取规则：\n- `../candidate/skills/lean-engineer/SKILL.md`。\n- 该 skill 的 `references/risk-gates.md`、`references/implementation.md`、`references/reusable-capabilities.md`、`references/review-protocol.md`、`references/verification.md`。\n- 项目能力位置与边界：`powers.md`。\n- 同时遵循任务提供的 UTF-8、只写业务目录、禁止读取其他试验/评判文件、禁止子代理、不安装依赖要求。业务目录没有 AGENTS.md、CLAUDE.md 或 CODING.md。\n\n本次仅完成自查；小改不强制独立审查，且用户禁止子代理。厚审大改的三道质量门不适用于本次档位。\n\n准确模型 ID：当前会话不可见，无法确认。\n",
+  "agent_command_records": {
+    "status": "verified",
+    "time": "2026-10-29T23:33:34.196587+08:00",
+    "environment": {
+      "python": "3.8.8 (default, Apr 13 2021, 15:08:03) [MSC v.1916 64 bit (AMD64)]",
+      "platform": "Windows-10-10.0.26100-SP0",
+      "cwd": "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-implementation"
+    },
+    "model_id": "unknown; exact model ID is not exposed in this session",
+    "risk": {
+      "level": "small",
+      "basis": "Adds an unpublished local CLI entry; reuses unchanged formatting capability; no external service, dependency, persistence, or existing contract change."
+    },
+    "expectation_source": "User request: accept one or more titles, trim and collapse whitespace, preserve empty lines and input order.",
+    "checks": [
+      {
+        "name": "single_title",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "reminders/preview.py",
+          "  alpha   beta  "
+        ],
+        "command": "D:\\Anaconda\\python.exe -B -X utf8 reminders/preview.py \"  alpha   beta  \"",
+        "stdout": "alpha beta\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expected_stdout": "alpha beta\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "status": "passed"
+      },
+      {
+        "name": "order_empty_and_unicode",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "reminders/preview.py",
+          "  first   title ",
+          "",
+          " \t\n ",
+          "　中文\t标题　",
+          "last\nline"
+        ],
+        "command": "D:\\Anaconda\\python.exe -B -X utf8 reminders/preview.py \"  first   title \" \"\" \" \t\n \" \"　中文\t标题　\" last\nline",
+        "stdout": "first title\r\n\r\n\r\n中文 标题\r\nlast line\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expected_stdout": "first title\r\n\r\n\r\n中文 标题\r\nlast line\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "status": "passed"
+      },
+      {
+        "name": "one_empty_title",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "reminders/preview.py",
+          ""
+        ],
+        "command": "D:\\Anaconda\\python.exe -B -X utf8 reminders/preview.py \"\"",
+        "stdout": "\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expected_stdout": "\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "status": "passed"
+      },
+      {
+        "name": "whitespace_variants",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "reminders/preview.py",
+          "\t alpha\r\n beta\u000b\fgamma　"
+        ],
+        "command": "D:\\Anaconda\\python.exe -B -X utf8 reminders/preview.py \"\t alpha\r\n beta\u000b\fgamma　\"",
+        "stdout": "alpha beta gamma\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expected_stdout": "alpha beta gamma\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "status": "passed"
+      },
+      {
+        "name": "punctuation_and_option_like_title",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "reminders/preview.py",
+          "--",
+          "  --urgent   task  ",
+          "  A&B | C; D  "
+        ],
+        "command": "D:\\Anaconda\\python.exe -B -X utf8 reminders/preview.py -- \"  --urgent   task  \" \"  A&B | C; D  \"",
+        "stdout": "--urgent task\r\nA&B | C; D\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expected_stdout": "--urgent task\r\nA&B | C; D\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "status": "passed"
+      },
+      {
+        "name": "requires_at_least_one_title",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "reminders/preview.py"
+        ],
+        "command": "D:\\Anaconda\\python.exe -B -X utf8 reminders/preview.py",
+        "stdout": "",
+        "stderr": "usage: preview.py [-h] titles [titles ...]\r\npreview.py: error: the following arguments are required: titles\r\n",
+        "exit_code": 2,
+        "expected_stdout": "",
+        "expected_exit_code": 2,
+        "expected_stderr_contains": "the following arguments are required: titles",
+        "status": "passed"
+      },
+      {
+        "name": "existing_entry_regression",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "reminders/app.py",
+          "  old   title  "
+        ],
+        "command": "D:\\Anaconda\\python.exe -B -X utf8 reminders/app.py \"  old   title  \"",
+        "stdout": "old title\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expected_stdout": "old title\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "status": "passed"
+      },
+      {
+        "name": "shared_module_import",
+        "argv": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "-c",
+          "from reminders.mymodule.format_title import format_title; print(format_title(\"  shared   title  \"))"
+        ],
+        "command": "D:\\Anaconda\\python.exe -B -X utf8 -c \"from reminders.mymodule.format_title import format_title; print(format_title(\\\"  shared   title  \\\"))\"",
+        "stdout": "shared title\r\n",
+        "stderr": "",
+        "exit_code": 0,
+        "expected_stdout": "shared title\r\n",
+        "expected_exit_code": 0,
+        "expected_stderr_contains": null,
+        "status": "passed"
+      }
+    ],
+    "baseline_integrity": [
+      {
+        "path": "powers.md",
+        "sha256_before": "9419DB14E36E4013004E538CE56F12A3FD18B429271D2B5AE494328EDAE58E0C",
+        "sha256_after": "9419DB14E36E4013004E538CE56F12A3FD18B429271D2B5AE494328EDAE58E0C",
+        "status": "passed"
+      },
+      {
+        "path": "reminders/mymodule/format_title.py",
+        "sha256_before": "A9A7B556DFBEE833D07E28D8CEDFC0CB26C327592AAFB2C4C951AEC7B7205B13",
+        "sha256_after": "A9A7B556DFBEE833D07E28D8CEDFC0CB26C327592AAFB2C4C951AEC7B7205B13",
+        "status": "passed"
+      },
+      {
+        "path": "reminders/app.py",
+        "sha256_before": "0D314F4E8109137553A7A44543F984858FE15ACE2A4128349E5787EBB91D6B39",
+        "sha256_after": "0D314F4E8109137553A7A44543F984858FE15ACE2A4128349E5787EBB91D6B39",
+        "status": "passed"
+      }
+    ],
+    "source_checks": {
+      "utf8_strict_decode": "passed",
+      "syntax_compile": "passed",
+      "no_bom": "passed",
+      "no_replacement_characters": "passed",
+      "line_endings": "CRLF",
+      "sha256": "b18ca5e97ac6658456d841ecf2a25bead03a7542ef5f9e97fc56e843bffecf94"
+    },
+    "source_diff": "--- /dev/null\n+++ reminders/preview.py\n@@ -0,0 +1,15 @@\n+import argparse\r\n+\r\n+from mymodule.format_title import format_title\r\n+\r\n+\r\n+def main():\r\n+    parser = argparse.ArgumentParser(description=\"Preview reminder titles.\")\r\n+    parser.add_argument(\"titles\", nargs=\"+\")\r\n+    args = parser.parse_args()\r\n+    for title in args.titles:\r\n+        print(format_title(title))\r\n+\r\n+\r\n+if __name__ == \"__main__\":\r\n+    main()\r\n",
+    "independent_review": {
+      "status": "not_applicable",
+      "reason": "Small low-consequence change; not required by risk gates; user prohibits subagents. Self-check is not independent review."
+    },
+    "quality_gates": {
+      "status": "not_applicable",
+      "reason": "Three mandatory gates apply to thick-review large changes; this change does not trigger that level."
+    },
+    "read_rules": [
+      "../candidate/skills/lean-engineer/SKILL.md",
+      "../candidate/skills/lean-engineer/references/risk-gates.md",
+      "../candidate/skills/lean-engineer/references/implementation.md",
+      "../candidate/skills/lean-engineer/references/reusable-capabilities.md",
+      "../candidate/skills/lean-engineer/references/review-protocol.md",
+      "../candidate/skills/lean-engineer/references/verification.md",
+      "powers.md"
+    ],
+    "implementation_files": [
+      "reminders/preview.py"
+    ],
+    "evidence_files": [
+      "verification-reuse.json",
+      "result-reuse.md"
+    ],
+    "git_evidence": "No .git directory in the business project; baseline hashes and full new-file diff are used instead.",
+    "verification_execution": {
+      "command": "$env:PYTHONIOENCODING = 'utf-8'; $script = @'\nimport datetime\nimport difflib\nimport hashlib\nimport json\nimport os\nimport platform\nimport subprocess\nimport sys\nfrom pathlib import Path\n\nroot = Path.cwd()\nbaseline = {\"powers.md\":\"9419DB14E36E4013004E538CE56F12A3FD18B429271D2B5AE494328EDAE58E0C\",\"reminders/mymodule/format_title.py\":\"A9A7B556DFBEE833D07E28D8CEDFC0CB26C327592AAFB2C4C951AEC7B7205B13\",\"reminders/app.py\":\"0D314F4E8109137553A7A44543F984858FE15ACE2A4128349E5787EBB91D6B39\"}\nchecks = []\ndef check(name, argv, expected_stdout, expected_code=0, stderr_contains=None):\n    result = subprocess.run(argv, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)\n    stdout = result.stdout.decode('utf-8', errors='strict')\n    stderr = result.stderr.decode('utf-8', errors='strict')\n    wanted = expected_stdout.replace('\\n', os.linesep)\n    ok = result.returncode == expected_code and stdout == wanted\n    ok = ok and (stderr_contains in stderr if stderr_contains else stderr == '')\n    checks.append({\n        'name': name, 'argv': argv, 'command': subprocess.list2cmdline(argv),\n        'stdout': stdout, 'stderr': stderr, 'exit_code': result.returncode,\n        'expected_stdout': wanted, 'expected_exit_code': expected_code,\n        'expected_stderr_contains': stderr_contains,\n        'status': 'passed' if ok else 'failed',\n    })\n\nentry = [sys.executable, '-B', '-X', 'utf8', 'reminders/preview.py']\ncheck('single_title', entry + ['  alpha   beta  '], 'alpha beta\\n')\ncheck('order_empty_and_unicode', entry + [\n    '  first   title ', '', ' \\t\\n ', '\\u3000\\u4e2d\\u6587\\t\\u6807\\u9898\\u3000', 'last\\nline'],\n    'first title\\n\\n\\n\\u4e2d\\u6587 \\u6807\\u9898\\nlast line\\n')\ncheck('one_empty_title', entry + [''], '\\n')\ncheck('whitespace_variants', entry + ['\\t alpha\\r\\n\\u00a0beta\\v\\fgamma\\u3000'], 'alpha beta gamma\\n')\ncheck('punctuation_and_option_like_title', entry + ['--', '  --urgent   task  ', '  A&B | C; D  '], '--urgent task\\nA&B | C; D\\n')\ncheck('requires_at_least_one_title', entry, '', 2, 'the following arguments are required: titles')\ncheck('existing_entry_regression', [sys.executable, '-B', '-X', 'utf8', 'reminders/app.py', '  old   title  '], 'old title\\n')\ncheck('shared_module_import', [sys.executable, '-B', '-X', 'utf8', '-c',\n    'from reminders.mymodule.format_title import format_title; print(format_title(\"  shared   title  \"))'],\n    'shared title\\n')\n\nsource_path = root / 'reminders/preview.py'\nsource_bytes = source_path.read_bytes()\nsource_text = source_bytes.decode('utf-8', errors='strict')\ncompile(source_text, str(source_path), 'exec')\nbaseline_checks = []\nfor relative, original_hash in baseline.items():\n    contents = (root / relative).read_bytes()\n    contents.decode('utf-8', errors='strict')\n    current_hash = hashlib.sha256(contents).hexdigest().upper()\n    baseline_checks.append({\n        'path': relative, 'sha256_before': original_hash, 'sha256_after': current_hash,\n        'status': 'passed' if current_hash == original_hash else 'failed',\n    })\nsource_checks = {\n    'utf8_strict_decode': 'passed', 'syntax_compile': 'passed',\n    'no_bom': 'passed' if not source_bytes.startswith(b'\\xef\\xbb\\xbf') else 'failed',\n    'no_replacement_characters': 'passed' if '\\ufffd' not in source_text else 'failed',\n    'line_endings': 'CRLF', 'sha256': hashlib.sha256(source_bytes).hexdigest(),\n}\ndiff = ''.join(difflib.unified_diff([], source_text.splitlines(keepends=True),\n    fromfile='/dev/null', tofile='reminders/preview.py'))\nall_passed = (\n    all(item['status'] == 'passed' for item in checks + baseline_checks)\n    and source_checks['no_bom'] == 'passed'\n    and source_checks['no_replacement_characters'] == 'passed')\nevidence = {\n    'status': 'verified' if all_passed else 'failed',\n    'time': datetime.datetime.now(datetime.timezone.utc).isoformat(),\n    'environment': {'python': sys.version, 'platform': platform.platform(), 'cwd': str(root)},\n    'model_id': 'unknown; exact model ID is not exposed in this session',\n    'risk': {'level': 'small', 'basis': 'Adds an unpublished local CLI entry; reuses unchanged formatting capability; no external service, dependency, persistence, or existing contract change.'},\n    'expectation_source': 'User request: accept one or more titles, trim and collapse whitespace, preserve empty lines and input order.',\n    'checks': checks, 'baseline_integrity': baseline_checks,\n    'source_checks': source_checks, 'source_diff': diff,\n    'independent_review': {'status': 'not_applicable', 'reason': 'Small low-consequence change; not required by risk gates; user prohibits subagents. Self-check is not independent review.'},\n    'quality_gates': {'status': 'not_applicable', 'reason': 'Three mandatory gates apply to thick-review large changes; this change does not trigger that level.'},\n    'read_rules': [\n        '../candidate/skills/lean-engineer/SKILL.md',\n        '../candidate/skills/lean-engineer/references/risk-gates.md',\n        '../candidate/skills/lean-engineer/references/implementation.md',\n        '../candidate/skills/lean-engineer/references/reusable-capabilities.md',\n        '../candidate/skills/lean-engineer/references/review-protocol.md',\n        '../candidate/skills/lean-engineer/references/verification.md',\n        'powers.md',\n    ],\n    'implementation_files': ['reminders/preview.py'],\n    'evidence_files': ['verification-reuse.json', 'result-reuse.md'],\n    'git_evidence': 'No .git directory in the business project; baseline hashes and full new-file diff are used instead.'\n}\nwith (root / 'verification-reuse.json').open('x', encoding='utf-8', newline='\\n') as stream:\n    json.dump(evidence, stream, ensure_ascii=False, indent=2)\n    stream.write('\\n')\nprint(json.dumps({'status': evidence['status'], 'checks': checks, 'baseline_integrity': baseline_checks,\n    'source_checks': source_checks, 'source_diff': diff}, ensure_ascii=True, indent=2))\nraise SystemExit(0 if all_passed else 1)\n\n'@; $script | python -B -X utf8 -",
+      "output_combined": "{\r\n  \"status\": \"verified\",\r\n  \"checks\": [\r\n    {\r\n      \"name\": \"single_title\",\r\n      \"argv\": [\r\n        \"D:\\\\Anaconda\\\\python.exe\",\r\n        \"-B\",\r\n        \"-X\",\r\n        \"utf8\",\r\n        \"reminders/preview.py\",\r\n        \"  alpha   beta  \"\r\n      ],\r\n      \"command\": \"D:\\\\Anaconda\\\\python.exe -B -X utf8 reminders/preview.py \\\"  alpha   beta  \\\"\",\r\n      \"stdout\": \"alpha beta\\r\\n\",\r\n      \"stderr\": \"\",\r\n      \"exit_code\": 0,\r\n      \"expected_stdout\": \"alpha beta\\r\\n\",\r\n      \"expected_exit_code\": 0,\r\n      \"expected_stderr_contains\": null,\r\n      \"status\": \"passed\"\r\n    },\r\n    {\r\n      \"name\": \"order_empty_and_unicode\",\r\n      \"argv\": [\r\n        \"D:\\\\Anaconda\\\\python.exe\",\r\n        \"-B\",\r\n        \"-X\",\r\n        \"utf8\",\r\n        \"reminders/preview.py\",\r\n        \"  first   title \",\r\n        \"\",\r\n        \" \\t\\n \",\r\n        \"\\u3000\\u4e2d\\u6587\\t\\u6807\\u9898\\u3000\",\r\n        \"last\\nline\"\r\n      ],\r\n      \"command\": \"D:\\\\Anaconda\\\\python.exe -B -X utf8 reminders/preview.py \\\"  first   title \\\" \\\"\\\" \\\" \\t\\n \\\" \\\"\\u3000\\u4e2d\\u6587\\t\\u6807\\u9898\\u3000\\\" last\\nline\",\r\n      \"stdout\": \"first title\\r\\n\\r\\n\\r\\n\\u4e2d\\u6587 \\u6807\\u9898\\r\\nlast line\\r\\n\",\r\n      \"stderr\": \"\",\r\n      \"exit_code\": 0,\r\n      \"expected_stdout\": \"first title\\r\\n\\r\\n\\r\\n\\u4e2d\\u6587 \\u6807\\u9898\\r\\nlast line\\r\\n\",\r\n      \"expected_exit_code\": 0,\r\n      \"expected_stderr_contains\": null,\r\n      \"status\": \"passed\"\r\n    },\r\n    {\r\n      \"name\": \"one_empty_title\",\r\n      \"argv\": [\r\n        \"D:\\\\Anaconda\\\\python.exe\",\r\n        \"-B\",\r\n        \"-X\",\r\n        \"utf8\",\r\n        \"reminders/preview.py\",\r\n        \"\"\r\n      ],\r\n      \"command\": \"D:\\\\Anaconda\\\\python.exe -B -X utf8 reminders/preview.py \\\"\\\"\",\r\n      \"stdout\": \"\\r\\n\",\r\n      \"stderr\": \"\",\r\n      \"exit_code\": 0,\r\n      \"expected_stdout\": \"\\r\\n\",\r\n      \"expected_exit_code\": 0,\r\n      \"expected_stderr_contains\": null,\r\n      \"status\": \"passed\"\r\n    },\r\n    {\r\n      \"name\": \"whitespace_variants\",\r\n      \"argv\": [\r\n        \"D:\\\\Anaconda\\\\python.exe\",\r\n        \"-B\",\r\n        \"-X\",\r\n        \"utf8\",\r\n        \"reminders/preview.py\",\r\n        \"\\t alpha\\r\\n\\u00a0beta\\u000b\\fgamma\\u3000\"\r\n      ],\r\n      \"command\": \"D:\\\\Anaconda\\\\python.exe -B -X utf8 reminders/preview.py \\\"\\t alpha\\r\\n\\u00a0beta\\u000b\\fgamma\\u3000\\\"\",\r\n      \"stdout\": \"alpha beta gamma\\r\\n\",\r\n      \"stderr\": \"\",\r\n      \"exit_code\": 0,\r\n      \"expected_stdout\": \"alpha beta gamma\\r\\n\",\r\n      \"expected_exit_code\": 0,\r\n      \"expected_stderr_contains\": null,\r\n      \"status\": \"passed\"\r\n    },\r\n    {\r\n      \"name\": \"punctuation_and_option_like_title\",\r\n      \"argv\": [\r\n        \"D:\\\\Anaconda\\\\python.exe\",\r\n        \"-B\",\r\n        \"-X\",\r\n        \"utf8\",\r\n        \"reminders/preview.py\",\r\n        \"--\",\r\n        \"  --urgent   task  \",\r\n        \"  A&B | C; D  \"\r\n      ],\r\n      \"command\": \"D:\\\\Anaconda\\\\python.exe -B -X utf8 reminders/preview.py -- \\\"  --urgent   task  \\\" \\\"  A&B | C; D  \\\"\",\r\n      \"stdout\": \"--urgent task\\r\\nA&B | C; D\\r\\n\",\r\n      \"stderr\": \"\",\r\n      \"exit_code\": 0,\r\n      \"expected_stdout\": \"--urgent task\\r\\nA&B | C; D\\r\\n\",\r\n      \"expected_exit_code\": 0,\r\n      \"expected_stderr_contains\": null,\r\n      \"status\": \"passed\"\r\n    },\r\n    {\r\n      \"name\": \"requires_at_least_one_title\",\r\n      \"argv\": [\r\n        \"D:\\\\Anaconda\\\\python.exe\",\r\n        \"-B\",\r\n        \"-X\",\r\n        \"utf8\",\r\n        \"reminders/preview.py\"\r\n      ],\r\n      \"command\": \"D:\\\\Anaconda\\\\python.exe -B -X utf8 reminders/preview.py\",\r\n      \"stdout\": \"\",\r\n      \"stderr\": \"usage: preview.py [-h] titles [titles ...]\\r\\npreview.py: error: the following arguments are required: titles\\r\\n\",\r\n      \"exit_code\": 2,\r\n      \"expected_stdout\": \"\",\r\n      \"expected_exit_code\": 2,\r\n      \"expected_stderr_contains\": \"the following arguments are required: titles\",\r\n      \"status\": \"passed\"\r\n    },\r\n    {\r\n      \"name\": \"existing_entry_regression\",\r\n      \"argv\": [\r\n        \"D:\\\\Anaconda\\\\python.exe\",\r\n        \"-B\",\r\n        \"-X\",\r\n        \"utf8\",\r\n        \"reminders/app.py\",\r\n        \"  old   title  \"\r\n      ],\r\n      \"command\": \"D:\\\\Anaconda\\\\python.exe -B -X utf8 reminders/app.py \\\"  old   title  \\\"\",\r\n      \"stdout\": \"old title\\r\\n\",\r\n      \"stderr\": \"\",\r\n      \"exit_code\": 0,\r\n      \"expected_stdout\": \"old title\\r\\n\",\r\n      \"expected_exit_code\": 0,\r\n      \"expected_stderr_contains\": null,\r\n      \"status\": \"passed\"\r\n    },\r\n    {\r\n      \"name\": \"shared_module_import\",\r\n      \"argv\": [\r\n        \"D:\\\\Anaconda\\\\python.exe\",\r\n        \"-B\",\r\n        \"-X\",\r\n        \"utf8\",\r\n        \"-c\",\r\n        \"from reminders.mymodule.format_title import format_title; print(format_title(\\\"  shared   title  \\\"))\"\r\n      ],\r\n      \"command\": \"D:\\\\Anaconda\\\\python.exe -B -X utf8 -c \\\"from reminders.mymodule.format_title import format_title; print(format_title(\\\\\\\"  shared   title  \\\\\\\"))\\\"\",\r\n      \"stdout\": \"shared title\\r\\n\",\r\n      \"stderr\": \"\",\r\n      \"exit_code\": 0,\r\n      \"expected_stdout\": \"shared title\\r\\n\",\r\n      \"expected_exit_code\": 0,\r\n      \"expected_stderr_contains\": null,\r\n      \"status\": \"passed\"\r\n    }\r\n  ],\r\n  \"baseline_integrity\": [\r\n    {\r\n      \"path\": \"powers.md\",\r\n      \"sha256_before\": \"9419DB14E36E4013004E538CE56F12A3FD18B429271D2B5AE494328EDAE58E0C\",\r\n      \"sha256_after\": \"9419DB14E36E4013004E538CE56F12A3FD18B429271D2B5AE494328EDAE58E0C\",\r\n      \"status\": \"passed\"\r\n    },\r\n    {\r\n      \"path\": \"reminders/mymodule/format_title.py\",\r\n      \"sha256_before\": \"A9A7B556DFBEE833D07E28D8CEDFC0CB26C327592AAFB2C4C951AEC7B7205B13\",\r\n      \"sha256_after\": \"A9A7B556DFBEE833D07E28D8CEDFC0CB26C327592AAFB2C4C951AEC7B7205B13\",\r\n      \"status\": \"passed\"\r\n    },\r\n    {\r\n      \"path\": \"reminders/app.py\",\r\n      \"sha256_before\": \"0D314F4E8109137553A7A44543F984858FE15ACE2A4128349E5787EBB91D6B39\",\r\n      \"sha256_after\": \"0D314F4E8109137553A7A44543F984858FE15ACE2A4128349E5787EBB91D6B39\",\r\n      \"status\": \"passed\"\r\n    }\r\n  ],\r\n  \"source_checks\": {\r\n    \"utf8_strict_decode\": \"passed\",\r\n    \"syntax_compile\": \"passed\",\r\n    \"no_bom\": \"passed\",\r\n    \"no_replacement_characters\": \"passed\",\r\n    \"line_endings\": \"CRLF\",\r\n    \"sha256\": \"b18ca5e97ac6658456d841ecf2a25bead03a7542ef5f9e97fc56e843bffecf94\"\r\n  },\r\n  \"source_diff\": \"--- /dev/null\\n+++ reminders/preview.py\\n@@ -0,0 +1,15 @@\\n+import argparse\\r\\n+\\r\\n+from mymodule.format_title import format_title\\r\\n+\\r\\n+\\r\\n+def main():\\r\\n+    parser = argparse.ArgumentParser(description=\\\"Preview reminder titles.\\\")\\r\\n+    parser.add_argument(\\\"titles\\\", nargs=\\\"+\\\")\\r\\n+    args = parser.parse_args()\\r\\n+    for title in args.titles:\\r\\n+        print(format_title(title))\\r\\n+\\r\\n+\\r\\n+if __name__ == \\\"__main__\\\":\\r\\n+    main()\\r\\n\"\r\n}\r\n",
+      "exit_code": 0,
+      "output_note": "This outer shell output is combined. Every child process has separately captured stdout/stderr in checks.",
+      "recovered_recording_issue": {
+        "operation": "Attempt to append all preparation logs and create report in one shell command",
+        "exit_code": 1,
+        "launcher_output": "MXC launcher: CreateProcessW failed with error code 206 (0x000000CE).\n",
+        "resolution": "Split documentation and evidence writes into shorter commands; the failed process did not start."
+      }
+    },
+    "final_artifact_check": {
+      "status": "passed",
+      "added_files": [
+        "reminders/preview.py",
+        "result-reuse.md",
+        "verification-reuse.json"
+      ],
+      "existing_source_and_index_files_unchanged": true,
+      "utf8_without_bom": true,
+      "unexpected_files_within_authorized_scope": [],
+      "scope_exclusion": "result-first.md and verification.json names were listed, but contents were never opened or hashed.",
+      "recovered_attempt": {
+        "exit_code": 1,
+        "reason": "First file-inventory assertion included explicitly forbidden evidence filenames. Corrected inventory filter without reading or changing those files."
+      }
+    }
+  },
+  "output_source": "import argparse\r\n\r\nfrom mymodule.format_title import format_title\r\n\r\n\r\ndef main():\r\n    parser = argparse.ArgumentParser(description=\"Preview reminder titles.\")\r\n    parser.add_argument(\"titles\", nargs=\"+\")\r\n    args = parser.parse_args()\r\n    for title in args.titles:\r\n        print(format_title(title))\r\n\r\n\r\nif __name__ == \"__main__\":\r\n    main()\r\n",
+  "parent_verification": {
+    "executed_at": "2026-10-29T15:38:54.076350+00:00",
+    "same_module_imported": true,
+    "existing_module_caller_and_index_hashes_unchanged": true,
+    "cases": [
+      {
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-implementation\\reminders\\app.py",
+          "  中文\t 提醒  "
+        ],
+        "exit_code": 0,
+        "stdout": "中文 提醒\n",
+        "stderr": "",
+        "expected_stdout": "中文 提醒\n",
+        "passed": true
+      },
+      {
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-implementation\\reminders\\app.py",
+          ""
+        ],
+        "exit_code": 0,
+        "stdout": "\n",
+        "stderr": "",
+        "expected_stdout": "\n",
+        "passed": true
+      },
+      {
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-implementation\\reminders\\preview.py",
+          "  first   title  ",
+          "",
+          "\t \n",
+          "  中文\t 第二个  "
+        ],
+        "exit_code": 0,
+        "stdout": "first title\n\n\n中文 第二个\n",
+        "stderr": "",
+        "expected_stdout": "first title\n\n\n中文 第二个\n",
+        "passed": true
+      },
+      {
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-implementation\\reminders\\preview.py",
+          "--",
+          "  --help  "
+        ],
+        "exit_code": 0,
+        "stdout": "--help\n",
+        "stderr": "",
+        "expected_stdout": "--help\n",
+        "passed": true
+      },
+      {
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\Administrator\\.codex\\visualizations\\2026\\10\\29\\01a185f2-4e8e-7ef0-87e7-9a9d64667ee9\\lean-engineer-update\\trial-implementation\\reminders\\preview.py"
+        ],
+        "exit_code": 2,
+        "stdout": "",
+        "stderr": "usage: preview.py [-h] titles [titles ...]\npreview.py: error: the following arguments are required: titles\n",
+        "expected_stdout": null,
+        "passed": true
+      }
+    ]
+  },
+  "evidence_limits": [
+    "One cold-context execution.",
+    "Model reads are self-reported; complete tool-read trace not exported.",
+    "No real-incident detection or causal improvement claim."
+  ]
+}

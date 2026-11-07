@@ -1,0 +1,274 @@
+{
+  "release": "1.1.1",
+  "recorded_at": "2026-11-05T14:46:09.036035+00:00",
+  "scope": "Two existing policy-boundary corrections; no production code, new domain or tool permission change.",
+  "rule_sha256": {
+    "skills/lean-engineer/references/risk-gates.md": "f0552c3cbcbb9ec211fbcefd1b084d0adc18f707a44bd98f7b2d23773c479c7a",
+    "skills/lean-engineer/references/verification.md": "76d111b7674d94e843f100b160c3928c687d6839e70083bac6bc0c21614f08e4",
+    "tests/test_adversarial.py": "30a385d7ef9d1af9a2b89e8f0a3b8cafaaf530d27384fd2744089ab3e1c76b4f"
+  },
+  "source_checks": {
+    "started_at": "2026-11-05T14:44:16.955482+00:00",
+    "status": "passed",
+    "checks": [
+      {
+        "name": "candidate-package",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "scripts/validate_package.py",
+          "."
+        ],
+        "cwd": "<workspace>\\candidate",
+        "expected_exit": 0,
+        "exit_code": 0,
+        "duration_seconds": 0.14,
+        "stdout": "{\n  \"ok\": true,\n  \"errors\": [],\n  \"warnings\": [],\n  \"summary\": {\n    \"required_files\": 46,\n    \"markdown_files\": 32,\n    \"local_links_checked\": 93,\n    \"evaluation_definitions\": 55,\n    \"model_runs\": 13\n  }\n}\n",
+        "stderr": ""
+      },
+      {
+        "name": "candidate-tests",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-v"
+        ],
+        "cwd": "<workspace>\\candidate",
+        "expected_exit": 0,
+        "exit_code": 0,
+        "duration_seconds": 9.453,
+        "stdout": "",
+        "stderr": "test_eval_evidence_rejects_internal_directory_link (test_adversarial.AuditClosureTests) ... ok\ntest_eval_evidence_rejects_internal_file_symlink (test_adversarial.AuditClosureTests) ... ok\ntest_eval_reference_matrix_covers_all_cases (test_adversarial.AuditClosureTests) ... ok\ntest_eval_run_count_and_evidence_reject_invalid_records (test_adversarial.AuditClosureTests) ... ok\ntest_eval_status_text_supports_future_nonzero_runs (test_adversarial.AuditClosureTests) ... ok\ntest_performance_measurement_diagnosis_route_is_explicit (test_adversarial.AuditClosureTests) ... ok\ntest_readonly_formal_verification_uses_delegated_output (test_adversarial.AuditClosureTests) ... ok\ntest_readonly_history_routing_does_not_require_implementation (test_adversarial.AuditClosureTests) ... ok\ntest_rereview_history_and_missing_branch (test_adversarial.AuditClosureTests) ... ok\ntest_synthetic_eval_evidence_survives_packaging (test_adversarial.AuditClosureTests) ... ok\ntest_synthetic_eval_run_with_valid_evidence_is_accepted (test_adversarial.AuditClosureTests) ... ok\ntest_parameterized_reviewer_tools_are_rejected (test_adversarial.FinalAuditTests) ... ok\ntest_manifest_root_arrays_return_errors (test_adversarial.MalformedStructureTests) ... ok\ntest_null_and_object_identifiers_return_errors (test_adversarial.MalformedStructureTests) ... ok\ntest_null_eval_lists_return_errors (test_adversarial.MalformedStructureTests) ... ok\ntest_archive_creation_error_is_not_masked_by_cleanup (test_adversarial.PackageAdversarialTests) ... ok\ntest_archive_rejects_unsafe_names_and_corrupt_content (test_adversarial.PackageAdversarialTests) ... ok\ntest_backend_protocol_includes_not_checked (test_adversarial.PackageAdversarialTests) ... ok\ntest_cli_preserves_plugin_default_and_selects_skill_format (test_adversarial.PackageAdversarialTests) ... ok\ntest_cli_relative_output_and_failed_inputs (test_adversarial.PackageAdversarialTests) ... ok\ntest_disable_model_invocation_uses_yaml_boolean (test_adversarial.PackageAdversarialTests) ... ok\ntest_domain_references_are_required (test_adversarial.PackageAdversarialTests) ... ok\ntest_empty_license_is_rejected (test_adversarial.PackageAdversarialTests) ... ok\ntest_eval_schema_is_strict (test_adversarial.PackageAdversarialTests) ... ok\ntest_existing_temporary_archive_is_not_overwritten (test_adversarial.PackageAdversarialTests) ... ok\ntest_external_unknown_cannot_be_controlled_change (test_adversarial.PackageAdversarialTests) ... ok\ntest_frontend_topics_require_evidence_and_sources (test_adversarial.PackageAdversarialTests) ... ok\ntest_implementation_discipline_is_routed_and_complete (test_adversarial.PackageAdversarialTests) ... ok\ntest_json_input_has_a_size_limit (test_adversarial.PackageAdversarialTests) ... ok\ntest_kimi_manifest_rejects_files_for_directories (test_adversarial.PackageAdversarialTests) ... ok\ntest_kimi_manifest_rejects_parent_escape (test_adversarial.PackageAdversarialTests) ... ok\ntest_output_cannot_be_inside_package_root (test_adversarial.PackageAdversarialTests) ... ok\ntest_output_cannot_overwrite_input (test_adversarial.PackageAdversarialTests) ... ok\ntest_package_excludes_backup_cache_and_orig (test_adversarial.PackageAdversarialTests) ... ok\ntest_package_rejects_outside_link (test_adversarial.PackageAdversarialTests) ... ok\ntest_plugin_archive_default_and_file_permissions (test_adversarial.PackageAdversarialTests) ... ok\ntest_quality_gate_preflight_and_ci_handoff (test_adversarial.PackageAdversarialTests) ... ok\ntest_repository_location_is_not_a_risk_gate_by_itself (test_adversarial.PackageAdversarialTests) ... ok\ntest_reviewer_policy_cannot_be_overridden_in_body (test_adversarial.PackageAdversarialTests) ... ok\ntest_reviewer_tools_are_host_neutral (test_adversarial.PackageAdversarialTests) ... ok\ntest_risk_and_delivery_status_cover_all_branches (test_adversarial.PackageAdversarialTests) ... ok\ntest_runtime_files_do_not_reference_removed_external_skills (test_adversarial.PackageAdversarialTests) ... ok\ntest_self_review_cases_require_independent_reviewer (test_adversarial.PackageAdversarialTests) ... ok\ntest_skill_archive_is_self_contained (test_adversarial.PackageAdversarialTests) ... ok\ntest_skill_archive_rejects_each_missing_license_file (test_adversarial.PackageAdversarialTests) ... ok\ntest_skill_archive_rejects_missing_entrypoint (test_adversarial.PackageAdversarialTests) ... ok\ntest_standalone_license_and_validator_command (test_adversarial.PackageAdversarialTests) ... ok\ntest_thick_change_requires_gates_and_independent_expectations (test_adversarial.PackageAdversarialTests) ... ok\ntest_thick_eval_cases_have_complete_routing (test_adversarial.PackageAdversarialTests) ... ok\ntest_validation_record_is_current (test_adversarial.PackageAdversarialTests) ... ok\ntest_verification_does_not_unconditionally_build_ci (test_adversarial.PackageAdversarialTests) ... ok\ntest_authorized_no_object_exemption_is_allowed (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_coverage_rejects_invalid_references_evidence_and_questions (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_coverage_requires_valid_checks_and_schema (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_design_model_evidence_is_allowed (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_evidence_requires_baseline_reference (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_full_requires_all_topics (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_invalid_observed_at_fails (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_malformed_fields_return_errors_instead_of_raising (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_malformed_required_topics_return_errors (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_missing_capability_cannot_use_evidence_or_decision (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_missing_capability_contradicts_no_check_object (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_model_only_code_finding_is_rejected (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_model_replay_must_link_to_finding (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_model_resolution_requires_code_replay (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_non_behavior_exemption_allows_current_specification (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_non_behavior_exemption_requires_structured_basis (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_normal_risk_does_not_remove_behavior_requirement (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_orphan_finding_is_rejected (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_placeholder_baseline_cannot_be_ready (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_placeholder_decisions_are_rejected (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_ready_requires_authority (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_release_evidence_baseline_must_match (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_release_evidence_must_link_a_passed_check (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_resolution_evidence_must_link_to_finding (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_resolved_evidence_must_match_current_baseline (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_surface_location_is_required (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_unhashable_evidence_ids_return_errors (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_valid_failed_check_can_complete_coverage (test_adversarial.ReleaseGateAdversarialTests) ... ok\ntest_candidate_triage_and_agent_inheritance (test_adversarial.ReviewWorkflowContractTests) ... ok\ntest_evaluation_protocol_and_routing_cases (test_adversarial.ReviewWorkflowContractTests) ... ok\ntest_rereview_convergence_contract (test_adversarial.ReviewWorkflowContractTests) ... ok\ntest_rule_feedback_contract (test_adversarial.ReviewWorkflowContractTests) ... ok\ntest_any_error_forces_release_ready_false (test_adversarial.SecondRoundAuditTests) ... ok\ntest_behavior_exemption_requires_structured_basis (test_adversarial.SecondRoundAuditTests) ... ok\ntest_mixed_baseline_supporting_evidence_is_rejected (test_adversarial.SecondRoundAuditTests) ... ok\ntest_reviewer_has_no_shell_or_skill_tools (test_adversarial.SecondRoundAuditTests) ... ok\ntest_reviewer_inline_tools_are_rejected (test_adversarial.SecondRoundAuditTests) ... ok\ntest_reviewer_task_is_rejected (test_adversarial.SecondRoundAuditTests) ... ok\ntest_invalid_project_returns_errors (test_validators.MalformedInputTests) ... ok\ntest_invalid_reference_type_returns_errors (test_validators.MalformedInputTests) ... ok\ntest_non_string_eval_id_returns_errors (test_validators.MalformedInputTests) ... ok\ntest_claude_manifest_checks_agent_path (test_validators.PackageValidatorTests) ... ok\ntest_current_package_is_valid (test_validators.PackageValidatorTests) ... ok\ntest_eval_ids_must_be_unique (test_validators.PackageValidatorTests) ... ok\ntest_eval_input_boundaries (test_validators.PackageValidatorTests) ... ok\ntest_evaluation_activation_warning (test_validators.PackageValidatorTests) ... ok\ntest_frontmatter_reads_metadata_version (test_validators.PackageValidatorTests) ... ok\ntest_license_content_and_distribution_copies (test_validators.PackageValidatorTests) ... ok\ntest_manifest_consistency_in_both_directions (test_validators.PackageValidatorTests) ... ok\ntest_manifest_rejects_session_start (test_validators.PackageValidatorTests) ... ok\ntest_markdown_link_must_exist (test_validators.PackageValidatorTests) ... ok\ntest_missing_capability_reference_is_rejected (test_validators.PackageValidatorTests) ... ok\ntest_package_missing_root_and_optional_checks_do_not_raise (test_validators.PackageValidatorTests) ... ok\ntest_portable_manifest_rejects_unknown_top_level_field (test_validators.PackageValidatorTests) ... ok\ntest_portable_manifest_requires_canonical_schema (test_validators.PackageValidatorTests) ... ok\ntest_security_reference_is_required_without_inbound_links (test_validators.PackageValidatorTests) ... ok\ntest_skill_license_is_required (test_validators.PackageValidatorTests) ... ok\ntest_skill_name_must_match_directory (test_validators.PackageValidatorTests) ... ok\ntest_accepted_risk_requires_human_decision (test_validators.ReviewValidatorTests) ... ok\ntest_behavior_rejects_source_only_evidence (test_validators.ReviewValidatorTests) ... ok\ntest_failed_check_requires_finding (test_validators.ReviewValidatorTests) ... ok\ntest_finding_text_cannot_be_empty (test_validators.ReviewValidatorTests) ... ok\ntest_full_requires_all_declared_topics (test_validators.ReviewValidatorTests) ... ok\ntest_high_risk_surface_requires_behavior_evidence (test_validators.ReviewValidatorTests) ... ok\ntest_not_assessed_does_not_pass_require_ready (test_validators.ReviewValidatorTests) ... ok\ntest_pass_requires_evidence (test_validators.ReviewValidatorTests) ... ok\ntest_ready_rejects_blocked_check (test_validators.ReviewValidatorTests) ... ok\ntest_resolved_finding_requires_resolution_evidence (test_validators.ReviewValidatorTests) ... ok\ntest_specification_cannot_confirm_or_resolve (test_validators.ReviewValidatorTests) ... ok\ntest_template_is_valid_but_not_ready (test_validators.ReviewValidatorTests) ... ok\ntest_unknown_evidence_reference_fails (test_validators.ReviewValidatorTests) ... ok\ntest_valid_ready_review (test_validators.ReviewValidatorTests) ... ok\n\n----------------------------------------------------------------------\nRan 123 tests in 9.284s\n\nOK\n"
+      },
+      {
+        "name": "candidate-quick-.",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "C:\\Users\\Administrator\\.codex\\skills\\.system\\skill-creator\\scripts\\quick_validate.py",
+          "."
+        ],
+        "cwd": "<workspace>\\candidate",
+        "expected_exit": 0,
+        "exit_code": 0,
+        "duration_seconds": 0.078,
+        "stdout": "Skill is valid!\n",
+        "stderr": ""
+      },
+      {
+        "name": "candidate-quick-skills/lean-engineer",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "C:\\Users\\Administrator\\.codex\\skills\\.system\\skill-creator\\scripts\\quick_validate.py",
+          "skills/lean-engineer"
+        ],
+        "cwd": "<workspace>\\candidate",
+        "expected_exit": 0,
+        "exit_code": 0,
+        "duration_seconds": 0.079,
+        "stdout": "Skill is valid!\n",
+        "stderr": ""
+      },
+      {
+        "name": "candidate-ledger-0",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "skills/lean-engineer/scripts/validate_review.py",
+          "skills/lean-engineer/assets/backend-review-template.json"
+        ],
+        "cwd": "<workspace>\\candidate",
+        "expected_exit": 0,
+        "exit_code": 0,
+        "duration_seconds": 0.078,
+        "stdout": "{\n  \"ok\": true,\n  \"errors\": [],\n  \"warnings\": [\n    \"No surfaces registered. This is a template or an incomplete review.\"\n  ],\n  \"summary\": {\n    \"surfaces\": 0,\n    \"checks\": 0,\n    \"findings\": 0,\n    \"review_coverage_complete\": false,\n    \"release_ready\": false\n  }\n}\n",
+        "stderr": ""
+      },
+      {
+        "name": "candidate-ledger-2",
+        "command": [
+          "D:\\Anaconda\\python.exe",
+          "-B",
+          "skills/lean-engineer/scripts/validate_review.py",
+          "skills/lean-engineer/assets/backend-review-template.json",
+          "--require-ready"
+        ],
+        "cwd": "<workspace>\\candidate",
+        "expected_exit": 2,
+        "exit_code": 2,
+        "duration_seconds": 0.078,
+        "stdout": "{\n  \"ok\": true,\n  \"errors\": [],\n  \"warnings\": [\n    \"No surfaces registered. This is a template or an incomplete review.\"\n  ],\n  \"summary\": {\n    \"surfaces\": 0,\n    \"checks\": 0,\n    \"findings\": 0,\n    \"review_coverage_complete\": false,\n    \"release_ready\": false\n  }\n}\n",
+        "stderr": ""
+      },
+      {
+        "name": "candidate-claude-manifest",
+        "command": [
+          "pwsh",
+          "-NoProfile",
+          "-Command",
+          "claude plugin validate --strict ."
+        ],
+        "cwd": "<workspace>\\candidate",
+        "expected_exit": 0,
+        "exit_code": 0,
+        "duration_seconds": 0.734,
+        "stdout": "Validating plugin manifest: <workspace>\\candidate\\.claude-plugin\\plugin.json\n\n√ Validation passed\n",
+        "stderr": ""
+      }
+    ],
+    "completed_at": "2026-11-05T14:44:27.591184+00:00"
+  },
+  "quality_scope": {
+    "production_code_unchanged": true,
+    "complexity": {
+      "status": "not_applicable",
+      "basis": "no_check_object",
+      "scope": "No production code changes; source byte equality verified."
+    },
+    "production_mutation": {
+      "status": "not_applicable",
+      "basis": "no_check_object",
+      "scope": "Only instructions, metadata, evaluation definitions and tests changed; policy behavior assessed separately through independent scenarios and audit."
+    },
+    "architecture": {
+      "method": "Existing package, reference, manifest and permission checks; no changed runtime dependency or module ownership."
+    },
+    "checks_not_relaxed": [
+      "all controlled-change prerequisites except repository location as a standalone trigger",
+      "unknown callers and missing version evidence",
+      "high-consequence and compatibility-addition independent review",
+      "applicable three quality gates",
+      "CI checks explicitly required by user or project",
+      "readonly permissions",
+      "backend ledger schema"
+    ]
+  },
+  "old_rule_regression": [
+    {
+      "id": "RISK-EXTERNAL-01",
+      "scope": "Exact wording regression guard, not a proof of all policy semantics",
+      "phases": [
+        {
+          "phase": "green_before",
+          "command": [
+            "D:\\Anaconda\\python.exe",
+            "-B",
+            "-m",
+            "unittest",
+            "test_adversarial.PackageAdversarialTests.test_repository_location_is_not_a_risk_gate_by_itself"
+          ],
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": ".\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nOK\n"
+        },
+        {
+          "phase": "red_old_rule",
+          "command": [
+            "D:\\Anaconda\\python.exe",
+            "-B",
+            "-m",
+            "unittest",
+            "test_adversarial.PackageAdversarialTests.test_repository_location_is_not_a_risk_gate_by_itself"
+          ],
+          "exit_code": 1,
+          "stdout": "",
+          "stderr": "F\n======================================================================\nFAIL: test_repository_location_is_not_a_risk_gate_by_itself (test_adversarial.PackageAdversarialTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"<workspace>\\rule-regression-check\\tests\\test_adversarial.py\", line 700, in test_repository_location_is_not_a_risk_gate_by_itself\n    self.assertNotIn(\"对外服务的调用方不在当前仓库，或者动态引用无法列全\", text)\nAssertionError: '对外服务的调用方不在当前仓库，或者动态引用无法列全' unexpectedly found in '# 风险分档\\n\\n## 定义\\n\\n- **小改**：没有命中大改触发项。调用方和安全边界能够查明。\\n- **受控大改**：命中大改触发项，且满足下方全部附加条件。包括已有项的取值或判断变化，以及证据闭合的兼容性增补。\\n- **厚审大改**：命中大改触发项，但不满足受控大改的全部条件。包括不满足兼容性增补条件的对外形状改变，或者调用方、依赖、数据恢复、安全边界不能闭合。\\n- **可观察改动**：用户或已发布调用方不读源码即可感知差异。可观察改动需要行为证据。\\n\\n档位决定基础验证要求。下方的高后果变更另加独立审查要求，不因契约形状不变而豁免。用户要求更严格验证时，执行用户要求。\\n\\n## 大改触发项\\n\\n命中任一项即为大改：\\n\\n1. 修改 HTTP、RPC、事件、公开导出、路由、DTO 或其他已发布契约。\\n2. 修改表结构、字段含义、文件格式、缓存键、数据删除或迁移行为。\\n3. 修改认证、授权、角色、租户、令牌或会话语义。\\n4. 修改价格、支付、订单、退款、余额或配额计费。\\n5. 修改环境变量、远程开关、文档化配置、构建发布或部署行为。\\n6. 新增第三方库、构建插件或运行时服务。\\n7. 修改契约文档、对外 schema、契约测试、对外错误语义或被省略参数使用的默认值。\\n8. 修改共享状态的交错、并发恢复、加密、隐私或危险操作，并且失效会造成越权、数据丢失、资金错误或不可恢复副作用。\\n9. 修改设备安全状态、保护逻辑、中断或任务时序，并且失效会违反项目规定的实时约束、损坏设备或危及人身安全。\\n\\n领域中的等价变化同样触发上述规则：移动端权限与旧版本兼容、固件升级与持久化格式、数据管道指标口径与回填范围，分别按对应契约、权限、发布或数据行为判断。不能因为没有 HTTP 接口就按小改处理，也不能仅因所属领域而升级无关文案。\\n\\n以下情况按厚审处理：\\n\\n- 新增或删除对外字段、端点、事件、权限点、配置项或依赖。唯一的增补例外是下文定义的兼容性增补；不能仅凭“可选”或“向后兼容”的声明进入例外。\\n- 对外服务的调用方不在当前仓库，或者动态引用无法列全。\\n- 数据恢复、兼容窗口或回滚路径不清楚。\\n- 任一触发项无法根据现有证据判断。\\n\\n搜索未命中只记录 `not_found(scope)`。它不等于不存在。无法搜索的外部调用方记录 `unknown`，不得按闭合处理。\\n\\n## 受控大改的附加条件\\n\\n受控大改必须同时满足：\\n\\n1. 只修改已有项的取值或已有判断的条件；或者仅为现有响应或返回对象新增可选展示字段，且满足下方兼容性增补条件。\\n2. 没有新增依赖，没有新增共享能力入库。\\n3. 除符合条件的可选展示字段外，没有新增或删除对外契约元素。已有契约测试可以随取值变化更新，但必须运行。\\n4. 所有受支持调用方及其版本能够逐一点名，并有实际兼容验证。外部调用方未知时不满足受控大改条件，必须按厚审大改处理。\\n\\n兼容性增补还必须同时满足：\\n\\n- 字段直接使用已有可公开数据，不新增 I/O 或副作用；不改变既有字段、默认行为、错误语义、数据含义、权限、隐私边界或资源预算。\\n- 核对 schema 与实际消费者，包括严格反序列化、字段枚举或其他会拒绝未知字段的路径。必须运行旧调用方兼容与新增字段行为检查，不能把“源码没引用新字段”当作兼容证据。\\n- 记录回退方式，并由独立方核对增补范围和兼容依据。没有可用独立方时为 `blocked`，尚未执行时为 `not_run`，交付只能为 `partial`。\\n- 任一条件未知或不满足，按厚审处理。新增请求参数、端点、权限点、配置或持久化结构不使用此例外。\\n\\n此例外仍属于受控大改，不是小改；它保留契约、调用方、行为验证和独立审查，不自动要求厚审的三道质量门。\\n\\n支付金额、权限条件和超时默认值可以改变可观察行为。不得把“契约形状不变”写成“可观察行为不变”。\\n\\n## 各档最低要求\\n\\n| 档位 | 编码前 | 验证与交付 | 独立审查 |\\n| --- | --- | --- | --- |\\n| 小改 | 记录改动对象、调用方和契约影响。新代码先查复用 | 运行相关检查。可观察改动运行对应行为或记录未运行原因 | 不强制 |\\n| 受控大改 | 列出 producer、consumer、取值或增补变化、失败路径和恢复方式 | 运行相关契约、调用方和行为检查。更新期望值时保留独立依据 | 高后果变更和兼容性增补必须执行。其他受控大改不强制，用户要求时执行 |\\n| 厚审大改 | 列出契约、信任边界、调用方、兼容、失败路径、恢复和领域专题 | 运行项目检查、风险专项检查和真实场景。通过复杂度、测试与变异、架构约束三道质量门。按 [验证与证据](verification.md) 记录状态 | 必须尝试独立审查。无法执行时明确标记 |\\n\\n厚审大改的三道质量门都是必需检查。任一门为 `failed` 时，交付为 `failed`。任一门为 `blocked` 或 `not_run` 时，交付只能为 `partial`。缺少工具、配置或规则不得写成 `not_applicable`。没有检查对象时，必须记录具体豁免依据。\\n\\n纯一行修改不自动等于小改。文案修改属于可观察的小改，不得归为不可观察改动。\\n\\n## 高后果变更的独立审查\\n\\n变更改变以下任一核心不变量时，必须由未参与实现的人或独立 agent 审查，并按 [独立审查协议](review-protocol.md) 复验：\\n\\n- 金额计算、扣款、退款、余额或重复交易防护的正确性。\\n- 身份可信性、对象权限、角色权限或租户隔离。\\n- 不可恢复的数据删除、覆盖或恢复保护。\\n- 防止人身伤害、设备损坏或失去恢复能力的保护、截止时间与安全状态。\\n- 用于结算、财务或监管报告，或项目已明确认定为高后果决策依据的数据口径与完整性。普通分析图表不因属于数据工程而自动命中。\\n\\n判断依据是本次行为变化及其失效后果。只改一个条件、数值或比较运算符也不豁免。未改变这些不变量的展示文案或格式不因此升级。\\n\\n这项要求只增加独立审查，不自动把受控大改升级成厚审大改，也不自动要求三道质量门。基础档位仍按上文判定。独立方核对业务依据、允许与拒绝路径、边界反例及恢复证据。没有可用独立方时记录 `independent_review=blocked`，尚未执行时记录 `not_run`。交付只能为 `partial`，不得用自审替代。\\n\\n## 检查范围\\n\\n检查范围跟随本次 diff、真实调用方和受影响契约。不要运行与风险无关的全量任务来填充证据。用户明确要求全量时除外。\\n\\n额外验证可以提高信心。不得为了减少工作量而禁止额外验证。\\n'\n\n----------------------------------------------------------------------\nRan 1 test in 0.002s\n\nFAILED (failures=1)\n"
+        },
+        {
+          "phase": "green_after",
+          "command": [
+            "D:\\Anaconda\\python.exe",
+            "-B",
+            "-m",
+            "unittest",
+            "test_adversarial.PackageAdversarialTests.test_repository_location_is_not_a_risk_gate_by_itself"
+          ],
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": ".\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nOK\n"
+        }
+      ]
+    },
+    {
+      "id": "VERIFY-CI-SCOPE-01",
+      "scope": "Exact wording regression guard, not a proof of all policy semantics",
+      "phases": [
+        {
+          "phase": "green_before",
+          "command": [
+            "D:\\Anaconda\\python.exe",
+            "-B",
+            "-m",
+            "unittest",
+            "test_adversarial.PackageAdversarialTests.test_verification_does_not_unconditionally_build_ci"
+          ],
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": ".\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nOK\n"
+        },
+        {
+          "phase": "red_old_rule",
+          "command": [
+            "D:\\Anaconda\\python.exe",
+            "-B",
+            "-m",
+            "unittest",
+            "test_adversarial.PackageAdversarialTests.test_verification_does_not_unconditionally_build_ci"
+          ],
+          "exit_code": 1,
+          "stdout": "",
+          "stderr": "F\n======================================================================\nFAIL: test_verification_does_not_unconditionally_build_ci (test_adversarial.PackageAdversarialTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"<workspace>\\rule-regression-check\\tests\\test_adversarial.py\", line 706, in test_verification_does_not_unconditionally_build_ci\n    self.assertNotIn(\"5. 将同一个项目命令接入 CI。\", text)\nAssertionError: '5. 将同一个项目命令接入 CI。' unexpectedly found in '# 验证与证据\\n\\n## 证据类型\\n\\n| 类型 | 可以证明 | 不能单独证明 |\\n| --- | --- | --- |\\n| `specification` | 需求、合同或预期是什么 | 实现满足预期 |\\n| `source` | 当前源码包含或不包含某个结构 | 真实运行全部正确 |\\n| `test` | 指定测试在指定环境得到指定结果 | 未覆盖场景正确 |\\n| `runtime` | 真实入口的可观察行为 | 未操作路径和隐藏副作用 |\\n| `measurement` | 指定条件下的数值 | 其他负载、设备或数据量下的数值 |\\n| `model` | 指定模型和边界内的性质 | 实际代码与模型等价 |\\n\\n证据必须包含位置、命令或观察步骤、环境、时间和结果。秘密与个人信息必须脱敏。\\n\\n## 领域证据与台账范围\\n\\n这些领域的局部任务默认检查本次改动和受影响调用链。用户要求完整审查时，先建立声明范围内的对象与检查项清单，记录总数、已查数、未查数及原因，不得静默缩成 diff 审查或仅凭几个样例宣称完整。\\n\\n证据种类描述证明方式，不限定技术栈。真机操作日志属于 `runtime`；自动设备测试或数据断言属于 `test`；波形、功耗、时序、吞吐量和数据差异统计属于 `measurement`。按证据实际内容分类，不因附件名或格式自动认定充分。\\n\\n除通用字段外，记录决定复现结果的条件：移动端的 OS、机型、应用版本与权限；硬件的板卡版本、固件构建、探测点、采样与负载；数据任务的输入快照、分区、时间窗口、口径版本与运行 ID。结论应关联原始记录和预期来源，不能只保留“通过”的摘要。\\n\\n内置 `validate_review.py` 和 JSON 模板仅校验后端六专题。需要其他领域时，沿用项目已有台账；没有时，以精简表格记录：检查对象、风险或不变量、操作与预期、实际结果、证据位置与基线、状态、未查范围。不得将新领域硬塞进后端专题来声称完整覆盖。\\n\\n同一交付若同时含后端台账和领域补充记录，合并所有必需检查后按下方规则判定状态。任一领域的失败、阻塞或未运行都会影响整体结论；后端脚本的 `release_ready` 不能替代该汇总。领域记录中的必需检查和“不适用”依据须由项目要求与实际改动确定，不得为取得通过而删项。\\n\\n## 检查状态\\n\\n- `passed`：所需证据支持该检查的预期。\\n- `failed`：证据表明实际结果违反预期。\\n- `blocked`：缺少环境、权限、数据、合同或工具，无法执行。\\n- `not_run`：具备执行条件但本次没有执行，或者尚未尝试。\\n- `not_applicable`：有具体依据证明该检查不在范围内。\\n\\n`blocked` 和 `not_run` 都不是通过。`not_applicable` 不能替代无法验证。\\n\\n交付状态只有三类：\\n\\n- `verified`：所有必需检查均为 `passed` 或有依据的 `not_applicable`。\\n- `partial`：存在 `blocked` 或 `not_run`，且没有必需检查失败。\\n- `failed`：任一必需检查为 `failed`。\\n\\n不得把 `partial` 写成完成验收。不得把检查计划写成检查证据。\\n\\n## 测试与质量门\\n\\n1. 优先使用项目已有构建、静态检查、测试和运行入口。\\n2. 测试期望值必须记录来源。来源可以是用户要求、合同、固定夹具、独立样例或可审查的业务规则。不得从被测实现反推同一答案。厚审大改的关键测试缺少独立依据时，对应检查为 `blocked`，不得使用 `verified`。\\n3. 实现者可以编写测试。厚审大改、高后果变更和兼容性增补仍需独立方核对期望值来源、需求、反例和验证充分性。独立性来自依据和审查，不要求重新编写全部测试。\\n4. 新增或修改关键契约测试时，使用一个已知破坏验证它能失败。随后恢复并再次运行。保留绿、红、绿的真实记录。\\n5. 厚审大改必须实际通过复杂度、测试与变异、架构约束三道质量门。三门均为必需检查，交付状态按 [风险分档](risk-gates.md) 判定。\\n6. 复杂度：对新增或修改函数运行机器检查。项目阈值优先。没有项目阈值时，圈复杂度上限为 10。人工阅读不能替代质量门证据。\\n7. 测试与变异：相关测试必须通过，变更代码必须实际运行变异测试。非等价变异体必须全部杀死。等价变异体必须单独记录依据。未配置或未运行变异测试时记录 `blocked` 或 `not_run`，不得用覆盖率或手工变异替代通过。\\n8. 架构约束：使用项目已有的机器规则检查分层、循环依赖、命名和位置边界。没有项目或用户提供的规则时，该门为 `blocked`。不得自行发明规则并宣称通过。\\n9. 工具安装按 [实现纪律](implementation.md#记录与交付边界) 的项目级工具规则及已有授权执行，不重复索取授权。不得把安装失败写成工具门通过。缺少工具、配置或规则不得写成 `not_applicable`。纯文档或无代码改动确实没有检查对象时，必须记录具体豁免依据。\\n10. 没有测试基线时，只补本次变更所需的最小测试。不得宣称历史代码已经覆盖。\\n\\n## 执行前检查与项目交接\\n\\n1. 检查项目 manifest、lockfile、构建脚本、测试配置和 CI 配置。记录判断依据的位置。不得仅凭工具名称或文档声明认定项目已经配置质量门。\\n2. 分别记录三道门的执行条件：已配置、缺少配置、缺少工具或无法运行。能力预检只描述执行条件，不替代实际质量门结果。\\n3. 优先运行项目已有的统一命令。记录工具版本、变更范围、命令、结果和证据位置。预检通过不得写成质量门通过。\\n4. 缺少配置或工具时，给出最小接入方案。已有任务授权覆盖必要项目级工具时，按实现纪律安装、配置并运行；项目明确禁止或超出已有授权时不安装，未完成的必需检查使交付保持 `partial`。未检查项目配置前，不得声称工具不可用。\\n5. 将同一个项目命令接入 CI。PR 可以限定变更范围，定时任务可以运行更大范围，但不得降低通过标准。需要阻止合并时，由项目 CI 必需检查和分支保护执行。不得把 AI 报告写成已经建立合并阻断。\\n6. 本 skill 定义质量门要求和证据口径，不提供各项目通用的质量门执行器。本地与 CI 证据必须对应同一源码基线，才能共同支持同一结论。\\n\\n## 行为、性能与恢复\\n\\n- 可观察改动必须通过真实页面、请求、任务或对应测试观察行为。无法运行时标记 `not_run` 或 `blocked`。\\n- 性能结论必须有同条件的前后测量。没有测量时不得声称更快或更省。\\n- 回滚代码不等于恢复数据。持久化、支付、身份和权限变更必须分别说明代码回滚与数据恢复。\\n- Git 不可用时，使用文件清单、哈希或副本对比。`git diff` 不包含未跟踪文件时，不得把它当作完整变更证明。\\n\\n## 完成判定\\n\\n交付前逐条列出用户要求。每项关联至少一个实际结果或一个明确缺口。构建通过、测试通过、台账完整和独立审查分别是不同事实。任何一项都不能单独证明整个需求已经正确实现。\\n'\n\n----------------------------------------------------------------------\nRan 1 test in 0.002s\n\nFAILED (failures=1)\n"
+        },
+        {
+          "phase": "green_after",
+          "command": [
+            "D:\\Anaconda\\python.exe",
+            "-B",
+            "-m",
+            "unittest",
+            "test_adversarial.PackageAdversarialTests.test_verification_does_not_unconditionally_build_ci"
+          ],
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": ".\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nOK\n"
+        }
+      ]
+    }
+  ],
+  "host_load": {
+    "command": "claude --plugin-dir . plugin list",
+    "exit_code": 0,
+    "stdout": "Session-only plugins (--plugin-dir / --plugin-url):\n\n  > lean-engineer@inline\n    Version: 1.1.1\n    Path: <workspace>\\candidate\n    Status: √ loaded\n\n",
+    "stderr": "",
+    "redactions": "Unrelated host plugins omitted; local workspace path substituted."
+  },
+  "design_issues": [
+    {
+      "id": "RISK-EXTERNAL-01",
+      "origin": "pre_existing",
+      "resolution": "Consumer/version evidence, not repository location alone, determines eligibility; all other prerequisites remain.",
+      "status": "resolved",
+      "recheck": "Independent audit and fixed positive/negative scenarios."
+    },
+    {
+      "id": "VERIFY-CI-SCOPE-01",
+      "origin": "pre_existing",
+      "resolution": "Preflight and CI actions follow task scope and authorization; explicitly required CI remains mandatory.",
+      "status": "resolved",
+      "recheck": "Independent audit, mandatory-CI and readonly counterexamples."
+    }
+  ],
+  "independent_audit": {
+    "status": "passed",
+    "rounds": 1,
+    "unresolved_confirmed_findings": 0,
+    "report": "RELEASE-1.1.1-AUDIT.json"
+  },
+  "postconditions": "Archive evidence, then rebuild both modes twice, inspect/extract/check, verify source drift before installation and reread after installation. Final archive results live in an external verification sidecar, avoiding self-reference."
+}

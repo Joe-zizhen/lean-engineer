@@ -1,0 +1,32 @@
+{
+  "case_type": "synthetic",
+  "task_input": "Based on facts.md, recovery.py and access.py, separately give execution plans and acceptance states for recovery protection, authorization repair and button copy. Do not edit implementations. Use the selected skill only.",
+  "skill_input_sha256": {
+    "SKILL.md": "fb3cc8964b2cf3cd303fce2ec2c42d1168a3bbcd0d0c71a101b310b0160aea7d",
+    "skills/lean-engineer/SKILL.md": "a31367e7ae7234e3d5c858bcafc45c2ac5a948d54ee656321ed5eef57c0e0544",
+    "skills/lean-engineer/references/implementation.md": "c3061f3ebb5d0efc8036e0a41837649076beeb176ec585cb939e4d5088f1f0fb",
+    "skills/lean-engineer/references/risk-gates.md": "4d8dab3401ed3e60e6c9785f83159282a7b0b125f6dc8dbeda08bfd87ee63064",
+    "skills/lean-engineer/references/review-protocol.md": "7272c1f7fff96f7d4ac011f4ce233c01c248745a5e9f19cf25ac56a03b5215b3",
+    "skills/lean-engineer/references/verification.md": "3a59607ade620837565d6713a15f7afb47d8477ee2fb0545d8ff94c9ed342be2"
+  },
+  "agent_output": "[经验门禁] 无命中（本次读取范围受限，未执行经验库检索，不代表已完成检索）。\n\n三项分别判断：写入恢复保留原代码，验收为 `partial`；读取授权应做一行修复，当前实现验收为 `failed`；按钮文案属于可观察的小改，当前为 `partial`。本次仅输出方案和检查现状，没有修改实现、安装依赖或创建子代理。\n\n### 写入恢复\n\n保留 `recovery.py` 的完整恢复路径：写入前取得 `backup`，捕获 `OSError` 后调用 `store.restore(backup)`，再原样抛出异常。已确认 `store.write` 会在部分写入后抛出该异常，因此恢复不是投机处理，不需要为本次任务新增实现。\n\n“失败后恢复写入前数据”是明确契约；不能因测试环境没有故障注入入口就删除 `except`、`restore` 或重新抛出。实现纪律中针对“新增守卫无法构造触发输入”的规则，不适用于删除这里已有且明确必需的防数据丢失处理。\n\n需要验证：正常写入结果；在真实 store 已写入部分数据后触发 `OSError`，经恢复后实际数据与写入前快照一致，并向调用方传播失败。测试期望来自已确认契约，不能从实现反推。假 store 即使证明控制流，也不能证明真实 store 数据已恢复。\n\n当前源码读取只能证明恢复结构存在，不能证明真实恢复成功。故障恢复演练为 `blocked`：当前环境没有中断写入或故障注入接口，并且禁止修改 store 和测试基础设施。正常写入检查为 `not_run`，本次没有真实 store 运行入口。没有运行形式化验证；模型或手工状态图不能补成真实恢复证据。\n\n**当前不能完成验收，状态为 `partial`。** 应保留代码与验证缺口，待具备允许的真实故障触发条件后补验。这里没有实现改动，不应仅因读取了恢复代码就自动套用厚审大改的全部质量门；若后续改变恢复语义，再按实际变更后果定档。\n\n### 读取授权修复\n\n按 `references/risk-gates.md`，此项触及授权语义，是**受控大改**：只改变已有角色判断，字段、签名、角色集合和契约形状不变；已确认两个真实调用方均在仓库内且调用 `can_read`，调用关系及回滚路径已查明。不能因为只改一行就称为小改，也不能因为没有独立审查者就升级成厚审大改。\n\n执行时仅将 `access.py` 的返回条件改为：\n\n```python\nreturn actor.tenant_id == record.tenant_id and actor.role in (\"reader\", \"admin\")\n```\n\n保留函数签名、同租户限制和其他角色的拒绝行为。不要改调用方接口、增加角色配置框架或引入依赖。producer 为 `can_read`，consumer 为事实文件确认的两个真实调用方；本次未获其具体路径，不伪造调用方检查记录。\n\n预期变化仅为同租户 admin 从拒绝变为允许。同租户 reader 继续允许，跨租户 reader/admin 均继续拒绝。代码回滚为恢复原判断；按已确认事实，本次不修改持久化数据，因此无数据迁移或数据恢复操作。回滚后同租户 admin 会重新被拒绝，这个行为变化应写入回滚说明。\n\n必需检查包括：\n\n- 角色与租户矩阵：同租户 reader/admin 允许，跨租户 reader/admin 拒绝，未明确允许的其他角色拒绝。\n- 两个真实调用方的相关契约和行为检查，覆盖合法读取及拒绝路径。拒绝路径须确认没有受限数据泄露，不能仅凭布尔函数测试宣称完整服务端授权安全。\n- 对本次触及的身份和租户来源进行核对；真实调用链证据不足时保留对应缺口，不假定客户端角色可信。\n- 若新增或修改关键契约测试，以已确认需求作为独立期望来源，按规则运行已知破坏后恢复的绿、红、绿检查，真实记录结果。\n- 修复后检查实际差异、UTF-8 编码和相关既有检查；检查范围限于本次条件及真实调用方。\n\n此档位不强制独立审查，也不强制厚审大改的复杂度、测试与变异、架构约束三道质量门。`independent_review=not_run`，原因是已确认本次没有可用独立审查者；这不是本项必需检查的阻塞，不能单独阻止之后达到 `verified`。也不能因此省略契约、调用方和行为检查。\n\n本次已对原版 `access.py` 实际执行只读函数测试，使用 Python `-B`、显式 UTF-8 严格解码源码、标准库 `SimpleNamespace` 构造输入，没有改源码。运行时间：`2026-10-29T09:18:16.849691+00:00`；源码 SHA-256：`536e519962c262ca4ea21a7408bdf25501b1a1b25a4f80797c8b00d38b5d5792`。\n\n| 场景 | 期望 | 实际 | 检查状态 |\n| --- | --- | --- | --- |\n| 同租户 reader | True | True | passed |\n| 同租户 admin | True | False | failed |\n| 跨租户 reader | False | False | passed |\n| 跨租户 admin | False | False | passed |\n| 同租户其他角色 | False | False | passed |\n\n命令退出码为 `1`，共一项失败。前四项期望来自事实文件；其他角色的拒绝期望来自默认拒绝规则及保留原有非目标行为。上述结果只覆盖函数，不代表两个真实调用方已经运行。修复尚未实施，修复后检查、调用方检查和契约测试为 `not_run`。\n\n**当前实现不能通过验收，状态为 `failed`。** 完成上述修复，且全部必需检查为 `passed` 或有依据的 `not_applicable` 后，才能标为 `verified`；独立审查未执行不构成该受控大改的额外必需门禁。\n\n### 按钮文案修改\n\n此项是**可观察的小改**。执行时定位目标按钮的实际文本来源，仅将该按钮的“确定”改为“保存”。保留点击回调、提交行为、权限、接口和持久化语义。若文本来自共享翻译键，先核对引用范围，避免连带修改其他按钮；若有独立的可访问名称，核对它是否也需要与可见名称同步。这里均是执行前核对事项，不假定当前存在这些结构。\n\n必要检查是实际目标页面或对应组件行为测试中显示“保存”，原操作仍可用，文本与可访问名称没有冲突，受影响布局没有截断。运行适用的既有局部检查即可；无需为两字文案强制新增测试框架、安装工具、运行无关全量审查或厚审三道质量门。可用实际页面检查获得行为证据，不把源码字符串搜索冒充页面验收。\n\n本次仅有需求事实，没有按钮源码、页面或运行入口；实现定位及页面行为验收为 `blocked`。没有实施文案修改，也没有运行页面检查。\n\n**当前不能完成验收，状态为 `partial`。** 取得实际目标并完成局部修改和对应行为验证后可达到 `verified`；独立审查不强制。\n\n### 实际读取的规则文件\n\n以下路径均相对于指定的 `baseline/skills/lean-engineer/`，全部以显式 UTF-8 严格解码读取：\n\n1. `SKILL.md`\n2. `references/risk-gates.md`\n3. `references/verification.md`\n4. `references/review-protocol.md`\n5. `references/formal-verification.md`\n6. `references/backend-review.md`\n7. `references/backend/identity-access.md`\n8. `references/backend/data-consistency.md`\n9. `references/frontend-review.md`\n10. `references/implementation.md`\n11. `references/backend/api-contracts.md`\n12. `references/backend/delivery-operations.md`\n13. `references/frontend/routes-components.md`\n14. `references/frontend/accessibility-layout.md`\n\n实际读取的任务输入仅为指定试验目录中的 `facts.md`、`recovery.py`、`access.py`。未查看其他试验或版本、上级评估文件、项目其他文件，未将未读取资料或未运行检查写成已执行。\n\n精确模型标识在本次上下文中**不可见**。可以看到一般性模型描述，但没有可核实的实际运行模型 ID；工具列出的可选模型不等于本次模型，不能据此猜测或填写。",
+  "artifacts": {
+    "facts.md": "# 已确认需求与现场\r\n\r\n## 写入恢复\r\n\r\nstore.write 在写入部分数据后能抛出 OSError。契约要求失败后恢复写入前数据。恢复代码必须保留。当前测试环境不提供中断写入或故障注入接口。本次不能修改 store 实现或测试基础设施。\r\n\r\n## 读取授权\r\n\r\n同租户的 reader 和 admin 均可读取。跨租户读取必须拒绝。当前实现只允许 reader，需要修改。当前仓库有两个真实调用方，均调用 can_read。字段和签名不变，旧新调用方已查明。回滚为恢复旧判断，不改变持久化数据。没有其他契约形状变化。项目没有额外审查或质量门规则。本次没有可用独立审查者。\r\n\r\n## 展示文案\r\n\r\n另一个请求只将按钮“确定”改为“保存”。身份、数据、接口和持久化不变。\r\n",
+    "recovery.py": "def write_record(store, record):\r\n    backup = store.snapshot()\r\n    try:\r\n        store.write(record)\r\n    except OSError:\r\n        store.restore(backup)\r\n        raise\r\n",
+    "access.py": "def can_read(actor, record):\r\n    return actor.tenant_id == record.tenant_id and actor.role == \"reader\"\r\n"
+  },
+  "parent_assessment": {
+    "necessary_existing_guard": "retained; actual recovery remains unverified",
+    "authorization_base_tier": "controlled large change",
+    "authorization_independent_review": "not mandatory under baseline",
+    "copy_only_edit": "small observable change; no mandatory independent review",
+    "source_files_modified": false,
+    "interpretation": "The two outputs differ in the authorization review requirement. Both preserve the existing required guard. No claim that baseline deleted a guard or that defect recall improved."
+  },
+  "evidence_limits": [
+    "Single model execution, not a reliability estimate.",
+    "Exact model ID, token usage and tool-call totals are unavailable.",
+    "The report contains agent-reported read paths. Complete tool-read traces were not independently exported.",
+    "This is not a real incident dataset or a full no-skill/old/new controlled experiment."
+  ]
+}
